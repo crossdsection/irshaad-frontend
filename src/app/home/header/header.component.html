@@ -1,0 +1,118 @@
+<section>
+    <div class="container-fluid" style="background: #013775;">
+
+        <div class="">
+            <span (click)="onClick()" class="log_sign"><span class="glyphicon glyphicon-log-in"></span> Login/Signup</span>
+
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-2 col-sm-4 col-xs-4" style="border-right: 2px solid #9c9cdd;padding: 23px 0px 0px 0px;height: 160px;">
+                <img src="../assets/img/logo.PNG" style="width:100%" />
+            </div>
+            <div class="col-md-2 col-sm-4 col-xs-4">
+                <ul style="display:flex;list-style-type: none;padding: 9px 5px;">
+                    <li class="flag_img"><img src="../assets/img/1.jpg" class="head_img" /></li>
+                    <li class="flag_img"><img src="../assets/img/2.jpg" class="head_img" /></li>
+                </ul>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-8">
+                <div id="custom-search-input">
+                    <div class="input-group ">
+                        <input type="text" class=" search_input search-query " placeholder="Search on worldvoting.org " />
+                        <span class="input-group-btn ">
+                                    <button class="btn btn-danger input_left" type="button">
+                                        <!-- <span class=" glyphicon glyphicon-search"><i class="fas fa-search"></i></span> -->
+                        <span><i class="fa fa-search"></i></span>
+                        </button>
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <script type="text/javascript">
+                // Load google charts
+                google.charts.load('current', {
+                    'packages': ['corechart']
+                });
+                google.charts.setOnLoadCallback(drawChart);
+
+                // Draw the chart and set the chart values
+                function drawChart() {
+                    var data = google.visualization.arrayToDataTable([
+                        ['Task', 'Hours per Day'],
+                        ['No', 6.5],
+                        ['yes', 3.5],
+
+                    ]);
+
+                    // Optional; add a title and set the width and height of the chart
+                    var options = {
+                        'title': 'My Average Day',
+                        'width': 550,
+                        'height': 400
+                    };
+
+                    // Display the chart inside the <div> element with id="piechart"
+                    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+                    chart.draw(data, options);
+                }
+            </script>
+
+            <div class="col-md-4 col-sm-4 col-xs-8">
+                <span class="menu_icons ">
+
+			<span  class=" showPlace dropdown"  ><i class="fa fa-user-circle " data-toggle="tooltip" title="Profile"><span class="caret"></span></i>
+                <ul class="dropdown-menu place dropdown_content" style="background: #013775;margin-left: -105px;">
+                    <li class="profileEdit"><a href="#"><i class="fa fa-user"></i>&nbsp;&nbsp;Profile</a></li>
+                    <li class="friend_list"><a href="#"><i class="fa fa-users"></i>&nbsp;&nbsp;Friends</a></li>
+                    <li><a href="#"><i class="fa fa-cog"></i>&nbsp;&nbsp;Settings</a></li>
+                    <li class="polls_list"><a href="#"><i class="fa fa-cog"></i>&nbsp;&nbsp;Polls</a></li>
+                </ul>
+
+
+                </span>
+
+
+                <span class="showPlace dropdown_fav"><i class="fa fa-compass" data-toggle="tooltip" title="Location"><span class="caret"></span></i>
+                <ul class="dropdown-menu place dropdown_content_fav" id="places" style="background: #013775;overflow:hidden;width: 160px;left: -45px;">
+                    <li><a href="#">&nbsp;&nbsp;<marquee behavior="scroll" direction="left" onmouseover="this.start();" onmouseout="this.stop();">
+					Canal Road
+					</marquee></a></li>
+                    <li><a href="#">&nbsp;&nbsp;<marquee behavior="scroll" direction="left" onmouseover="this.start();" onmouseout="this.stop();">
+					sahastradhara
+					</marquee></a></li>
+
+                    <!--li class="friend_list scroll_contant"><a href="#"  class="scroll_contant">
+      hello Jquery. dsad a dsa dasasd ad sad a da.&nbsp;&nbsp;&nbsp;
+    </a></li-->
+
+                </ul>
+                </span>
+
+                <i class="fa fa-bell" data-toggle="tooltip" title="Notification"></i>
+                <i class="fa fa-sign-out-alt" data-toggle="tooltip" title="Log out"></i>
+                </span>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<script>
+    $(document).on("click", ".showPlace", function() {
+
+        $(this).find("ul").slideToggle();
+        console.log("name");
+
+    });
+</script>
+
+
+<!-- <pre>{{closeResult}}</pre> -->
