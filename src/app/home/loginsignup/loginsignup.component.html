@@ -7,164 +7,121 @@
 <div class="modal-body">
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
-                <div class="panel with-nav-tabs panel-info">
-                    <div class="panel-heading">
-                        <ul class="nav nav-tabs">
-                            <li class=" "><a href="#login" class="active show " data-toggle="tab"> Login </a></li>
-                            <li><a href="#signup" data-toggle="tab"> Signup </a></li>
-                        </ul>
-                    </div>
-
-                    <div class="panel-body">
-                        <div class="tab-content">
-                            <div id="login" class="tab-pane fade in register active show">
-                                <div class="container-fluid">
-                                    <div class="">
-                                        <h2 class="text-center" style="color: #5cb85c;"> <strong> Login  </strong></h2>
-                                        <hr />
-                                    </div>
-
-
-                                    <div class="row">
-
-                                        <div class="form-group width100">
-                                            <div class="input-group">
-                                                <div class="input-group-addon">
-                                                    <span class="glyphicon glyphicon-user"></span>
-                                                </div>
-                                                <input type="text" placeholder="User Name" name="uname" class="form-control">
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="row">
-
-                                        <div class="form-group width100">
-                                            <div class="input-group">
-                                                <div class="input-group-addon">
-                                                    <span class="glyphicon glyphicon-lock"></span>
-                                                </div>
-
-                                                <input type="password" placeholder="Password" name="pass" class="form-control">
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="col-xs-12 col-sm-12 col-md-12">
-                                        <div class="col-xs-6 col-sm-6 col-md-6">
-                                            <div class="form-group">
-                                                <input type="checkbox" name="check" checked> Remember Me
-                                            </div>
-                                        </div>
-
-                                        <div class="col-xs-6 col-sm-6 col-md-6">
-                                            <div class="form-group">
-                                                <a href="#forgot" data-toggle="modal"> Forgot Password? </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <hr />
-                                    <div class="row">
-                                        <div class="col-xs-12 col-sm-12 col-md-12">
-                                            <button type="submit" class="btn btn-success btn-block btn-lg"> Login </button>
-                                        </div>
-                                    </div>
-
-
-                                </div>
-                            </div>
-
-                            <div id="signup" class="tab-pane fade">
-                                <div class="container-fluid">
-                                    <div class="">
-                                        <h2 class="text-center" style="color: #f0ad4e;">
-                                            <Strong> Register </Strong>
-                                        </h2>
-                                    </div>
-                                    <hr />
-                                    <div class="row">
-
-                                        <div class="form-group " style="width:48%">
-                                            <div class="input-group">
-                                                <div class="input-group-addon iga1">
-                                                    <span class="glyphicon glyphicon-user"></span>
-                                                </div>
-                                                <input type="text" class="form-control" placeholder="First Name" name="name">
-                                            </div>
-
-                                        </div>
-
-                                        <div class="form-group " style="width:48%;margin-left: 15px;">
-                                            <div class="input-group">
-                                                <div class="input-group-addon iga1">
-                                                    <span class="glyphicon glyphicon-user"></span>
-                                                </div>
-                                                <input type="text" class="form-control" placeholder="Last Name" name="name">
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="row">
-
-                                        <div class="form-group width100">
-                                            <div class="input-group">
-                                                <div class="input-group-addon iga1">
-                                                    <span class="glyphicon glyphicon-envelope"></span>
-                                                </div>
-                                                <input type="email" class="form-control" placeholder="Enter E-Mail" name="mail">
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="row">
-
-                                        <div class="form-group width100">
-                                            <div class="input-group">
-                                                <div class="input-group-addon iga1">
-                                                    <span class="glyphicon glyphicon-lock"></span>
-                                                </div>
-                                                <input type="password" class="form-control" placeholder="Enter Password" name="pass">
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="row">
-
-                                        <div class="form-group width100">
-                                            <div class="input-group">
-                                                <div class="input-group-addon iga1">
-                                                    <span class="glyphicon glyphicon-lock"></span>
-                                                </div>
-                                                <input type="password" class="form-control" placeholder="Enter Confirm Password" name="pass">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <hr>
-                                    <div class="row">
-
-                                        <div class="form-group width100">
-                                            <button type="submit" class="btn btn-lg btn-block btn-warning"> Register</button>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+          <ngb-tabset class="col-md-12">
+            <ngb-tab title="Login">
+              <ng-template ngbTabContent>
+                <div>
+                  <h2 class="text-center" style="color: #5cb85c;"> <strong> Login </strong></h2>
                 </div>
-            </div>
+                <form novalidate [formGroup]="loginform">
+                  <div class="form-group"
+                       [ngClass]="{
+                        'is-invalid': loginemail.invalid && (loginemail.dirty || loginemail.touched),
+                        'is-valid': loginemail.valid && (loginemail.dirty || loginemail.touched)
+                   }">
+                    <input type="email" class="form-control" formControlName="loginemail" required placeholder="Email">
+                    <div class="invalid-feedback"
+                         *ngIf="loginemail.errors && (loginemail.dirty || loginemail.touched)">
+                      <p *ngIf="loginemail.errors.required">Email is required</p>
+                      <p *ngIf="loginemail.errors.pattern">The email address must contain at least the @ character</p>
+                    </div>
+                  </div>
+
+                  <div class="form-group"
+                       [ngClass]="{
+                        'needs-validation': loginpassword.invalid && (loginpassword.dirty || loginpassword.touched),
+                        'was-validation': loginpassword.valid && (loginpassword.dirty || loginpassword.touched)
+                   }">
+                    <input type="password" class="form-control" formControlName="loginpassword" required placeholder="Password">
+                    <div class="invalid-feedback"
+                         *ngIf="loginpassword.errors && (loginpassword.dirty || loginpassword.touched)">
+                      <p *ngIf="loginpassword.errors.required">Password is required</p>
+                      <p *ngIf="loginpassword.errors.minlength">Password must be 8 characters long, we need another {{password.errors.minlength.requiredLength - password.errors.minlength.actualLength}} characters </p>
+                    </div>
+                  </div>
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" (click)="login()">Login</button>
+                </div>
+              </ng-template>
+            </ngb-tab>
+            <ngb-tab class="col-md-12" title="Signup">
+              <ng-template ngbTabContent>
+                <div>
+                  <h2 class="text-center" style="color: #f0ad4e;"> <strong> Register </strong></h2>
+                </div>
+                <form novalidate [formGroup]="signupform">
+                  <div class="row">
+                    <div class="form-group col-md-6"
+                         [ngClass]="{
+                          'is-invalid': firstName.invalid && (firstName.dirty || firstName.touched),
+                          'is-valid': firstName.valid && (firstName.dirty || firstName.touched)
+                     }">
+                      <input type="text" class="form-control" formControlName="firstName" required placeholder="First Name">
+                      <div class="invalid-feedback"
+                           *ngIf="firstName.errors && (firstName.dirty || firstName.touched)">
+                        <p *ngIf="firstName.errors.required">First Name is required</p>
+                      </div>
+                    </div>
+
+                    <div class="form-group col-md-6"
+                         [ngClass]="{
+                          'is-invalid': lastName.invalid && (lastName.dirty || lastName.touched),
+                          'is-valid': lastName.valid && (lastName.dirty || lastName.touched)
+                     }">
+                      <input type="text" class="form-control" formControlName="lastName" required placeholder="Last Name">
+                      <div class="invalid-feedback"
+                           *ngIf="lastName.errors && (lastName.dirty || lastName.touched)">
+                        <p *ngIf="lastName.errors.required">Last Name is required</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group"
+                       [ngClass]="{
+                        'is-invalid': signUpEmail.invalid && (signUpEmail.dirty || signUpEmail.touched),
+                        'is-valid': signUpEmail.valid && (signUpEmail.dirty || signUpEmail.touched)
+                   }">
+                    <input type="email" class="form-control" formControlName="signUpEmail" required placeholder="Email">
+                    <div class="invalid-feedback"
+                         *ngIf="signUpEmail.errors && (signUpEmail.dirty || signUpEmail.touched)">
+                      <p *ngIf="signUpEmail.errors.required">Email is required</p>
+                      <p *ngIf="signUpEmail.errors.pattern">The email address must contain at least the @ character</p>
+                    </div>
+                  </div>
+
+                  <div class="form-group"
+                       [ngClass]="{
+                        'is-invalid': signUpPassword.invalid && (signUpPassword.dirty || signUpPassword.touched),
+                        'is-valid': signUpPassword.valid && (loginpassword.dirty || signUpPassword.touched)
+                   }">
+                    <input type="password" class="form-control" formControlName="signUpPassword" required placeholder="Password">
+                    <div class="invalid-feedback"
+                         *ngIf="signUpPassword.errors && (signUpPassword.dirty || signUpPassword.touched)">
+                      <p *ngIf="signUpPassword.errors.required">Password is required</p>
+                      <p *ngIf="signUpPassword.errors.minlength">Password must be 8 characters long, we need another {{password.errors.minlength.requiredLength - password.errors.minlength.actualLength}} characters </p>
+                    </div>
+                  </div>
+
+                  <div class="form-group"
+                       [ngClass]="{
+                        'is-invalid': signUpConPassword.invalid && (signUpConPassword.dirty || signUpConPassword.touched),
+                        'is-valid': signUpConPassword.valid && (signUpConPassword.dirty || signUpConPassword.touched)
+                   }">
+                    <input type="password" class="form-control" formControlName="signUpConPassword" required placeholder="Confirm Password">
+                    <div class="invalid-feedback"
+                         *ngIf="signUpConPassword.errors && (signUpConPassword.dirty || signUpConPassword.touched)">
+                      <p *ngIf="signUpConPassword.errors.required">Password is required</p>
+                      <p *ngIf="signUpConPassword.errors.minlength">Password must be 8 characters long, we need another {{signUpConPassword.errors.minlength.requiredLength - signUpConPassword.errors.minlength.actualLength}} characters </p>
+                    </div>
+                  </div>
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" (click)="activeModal.close('Close click')">Sign Up</button>
+                </div>
+              </ng-template>
+            </ngb-tab>
+          </ngb-tabset>
         </div>
     </div>
-
-</div>
-<div class="modal-footer">
-    <button type="button" class="btn btn-success" (click)="activeModal.close('Close click')">Create</button>
 </div>
