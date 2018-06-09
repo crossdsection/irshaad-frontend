@@ -11,6 +11,8 @@ import { HeaderComponent } from './home/header/header.component';
 import { FeedsComponent } from './home/feeds/feeds.component';
 import { LoginsignupComponent } from './home/loginsignup/loginsignup.component';
 
+import { TabsComponent } from './home/tabs/tabs.component';
+
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
 
@@ -22,7 +24,8 @@ const routes: Routes = [
     HomeComponent,
     HeaderComponent,
     FeedsComponent,
-    LoginsignupComponent
+    LoginsignupComponent,
+    TabsComponent
   ],
   entryComponents: [LoginsignupComponent],
   imports: [
