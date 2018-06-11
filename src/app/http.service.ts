@@ -18,17 +18,17 @@ export class HttpService {
   }
 
   doPOST( url, postData ) {
-   let postUrl = `${this.apiRoot}${url}` ;
-   console.log( postUrl );
-   const httpOptions = {
+    let postUrl = `${this.apiRoot}${url}` ;
+    console.log( postUrl );
+    console.log( postData );
+    let httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type':  'application/json',
-        'Access-Control-Allow-Origin': '*'
+        'Content-Type':  'application/json'
       })
     };
-   this.http.post( postUrl, postData, httpOptions ).subscribe(
-      res => console.log(res)
-    );
+    let bodyString = JSON.stringify( postData ); // Stringify payload
+
+    return this.http.post( postUrl, bodyString, httpOptions );
   }
 
   doPUT() {
