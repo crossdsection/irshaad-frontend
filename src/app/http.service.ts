@@ -11,18 +11,24 @@ export class HttpService {
 
   constructor( private http:HttpClient ) { }
 
-  apiRoot: string = "http://httpbin.org";
-
-  constructor(private http: Http) { }
+  apiRoot: string = "https://localhost/worldvoting/worldvote.back";
 
   doGET() {
    console.log("GET");
   }
 
   doPOST( url, postData ) {
-   console.log("POST");
-   let url = `${this.apiRoot}`;
-   this.http.post(url, {moo:"foo",goo:"loo"}).subscribe(res => console.log(res.json()));
+   let postUrl = `${this.apiRoot}${url}` ;
+   console.log( postUrl );
+   const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+        'Access-Control-Allow-Origin': '*'
+      })
+    };
+   this.http.post( postUrl, postData, httpOptions ).subscribe(
+      res => console.log(res)
+    );
   }
 
   doPUT() {
@@ -49,9 +55,9 @@ export class HttpService {
    console.log("GET WITH HEADERS");
   }
 
-  var request = request.clone({
-    setHeaders: {
-      Authorization: `Bearer ${this.auth.getToken()}`
-    }
-  });
+  // var request = request.clone({
+  //   setHeaders: {
+  //     Authorization: `Bearer ${this.auth.getToken()}`
+  //   }
+  // });
 }
