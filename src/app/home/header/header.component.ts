@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LoginsignupComponent } from '../loginsignup/loginsignup.component';
+import { EnactModalComponent } from '../enact-modal/enact-modal.component';
 
  @Component({
   selector: 'app-header',
@@ -9,53 +10,55 @@ import { LoginsignupComponent } from '../loginsignup/loginsignup.component';
 })
 
 export class HeaderComponent implements OnInit {
-  public show: boolean = false;
-  public show1: boolean = false;
-  public show2: boolean = false;
+  public govt: boolean = false;
+  public news: boolean = false;
+  public dashboard: boolean = false;
+
 fcolor = 'transparet';
-  bntStyle: string;
+
    constructor(private modal: NgbModal) { }
 
 
-   HeaderComponent() {
-    this. bntStyle = 'btn-default';
-   }
-   submit() {
-     this.bntStyle = 'btn-change';
-   }
-  onClick() {
+ onClick() {
     this.modal.open(LoginsignupComponent);
   }
+  enactModal() {
+     this.modal.open(EnactModalComponent);
+   }
+
 
   ngOnInit () {  }
-
+/*
   toggle() {
-    this.show = !this.show;
-  if (this.show) {
-    this.show2 = false;
-    this.show1 = false;
+    this.govt = !this.govt;
+  if (this.govt) {
+    this.dashboard = false;
+    this.news = false;
   }
-    console.log(this.show);
-    // CHANGE THE NAME OF THE BUTTON.
+    console.log(this.govt);
   }
+
+*/
   toggle1() {
-    this.show1 = !this.show1;
-    if (this.show1) {
-      this.show2 = false;
-      this.show = false;
+    this.news = !this.news;
+    if (this.news) {
+      this.dashboard = false;
+      this.govt = false;
     }
-    console.log(this.show1);
-    // CHANGE THE NAME OF THE BUTTON.
+    console.log(this.news);
+
   }
   toggle2() {
-    this.show2 = !this.show2;
-    if (this.show2) {
-      this.show = false;
-      this.show1 = false;
+    this.dashboard = !this.dashboard;
+    if (this.dashboard) {
+      this.govt = false;
+      this.news = false;
     }
-    console.log(this.show2);
-    // CHANGE THE NAME OF THE BUTTON.
+    console.log(this.dashboard);
+
   }
+
+
 
   changeColor(val) {
 this.fcolor = val;

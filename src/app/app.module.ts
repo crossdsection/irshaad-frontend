@@ -5,6 +5,7 @@ import { NgbModule, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
+import { HttpClientModule } from '@angular/common/http';
 
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './home/header/header.component';
@@ -12,6 +13,9 @@ import { FeedsComponent } from './home/feeds/feeds.component';
 import { LoginsignupComponent } from './home/loginsignup/loginsignup.component';
 
 import { TabsComponent } from './home/tabs/tabs.component';
+import { ProfilemodalComponent } from './home/profilemodal/profilemodal.component';
+import { CommentModalComponent } from './home/comment-modal/comment-modal.component';
+import { EnactModalComponent } from './home/enact-modal/enact-modal.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -25,14 +29,18 @@ const routes: Routes = [
     HeaderComponent,
     FeedsComponent,
     LoginsignupComponent,
-    TabsComponent
+    TabsComponent,
+    ProfilemodalComponent,
+    CommentModalComponent,
+    EnactModalComponent
   ],
-  entryComponents: [LoginsignupComponent],
+  entryComponents: [LoginsignupComponent, ProfilemodalComponent, CommentModalComponent, EnactModalComponent],
   imports: [
     BrowserModule,
     NgbModule.forRoot(),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [NgbActiveModal],
   bootstrap: [AppComponent]

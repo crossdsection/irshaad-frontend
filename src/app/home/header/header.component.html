@@ -113,7 +113,8 @@
 
         <ul class="nav back_height width100">
             <li class="department_menu width33" [ngStyle]="{'background': fcolor}">
-                <a href="#government" data-toggle="tab" (click)="toggle()">
+                <a href="#government" data-toggle="tab">
+                    <!-- (click)="toggle()" -->
                     <div>
 
                         <p class="depart_style" data-toggle="tooltip" title="Govt. Department">Govt. Department</p>
@@ -131,8 +132,9 @@
                         <span class="depart_style_drop"><i class="fa fa-chevron-down"></i></span></div>
                 </a>
             </li>
-            <li class=" department_menu width34" [ngStyle]="{'background': fcolor}">
+            <li class=" department_menu width34" [ngStyle]="{'background': fcolor} ">
                 <a href="#myDeskboard" data-toggle="tab" (click)="toggle2()">
+                    <!--  -->
                     <div>
 
                         <p class="depart_style" data-toggle="tooltip" title="My Deskboard ">My Deskboard </p>
@@ -150,7 +152,8 @@
         <section class="width100 marg_top_20">
             <div id="slide_menu" class="container-fluid tab-content category_tab" [ngStyle]="{'background': fcolor}">
 
-                <div class="tab-pane active " id="government" *ngIf="show">
+                <div class="tab-pane  " id="government">
+                    <!-- *ngIf="govt" -->
                     <div class="row ">
                         <div class="col-md-5 col-xs-9">
                             <div id="custom-search">
@@ -225,9 +228,7 @@
                 </div>
 
                 <!-------------news---------------->
-
-
-                <div class="tab-pane width100 pad_top20" id="topNews" *ngIf="show1">
+                <div class="tab-pane width100 pad_top20 active" id="topNews" *ngIf="news">
                     <div class="row">
                         <div class="col-md-3 col-xs-12" style="padding-bottom: 10px;">
                             <img src="../assets/img/55.jpg" class="news_img_size" /><br>
@@ -260,7 +261,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane " id="myDeskboard" *ngIf="show2">
+                <div class="tab-pane " id="myDeskboard" *ngIf="dashboard">
+                    <!--  -->
                     <div class="row">
                         <div class="col-md-3 col-xs-6">
                             <ul class="submenu_ul">
@@ -352,7 +354,7 @@
                 <div class="col-md-2 " style="float:right">
 
                     <img src="images/icon/com-icon.png" class="fav_img_size " style="margin-top: 5px;margin-left: 21px;float: right;margin-right: 16px;" />
-                    <button class="btn enact_btn" data-toggle="modal" data-target="#enact" style="float:right">ENACT</button>
+                    <button class="btn enact_btn" (click)="enactModal()" style="float:right">ENACT</button>
 
                 </div>
             </div>
