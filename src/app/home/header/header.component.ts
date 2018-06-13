@@ -12,29 +12,30 @@ export class HeaderComponent implements OnInit {
   public show: boolean = false;
   public show1: boolean = false;
   public show2: boolean = false;
-fcolor = 'transparet';
+  fcolor = 'transpaent';
   bntStyle: string;
-   constructor(private modal: NgbModal) { }
+
+  constructor(private modal: NgbModal) { }
 
 
-   HeaderComponent() {
-    this. bntStyle = 'btn-default';
-   }
-   submit() {
-     this.bntStyle = 'btn-change';
-   }
+  HeaderComponent() {
+    this.bntStyle = 'btn-default';
+  }
+  submit() {
+    this.bntStyle = 'btn-change';
+  }
   onClick() {
-    this.modal.open(LoginsignupComponent);
+    this.modal.open(LoginsignupComponent, { size: 'lg', backdrop: 'static',windowClass:'animated slideInUp'});
   }
 
   ngOnInit () {  }
 
   toggle() {
     this.show = !this.show;
-  if (this.show) {
-    this.show2 = false;
-    this.show1 = false;
-  }
+    if (this.show) {
+      this.show2 = false;
+      this.show1 = false;
+    }
     console.log(this.show);
     // CHANGE THE NAME OF THE BUTTON.
   }
@@ -58,8 +59,8 @@ fcolor = 'transparet';
   }
 
   changeColor(val) {
-this.fcolor = val;
-console.log(this.fcolor);
-    }
+    this.fcolor = val;
+    console.log(this.fcolor);
+  }
 
 }

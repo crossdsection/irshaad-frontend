@@ -1,4 +1,4 @@
-.btn-success {
+/* .btn-success {
     transition: 0.5s;
 }
 
@@ -140,4 +140,13 @@ a {
 .nav>li>a:hover {
     text-decoration: none;
     background-color: #eee;
+} */
+
+.formHeading {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.width100 {
+    width: 100%;
 }
