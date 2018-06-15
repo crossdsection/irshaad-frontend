@@ -1,9 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgbModule, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
-import { HttpService } from './http.service';
 import { HttpClientModule } from '@angular/common/http';
-
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
@@ -18,6 +16,9 @@ import { TabsComponent } from './home/tabs/tabs.component';
 import { ProfilemodalComponent } from './home/profilemodal/profilemodal.component';
 import { CommentModalComponent } from './home/comment-modal/comment-modal.component';
 import { EnactModalComponent } from './home/enact-modal/enact-modal.component';
+
+import { UserdataService } from './services/userdata.service';
+import { HttpService } from './services/http.service';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -44,7 +45,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [NgbActiveModal, HttpService],
+  providers: [NgbActiveModal, HttpService, UserdataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -2,6 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 
+const httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
+
 @Injectable()
 export class HttpService {
 
@@ -12,12 +16,11 @@ export class HttpService {
   doGET( url ) {
     let getUrl = `${this.apiRoot}${url}`;
     let userData = localStorage.getItem('userData');
-    let httpOptions = null;
     if( userData ){
       userData = JSON.parse( userData );
-      let bearerToken = userData['bearerToken'];
+      let bearerToken = userData['data']['bearerToken'];
       if ( bearerToken && bearerToken.length != 0 ) {
-        httpOptions = {
+        let httpOptions = {
           headers: new HttpHeaders({
             'Content-Type':  'application/json',
             'Authorization': ':Bearer ' + bearerToken
@@ -25,7 +28,7 @@ export class HttpService {
         };
       }
     } else {
-      httpOptions = {
+      let httpOptions = {
         headers: new HttpHeaders({
           'Content-Type':  'application/json'
         })
@@ -37,12 +40,11 @@ export class HttpService {
   doPOST( url, postData ) {
     let postUrl = `${this.apiRoot}${url}`;
     let userData = localStorage.getItem('userData');
-    let httpOptions = null;
     if( userData ){
       userData = JSON.parse( userData );
-      let bearerToken = userData['bearerToken'];
+      let bearerToken = userData['data']['bearerToken'];
       if ( bearerToken && bearerToken.length != 0 ) {
-        httpOptions = {
+        let httpOptions = {
           headers: new HttpHeaders({
             'Content-Type':  'application/json',
             'Authorization': ':Bearer ' + bearerToken
@@ -50,7 +52,7 @@ export class HttpService {
         };
       }
     } else {
-      httpOptions = {
+      let httpOptions = {
         headers: new HttpHeaders({
           'Content-Type':  'application/json'
         })
@@ -58,6 +60,7 @@ export class HttpService {
     }
 
     let bodyString = JSON.stringify( postData ); // Stringify payload
+
     return this.http.post( postUrl, bodyString, httpOptions );
   }
 

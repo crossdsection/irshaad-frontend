@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {NgbActiveModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import {NgbTabsetConfig} from '@ng-bootstrap/ng-bootstrap';
 
-import { HttpService } from '../../http.service';
+import { HttpService } from '../../services/http.service';
+import { UserdataService } from '../../services/userdata.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -27,7 +28,7 @@ export class LoginsignupComponent implements OnInit {
   signUpPassword: FormControl;
   signUpConPassword: FormControl;
 
-  constructor(public activeModal: NgbActiveModal, public config: NgbTabsetConfig, private httpService: HttpService ) {
+  constructor(public activeModal: NgbActiveModal, public config: NgbTabsetConfig, private httpService: HttpService, private userService: UserdataService ) {
     config.justify = 'center';
     this.signupAlert = 0;
     this.loginAlert = 0;
@@ -91,6 +92,9 @@ export class LoginsignupComponent implements OnInit {
         console.log( response );
         if( response["error"] == 0 ){
           this.loginAlert = 1;
+          localStorage.setItem('userData', JSON.stringify(response['data']) );
+          this.userService.getUserInfo();
+          this.activeModal.close('Close Click');
         } else {
           this.loginAlert = -1;
         }
@@ -108,7 +112,6 @@ export class LoginsignupComponent implements OnInit {
     postData['confirmPassword'] = this.signUpConPassword.value;
     this.httpService.doPOST( '/auth/signup', postData ).subscribe(
       response => {
-        console.log( response );
         if( response["error"] == 0 ){
           this.signupAlert = 1;
         } else {
