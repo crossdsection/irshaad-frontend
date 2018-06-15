@@ -540,7 +540,7 @@ a:hover {
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     border-radius: 3px;
-    position: absolute;
+    position: relative;
 }
 
 #custom-search-input button {
@@ -1113,6 +1113,8 @@ ul ul a {
     width: 33.4%
 }
 
+
 .pad_top20 {
     padding-top: 20px
 }
+ 

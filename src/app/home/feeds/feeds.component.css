@@ -34,3 +34,55 @@
     word-wrap: break-word;
     font-size: 17px;
 }
+
+.cur_point {
+    cursor: pointer;
+}
+
+/*neews bottom icons  */
+ 
+    
+    .padd50{
+        padding:50px;
+    }
+    .bottom_icon{
+        color:grey;
+    }
+    /* .court_con_scroll{
+        display: -webkit-box;
+        display: -moz-inline-box;
+        overflow-x: scroll;
+    } */
+    .court_con_scroll{
+
+        overflow-x: scroll;
+    }
+    .padd_left_right{
+        padding-right: 10px;
+        padding-left: 22px;
+        } 
+
+    @media only screen and (max-width: 500px) {
+        .padd_left_right{
+            padding-right: 10px;
+            padding-left: 16px;
+            } 
+            .bottom_icon{
+                color:grey;display: -webkit-box;
+            }
+            .court_con_scroll{
+                display: -webkit-box;
+                display: ruby;
+                overflow-x: scroll;
+            }
+            .padd50 {
+                padding: 14px;
+            }
+         
+    }
+    @media only screen and (max-width: 300px) {
+    .padd_left_right{
+        padding-right: 6px;
+        padding-left: 12px;
+    }
+}
