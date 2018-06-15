@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {NgbActiveModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import {NgbTabsetConfig} from '@ng-bootstrap/ng-bootstrap';
 
-
+import { HttpService } from '../../http.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -15,6 +15,8 @@ export class LoginsignupComponent implements OnInit {
   loginform: FormGroup;
   signupform: FormGroup;
   closeResult: string;
+  loginAlert: Number;
+  signupAlert: Number;
 
   loginemail: FormControl;
   loginpassword: FormControl;
@@ -25,8 +27,10 @@ export class LoginsignupComponent implements OnInit {
   signUpPassword: FormControl;
   signUpConPassword: FormControl;
 
-  constructor(public activeModal: NgbActiveModal, public config: NgbTabsetConfig) {
+  constructor(public activeModal: NgbActiveModal, public config: NgbTabsetConfig, private httpService: HttpService ) {
     config.justify = 'center';
+    this.signupAlert = 0;
+    this.loginAlert = 0;
   }
 
   ngOnInit() {
@@ -79,7 +83,39 @@ export class LoginsignupComponent implements OnInit {
   }
 
   login(){
-    console.log( this.loginemail.value );
-    console.log( this.loginpassword.value );
+    var postData = {};
+    postData['username'] = this.loginemail.value;
+    postData['password'] = this.loginpassword.value;
+    this.httpService.doPOST( '/auth/login', postData ).subscribe(
+      response => {
+        console.log( response );
+        if( response["error"] == 0 ){
+          this.loginAlert = 1;
+        } else {
+          this.loginAlert = -1;
+        }
+      },
+      err => console.log(err)
+    );
+  }
+
+  signup(){
+    var postData = {};
+    postData['email'] = this.signUpEmail.value;
+    postData['firstName'] = this.firstName.value;
+    postData['lastName'] = this.lastName.value;
+    postData['password'] = this.signUpPassword.value;
+    postData['confirmPassword'] = this.signUpConPassword.value;
+    this.httpService.doPOST( '/auth/signup', postData ).subscribe(
+      response => {
+        console.log( response );
+        if( response["error"] == 0 ){
+          this.signupAlert = 1;
+        } else {
+          this.signupAlert = -1;
+        }
+      },
+      err => console.log(err)
+    );
   }
 }

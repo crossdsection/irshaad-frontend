@@ -10,16 +10,26 @@
           <ngb-tabset class="col-md-12">
             <ngb-tab title="Login">
               <ng-template ngbTabContent>
-                <div>
+                <div class="formHeading">
                   <h2 class="text-center" style="color: #5cb85c;"> <strong> Login </strong></h2>
                 </div>
-                <form novalidate [formGroup]="loginform">
-                  <div class="form-group"
-                       [ngClass]="{
-                        'is-invalid': loginemail.invalid && (loginemail.dirty || loginemail.touched),
-                        'is-valid': loginemail.valid && (loginemail.dirty || loginemail.touched)
-                   }">
-                    <input type="email" class="form-control" formControlName="loginemail" required placeholder="Email">
+                <div class="alert"
+                     [ngClass]="{ 'alert-success alert-dismissible': loginAlert == 1,
+                                  'alert-danger alert-dismissible': loginAlert == -1
+                                }"
+                     *ngIf="loginAlert != 0">
+                  <button type="button" class="close" data-dismiss="alert">&times;</button>
+                  <p *ngIf="loginAlert == 1"> <strong>Success!</strong> Login Successful. </p>
+                  <p *ngIf="loginAlert == -1"> <strong>Failed!</strong> Invalid Login. </p>
+                </div>
+                <form class="needs-validation" [formGroup]="loginform">
+                  <div class="form-group">
+                    <input type="email"
+                           class="form-control"
+                           [ngClass]="{ 'is-invalid': loginemail.invalid && (loginemail.dirty || loginemail.touched),
+                                        'is-valid': loginemail.valid && (loginemail.dirty || loginemail.touched)
+                                      }"
+                           formControlName="loginemail" required placeholder="Email">
                     <div class="invalid-feedback"
                          *ngIf="loginemail.errors && (loginemail.dirty || loginemail.touched)">
                       <p *ngIf="loginemail.errors.required">Email is required</p>
@@ -27,49 +37,64 @@
                     </div>
                   </div>
 
-                  <div class="form-group"
-                       [ngClass]="{
-                        'needs-validation': loginpassword.invalid && (loginpassword.dirty || loginpassword.touched),
-                        'was-validation': loginpassword.valid && (loginpassword.dirty || loginpassword.touched)
-                   }">
-                    <input type="password" class="form-control" formControlName="loginpassword" required placeholder="Password">
+                  <div class="form-group">
+                    <input  type="password"
+                            class="form-control"
+                            [ngClass]="{
+                                         'is-invalid': loginpassword.invalid && (loginpassword.dirty || loginpassword.touched),
+                                         'is-valid': loginpassword.valid && (loginpassword.dirty || loginpassword.touched)
+                                       }"
+                            formControlName="loginpassword" required placeholder="Password">
                     <div class="invalid-feedback"
                          *ngIf="loginpassword.errors && (loginpassword.dirty || loginpassword.touched)">
                       <p *ngIf="loginpassword.errors.required">Password is required</p>
-                      <p *ngIf="loginpassword.errors.minlength">Password must be 8 characters long, we need another {{password.errors.minlength.requiredLength - password.errors.minlength.actualLength}} characters </p>
+                      <p *ngIf="loginpassword.errors.minlength">Password must be 8 characters long, we need another {{loginpassword.errors.minlength.requiredLength - loginpassword.errors.minlength.actualLength}} characters </p>
                     </div>
                   </div>
                 </form>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success" (click)="login()">Login</button>
+                    <button type="button" class="btn btn-success width100" (click)="login()">Login</button>
                 </div>
               </ng-template>
             </ngb-tab>
             <ngb-tab class="col-md-12" title="Signup">
               <ng-template ngbTabContent>
-                <div>
+                <div class="formHeading">
                   <h2 class="text-center" style="color: #f0ad4e;"> <strong> Register </strong></h2>
                 </div>
-                <form novalidate [formGroup]="signupform">
+                <div class="alert"
+                     [ngClass]="{ 'alert-success alert-dismissible': signupAlert == 1,
+                                  'alert-danger alert-dismissible': signupAlert == -1
+                                }"
+                     *ngIf="signupAlert != 0">
+                  <button type="button" class="close" data-dismiss="alert">&times;</button>
+                  <p *ngIf="signupAlert == 1"> <strong>Success!</strong> Login Successful. </p>
+                  <p *ngIf="signupAlert == -1"> <strong>Failed!</strong> Invalid Login. </p>
+                </div>
+                <form class="needs-validation" [formGroup]="signupform">
                   <div class="row">
-                    <div class="form-group col-md-6"
-                         [ngClass]="{
-                          'is-invalid': firstName.invalid && (firstName.dirty || firstName.touched),
-                          'is-valid': firstName.valid && (firstName.dirty || firstName.touched)
-                     }">
-                      <input type="text" class="form-control" formControlName="firstName" required placeholder="First Name">
+                    <div class="form-group col-md-6">
+                      <input type="text"
+                             class="form-control"
+                             [ngClass]="{
+                                          'is-invalid': firstName.invalid && (firstName.dirty || firstName.touched),
+                                          'is-valid': firstName.valid && (firstName.dirty || firstName.touched)
+                                        }"
+                             formControlName="firstName" required placeholder="First Name">
                       <div class="invalid-feedback"
                            *ngIf="firstName.errors && (firstName.dirty || firstName.touched)">
                         <p *ngIf="firstName.errors.required">First Name is required</p>
                       </div>
                     </div>
 
-                    <div class="form-group col-md-6"
-                         [ngClass]="{
-                          'is-invalid': lastName.invalid && (lastName.dirty || lastName.touched),
-                          'is-valid': lastName.valid && (lastName.dirty || lastName.touched)
-                     }">
-                      <input type="text" class="form-control" formControlName="lastName" required placeholder="Last Name">
+                    <div class="form-group col-md-6">
+                      <input type="text"
+                             class="form-control"
+                             [ngClass]="{
+                                          'is-invalid': lastName.invalid && (lastName.dirty || lastName.touched),
+                                          'is-valid': lastName.valid && (lastName.dirty || lastName.touched)
+                                        }"
+                             formControlName="lastName" required placeholder="Last Name">
                       <div class="invalid-feedback"
                            *ngIf="lastName.errors && (lastName.dirty || lastName.touched)">
                         <p *ngIf="lastName.errors.required">Last Name is required</p>
@@ -77,12 +102,14 @@
                     </div>
                   </div>
 
-                  <div class="form-group"
-                       [ngClass]="{
-                        'is-invalid': signUpEmail.invalid && (signUpEmail.dirty || signUpEmail.touched),
-                        'is-valid': signUpEmail.valid && (signUpEmail.dirty || signUpEmail.touched)
-                   }">
-                    <input type="email" class="form-control" formControlName="signUpEmail" required placeholder="Email">
+                  <div class="form-group">
+                    <input type="email"
+                           class="form-control"
+                           [ngClass]="{
+                                        'is-invalid': signUpEmail.invalid && (signUpEmail.dirty || signUpEmail.touched),
+                                        'is-valid': signUpEmail.valid && (signUpEmail.dirty || signUpEmail.touched)
+                                      }"
+                           formControlName="signUpEmail" required placeholder="Email">
                     <div class="invalid-feedback"
                          *ngIf="signUpEmail.errors && (signUpEmail.dirty || signUpEmail.touched)">
                       <p *ngIf="signUpEmail.errors.required">Email is required</p>
@@ -90,34 +117,39 @@
                     </div>
                   </div>
 
-                  <div class="form-group"
-                       [ngClass]="{
-                        'is-invalid': signUpPassword.invalid && (signUpPassword.dirty || signUpPassword.touched),
-                        'is-valid': signUpPassword.valid && (loginpassword.dirty || signUpPassword.touched)
-                   }">
-                    <input type="password" class="form-control" formControlName="signUpPassword" required placeholder="Password">
+                  <div class="form-group">
+                    <input type="password"
+                           class="form-control"
+                           [ngClass]="{
+                                        'is-invalid': signUpPassword.invalid && (signUpPassword.dirty || signUpPassword.touched),
+                                        'is-valid': signUpPassword.valid && (loginpassword.dirty || signUpPassword.touched)
+                                      }"
+                           formControlName="signUpPassword" required placeholder="Password">
                     <div class="invalid-feedback"
                          *ngIf="signUpPassword.errors && (signUpPassword.dirty || signUpPassword.touched)">
                       <p *ngIf="signUpPassword.errors.required">Password is required</p>
-                      <p *ngIf="signUpPassword.errors.minlength">Password must be 8 characters long, we need another {{password.errors.minlength.requiredLength - password.errors.minlength.actualLength}} characters </p>
+                      <p *ngIf="signUpPassword.errors.minlength">Password must be 8 characters long, we need another {{signUpPassword.errors.minlength.requiredLength - signUpPassword.errors.minlength.actualLength}} characters </p>
                     </div>
                   </div>
 
-                  <div class="form-group"
-                       [ngClass]="{
-                        'is-invalid': signUpConPassword.invalid && (signUpConPassword.dirty || signUpConPassword.touched),
-                        'is-valid': signUpConPassword.valid && (signUpConPassword.dirty || signUpConPassword.touched)
-                   }">
-                    <input type="password" class="form-control" formControlName="signUpConPassword" required placeholder="Confirm Password">
+                  <div class="form-group">
+                    <input type="password"
+                           class="form-control"
+                           [ngClass]="{
+                                        'is-invalid': signUpConPassword.invalid && (signUpConPassword.dirty || signUpConPassword.touched) || signUpConPassword.value != signUpPassword.value,
+                                        'is-valid': signUpConPassword.valid && (signUpConPassword.dirty || signUpConPassword.touched) && signUpConPassword.value == signUpPassword.value
+                                      }"
+                           formControlName="signUpConPassword" required placeholder="Confirm Password">
                     <div class="invalid-feedback"
-                         *ngIf="signUpConPassword.errors && (signUpConPassword.dirty || signUpConPassword.touched)">
-                      <p *ngIf="signUpConPassword.errors.required">Password is required</p>
-                      <p *ngIf="signUpConPassword.errors.minlength">Password must be 8 characters long, we need another {{signUpConPassword.errors.minlength.requiredLength - signUpConPassword.errors.minlength.actualLength}} characters </p>
+                         *ngIf="signUpConPassword.errors && (signUpConPassword.dirty || signUpConPassword.touched) || signUpConPassword.value != signUpPassword.value">
+                      <p *ngIf="signUpConPassword.value != signUpPassword.value">Password doesn't match</p>
+                      <p *ngIf="signUpConPassword.errors && signUpConPassword.errors.required">Password is required</p>
+                      <p *ngIf="signUpConPassword.errors && signUpConPassword.errors.minlength">Password must be 8 characters long, we need another {{signUpConPassword.errors.minlength.requiredLength - signUpConPassword.errors.minlength.actualLength}} characters </p>
                     </div>
                   </div>
                 </form>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success" (click)="activeModal.close('Close click')">Sign Up</button>
+                    <button type="button" class="btn btn-success width100" (click)="activeModal.close('Close click')">Sign Up</button>
                 </div>
               </ng-template>
             </ngb-tab>

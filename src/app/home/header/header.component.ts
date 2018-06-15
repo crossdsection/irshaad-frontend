@@ -10,17 +10,24 @@ import { EnactModalComponent } from '../enact-modal/enact-modal.component';
 })
 
 export class HeaderComponent implements OnInit {
+ 
   public govt: boolean = false;
   public news: boolean = false;
   public dashboard: boolean = false;
 
-fcolor = 'transparet';
+  fcolor = 'transparet';
 
-   constructor(private modal: NgbModal) { }
+  constructor(private modal: NgbModal) { }
 
 
- onClick() {
-    this.modal.open(LoginsignupComponent);
+  HeaderComponent() {
+    this.bntStyle = 'btn-default';
+  }
+  submit() {
+    this.bntStyle = 'btn-change';
+  }
+  onClick() {
+    this.modal.open(LoginsignupComponent, { size: 'lg', backdrop: 'static',windowClass:'animated slideInUp'});
   }
   enactModal() {
      this.modal.open(EnactModalComponent);
@@ -28,17 +35,17 @@ fcolor = 'transparet';
 
 
   ngOnInit () {  }
-/*
+
   toggle() {
     this.govt = !this.govt;
-  if (this.govt) {
-    this.dashboard = false;
-    this.news = false;
-  }
+    if (this.govt) {
+      this.dashboard = false;
+      this.news = false;
+    }
     console.log(this.govt);
   }
 
-*/
+
   toggle1() {
     this.news = !this.news;
     if (this.news) {
@@ -61,8 +68,8 @@ fcolor = 'transparet';
 
 
   changeColor(val) {
-this.fcolor = val;
-console.log(this.fcolor);
-    }
+    this.fcolor = val;
+    console.log(this.fcolor);
+  }
 
 }
