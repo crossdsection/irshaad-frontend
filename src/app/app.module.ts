@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgbModule, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
@@ -19,12 +20,13 @@ import { EnactModalComponent } from './home/enact-modal/enact-modal.component';
 
 import { UserdataService } from './services/userdata.service';
 import { HttpService } from './services/http.service';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
-
-   { path: '', redirectTo: '/home', pathMatch: 'full'}
+  { path: '', redirectTo: '/home', pathMatch: 'full'}
 ];
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,7 +47,16 @@ const routes: Routes = [
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [NgbActiveModal, HttpService, UserdataService],
+  providers: [
+    NgbActiveModal,
+    HttpService,
+    UserdataService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

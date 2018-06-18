@@ -15,53 +15,14 @@ export class HttpService {
 
   doGET( url ) {
     let getUrl = `${this.apiRoot}${url}`;
-    let userData = localStorage.getItem('userData');
-    if( userData ){
-      userData = JSON.parse( userData );
-      let bearerToken = userData['data']['bearerToken'];
-      if ( bearerToken && bearerToken.length != 0 ) {
-        let httpOptions = {
-          headers: new HttpHeaders({
-            'Content-Type':  'application/json',
-            'Authorization': ':Bearer ' + bearerToken
-          })
-        };
-      }
-    } else {
-      let httpOptions = {
-        headers: new HttpHeaders({
-          'Content-Type':  'application/json'
-        })
-      };
-    }
-    return this.http.get( getUrl, httpOptions );
+    return this.http.get( getUrl );
   }
 
   doPOST( url, postData ) {
     let postUrl = `${this.apiRoot}${url}`;
-    let userData = localStorage.getItem('userData');
-    if( userData ){
-      userData = JSON.parse( userData );
-      let bearerToken = userData['data']['bearerToken'];
-      if ( bearerToken && bearerToken.length != 0 ) {
-        let httpOptions = {
-          headers: new HttpHeaders({
-            'Content-Type':  'application/json',
-            'Authorization': ':Bearer ' + bearerToken
-          })
-        };
-      }
-    } else {
-      let httpOptions = {
-        headers: new HttpHeaders({
-          'Content-Type':  'application/json'
-        })
-      };
-    }
-
     let bodyString = JSON.stringify( postData ); // Stringify payload
 
-    return this.http.post( postUrl, bodyString, httpOptions );
+    return this.http.post( postUrl, bodyString );
   }
 
   doPUT() {
