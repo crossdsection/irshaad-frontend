@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { NgbModule, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
@@ -42,6 +43,7 @@ const routes: Routes = [
   entryComponents: [LoginsignupComponent, ProfilemodalComponent, CommentModalComponent, EnactModalComponent],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     NgbModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,

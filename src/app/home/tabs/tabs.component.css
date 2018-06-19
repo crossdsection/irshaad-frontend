@@ -638,7 +638,7 @@ a:hover {
 }
 
 .enact_btn {
-    width: 40%;
+    width: 55%;
     height: 45px;
     margin-top: 4px;
     font-weight: 500;
@@ -1112,6 +1112,10 @@ ul ul a {
 
 .marg_top_20 {
     margin-top: -20px;
+}
+
+.plusmarg_top_5 {
+    margin-top: 5px;
 }
 
 .width33 {

@@ -15,7 +15,7 @@ export class UserdataService {
         response => {
           console.log( response );
           if( response["error"] == 0 ){
-            localStorage.setItem('userData', JSON.stringify(response['data']) );
+            localStorage.setItem('userinfo', JSON.stringify(response['data']) );
           } else {
             return false;
           }

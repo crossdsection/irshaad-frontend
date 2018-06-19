@@ -25,281 +25,244 @@
 
 <div class="container-fluid">
     <div class="row depart">
-
         <ul class="nav back_height width100">
             <li class="department_menu width33" [ngStyle]="{'background': fcolor}">
-                <a href="#government" data-toggle="tab">
+                <a href="#government" data-toggle="tab" (click)="toggleTabs('govt')">
                     <!-- (click)="toggle()" -->
                     <div>
-
                         <p class="depart_style" data-toggle="tooltip" title="Govt. Department">Govt. Department</p>
                         <i class="depart_icon fa fa-balance-scale" data-toggle="tooltip" title="Govt. Department"></i>
                         <span class="depart_style_drop"><i class="fa fa-chevron-down"></i></span>
                     </div>
                 </a>
             </li>
-            <li class=" department_menu  width33" [ngStyle]="{'background': fcolor}">
-                <a href="#topNews" data-toggle="tab" (click)="toggle1()">
+            <li class="department_menu  width33" [ngStyle]="{'background': fcolor}">
+                <a href="#topNews" data-toggle="tab" (click)="toggleTabs('news')">
                     <div>
-
                         <p class="depart_style" data-toggle="tooltip" title="Top News">Top News</p>
                         <i class="depart_icon fa fa-newspaper" data-toggle="tooltip" title="Top News"></i>
-                        <span class="depart_style_drop"><i class="fa fa-chevron-down"></i></span></div>
+                        <span class="depart_style_drop"><i class="fa fa-chevron-down"></i></span>
+                    </div>
                 </a>
             </li>
-            <li class=" department_menu width34" [ngStyle]="{'background': fcolor} ">
-                <a href="#myDeskboard" data-toggle="tab" (click)="toggle2()">
+            <li class="department_menu width34" [ngStyle]="{'background': fcolor} ">
+                <a href="#myDeskboard" data-toggle="tab" (click)="toggleTabs('desk')">
                     <!--  -->
                     <div>
-
                         <p class="depart_style" data-toggle="tooltip" title="My Deskboard ">My Deskboard </p>
                         <i class="depart_icon fa fa-tachometer-alt" data-toggle="tooltip" title="My Deskboard "></i>
-
-                        <span class="depart_style_drop"><i class="fa fa-chevron-down"></i></span></div>
+                        <span class="depart_style_drop"><i class="fa fa-chevron-down"></i></span>
+                    </div>
                 </a>
             </li>
-
         </ul>
+    </div>
+</div>
 
-        <span class="drop_ind"><i class="fa fa-chevron-down"></i></span>
-
-
-        <section class="width100 marg_top_20">
-            <div id="slide_menu" class="container-fluid tab-content category_tab" [ngStyle]="{'background': fcolor}">
-
-                <div class="tab-pane  " id="government">
-                    <!-- *ngIf="govt" -->
-                    <div class="row ">
-                        <div class="col-md-5 col-xs-9">
-                            <div id="custom-search">
-                                <div class="input-group ">
-                                    <input type="text" class=" search_input_category search-query " placeholder="Search on worldvoting.org " />
-                                    <span class="input-group-btn">
-                                      <button class="btn btn-danger" type="button">
-                                          <span class=" glyphicon glyphicon-search"></span>
-                                    </button>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-xs-2" style="margin-top: 9px;">
-                            <p class="toggle_text">Normal Mode</p><br>
-                            <div class="onoffswitch onoffbar" style="	">
-
-                                <input type="checkbox" name="onoffswitch" class="on onoffswitch-checkbox" id="myonoffswitch" checked>
-                                <label class="onoffswitch-label" for="myonoffswitch">
+<div class="container-fluid">
+  <section class="width100 plusmarg_top_5">
+    <div id="slide_menu" class="container-fluid tab-content category_tab" [ngStyle]="{'background': fcolor}">
+      <div id="government" *ngIf="govt" [@slideInOut]>
+          <!-- *ngIf="govt" -->
+          <div class="row ">
+              <div class="col-md-5 col-xs-9">
+                  <div id="custom-search">
+                      <div class="input-group ">
+                          <input type="text" class=" search_input_category search-query " placeholder="Search on worldvoting.org " />
+                          <span class="input-group-btn">
+                            <button class="btn btn-danger" type="button">
+                                <span class=" glyphicon glyphicon-search"></span>
+                          </button>
+                          </span>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-md-6 col-xs-2" style="margin-top: 9px;">
+                  <p class="toggle_text">Normal Mode</p><br>
+                  <div class="onoffswitch onoffbar" style="	">
+                    <input type="checkbox" name="onoffswitch" class="on onoffswitch-checkbox" id="myonoffswitch" checked>
+                    <label class="onoffswitch-label" for="myonoffswitch">
                       <span class="onoffswitch-inner"></span>
                       <span class="onoffswitch-switch"></span>
-                  </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="gov_toggle width100">
-                            <div class="row">
-                                <div class="col-md-3 col-xs-6">
-                                    <ul class="submenu_ul">
-                                        <li><a href="#" class="selected_option">Department of Administrative</a></li>
-                                        <li><a href="#" class="selected_option">Department of Biotechnology</a></li>
-                                        <li><a href="#" class="selected_option">Department of Commerce</a></li>
-                                        <li><a href="#" class="selected_option">Department of Industrial</a></li>
-                                        <li><a href="#" class="selected_option">Separated link</a></li>
-                                    </ul>
-                                </div>
-                                <div class="col-md-3 col-xs-6">
-                                    <ul class="submenu_ul">
-                                        <li><a href="#" class="selected_option">Action</a></li>
-                                        <li><a href="#" class="selected_option">Another action</a></li>
-                                        <li><a href="#" class="selected_option">Something else here</a></li>
-                                        <li></li>
-                                        <li><a href="#" class="selected_option">Separated link</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="toggle_gov width100">
-                            <div class="row">
-                                <div class="col-md-3 col-xs-6">
-                                    <ul class="submenu_ul">
-                                        <li><a href="#" class="selected_option">Law Making</a></li>
-                                        <li><a href="#" class="selected_option">Corruption</a></li>
-                                        <li><a href="#" class="selected_option">Water</a></li>
-                                        <li><a href="#" class="selected_option">Electricity</a></li>
-                                        <li><a href="#" class="selected_option">Road</a></li>
-                                    </ul>
-                                </div>
-                                <div class="col-md-3 col-xs-6">
-                                    <ul class="submenu_ul">
-                                        <li><a href="#" class="selected_option">Action</a></li>
-                                        <li><a href="#" class="selected_option">Another action</a></li>
-                                        <li><a href="#" class="selected_option">Something else here</a></li>
-                                        <li></li>
-                                        <li><a href="#" class="selected_option">Separated link</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-------------news---------------->
-                <div class="tab-pane width100 pad_top20 active" id="topNews" *ngIf="news">
-                    <div class="row">
-                        <div class="col-md-3 col-xs-12" style="padding-bottom: 10px;">
-                            <img src="../assets/img/55.jpg" class="news_img_size" /><br>
-                            <button class="btn " style="width: 80%;height: 45px;margin-top: 60px;font-weight: 500;background: linear-gradient(#ebf904,#ff9703);font-size: 24px;">Say Something</button> &nbsp;&nbsp;<img src="../assets/images/icon/s-logo.png"
-                                style="margin-top: 60px;" />
-                        </div>
-                        <div class="col-md-3 col-xs-12">
-                            <div><img src="../assets/img/55.jpg" class="news_img_size" /></div>
-                            <div class=" " style="background:white;padding-right:15px;padding-left:15px;">
-                                <p>To begin customizing your site go to Appearance -> Customizer and </p>
-                            </div>
-                            &nbsp;&nbsp;
-                            <div style="text-align:center;padding-bottom: 8px;margin-top: -11px;"><img src="../assets/images/ndtv.jpg" style="height: 50px;width: 200px;" /></div>
-                        </div>
-                        <div class="col-md-3 col-xs-12">
-                            <div><img src="../assets/img/55.jpg" class="news_img_size" /></div>
-                            <div class="" style="background:white;padding-right:15px;padding-left:15px;">
-                                <p>To begin customizing your site go to Appearance -> Customizer and </p>
-                            </div>
-                            &nbsp;&nbsp;
-                            <div style="text-align:center;padding-bottom: 8px;margin-top: -11px;"><img src="../assets/images/ndtv.jpg" style="height: 50px;width: 200px;" /></div>
-                        </div>
-                        <div class="col-md-3 col-xs-12">
-                            <div><img src="../assets/img/55.jpg" class="news_img_size" /></div>
-                            <div class="" style="background:white;padding-right:15px;padding-left:15px;">
-                                <p>To begin customizing your site go to Appearance -> Customizer and </p>
-                            </div>
-                            &nbsp;&nbsp;
-                            <div style="text-align:center;padding-bottom: 8px;margin-top: -11px;"><img src="../assets/images/ndtv.jpg" style="height: 50px;width: 200px;" /></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-pane " id="myDeskboard" *ngIf="dashboard">
-                    <!--  -->
-                    <div class="row">
-                        <div class="col-md-3 col-xs-6">
-                            <ul class="submenu_ul">
-                                <li>
-                                    <a href="#"><img src="../assets/images/icon/mail.png" /> &nbsp;&nbsp;Notification</a>
-                                </li>
-                                <li>
-                                    <a href="#"><img src="../assets/images/icon/warning.png" /> &nbsp;&nbsp;Attention Required</a>
-                                </li>
-                                <li>
-                                    <a href="#"><img src="../assets/images/icon/request.png" /> &nbsp;&nbsp;Friends Requests</a>
-                                </li>
-                                <li>
-                                    <a href="#"><img src="../assets/images/icon/followers.png" /> &nbsp;&nbsp;Followers</a>
-                                </li>
-                                <li>
-                                    <a href="#"><img src="../assets/images/icon/following.png" /> &nbsp;&nbsp;Following</a>
-                                </li>
-                                <li><a href="#">&nbsp;&nbsp;Points</a></li>
-                                <li><a href="#">&nbsp;&nbsp;Wallet</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-md-3 col-xs-6">
-                            <ul class="submenu_ul">
-                                <li>
-                                    <a href="#"><img src="../assets/images/icon/elections.png" /> &nbsp;&nbsp;Votes</a>
-                                </li>
-                                <li>
-                                    <a href="#"><img src="../assets/images/icon/bookmark.png" /> &nbsp;&nbsp;Bookmarks</a>
-                                </li>
-                                <li>
-                                    <a href="#"><img src="../assets/images/icon/request.png" /> &nbsp;&nbsp;Favorite</a>
-                                </li>
-                                <li>
-                                    <a href="#"><img src="../assets/images/icon/settings.png" /> &nbsp;&nbsp;Settings</a>
-                                </li>
-                                <li>
-                                    <a href="#"><img src="../assets/images/icon/idea.png" /> &nbsp;&nbsp;My Creation</a>
-                                </li>
-                                <li>
-                                    <a href="#"><img src="../assets/images/icon/crown.png" /> &nbsp;&nbsp;Successful Polls</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </section>
-        <div class="container-fluid india_color">
-            <div class="row">
-                <div class="col-md-4">
-                </div>
-                <div class="col-md-4">
-                    <h1 style="text-align:center;font-size: 45px;font-weight:700">INDIA</h1>
-                    <div id="piechart"></div>
-                    <div class="row" style="padding: 5px 45px;">
-                        <div class="col-md-6 col-xs-6">
-                            <button class="btn " style="width: 100%;height: 45px;margin-top: 4px;font-weight: 500;background: linear-gradient(#ebf904,#ff9703);font-size: 24px;">Good</button>
-                        </div>
-                        <div class="col-md-6 col-xs-6">
-                            <button class="btn " style="width: 100%;height: 45px;margin-top: 4px;font-weight: 500;background: linear-gradient(#ebf904,#ff9703);font-size: 24px;">Bad</button>
-                        </div>
-                    </div><br>
-                    <h4 style="color:#7e7e82;text-align:center"> You may changes your Vote anytime after 24 hours</h4><br>
-                </div>
-                <div class="col-md-4">
-                </div>
-            </div>
-            <div class="row" style="    height: 18px;background:green;text-align:center;">
-                <span class=""><i style="font-size:22px" class="fa fa-chevron-down"></i></span>
-            </div>
-
+                    </label>
+                  </div>
+              </div>
+          </div>
+          <div class="row">
+              <div class="gov_toggle width100">
+                  <div class="row">
+                      <div class="col-md-3 col-xs-6">
+                          <ul class="submenu_ul">
+                              <li><a href="#" class="selected_option">Department of Administrative</a></li>
+                              <li><a href="#" class="selected_option">Department of Biotechnology</a></li>
+                              <li><a href="#" class="selected_option">Department of Commerce</a></li>
+                              <li><a href="#" class="selected_option">Department of Industrial</a></li>
+                              <li><a href="#" class="selected_option">Separated link</a></li>
+                          </ul>
+                      </div>
+                      <div class="col-md-3 col-xs-6">
+                          <ul class="submenu_ul">
+                              <li><a href="#" class="selected_option">Action</a></li>
+                              <li><a href="#" class="selected_option">Another action</a></li>
+                              <li><a href="#" class="selected_option">Something else here</a></li>
+                              <li></li>
+                              <li><a href="#" class="selected_option">Separated link</a></li>
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+              <div class="toggle_gov width100">
+                  <div class="row">
+                      <div class="col-md-3 col-xs-6">
+                          <ul class="submenu_ul">
+                              <li><a href="#" class="selected_option">Law Making</a></li>
+                              <li><a href="#" class="selected_option">Corruption</a></li>
+                              <li><a href="#" class="selected_option">Water</a></li>
+                              <li><a href="#" class="selected_option">Electricity</a></li>
+                              <li><a href="#" class="selected_option">Road</a></li>
+                          </ul>
+                      </div>
+                      <div class="col-md-3 col-xs-6">
+                          <ul class="submenu_ul">
+                              <li><a href="#" class="selected_option">Action</a></li>
+                              <li><a href="#" class="selected_option">Another action</a></li>
+                              <li><a href="#" class="selected_option">Something else here</a></li>
+                              <li></li>
+                              <li><a href="#" class="selected_option">Separated link</a></li>
+                          </ul>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div id="topNews" *ngIf="news" [@slideInOut]>
+          <div class="row">
+              <div class="col-md-3 col-xs-12" style="padding-bottom: 10px;">
+                  <img src="../assets/img/55.jpg" class="news_img_size" /><br>
+                  <button class="btn " style="width: 80%;height: 45px;margin-top: 60px;font-weight: 500;background: linear-gradient(#ebf904,#ff9703);font-size: 24px;">Say Something</button> &nbsp;&nbsp;<img src="../assets/images/icon/s-logo.png"
+                      style="margin-top: 60px;" />
+              </div>
+              <div class="col-md-3 col-xs-12">
+                  <div><img src="../assets/img/55.jpg" class="news_img_size" /></div>
+                  <div class=" " style="background:white;padding-right:15px;padding-left:15px;">
+                      <p>To begin customizing your site go to Appearance -> Customizer and </p>
+                  </div>
+                  &nbsp;&nbsp;
+                  <div style="text-align:center;padding-bottom: 8px;margin-top: -11px;"><img src="../assets/images/ndtv.jpg" style="height: 50px;width: 200px;" /></div>
+              </div>
+              <div class="col-md-3 col-xs-12">
+                  <div><img src="../assets/img/55.jpg" class="news_img_size" /></div>
+                  <div class="" style="background:white;padding-right:15px;padding-left:15px;">
+                      <p>To begin customizing your site go to Appearance -> Customizer and </p>
+                  </div>
+                  &nbsp;&nbsp;
+                  <div style="text-align:center;padding-bottom: 8px;margin-top: -11px;"><img src="../assets/images/ndtv.jpg" style="height: 50px;width: 200px;" /></div>
+              </div>
+              <div class="col-md-3 col-xs-12">
+                  <div><img src="../assets/img/55.jpg" class="news_img_size" /></div>
+                  <div class="" style="background:white;padding-right:15px;padding-left:15px;">
+                      <p>To begin customizing your site go to Appearance -> Customizer and </p>
+                  </div>
+                  &nbsp;&nbsp;
+                  <div style="text-align:center;padding-bottom: 8px;margin-top: -11px;"><img src="../assets/images/ndtv.jpg" style="height: 50px;width: 200px;" /></div>
+              </div>
+          </div>
+      </div>
+      <div id="myDeskboard" *ngIf="dashboard" [@slideInOut]>
+          <!--  -->
+          <div class="row">
+              <div class="col-md-3 col-xs-6">
+                  <ul class="submenu_ul">
+                      <li>
+                          <a href="#"><img src="../assets/images/icon/mail.png" /> &nbsp;&nbsp;Notification</a>
+                      </li>
+                      <li>
+                          <a href="#"><img src="../assets/images/icon/warning.png" /> &nbsp;&nbsp;Attention Required</a>
+                      </li>
+                      <li>
+                          <a href="#"><img src="../assets/images/icon/request.png" /> &nbsp;&nbsp;Friends Requests</a>
+                      </li>
+                      <li>
+                          <a href="#"><img src="../assets/images/icon/followers.png" /> &nbsp;&nbsp;Followers</a>
+                      </li>
+                      <li>
+                          <a href="#"><img src="../assets/images/icon/following.png" /> &nbsp;&nbsp;Following</a>
+                      </li>
+                      <li><a href="#">&nbsp;&nbsp;Points</a></li>
+                      <li><a href="#">&nbsp;&nbsp;Wallet</a></li>
+                  </ul>
+              </div>
+              <div class="col-md-3 col-xs-6">
+                  <ul class="submenu_ul">
+                      <li>
+                          <a href="#"><img src="../assets/images/icon/elections.png" /> &nbsp;&nbsp;Votes</a>
+                      </li>
+                      <li>
+                          <a href="#"><img src="../assets/images/icon/bookmark.png" /> &nbsp;&nbsp;Bookmarks</a>
+                      </li>
+                      <li>
+                          <a href="#"><img src="../assets/images/icon/request.png" /> &nbsp;&nbsp;Favorite</a>
+                      </li>
+                      <li>
+                          <a href="#"><img src="../assets/images/icon/settings.png" /> &nbsp;&nbsp;Settings</a>
+                      </li>
+                      <li>
+                          <a href="#"><img src="../assets/images/icon/idea.png" /> &nbsp;&nbsp;My Creation</a>
+                      </li>
+                      <li>
+                          <a href="#"><img src="../assets/images/icon/crown.png" /> &nbsp;&nbsp;Successful Polls</a>
+                      </li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+    </div>
+</section>
+</div>
+<div class="container-fluid india_color">
+    <div class="row">
+        <div class="col-md-4">
         </div>
-
-        <div class="container-fluid marg_top_20" id="myHeader">
-            <div class="row " style="background:#013775">
-                <div class=" col-md-1 col-xs-1 toggle_move_back" id="content">
-                    <span style="display: flex;"><i style="font-size: 32px;color: white;padding: 10px 30px;"  id="sidebarCollapse" class="fa fa-bars"></i>  <img src="images/icon/s-logo.png" class="fav_img_size fav_img_margin" /></span>
-
+        <div class="col-md-4">
+            <h1 style="text-align:center;font-size: 45px;font-weight:700">INDIA</h1>
+            <div id="piechart"></div>
+            <div class="row" style="padding: 5px 45px;">
+                <div class="col-md-6 col-xs-6">
+                    <button class="btn " style="width: 100%;height: 45px;margin-top: 4px;font-weight: 500;background: linear-gradient(#ebf904,#ff9703);font-size: 24px;">Good</button>
                 </div>
-                <div class="col-md-9 " style="    margin-left: -13px;">
-                    <h4 style="color:white">15 Canal road , dehradun</h4><br>
-                    <ul id="tag_tab" style="display:flex">
-
-                    </ul>
+                <div class="col-md-6 col-xs-6">
+                    <button class="btn " style="width: 100%;height: 45px;margin-top: 4px;font-weight: 500;background: linear-gradient(#ebf904,#ff9703);font-size: 24px;">Bad</button>
                 </div>
-
-                <div class="col-md-2 " style="float:right">
-
-                    <img src="images/icon/com-icon.png" class="fav_img_size " style="margin-top: 5px;margin-left: 21px;float: right;margin-right: 16px;" />
-                    <button class="btn enact_btn" (click)="enactModal()" style="float:right">ENACT</button>
-
-                </div>
-            </div>
+            </div><br>
+            <h4 style="color:#7e7e82;text-align:center"> You may changes your Vote anytime after 24 hours</h4><br>
         </div>
+        <div class="col-md-4">
+        </div>
+    </div>
+    <div class="row" style="    height: 18px;background:green;text-align:center;">
+        <span class=""><i style="font-size:22px" class="fa fa-chevron-down"></i></span>
     </div>
 
 </div>
 
-<div class="wrapper" id="scrollBar">
+<div class="container-fluid plusmarg_top_5" id="myHeader">
+    <div class="row " style="background:#013775">
+        <div class=" col-md-1 col-xs-1 toggle_move_back" id="content">
+            <span style="display: flex;"><i style="font-size: 32px;color: white;padding: 10px 30px;"  id="sidebarCollapse" class="fa fa-bars"></i>  <img src="images/icon/s-logo.png" class="fav_img_size fav_img_margin" /></span>
 
-    <nav id="sidebar" style="">
-        <!-- Sidebar Header -->
+        </div>
+        <div class="col-md-9 " style="    margin-left: -13px;">
+            <h4 style="color:white">15 Canal road , dehradun</h4><br>
+            <ul id="tag_tab" style="display:flex">
 
-        <!-- Sidebar Links -->
-        <ul class="list-unstyled components">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
+            </ul>
+        </div>
 
-            <li>
-                <!-- Link with dropdown items -->
-                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">Pages</a>
-                <ul class="collapse list-unstyled" id="homeSubmenu">
-                    <li><a href="#">Page</a></li>
-                    <li><a href="#">Page</a></li>
-                    <li><a href="#">Page</a></li>
-                </ul>
-            </li>
-            <li><a href="#">Portfolio</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
-    </nav>
+        <div class="col-md-2 " style="float:right">
 
+            <img src="images/icon/com-icon.png" class="fav_img_size " style="margin-top: 5px;margin-left: 21px;float: right;margin-right: 16px;" />
+            <button class="btn enact_btn" (click)="enactModal()" style="float:right">ENACT</button>
+
+        </div>
+    </div>
 </div>

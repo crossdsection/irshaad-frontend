@@ -1,12 +1,35 @@
 import { Component, OnInit } from '@angular/core';
 import { EnactModalComponent } from '../enact-modal/enact-modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
+import { trigger, style, group, transition, state, animate, keyframes, query, stagger } from '@angular/animations';
 
 @Component({
   selector: 'app-tabs',
   templateUrl: './tabs.component.html',
-  styleUrls: ['./tabs.component.css']
+  styleUrls: ['./tabs.component.css'],
+  animations: [
+      trigger('slideInOut', [
+          state('in', style({height: '*', opacity: 0})),
+          transition(':leave', [
+              style({height: '*', opacity: 1}),
+
+              group([
+                  animate(300, style({height: 0})),
+                  animate('200ms ease-in-out', style({'opacity': '0'}))
+              ])
+
+          ]),
+          transition(':enter', [
+              style({height: '0', opacity: 0}),
+
+              group([
+                  animate(300, style({height: '*'})),
+                  animate('400ms ease-in-out', style({'opacity': '1'}))
+              ])
+
+          ])
+      ])
+  ]
 })
 export class TabsComponent implements OnInit {
   fcolor = 'transparet';
@@ -22,36 +45,34 @@ export class TabsComponent implements OnInit {
   changeColor(val) {
     this.fcolor = val;
     console.log(this.fcolor);
-        }
-        ngOnInit () {  }
-        
-          toggle() {
-            this.govt = !this.govt;
-          if (this.govt) {
-            this.dashboard = false;
-            this.news = false;
-          }
-            console.log(this.govt);
-          }
+  }
 
-          toggle1() {
-            this.news = !this.news;
-            if (this.news) {
-              this.dashboard = false;
-              this.govt = false;
-            }
-            console.log(this.news);
+  ngOnInit () {  }
 
-          }
-          toggle2() {
-            this.dashboard = !this.dashboard;
-            if (this.dashboard) {
-              this.govt = false;
-              this.news = false;
-            }
-            console.log(this.dashboard);
-
-          }
-
+  toggleTabs( args ){
+    switch( args ){
+      case 'govt' : {
+        this.govt = !this.govt;
+        this.dashboard = false;
+        this.news = false;
+        break;
+      }
+      case 'news' : {
+        this.news = !this.news;
+        this.dashboard = false;
+        this.govt = false;
+        break;
+      }
+      case 'desk' : {
+        this.dashboard = !this.dashboard;
+        this.govt = false;
+        this.news = false;
+        break;
+      }
+    }
+    console.log( this.dashboard );
+    console.log( this.govt );
+    console.log( this.news );
+  }
 
 }
