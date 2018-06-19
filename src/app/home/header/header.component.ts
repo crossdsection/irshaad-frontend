@@ -12,10 +12,16 @@ import { UserdataService } from '../../services/userdata.service';
 })
 
 export class HeaderComponent implements OnInit {
+  public loggedIn: boolean;
+  public userInfo: object;
   constructor( private modal: NgbModal, private userService: UserdataService ) { }
 
   ngOnInit () {
-    this.userService.getUserInfo();
+    this.loggedIn = false;
+    this.userInfo = this.userService.getUserInfo();
+    if( this.userInfo && this.userInfo.length != 0 ){
+      this.loggedIn = true;
+    }
   }
 
   onClick() {

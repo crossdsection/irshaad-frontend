@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {NgbActiveModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
-import {NgbTabsetConfig} from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbTabsetConfig } from '@ng-bootstrap/ng-bootstrap';
 
 import { HttpService } from '../../services/http.service';
 import { UserdataService } from '../../services/userdata.service';
@@ -95,6 +95,7 @@ export class LoginsignupComponent implements OnInit {
           localStorage.setItem('userData', JSON.stringify(response['data']) );
           this.userService.getUserInfo();
           this.activeModal.close('Close Click');
+          location.reload()
         } else {
           this.loginAlert = -1;
         }

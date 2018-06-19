@@ -2,9 +2,10 @@
     <div class="container-fluid" style="background: #013775;">
 
         <div class="">
-            <span (click)="onClick()" class="log_sign"><span class="glyphicon glyphicon-log-in"></span> Login/Signup</span>
-
-
+            <span  (click)="onClick()" *ngIf="!loggedIn" class="log_sign"><span class="glyphicon glyphicon-log-in"></span> Login/Signup</span>
+            <span *ngIf="loggedIn" class="log_sign">
+              <a href="#">{{ this.userInfo.name }}</a>
+            </span>
         </div>
 
         <div class="row">
