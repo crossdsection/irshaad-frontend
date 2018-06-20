@@ -1,0 +1,170 @@
+
+<section class="profile_view">
+  <div class="container-fluid">
+    <div class="row">
+     <div  class=" col-md-9" style="    border-right: 2px solid white;"><br><br>
+      <div class="row">
+                 <div class="col-xs-3 col-md-3" style="text-align: center;">
+              <!-- required for floating -->
+              <!-- Nav tabs -->
+        
+        <img src="../assets/img/1.jpg" class="" style="border-radius:50%;height: 250px;" />
+        <div style="text-align:center"><h4>Name</h4>
+          From</div>
+        <br><br>
+        
+              <ul class="nav nav-tabs tabs-left" style="font-weight:600">
+                  <li class="active tab_padding"><a href="#profile" data-toggle="tab">View Profile</a></li>
+                  
+                  <li class="tab_padding"><a href="#cahngeImage " data-toggle="tab">Change Image</a></li>
+                  <li class="tab_padding"><a href="#changePassword" data-toggle="tab">Change Password</a></li>
+                  <li class="tab_padding"><a href="#settings" data-toggle="tab">Settings</a></li>
+              </ul>
+          </div>
+          <div class="col-xs-10 col-md-9">
+              <!-- Tab panes -->
+              <div class="tab-content">
+         <div class="tab-pane active" id="profile">
+         <div class="row">
+          <div class="col-md-12">
+            <form>
+              <div class="row" style="font-weight:600">
+            
+                <div class="col-md-6">
+                  First Name*
+                  <input  type="text" class="form-control" value="" name="" placeholder="Enter First Name"  required /><br>
+                  Email*
+                  <input type="email" class="form-control" value="" name="" placeholder="Enter Email" required /><br>
+                  Gender
+                  <select class="form-control">
+                    <option value="male"> Male</option>
+                    <option value="female"> Female</option>
+                    <option value="others"> Others</option>
+                  </select><br>
+                  <input type="radio" name="married"  value="married">&nbsp;&nbsp;&nbsp;Married  &nbsp;	
+                <input type="radio" name="married" value="unmarried" >&nbsp;&nbsp;&nbsp; Unmarried
+                <br><br>
+                  
+  
+                   Current City
+                  <input type="text" class="form-control" value="" name="" placeholder="Enter Number " required /><br>
+                   Hometown
+                  <input type="text" class="form-control" value="" name="" placeholder="Enter Number " required /><br>
+                  
+                  <div  class= "add_collage">
+                  <h4 class="collage_font" (click)="toggleWorkplace()"><i class="fa fa fa-plus"></i> Add Workplace</h4><span class="collage_cancel"><i class="fa fa fa-times-circle"></i> cancel</span>
+                    
+                  <div class="pro_show" *ngIf="workplace">
+                      Comapny
+                      <input type="text" class="form-control" value="" name="" placeholder="Enter Company Name " required /><br>
+                      Post
+                      <input type="text" class="form-control" value="" name="" placeholder="Enter Post " required /><br>
+                    </div>
+                  </div>
+                  
+                  <br>
+                
+                    
+                  <div  class= "add_collage">
+                  <h4 class="collage_font"  (click)="toggleCollege()"><i class="fa fa fa-plus"></i> Add College</h4><span class="collage_cancel"><i class="fa fa fa-times-circle"></i> cancel</span>
+                    
+                  <div class="pro_show"  *ngIf="college">
+                      College Name
+                      <input type="text" class="form-control" value="" name="" placeholder="Enter Company Name " required /><br>
+                      City
+                      <input type="text" class="form-control" value="" name="" placeholder="Enter Post " required /><br>
+                      Year
+                      <input type="date" class="form-control" value="" name="" placeholder="Enter Post " required /><br>
+                    </div>
+                  </div>
+                  <br>
+                
+              
+              
+                </div>
+                
+                <div class="col-md-6">
+                  Last Name*
+                  <input type="text" class="form-control" value="" name="" placeholder="First Name" required/><br>
+                  Mobile No.
+                  <input type="text" class="form-control" value="" name="" placeholder="Enter Number " required/><br>
+                  
+                  Date of Birth
+                  <input type="date" class="form-control" value="" name="" placeholder="Date of Birth " required/><br>
+            
+                  About You
+                  <textarea class="form-control" rows="5" placeholder="Enter About Yourself....">
+                  </textarea><br>
+                  Interst
+                  <textarea class="form-control" rows="5" placeholder="Enter Your Interst and Hobbies....">
+                  </textarea>
+                  <br>
+                    <div  class= "add_collage">
+                  <h4 class="collage_font" (click)=" toggleSchool()"><i class="fa fa fa-plus"></i> Add School</h4><span class="collage_cancel"><i class="fa fa fa-times-circle"></i> cancel</span>
+                    
+                  <div class="pro_show" *ngIf="school">
+                      School Name
+                      <input type="text" class="form-control" value="" name="" placeholder="Enter Company Name " required /><br>
+                      City
+                      <input type="text" class="form-control" value="" name="" placeholder="Enter Post " required /><br>
+                      Year
+                      <input type="date" class="form-control" value="" name="" placeholder="Enter Post " required /><br>
+                    </div>
+                  </div>
+                </div>
+              
+              </div><br>
+              <br>
+              <div class="" style="text-align:center;font-weight:600 ">
+              <button class="btn btn-info" style="width: 60%;">Save Changes</button>
+              </div>
+            </form><br><br><br><br>
+          </div>
+        
+    </div>
+      
+         </div>
+                  <div class="tab-pane" id="cahngeImage"  style="text-align:center">
+            <div class="" style="text-align:center">
+              <img src="../assets/img/1.jpg"/>
+              <br><br>
+            <button class="btn btn-info">Save Changes</button>	
+            </div>
+              
+          </div>
+                  <div class="tab-pane" id="changePassword" >
+         
+            <div class="row">
+            <h2 style="text-align:center">Change Password</h2><br>
+              <div class="col-md-3"></div>
+  
+              <div class="col-md-6 "  style="font-weight:600">
+              
+                  Old Password
+                  <input type="Password" class="form-control" value="" name="" placeholder="Old Password  " required/><br>
+                  
+                  New Password
+                  <input type="password" class="form-control" value="" name="" placeholder="New Password " required/><br>
+              <div class="row" style="text-align:center;font-weight:600 ">
+              <button class="btn btn-info">Save Changes</button>
+              </div><br><br>
+              </div>
+              <div class="col-md-3"></div>						
+            </div>
+            
+            
+          </div>
+                  <div class="tab-pane" id="settings"></div>
+              </div>
+          </div>
+<br><br></div>
+
+          
+       
+      </div><br><br>
+      <div class="col-md-2 ">
+        fsadfsdfsfsdfsdfs svdgvw
+      </div>
+    </div>
+  </div><br><br>
+  </section>

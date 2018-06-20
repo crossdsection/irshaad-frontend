@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import * as $ from 'jquery';
+import { RouterModule, Routes } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +9,6 @@ import * as $ from 'jquery';
 })
 export class AppComponent {
   title = 'app';
+
+  
 }
