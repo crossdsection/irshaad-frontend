@@ -1,0 +1,82 @@
+
+/*------------profile-----------*/
+
+.add_collage {
+    border: 2px dashed #79c5f1;
+    padding: 10px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.collage_font {
+    color: #79c5f1;
+    font-weight: 600
+}
+
+.pro_show {
+    /*display:none;*/
+}
+
+.collage_cancel {
+    margin-right: 15px;
+    margin-top: -20px;
+    float: right;
+    color: gray;
+    font-weight: 500;
+    display: none;
+    cursor: pointer;
+}
+
+.dekhoNone {
+    display: none;
+}
+
+.tagging_view {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    margin-top: -22px;
+    background: #dd7518;
+    color: white;
+    padding: 5px;
+    margin-left: 10px;
+    text-align: center;
+}
+
+.tagging_cross {
+    float: right;
+    padding: 3px;
+}
+
+
+.profile_view {
+    
+    background: #055063;
+    color: white;
+}
+.tab_padding{
+    padding: 0px 9px 5px;
+}
+a {
+
+    color: white;
+    text-decoration: none;
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
+
+}
+a:hover{
+    color:#6cb0f9;
+}
+.nav{
+    flex-wrap: wrap;
+display:block;
+padding-left: 0;
+text-align: left;
+margin-bottom: 0;
+
+list-style: none;
+}
+
+.tab_padding:active {
+    background: #17a2b8;
+}

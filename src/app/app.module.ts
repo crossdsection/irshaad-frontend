@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 
+
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './home/header/header.component';
 import { FeedsComponent } from './home/feeds/feeds.component';
@@ -22,6 +23,8 @@ import { EnactModalComponent } from './home/enact-modal/enact-modal.component';
 import { UserdataService } from './services/userdata.service';
 import { HttpService } from './services/http.service';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { UserProfileComponent } from './home/user-profile/user-profile.component';
+import { FavLocationComponent } from './home/fav-location/fav-location.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -38,7 +41,9 @@ const routes: Routes = [
     TabsComponent,
     ProfilemodalComponent,
     CommentModalComponent,
-    EnactModalComponent
+    EnactModalComponent,
+    UserProfileComponent,
+    FavLocationComponent
   ],
   entryComponents: [LoginsignupComponent, ProfilemodalComponent, CommentModalComponent, EnactModalComponent],
   imports: [
