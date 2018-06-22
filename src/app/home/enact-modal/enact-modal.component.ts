@@ -18,7 +18,11 @@ export class EnactModalComponent implements OnInit {
   postTypesObj: FormControl;
 
   postSubmitAlert: Number;
-  fileJSON: Array;
+  fileJSON: Array<Number>;
+  uploadProgress:number = 0;
+  uploadComplete:boolean = false;
+  uploadingProgressing:boolean = false;
+  serverResponse: any;
 
   constructor(public activeModal: NgbActiveModal, private httpService: HttpService) { }
 
@@ -68,18 +72,19 @@ export class EnactModalComponent implements OnInit {
 
   handleProgress(event){
     if (event.type === HttpEventType.DownloadProgress) {
-      this.uploadingProgressing =true
-      this.uploadProgress = Math.round(100 * event.loaded / event.total)
+      this.uploadingProgressing = true;
+      this.uploadProgress = Math.round(100 * event.loaded / event.total);
     }
 
     if (event.type === HttpEventType.UploadProgress) {
-      this.uploadingProgressing =true
-      this.uploadProgress = Math.round(100 * event.loaded / event.total)
+      this.uploadingProgressing = true;
+      this.uploadProgress = Math.round(100 * event.loaded / event.total);
     }
 
     if (event.type === HttpEventType.Response) {
-      this.uploadComplete = true
-      this.serverResponse = event.body
+      this.uploadingProgressing = false;
+      this.uploadComplete = true;
+      this.serverResponse = event.body;
       if( this.serverResponse["error"] == 0 ){
         for( var i in this.serverResponse['data'] ){
           this.fileJSON.push( this.serverResponse['data'][i] );

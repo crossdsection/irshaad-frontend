@@ -10,13 +10,13 @@
         <h3 class=" modal-title" style="font-weight: 600;">ENACT</h3>
     </div>
     <div class="alert"
-         [ngClass]="{ 'alert-success alert-dismissible': loginAlert == 1,
-                      'alert-danger alert-dismissible': loginAlert == -1
+         [ngClass]="{ 'alert-success alert-dismissible': postSubmitAlert == 1,
+                      'alert-danger alert-dismissible': postSubmitAlert == -1
                     }"
          *ngIf="postSubmitAlert != 0">
       <button type="button" class="close" data-dismiss="alert">&times;</button>
-      <p *ngIf="postSubmitAlert == 1"> <strong>Success!</strong> Success!! </p>
-      <p *ngIf="postSubmitAlert == -1"> <strong>Failed!</strong> Failed!! </p>
+      <p *ngIf="postSubmitAlert == 1"> <strong>Success!</strong></p>
+      <p *ngIf="postSubmitAlert == -1"> <strong>Failed!</strong></p>
     </div>
     <form class="needs-validation" [formGroup]="enactForm" >
         <div class="form-group">
@@ -72,6 +72,12 @@
             </div>
             <div class="col-md-3">
               <img src="../assets/images/icon/anonymous.png" class="btn" value="" style="float:right;width: 57px;height: 47px;margin-top: -8px;" />
+            </div>
+          </div>
+          <div *ngIf="uploadingProgressing">
+            <div class="percent">{{uploadProgress}}%</div>
+            <div class="progress-bar">
+                <div class="uploaded" ng-style="{'width': uploadProgress+'%'}"></div>
             </div>
           </div>
         </div>
