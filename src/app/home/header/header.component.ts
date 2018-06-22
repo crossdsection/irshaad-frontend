@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit () {
     this.loggedIn = false;
     this.userInfo = this.userService.getUserInfo();
-    if( this.userInfo && this.userInfo.length != 0 ){
+    if( this.userInfo ){
       this.loggedIn = true;
     }
   }

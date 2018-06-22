@@ -70,9 +70,6 @@ export class TabsComponent implements OnInit {
         break;
       }
     }
-    console.log( this.dashboard );
-    console.log( this.govt );
-    console.log( this.news );
   }
 
 }

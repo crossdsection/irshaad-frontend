@@ -9,39 +9,74 @@
     <div class="text-center">
         <h3 class=" modal-title" style="font-weight: 600;">ENACT</h3>
     </div>
-    <div class="row">
-
-        <div class="col-md-12">
-
-            <form>
-                <div class="row" style="background: #a8a7a9;">
-                    <h4 style="padding: 9px 0px 0px 20px; font-weight:700">Title</h4>
-                    <input type="text" class="form-control" value="" placeholder="Enter Title" style="height:42px;font-size:17px;" />
-                    <h4 style="padding: 9px 0px 0px 20px; font-weight:700">Description</h4>
-                    <textarea class="form-control" placeholder="Let's change the World" style="height:180px;padding: 26px;font-size: 18px;"></textarea>
-                    <div class="col-md-4 col-xs-4" style="padding-right: 0px;padding-left: 0px;">
-                        <button class="btn" style="background: #a8a7a9;border-radius:0px;width:100%;border: 1px solid #ccc4d4;">Polls</button>
-                    </div>
-                    <div class="col-md-4 col-xs-4" style="padding-right: 0px;padding-left: 0px;">
-                        <button class="btn" style="border-radius:0px;width:100%;background: #a8a7a9;border: 1px solid #ccc4d4;">Discussion</button>
-                    </div>
-                    <div class="col-md-4 col-xs-4" style="padding-right: 0px;padding-left: 0px;">
-                        <button class="btn" style="border-radius:0px;width:100%;background: #a8a7a9;border: 1px solid #ccc4d4;">News</button>
-                    </div>
-                </div>
-                <div class="row" style="background:#cac1c1;padding:7px">
-                    <label for="pollImage" style="margin-left: 10px;"><img src="../assets/images/icon/camera.png"  /></label>
-                    <input type="file" style="display:none" id="pollImage">
-                    <label for="pollVideo"><img src="../assets/images/icon/video.png" /></label>
-                    <input type="file" style="display:none" id="pollVideo">
-                    <label for="pollDocument"><img src="../assets/images/icon/notes.png" /></label>
-                    <input type="file" style="display:none" id="pollDocument">
-                    <img src="../assets/images/icon/anonymous.png" class="btn" value="" style="float:right;width: 57px;height: 47px;margin-top: -8px;" />
-                </div>
-                <div class="row">
-                    <button class="btn " style="width: 100%;height: 45px;font-weight: 500;background: linear-gradient(#ebf904,#ff9703);font-size: 24px;">ENACT</button>
-                </div>
-            </form>
-        </div>
+    <div class="alert"
+         [ngClass]="{ 'alert-success alert-dismissible': loginAlert == 1,
+                      'alert-danger alert-dismissible': loginAlert == -1
+                    }"
+         *ngIf="postSubmitAlert != 0">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <p *ngIf="postSubmitAlert == 1"> <strong>Success!</strong> Success!! </p>
+      <p *ngIf="postSubmitAlert == -1"> <strong>Failed!</strong> Failed!! </p>
     </div>
+    <form class="needs-validation" [formGroup]="enactForm" >
+        <div class="form-group">
+          <input type="text"
+                 class="form-control"
+                 [ngClass]="{ 'is-invalid': title.invalid && (title.dirty || title.touched),
+                              'is-valid': title.valid && (title.dirty || title.touched)
+                            }"
+                 formControlName="title" required placeholder="Title">
+          <div class="invalid-feedback"
+               *ngIf="title.errors && (title.dirty || title.touched)">
+            <p *ngIf="title.errors.required">Title is required</p>
+          </div>
+        </div>
+        <div class="form-group">
+          <textarea  type="text"
+                  class="form-control"
+                  [ngClass]="{
+                               'is-invalid': description.invalid && (description.dirty || description.touched),
+                               'is-valid': description.valid && (description.dirty || description.touched)
+                             }"
+                  formControlName="description" required placeholder="Description">
+          </textarea>
+          <div class="invalid-feedback"
+               *ngIf="description.errors && (description.dirty || description.touched)">
+            <p *ngIf="description.errors.required">Description is required</p>
+          </div>
+        </div>
+        <div class="btn-group btn-group-toggle" style="width:100%" ngbRadioGroup name="radioBasic" formControlName="postTypes">
+          <label class="btn-secondary col-md-4 col-xs-4" ngbButtonLabel>
+            <input type="radio" ngbButton value="polls"> Polls
+          </label>
+          <label class="btn-secondary col-md-4 col-xs-4" ngbButtonLabel>
+            <input type="radio" ngbButton value="discussion"> Discussion
+          </label>
+          <label class="btn-secondary col-md-4 col-xs-4" ngbButtonLabel>
+            <input type="radio" ngbButton value="news"> News
+          </label>
+        </div>
+        <div class="form-group" style="border:4px;border-style:dashed;background:#cac1c1;margin-top:10px">
+          <div class="row">
+            <div class="col-md-3">
+              <label for="pollImage" style="margin-left: 10px;"><img src="../assets/images/icon/camera.png"  /></label>
+              <input type="file" style="display:none" (change)="onFileChange($event, 'image')" id="pollImage" accept=".jpg,.jpeg,.png">
+            </div>
+            <div class="col-md-3">
+              <label for="pollVideo"><img src="../assets/images/icon/video.png" /></label>
+              <input type="file" style="display:none" (change)="onFileChange($event, 'video')" id="pollVideo" accept=".mp4,.3gp">
+            </div>
+            <div class="col-md-3">
+              <label for="pollDocument"><img src="../assets/images/icon/notes.png" /></label>
+              <input type="file" style="display:none" (change)="onFileChange($event, 'document')" id="pollDocument" accept=".pdf,.doc,.docx">
+            </div>
+            <div class="col-md-3">
+              <img src="../assets/images/icon/anonymous.png" class="btn" value="" style="float:right;width: 57px;height: 47px;margin-top: -8px;" />
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn" (click)="postSubmit()" style="width: 100%;height: 45px;font-weight: 500;background: linear-gradient(#ebf904,#ff9703);font-size: 24px;">Let's change the World</button>
+        </div>
+    </form>
 </div>

@@ -19,7 +19,6 @@ export class AuthInterceptor implements HttpInterceptor {
         newHeader['Authorization'] = `:Bearer ${bearerToken}`;
       }
     }
-    newHeader['Content-Type'] = 'application/json';
     let changedReq = request.clone({
       setHeaders : newHeader
     });
