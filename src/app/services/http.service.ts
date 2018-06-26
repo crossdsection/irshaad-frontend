@@ -11,7 +11,7 @@ export class HttpService {
 
   constructor( private http:HttpClient ) { }
 
-  apiRoot: string = "http://localhost/worlvoting/";
+  apiRoot: string = "https://localhost/worldvoting/worldvote.back/";
 
   doGET( url ) {
     let getUrl = `${this.apiRoot}${url}`;
@@ -25,7 +25,7 @@ export class HttpService {
   }
 
   doFileUpload( fileItem:File, extraData?:object ):any{
-    let apiCreateEndpoint = `${this.apiRoot}files/submit/`
+    let apiCreateEndpoint = `${this.apiRoot}files/submit/`;
     const formData: FormData = new FormData();
 
     formData.append('file', fileItem, fileItem.name);
@@ -40,6 +40,10 @@ export class HttpService {
     return this.http.request(req)
   }
 
+  doGETFileUrl( fileUrl ){
+    return `${this.apiRoot}${fileUrl}`;
+  }
+  
   doPUT() {
    console.log("PUT");
   }

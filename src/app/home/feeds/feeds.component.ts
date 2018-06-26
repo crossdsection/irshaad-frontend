@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ProfilemodalComponent } from '../profilemodal/profilemodal.component';
+import { ProfileModalComponent } from '../profilemodal/profilemodal.component';
 import { CommentModalComponent } from '../comment-modal/comment-modal.component';
+
+import { HttpService } from '../../services/http.service';
+import { UserdataService } from '../../services/userdata.service';
 
 @Component({
   selector: 'app-feeds',
@@ -10,13 +13,16 @@ import { CommentModalComponent } from '../comment-modal/comment-modal.component'
 })
 export class FeedsComponent implements OnInit {
 
-  constructor(private modal: NgbModal) { }
+  constructor( private modal: NgbModal ) { }
+
   profileModal() {
-    this.modal.open(ProfilemodalComponent);
+    this.modal.open( ProfileModalComponent );
   }
+
   commentModal() {
-    this.modal.open(CommentModalComponent);
+    this.modal.open( CommentModalComponent );
   }
+
   ngOnInit() {
   }
 }

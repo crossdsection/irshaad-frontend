@@ -63,7 +63,7 @@ export class TabsComponent implements OnInit {
         this.govt = false;
         break;
       }
-      case 'desk' : {
+      case 'dash' : {
         this.dashboard = !this.dashboard;
         this.govt = false;
         this.news = false;

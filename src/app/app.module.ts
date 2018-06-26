@@ -16,7 +16,7 @@ import { FeedsComponent } from './home/feeds/feeds.component';
 import { LoginsignupComponent } from './home/loginsignup/loginsignup.component';
 
 import { TabsComponent } from './home/tabs/tabs.component';
-import { ProfilemodalComponent } from './home/profilemodal/profilemodal.component';
+import { ProfileModalComponent } from './home/profilemodal/profilemodal.component';
 import { CommentModalComponent } from './home/comment-modal/comment-modal.component';
 import { EnactModalComponent } from './home/enact-modal/enact-modal.component';
 
@@ -39,13 +39,13 @@ const routes: Routes = [
     FeedsComponent,
     LoginsignupComponent,
     TabsComponent,
-    ProfilemodalComponent,
+    ProfileModalComponent,
     CommentModalComponent,
     EnactModalComponent,
     UserProfileComponent,
     FavLocationComponent
   ],
-  entryComponents: [LoginsignupComponent, ProfilemodalComponent, CommentModalComponent, EnactModalComponent],
+  entryComponents: [LoginsignupComponent, ProfileModalComponent, CommentModalComponent, EnactModalComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

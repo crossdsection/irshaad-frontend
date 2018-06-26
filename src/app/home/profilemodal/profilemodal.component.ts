@@ -9,15 +9,13 @@ import { ViewEncapsulation } from '@angular/core';
   styles: [`.modal-dialog {
     max-width: 50%;
     margin: 1.75rem auto;
-}  .pro_image {
-  width: 50px;
-  border-radius: 50%
-} `],
-
-
-encapsulation: ViewEncapsulation.None
+  }  .pro_image {
+    width: 50px;
+    border-radius: 50%
+  } `],
+  encapsulation: ViewEncapsulation.None
 })
-export class ProfilemodalComponent implements OnInit {
+export class ProfileModalComponent implements OnInit {
 
   constructor(public activeModal: NgbActiveModal) { }
 
