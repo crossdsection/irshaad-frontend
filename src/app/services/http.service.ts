@@ -11,7 +11,7 @@ export class HttpService {
 
   constructor( private http:HttpClient ) { }
 
-  apiRoot: string = "https://localhost/worldvoting/worldvote.back/";
+  apiRoot: string = "http://localhost/worlvoting/";
 
   doGET( url ) {
     let getUrl = `${this.apiRoot}${url}`;
@@ -43,7 +43,7 @@ export class HttpService {
   doGETFileUrl( fileUrl ){
     return `${this.apiRoot}${fileUrl}`;
   }
-  
+
   doPUT() {
    console.log("PUT");
   }

@@ -25,4 +25,13 @@ export class UserdataService {
       );
     }
   }
+
+  getProfilePic(){
+    var userInfo = localStorage.getItem('userinfo');
+    var profilepic = '';
+    if( userInfo ){
+      profilepic = this.httpService.doGETFileUrl( JSON.parse(userInfo)['profilepic'] );
+    }
+    return profilepic;
+  }
 }

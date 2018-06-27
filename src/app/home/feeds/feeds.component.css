@@ -25,7 +25,7 @@
 .polls_section {
     border-radius: 10px;
     box-shadow: 0px 5px 10px 10px #0a0a0a42;
-    ;
+    margin-top: 25px;
     padding: 15px
 }
 
@@ -40,8 +40,8 @@
 }
 
 /*neews bottom icons  */
- 
-    
+
+
     .padd50{
         padding:50px;
     }
@@ -60,13 +60,13 @@
     .padd_left_right{
         padding-right: 10px;
         padding-left: 22px;
-        } 
+        }
 
     @media only screen and (max-width: 500px) {
         .padd_left_right{
             padding-right: 10px;
             padding-left: 16px;
-            } 
+            }
             .bottom_icon{
                 color:grey;display: -webkit-box;
             }
@@ -78,7 +78,7 @@
             .padd50 {
                 padding: 14px;
             }
-         
+
     }
     @media only screen and (max-width: 300px) {
     .padd_left_right{

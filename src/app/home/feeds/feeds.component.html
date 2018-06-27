@@ -4,10 +4,10 @@
             <h3 class="divide_menu">Courts</h3>
         </div>
         <div class="col-md-4 col-xs-4  divide_border">
-            <h3 class="divide_menu">discussion</h3>
+            <h3 class="divide_menu">Discussion</h3>
         </div>
         <div class="col-md-4 col-xs-4  divide_border">
-            <h3 class="divide_menu">news</h3>
+            <h3 class="divide_menu">News</h3>
         </div>
     </div>
 </div>
@@ -15,146 +15,108 @@
 <div class="container-fluid ">
     <div class="row court_con_scroll">
         <div class="col-md-4 padd50">
-            <div class=" " style="   ">
-
-                <div class="card polls_section" >
+            <div>
+                <div class="card polls_section" *ngFor="let feed of feedCourtData; let i = index">
                     <div class="row" style="margin-bottom: 4px;">
                         <div class="col-md-2 col-xs-3 col-sm-3">
-                            <span (click)="profileModal()" class="cur_point"><img src="../assets/img/12.jpg" class="pro_image"  /></span>
+                            <span (click)="profileModal()" class="cur_point"><img [src]="feed.user.profilepic" class="pro_image"  /></span>
                         </div>
                         <div class="col-md-10 col-xs-9 col-sm-9">
-                            <p class="user_head">Name<br>Place</p>
-                            <p style="float:right;margin-top: 10px;">Date</p>
+                            <p class="user_head">{{feed.user.name}}<br>Place</p>
+                            <p style="float:right; margin-top:10px;">{{feed.created}}</p>
                         </div>
                     </div>
-                    <img class="card-img-top" src="../assets/img/55.jpg" alt="Card image cap">
+                    <div *ngFor="let image of feed.files.images; let j = index">
+                      <img class="card-img-top" [src]="image" alt="Card image cap">
+                    </div>
                     <div class="card-body">
-                        <h3 class="card-text text-info">Some quick example text to build on the card title and make up the bulk of the card's content.</h3>
+                        <h3 class="card-text text-info">{{feed.title}}</h3>
                     </div>
 
                     <div> <a href=""><span style="float:right;margin-right: 7px;"><i style="font-size: 17px;" class="fa fa-question-circle"></i></span></a></div>
                     <div class="row ">
                         <div class="col-md-12" style="bottom: 4px;display: flex;">
-
                             <button class="btn" style="padding-right: 5px; padding-left: 5px; width:100%;background: linear-gradient(#ffe45c,#ffae26);
                     border: 1px solid #ffaa22; "><i style="color:green;font-size: 17px;"  class="fa fa-check"></i></button> &nbsp;&nbsp;&nbsp;
                             <button class="btn " style="padding-right: 5px; padding-left: 5px; width:100%;background: linear-gradient(#ffe45c,#ffae26);
                     border: 1px solid #ffaa22;"><i style="color:red;    font-size: 17px;" class="fa fa-times"></i></button>
-
                         </div>
                     </div>
                     <div class="row bottom_icon" >
-
                         <a class="col-md-2 col-xs-2 padd_left_right"><i class="fa fa-share-alt"></i></a>
-
-
                         <a class="col-md-2 col-xs-2 padd_left_right"><i class="fa fa-star"></i></a>
-
-
-                     <span class="col-md-2 col-xs-2 padd_left_right" (click)="commentModal()"><i class="fa fa-comment"></i></span>
-
-
+                        <span class="col-md-2 col-xs-2 padd_left_right" (click)="commentModal()"><i class="fa fa-comment"></i></span>
                         <a class="col-md-2 col-xs-2 padd_left_right"><i class="fa fa-arrow-alt-up"></i></a>
-
-
                         <a class="col-md-2 col-xs-2 padd_left_right"><i class="fa fa-flag"></i></a>
-
-
                         <a class="col-md-2 col-xs-2 padd_left_right"><i class="fa fa-signal icon_flip" ></i></a>
-
                     </div>
                 </div>
             </div>
-
         </div>
         <div class="col-md-4 padd50">
-            <div class=" " style="   ">
-
-                <div class="card polls_section" >
+            <div>
+                <div class="card polls_section" *ngFor="let feed of feedDiscussionData; let i = index">
                     <div class="row" style="margin-bottom: 4px;">
                         <div class="col-md-2 col-xs-3 col-sm-3">
-                            <span (click)="profileModal()" class="cur_point"><img src="../assets/img/12.jpg" class="pro_image"  /></span>
+                            <span (click)="profileModal()" class="cur_point"><img [src]="feed.user.profilepic" class="pro_image"  /></span>
                         </div>
                         <div class="col-md-10 col-xs-9 col-sm-9">
-                            <p class="user_head">Name<br>Place</p>
-                            <p style="float:right;margin-top: 10px;">Date</p>
+                          <p class="user_head">{{feed.user.name}}<br>Place</p>
+                          <p style="float:right; margin-top:10px;">{{feed.created}}</p>
                         </div>
                     </div>
-                    <img class="card-img-top" src="../assets/img/55.jpg" alt="Card image cap">
+                    <div *ngFor="let image of feed.files.images; let j = index">
+                      <img class="card-img-top" [src]="image" alt="Card image cap">
+                    </div>
                     <div class="card-body">
-                        <h3 class="card-text text-info">Some quick example text to build on the card title and make up the bulk of the card's content.</h3>
+                        <h3 class="card-text text-info">{{feed.title}}</h3>
                     </div>
 
                     <div> <a href=""><span style="float:right;margin-right: 7px;"><i style="font-size: 17px;" class="fa fa-question-circle"></i></span></a></div>
 
                     <div class="row bottom_icon" >
-
                         <a class="col-md-2 col-xs-2" ><i class="fa fa-share-alt"></i></a>
-
-
                         <a class="col-md-2 col-xs-2" ><i class="fa fa-star"></i></a>
-
-
                         <span class="col-md-2 col-xs-2"  (click)="commentModal()"><i class="fa fa-comment"></i></span>
-
-
                         <a class="col-md-2 col-xs-2"><i class="fa fa-arrow-alt-up"></i></a>
-
-
                         <a class="col-md-2 col-xs-2"><i class="fa fa-flag"></i></a>
-
-
                         <a class="col-md-2 col-xs-2"><i class="fa fa-signal icon_flip" ></i></a>
-
                     </div>
                 </div>
             </div>
-
         </div>
         <div class="col-md-4 padd50">
-            <div class=" " style="   ">
-
-                <div class="card polls_section" style="height: 533px;">
+            <div>
+                <div class="card polls_section" *ngFor="let feed of feedNewsData; let i = index" >
                     <div class="row" style="margin-bottom: 4px;">
                         <div class="col-md-2 col-xs-3 col-sm-3">
-                            <span (click)="profileModal()" class="cur_point"><img src="../assets/img/12.jpg" class="pro_image"  /></span>
+                            <span (click)="profileModal()" class="cur_point"><img [src]="feed.user.profilepic" class="pro_image"  /></span>
                         </div>
                         <div class="col-md-10 col-xs-9 col-sm-9">
-                            <p class="user_head">Name<br>Place</p>
-                            <p style="float:right;margin-top: 10px;">Date</p>
+                          <p class="user_head">{{feed.user.name}}<br>Place</p>
+                          <p style="float:right; margin-top:10px;">{{feed.created}}</p>
                         </div>
                     </div>
-                    <img class="card-img-top" src="../assets/img/55.jpg" alt="Card image cap">
+                    <div *ngFor="let image of feed.files.images; let j = index">
+                      <img class="card-img-top" [src]="image" alt="Card image cap">
+                    </div>
                     <div class="card-body">
-                        <h3 class="card-text text-info">Some quick example text to build on the card.</h3>
-                        <p>Some quick example text to build on the card.</p>
+                      <h3 class="card-text text-info">{{feed.title}}</h3>
+                      <p>{{feed.details}}</p>
                     </div>
 
                     <div> <a href=""><span style="float:right;margin-right: 7px;"><i style="font-size: 17px;" class="fa fa-question-circle"></i></span></a></div>
 
                     <div class="row bottom_icon">
-
                         <a class="col-md-2 col-xs-2" ><i class="fa fa-share-alt"></i></a>
-
-
                         <a class="col-md-2 col-xs-2" ><i class="fa fa-star"></i></a>
-
-
                         <span class="col-md-2 col-xs-2"  (click)="commentModal()"><i class="fa fa-comment"></i></span>
-
-
                         <a class="col-md-2 col-xs-2" ><i class="fa fa-arrow-alt-up"></i></a>
-
-
                         <a class="col-md-2 col-xs-2" ><img src="../assets/images/icon/up.png" style="width: 15px;margin-top: -3px;"></a>
-
-
                         <a class="col-md-2 col-xs-2" ><img src="../assets/images/icon/eye.png" style="width: 19px;margin-top: -3px;"></a>
-
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </div>
