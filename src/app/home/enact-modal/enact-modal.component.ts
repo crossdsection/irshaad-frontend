@@ -99,6 +99,7 @@ export class EnactModalComponent implements OnInit {
     var postData = {};
     postData['title'] = this.enactForm.value.title;
     postData['details'] = this.enactForm.value.description;
+    postData['postType'] = this.enactForm.value.postTypes;
     postData['filejson'] = this.fileJSON;
     postData['city_id'] = 3378;
     console.log( postData);
