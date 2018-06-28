@@ -27,4 +27,9 @@ export class HeaderComponent implements OnInit {
   onClick() {
     this.modal.open( LoginsignupComponent );
   }
+
+  logOut(){
+    this.userService.logout();
+    location.reload();
+  }
 }

@@ -59,19 +59,19 @@
         <div class="form-group" style="border:4px;border-style:dashed;background:#cac1c1;margin-top:10px">
           <div class="row">
             <div class="col-md-3">
-              <label for="pollImage" style="margin-left: 10px;"><img src="../assets/images/icon/camera.png"  /></label>
+              <label for="pollImage" style="margin-left: 10px;"><img src="assets/images/icon/camera.png"  /></label>
               <input type="file" style="display:none" (change)="onFileChange($event, 'image')" id="pollImage" accept=".jpg,.jpeg,.png">
             </div>
             <div class="col-md-3">
-              <label for="pollVideo"><img src="../assets/images/icon/video.png" /></label>
+              <label for="pollVideo"><img src="assets/images/icon/video.png" /></label>
               <input type="file" style="display:none" (change)="onFileChange($event, 'video')" id="pollVideo" accept=".mp4,.3gp">
             </div>
             <div class="col-md-3">
-              <label for="pollDocument"><img src="../assets/images/icon/notes.png" /></label>
+              <label for="pollDocument"><img src="assets/images/icon/notes.png" /></label>
               <input type="file" style="display:none" (change)="onFileChange($event, 'document')" id="pollDocument" accept=".pdf,.doc,.docx">
             </div>
             <div class="col-md-3">
-              <img src="../assets/images/icon/anonymous.png" class="btn" value="" style="float:right;width: 57px;height: 47px;margin-top: -8px;" />
+              <img src="assets/images/icon/anonymous.png" class="btn" value="" style="float:right;width: 57px;height: 47px;margin-top: -8px;" />
             </div>
           </div>
           <div *ngIf="uploadingProgressing">

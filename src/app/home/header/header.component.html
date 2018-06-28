@@ -1,21 +1,21 @@
 <section>
     <div class="container-fluid" style="background: #013775;">
-
         <div class="">
             <span  (click)="onClick()" *ngIf="!loggedIn" class="log_sign"><span class="glyphicon glyphicon-log-in"></span> Login/Signup</span>
             <span *ngIf="loggedIn" class="log_sign">
-              <a href="#">{{ this.userInfo.name }}</a>
+              <a href="#">{{ this.userInfo[0].name }}</a>
+              <a href="#" (click)="logOut()"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
             </span>
         </div>
 
         <div class="row">
             <div class="col-md-2 col-sm-4 col-xs-4" style="border-right: 2px solid #9c9cdd;padding: 23px 0px 0px 0px;height: 160px;">
-                <img src="../assets/img/logo.PNG" style="width:100%" />
+                <img src="assets/img/logo.PNG" style="width:100%" />
             </div>
             <div class="col-md-2 col-sm-4 col-xs-4">
                 <ul style="display:flex;list-style-type: none;padding: 9px 5px;">
-                    <li class="flag_img"><img src="../assets/img/1.jpg" class="head_img" /></li>
-                    <li class="flag_img"><img src="../assets/img/2.jpg" class="head_img" /></li>
+                    <li class="flag_img"><img src="assets/img/1.jpg" class="head_img" /></li>
+                    <li class="flag_img"><img src="assets/img/2.jpg" class="head_img" /></li>
                 </ul>
             </div>
             <div class="col-md-4 col-sm-4 col-xs-8">
@@ -29,47 +29,29 @@
                         </span>
                     </div>
                 </div>
-
             </div>
-
-
-
-
 
             <div class="col-md-4 col-sm-4 col-xs-8">
                 <span class="menu_icons ">
   			          <span  class="showPlace dropdown"  ><i class="fa fa-user-circle " data-toggle="tooltip" title="Profile"><span class="caret"></span></i>
-                  <ul class="dropdown-menu place dropdown_content" style="background: #013775;margin-left: -105px;">
-                      <li class="profileEdit"><a routerLink="userprofile"><i class="fa fa-user"></i>&nbsp;&nbsp;Profile</a></li>
-                      <li class="friend_list"><a href="#"><i class="fa fa-users"></i>&nbsp;&nbsp;Friends</a></li>
-                      <li><a href="#"><i class="fa fa-cog"></i>&nbsp;&nbsp;Settings</a></li>
-                      <li class="polls_list"><a routerLink="userpolls"><i class="fa fa-cog"></i>&nbsp;&nbsp;Polls</a></li>
-                  </ul>
+                    <ul class="dropdown-menu place dropdown_content" style="background: #013775;margin-left: -105px;">
+                        <li class="profileEdit"><a routerLink="userprofile"><i class="fa fa-user"></i>&nbsp;&nbsp;Profile</a></li>
+                        <li class="friend_list"><a href="#"><i class="fa fa-users"></i>&nbsp;&nbsp;Friends</a></li>
+                        <li><a href="#"><i class="fa fa-cog"></i>&nbsp;&nbsp;Settings</a></li>
+                        <li class="polls_list"><a routerLink="userpolls"><i class="fa fa-cog"></i>&nbsp;&nbsp;Polls</a></li>
+                    </ul>
+                  </span>
+                  <span class="showPlace dropdown_fav">
+                    <i class="fa fa-compass" data-toggle="tooltip" title="Location"><span class="caret"></span></i>
+                    <ul class="dropdown-menu place dropdown_content_fav" id="places" style="background: #013775;overflow:hidden;width: 160px;left: -45px;">
+                        <li><a href="#">&nbsp;&nbsp;<marquee behavior="scroll" direction="left" onmouseover="this.start();" onmouseout="this.stop();"> Canal Road </marquee></a></li>
+                        <li><a href="#">&nbsp;&nbsp;<marquee behavior="scroll" direction="left" onmouseover="this.start();" onmouseout="this.stop();"> Sahastradhara </marquee></a></li>
+                    </ul>
+                  </span>
+                  <i class="fa fa-bell" data-toggle="tooltip" title="Notification"></i>
+                  <i class="fa fa-sign-out-alt" data-toggle="tooltip" title="Log out"></i>
                 </span>
-
-
-                <span class="showPlace dropdown_fav"><i class="fa fa-compass" data-toggle="tooltip" title="Location"><span class="caret"></span></i>
-                <ul class="dropdown-menu place dropdown_content_fav" id="places" style="background: #013775;overflow:hidden;width: 160px;left: -45px;">
-                    <li><a href="#">&nbsp;&nbsp;<marquee behavior="scroll" direction="left" onmouseover="this.start();" onmouseout="this.stop();">
-					Canal Road
-					</marquee></a></li>
-                    <li><a href="#">&nbsp;&nbsp;<marquee behavior="scroll" direction="left" onmouseover="this.start();" onmouseout="this.stop();">
-					sahastradhara
-					</marquee></a></li>
-
-                    <!--li class="friend_list scroll_contant"><a href="#"  class="scroll_contant">
-      hello Jquery. dsad a dsa dasasd ad sad a da.&nbsp;&nbsp;&nbsp;
-    </a></li-->
-
-                </ul>
-                </span>
-
-                <i class="fa fa-bell" data-toggle="tooltip" title="Notification"></i>
-                <i class="fa fa-sign-out-alt" data-toggle="tooltip" title="Log out"></i>
-                </span>
-
             </div>
-
         </div>
     </div>
 </section>
