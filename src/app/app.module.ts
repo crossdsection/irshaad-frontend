@@ -22,6 +22,7 @@ import { EnactModalComponent } from './home/enact-modal/enact-modal.component';
 
 import { UserdataService } from './services/userdata.service';
 import { HttpService } from './services/http.service';
+import { GeolocationService } from './services/geolocation.service';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { UserProfileComponent } from './home/user-profile/user-profile.component';
 import { FavLocationComponent } from './home/fav-location/fav-location.component';
@@ -57,6 +58,7 @@ const routes: Routes = [
   providers: [
     NgbActiveModal,
     HttpService,
+    GeolocationService,
     UserdataService,
     {
       provide: HTTP_INTERCEPTORS,

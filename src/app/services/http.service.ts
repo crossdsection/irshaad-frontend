@@ -44,8 +44,8 @@ export class HttpService {
     return `${this.apiRoot}${fileUrl}`;
   }
 
-  doPUT() {
-   console.log("PUT");
+  doGETFullUrl( fullUrl ) {
+    return this.http.get( fullUrl );
   }
 
   doDELETE() {
@@ -67,10 +67,4 @@ export class HttpService {
   doGETWithHeaders() {
    console.log("GET WITH HEADERS");
   }
-
-  // var request = request.clone({
-  //   setHeaders: {
-  //     Authorization: `Bearer ${this.auth.getToken()}`
-  //   }
-  // });
 }

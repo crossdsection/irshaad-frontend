@@ -5,6 +5,7 @@ import { NgbTabsetConfig } from '@ng-bootstrap/ng-bootstrap';
 import { HttpService } from '../../services/http.service';
 import { UserdataService } from '../../services/userdata.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Coordinates } from '../../interfaces/coordinates';
 
 @Component({
   selector: 'app-loginsignup',
@@ -12,7 +13,9 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./loginsignup.component.css'],
   providers: [NgbTabsetConfig]
 })
+
 export class LoginsignupComponent implements OnInit {
+
   loginform: FormGroup;
   signupform: FormGroup;
   closeResult: string;
@@ -28,16 +31,32 @@ export class LoginsignupComponent implements OnInit {
   signUpPassword: FormControl;
   signUpConPassword: FormControl;
 
-  constructor(public activeModal: NgbActiveModal, public config: NgbTabsetConfig, private httpService: HttpService, private userService: UserdataService ) {
+  currentCoordinates: Coordinates;
+
+  constructor( public activeModal: NgbActiveModal, public config: NgbTabsetConfig, private httpService: HttpService, private userService: UserdataService ) {
     config.justify = 'center';
     this.signupAlert = 0;
     this.loginAlert = 0;
-  }
+  };
 
   ngOnInit() {
     this.createFormControl();
     this.createFormGroup();
-  }
+    var location = localStorage.getItem('currentCoordinates');
+    if( location == null ){
+      this.currentCoordinates = {
+        'latitude' : 0,
+        'longitude' : 0,
+        'locality' : null,
+        'city' : null,
+        'state' : null,
+        'country' : null,
+        'timestamp' : 0
+      };
+    } else {
+      this.currentCoordinates = JSON.parse( location );
+    }
+  };
 
   createFormGroup(){
     this.loginform = new FormGroup({
@@ -52,7 +71,7 @@ export class LoginsignupComponent implements OnInit {
       signUpPassword: this.signUpPassword,
       signUpConPassword: this.signUpConPassword
     });
-  }
+  };
 
   createFormControl(){
     this.loginemail = new FormControl('', [
@@ -81,20 +100,26 @@ export class LoginsignupComponent implements OnInit {
       Validators.minLength(8),
       Validators.required
     ]);
-  }
+  };
 
   login(){
     var postData = {};
     postData['username'] = this.loginemail.value;
     postData['password'] = this.loginpassword.value;
+    postData['latitude'] = this.currentCoordinates.latitude;
+    postData['longitude'] = this.currentCoordinates.longitude;
+    postData['locality'] = this.currentCoordinates.locality;
+    postData['city'] = this.currentCoordinates.city;
+    postData['state'] = this.currentCoordinates.state;
+    postData['country'] = this.currentCoordinates.country;
     this.httpService.doPOST( '/auth/login', postData ).subscribe(
       response => {
         console.log( response );
         if( response["error"] == 0 ){
           this.loginAlert = 1;
-          localStorage.setItem('userData', JSON.stringify(response['data']) );
+          localStorage.setItem( 'userData', JSON.stringify( response['data'] ) );
           this.userService.getUserInfo();
-          this.activeModal.close('Close Click');
+          this.activeModal.close( 'Close Click' );
           location.reload()
         } else {
           this.loginAlert = -1;
@@ -102,7 +127,7 @@ export class LoginsignupComponent implements OnInit {
       },
       err => console.log(err)
     );
-  }
+  };
 
   signup(){
     var postData = {};
@@ -111,6 +136,12 @@ export class LoginsignupComponent implements OnInit {
     postData['lastName'] = this.lastName.value;
     postData['password'] = this.signUpPassword.value;
     postData['confirmPassword'] = this.signUpConPassword.value;
+    postData['latitude'] = this.currentCoordinates.latitude;
+    postData['longitude'] = this.currentCoordinates.longitude;
+    postData['locality'] = this.currentCoordinates.locality;
+    postData['city'] = this.currentCoordinates.city;
+    postData['state'] = this.currentCoordinates.state;
+    postData['country'] = this.currentCoordinates.country;
     this.httpService.doPOST( '/auth/signup', postData ).subscribe(
       response => {
         if( response["error"] == 0 ){
@@ -121,5 +152,5 @@ export class LoginsignupComponent implements OnInit {
       },
       err => console.log(err)
     );
-  }
+  };
 }
