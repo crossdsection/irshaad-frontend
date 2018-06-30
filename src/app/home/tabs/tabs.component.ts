@@ -53,6 +53,10 @@ export class TabsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.country = 'Country';
+    this.state = 'State';
+    this.city = 'City';
+    this.locality = 'Locality';
     var userData = JSON.parse( localStorage.getItem('userData') );
     if( userData != null ){
       if( userData['locale'] !== undefined ){
@@ -61,11 +65,6 @@ export class TabsComponent implements OnInit {
         this.city = userData['locale']['cities'][0]['city_name'];
         this.locality = userData['locale']['localities'][0]['locality_name'];
       }
-    } else {
-      this.country = 'Country';
-      this.state = 'State';
-      this.city = 'City';
-      this.locality = 'Locality';
     }
   }
 
