@@ -37,17 +37,37 @@ export class TabsComponent implements OnInit {
   public news: boolean = false;
   public dashboard: boolean = false;
 
+  public country : String;
+  public state : String;
+  public city : String;
+  public locality : String;
+
   constructor(private modal: NgbModal) { }
 
   enactModal() {
     this.modal.open(EnactModalComponent);
   }
+
   changeColor(val) {
     this.fcolor = val;
-    console.log(this.fcolor);
   }
 
-  ngOnInit () {  }
+  ngOnInit() {
+    var userData = JSON.parse( localStorage.getItem('userData') );
+    if( userData != null ){
+      if( userData['locale'] !== undefined ){
+        this.country = userData['locale']['countries'][0]['country_name'];
+        this.state = userData['locale']['states'][0]['state_name'];
+        this.city = userData['locale']['cities'][0]['city_name'];
+        this.locality = userData['locale']['localities'][0]['locality_name'];
+      }
+    } else {
+      this.country = 'Country';
+      this.state = 'State';
+      this.city = 'City';
+      this.locality = 'Locality';
+    }
+  }
 
   toggleTabs( args ){
     switch( args ){
