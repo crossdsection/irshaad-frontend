@@ -8,7 +8,8 @@ export class UserdataService {
 
   getUserInfo() {
     var userInfo = localStorage.getItem('userinfo');
-    if (userInfo ) {
+    console.log( userInfo );
+    if (userInfo != null && JSON.parse( userInfo ).length != 0 ) {
       return JSON.parse( userInfo );
     } else {
       this.httpService.doGET( 'user/getinfo' ).subscribe(
