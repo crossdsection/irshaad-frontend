@@ -11,6 +11,7 @@ import { UserdataService } from '../../services/userdata.service';
   templateUrl: './feeds.component.html',
   styleUrls: ['./feeds.component.css']
 })
+
 export class FeedsComponent implements OnInit {
 
   feedCourtData : any;
@@ -22,89 +23,65 @@ export class FeedsComponent implements OnInit {
   }
 
   profileModal() {
-    this.modal.open( ProfileModalComponent );
+    // this.modal.open( ProfileModalComponent );
+    let profileModalRef = this.modal.open( ProfileModalComponent );
+    profileModalRef.componentInstance.passedData = {};
   }
 
-  commentModal() {
-    this.modal.open( CommentModalComponent );
+  commentModal( index, postType ) {
+    var postData = null;
+    switch( postType ){
+      case 'court':{
+        postData = this.feedCourtData[ index ];
+        break;
+      }
+      case 'discussion':{
+        postData = this.feedDiscussionData[ index ];
+        break;
+      }
+      case 'news':{
+        postData = this.feedNewsData[ index ];
+        break;
+      }
+    }
+    let commentModalRef = this.modal.open( CommentModalComponent );
+    commentModalRef.componentInstance.setPostId( postData );
+  }
+
+  setupData( feedData ){
+    var date = null;
+    for( var i in feedData ){
+      feedData[i]['user']['profilepic'] = this.httpService.doGETFileUrl( feedData[i]['user']['profilepic'] );
+      date = new Date( feedData[i]['created'] );
+      feedData[i]['created'] = date.getDate() + '-' + ( date.getMonth() + 1 ) + '-' + date.getFullYear();
+      var files = feedData[i]['files'];
+      var tmpFiles = { 'images' : [], 'video' : [], 'downloads' : []};
+      for( var j in files ){
+        if( files[j]['filetype'].indexOf( 'image' ) !== -1 ){
+          var filePath = this.httpService.doGETFileUrl( files[j]['filepath'] );
+          tmpFiles['images'].push( filePath );
+        }
+        if( files[j]['filetype'].indexOf( 'video' ) !== -1 ){
+          var filePath = this.httpService.doGETFileUrl( files[j]['filepath'] );
+          tmpFiles['video'].push( filePath );
+        }
+        if( files[j]['filetype'].indexOf( 'application' ) !== -1 ){
+          var filePath = this.httpService.doGETFileUrl( files[j]['filepath'] );
+          tmpFiles['downloads'].push( filePath );
+        }
+        feedData[i]['files'] = tmpFiles;
+      }
+    }
+    return feedData;
   }
 
   ngOnInit() {
-    var date = null;
     this.httpService.doGET( '/post/get' ).subscribe(
       response => {
         if( response["error"] == 0 ){
-          this.feedCourtData = response['data']['court'];
-          this.feedDiscussionData = response['data']['discussion'];
-          this.feedNewsData = response['data']['news'];
-          for( var i in this.feedCourtData ){
-            this.feedCourtData[i]['user']['profilepic'] = this.httpService.doGETFileUrl( this.feedCourtData[i]['user']['profilepic'] );
-            date = new Date( this.feedCourtData[i]['created'] );
-            this.feedCourtData[i]['created'] = date.getDate() + '-' + ( date.getMonth() + 1 ) + '-' + date.getFullYear();
-            var files = this.feedCourtData[i]['files'];
-            var tmpFiles = { 'images' : [], 'video' : [], 'downloads' : []};
-            for( var j in files ){
-              if( files[j]['filetype'].indexOf( 'image' ) !== -1 ){
-                var filePath = this.httpService.doGETFileUrl( files[j]['filepath'] );
-                tmpFiles['images'].push(filePath);
-              }
-              if( files[j]['filetype'].indexOf( 'video' ) !== -1 ){
-                var filePath = this.httpService.doGETFileUrl( files[j]['filepath'] );
-                tmpFiles['video'].push(filePath);
-              }
-              if( files[j]['filetype'].indexOf( 'application' ) !== -1 ){
-                var filePath = this.httpService.doGETFileUrl( files[j]['filepath'] );
-                tmpFiles['downloads'].push(filePath);
-              }
-              this.feedCourtData[i]['files'] = tmpFiles;
-            }
-          }
-
-          for( var i in this.feedDiscussionData ){
-            this.feedDiscussionData[i]['user']['profilepic'] = this.httpService.doGETFileUrl( this.feedDiscussionData[i]['user']['profilepic'] );
-            date = new Date( this.feedDiscussionData[i]['created'] );
-            this.feedDiscussionData[i]['created'] = date.getDate() + '-' + ( date.getMonth() + 1 ) + '-' + date.getFullYear()
-            var files = this.feedDiscussionData[i]['files'];
-            var tmpFiles = { 'images' : [], 'video' : [], 'downloads' : []};
-            for( var j in files ){
-              if( files[j]['filetype'].indexOf( 'image' ) !== -1 ){
-                var filePath = this.httpService.doGETFileUrl( files[j]['filepath'] );
-                tmpFiles['images'].push(filePath);
-              }
-              if( files[j]['filetype'].indexOf( 'video' ) !== -1 ){
-                var filePath = this.httpService.doGETFileUrl( files[j]['filepath'] );
-                tmpFiles['video'].push(filePath);
-              }
-              if( files[j]['filetype'].indexOf( 'application' ) !== -1 ){
-                var filePath = this.httpService.doGETFileUrl( files[j]['filepath'] );
-                tmpFiles['downloads'].push(filePath);
-              }
-              this.feedDiscussionData[i]['files'] = tmpFiles;
-            }
-          }
-
-          for( var i in this.feedNewsData ){
-            this.feedNewsData[i]['user']['profilepic'] = this.httpService.doGETFileUrl( this.feedNewsData[i]['user']['profilepic'] );
-            date = new Date( this.feedNewsData[i]['created'] );
-            this.feedNewsData[i]['created'] = date.getDate() + '-' + ( date.getMonth() + 1 ) + '-' + date.getFullYear()
-            var files = this.feedNewsData[i]['files'];
-            var tmpFiles = { 'images' : [], 'video' : [], 'downloads' : []};
-            for( var j in files ){
-              if( files[j]['filetype'].indexOf( 'image' ) !== -1 ){
-                var filePath = this.httpService.doGETFileUrl( files[j]['filepath'] );
-                tmpFiles['images'].push(filePath);
-              }
-              if( files[j]['filetype'].indexOf( 'video' ) !== -1 ){
-                var filePath = this.httpService.doGETFileUrl( files[j]['filepath'] );
-                tmpFiles['video'].push(filePath);
-              }
-              if( files[j]['filetype'].indexOf( 'application' ) !== -1 ){
-                var filePath = this.httpService.doGETFileUrl( files[j]['filepath'] );
-                tmpFiles['downloads'].push(filePath);
-              }
-              this.feedNewsData[i]['files'] = tmpFiles;
-          }
-          }
+          this.feedCourtData = this.setupData( response['data']['court'] );
+          this.feedDiscussionData = this.setupData( response['data']['discussion'] );
+          this.feedNewsData = this.setupData( response['data']['news'] );
           return true;
         }
       },
