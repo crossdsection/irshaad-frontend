@@ -22,6 +22,15 @@
       </div>
     </div>
     <div class="col-md-6">
+      <div class="alert"
+           [ngClass]="{ 'alert-success alert-dismissible': commentAlert == 1,
+                        'alert-danger alert-dismissible': commentAlert == -1
+                      }"
+           *ngIf="commentAlert != 0">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <p *ngIf="commentAlert == 1"> Comment Submitted </p>
+        <p *ngIf="commentAlert == -1"> Please Try Again!! </p>
+      </div>
       <div class="commentParentDiv">
         <div class="commentBoxfloat"><form id="cmnt" novalidate="" class="ng-untouched ng-pristine ng-valid" style="
               margin: 0;
@@ -60,10 +69,10 @@
                   padding-left: 34px;
                   background: url(https://cdn3.iconfinder.com/data/icons/glypho-free/64/pen-checkbox-32.png) no-repeat left center;
                 ">comment</label>
-                <textarea id="userCmnt" placeholder="Write your comment here. You can Edit and Delete options. Just Hover in Your comment, you see the both buttons" style="-webkit-appearance: textarea; background-color: white; -webkit-rtl-ordering: logical; flex-direction: column; resize: auto; cursor: text; white-space: pre-wrap; word-wrap: break-word; margin: 0px; width: 392px; height: 37px;"></textarea>
+                <textarea placeholder="Write your comment here." [(ngModel)]="commentText" name="commentText" style="-webkit-appearance: textarea; background-color: white; -webkit-rtl-ordering: logical; flex-direction: column; resize: auto; cursor: text; white-space: pre-wrap; word-wrap: break-word; margin: 0px; width: 392px; height: 37px;"></textarea>
               </div>
               <div class="form_grp">
-                <button type="button" style="
+                <button (click)="submitComment()" style="
                   padding: 5px 20px;
                   background-color: #0e7ec7;
                   color: #fff;

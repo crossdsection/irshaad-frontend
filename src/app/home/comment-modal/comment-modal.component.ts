@@ -13,10 +13,13 @@ import { HttpService } from '../../services/http.service';
 export class CommentModalComponent implements OnInit {
   postData : Object;
   commentData : Object;
+  commentText : String;
   rootUrl : String;
+  commentAlert : Number;
 
   constructor( public activeModal: NgbActiveModal, private httpService: HttpService ) {
     this.rootUrl = this.httpService.apiRoot;
+    this.commentAlert = 0;
   }
 
   ngOnInit() { }
@@ -38,6 +41,23 @@ export class CommentModalComponent implements OnInit {
         }
       },
       err => console.log( err )
+    );
+  }
+
+  submitComment(){
+    console.log( this.commentText );
+    var postData = {};
+    postData['post_id'] = this.postData['id'];
+    postData['text'] = this.commentText;
+    this.httpService.doPOST( '/comments/submit', postData ).subscribe(
+      response => {
+        if( response["error"] == 0 ){
+          this.commentAlert = 1;
+        } else {
+          this.commentAlert = -1;
+        }
+      },
+      err => console.log(err)
     );
   }
 }

@@ -54,6 +54,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule
+    // RouterModule.forRoot(routes, {onSameUrlNavigation: ‘reload’})
   ],
   providers: [
     NgbActiveModal,

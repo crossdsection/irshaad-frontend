@@ -15,14 +15,15 @@ import { UserdataService } from '../../services/userdata.service';
 export class HeaderComponent implements OnInit {
   public loggedIn: boolean;
   public userInfo: object;
-  constructor( private modal: NgbModal, private userService: UserdataService, private httpService: HttpService, private geolocationService: GeolocationService ) { }
-
-  ngOnInit () {
+  constructor( private modal: NgbModal, private userService: UserdataService, private httpService: HttpService, private geolocationService: GeolocationService ) {
     this.loggedIn = false;
     this.userInfo = this.userService.getUserInfo();
     if( this.userInfo ){
       this.loggedIn = true;
     }
+  }
+
+  ngOnInit () {
     this.geolocationService.getLocation().subscribe(
       position => {
         var openStreetAPIUrl = 'https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=' + position.coords.latitude + '&lon=' + position.coords.longitude;
