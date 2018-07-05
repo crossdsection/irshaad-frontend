@@ -1,7 +1,7 @@
 <section>
     <div class="container-fluid" style="background: #013775;">
         <div class="">
-            <span  (click)="onClick()" *ngIf="!loggedIn" class="log_sign"><span class="glyphicon glyphicon-log-in"></span> Login/Signup</span>
+            <span  (click)="onClick()" *ngIf="!loggedIn" class="log_sign"><a><span class="glyphicon glyphicon-log-in"></span>Login/Signup</a></span>
             <span *ngIf="loggedIn" class="log_sign">
               <a href="#">{{ this.userInfo[0].name }}</a>
               <a href="#" (click)="logOut()"><i class="fa fa-sign-out" aria-hidden="true"></i></a>

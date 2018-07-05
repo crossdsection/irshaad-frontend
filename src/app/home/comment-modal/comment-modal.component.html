@@ -32,57 +32,34 @@
         <p *ngIf="commentAlert == -1"> Please Try Again!! </p>
       </div>
       <div class="commentParentDiv">
-        <div class="commentBoxfloat"><form id="cmnt" novalidate="" class="ng-untouched ng-pristine ng-valid" style="
-              margin: 0;
-              padding: 0;
-              box-sizing: border-box;
-              border: 0;
-              display: block;
-          ">
-            <fieldset style="
-              padding: 10px;
-              background: #69bdf4;
-              display: block;
-              -webkit-margin-start: 2px;
-              -webkit-margin-end: 2px;
-              -webkit-padding-before: 0.35em;
-              -webkit-padding-start: 0.75em;
-              -webkit-padding-end: 0.75em;
-              -webkit-padding-after: 0.625em;
-              min-width: -webkit-min-content;
-          ">
-              <div class="form_grp" style="
-                margin-bottom: 10px;
-                margin: 0;
-                padding: 0;
-                box-sizing: border-box;
-                border: 0;
-              ">
-                <label style="
-                  width: 100%;
-                  height: 32px;
-                  line-height: 32px;
-                  display: block;
-                  margin-bottom: 10px;
-                  font-size: 18px;
-                  color: #fff;
-                  padding-left: 34px;
-                  background: url(https://cdn3.iconfinder.com/data/icons/glypho-free/64/pen-checkbox-32.png) no-repeat left center;
-                ">comment</label>
-                <textarea placeholder="Write your comment here." [(ngModel)]="commentText" name="commentText" style="-webkit-appearance: textarea; background-color: white; -webkit-rtl-ordering: logical; flex-direction: column; resize: auto; cursor: text; white-space: pre-wrap; word-wrap: break-word; margin: 0px; width: 392px; height: 37px;"></textarea>
-              </div>
-              <div class="form_grp">
-                <button (click)="submitComment()" style="
-                  padding: 5px 20px;
-                  background-color: #0e7ec7;
-                  color: #fff;
-                  float: right;
-                ">Submit</button>
-              </div>
-            </fieldset>
-          </form>
+        <div>
+          <!-- <form novalidate="" class="formClass ng-untouched ng-pristine ng-valid"> -->
+          <fieldset class="fieldClass textField">
+            <div class="fieldDiv">
+              <textarea placeholder="Write your comment here." [(ngModel)]="commentText" name="commentText" (keydown)="checkSubmit($event)" class="fieldTextArea"></textarea>
+            </div>
+            <div>
+              <span class="commentInstructions">Press Enter to post.</span>
+            </div>
+          </fieldset>
+          <!-- </form> -->
         </div>
-        <div class="comment" *ngFor="let comment of commentData; let k = index">
+        <div *ngFor="let comment of commentData; let k = index">
+          <fieldset class="fieldClass commentField">
+            <div class="row">
+              <div class="col-md-2">
+                <img class="comment_profile" [src]="comment.user.profilepic">
+              </div>
+              <div class="col-md-10">
+                <span> {{ comment.text }} </span>
+                <div class="footer">
+                  <p class="author"><strong>{{ comment.user.name }}</strong> - {{ comment.dashTimeAgo }}</p>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+        <!-- <div class="comment" *ngFor="let comment of commentData; let k = index">
           <img [src]="comment.user.profilepic">
           <div class="comment-content"><p class="author"><strong>{{ comment.user.name }}</strong> - 10 minutes ago</p>
             <span>
@@ -90,7 +67,7 @@
             </span>
           </div>
           <br>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>

@@ -6,71 +6,75 @@
   width: 50px;
   border-radius: 50%
 }
-
 /*---*/
-
-.commentParentDiv {
-  width:100%;
-  padding-right: 15px;
-  padding-left: 0px;
-  margin-right: 0px;
-  margin-left: 0px;
+.comment_profile {
+  width: 50px;
+  border-radius: 50%
 }
 
-.comment{
-  width:80%;
-  padding:5px;
-  margin:20px auto 0 auto;
+.formClass {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: 0;
+  display: block;
 }
 
-.comment-content{
-  float:left;
-  margin:10px 0 0 20px;
-  width:70%;
+.fieldClass {
+  padding: 6px;
+  display: block;
+  min-width: -webkit-min-content;
 }
 
-.comment-content > span{
-  line-height:150%;
-  color:#444;
-  background:#f5f5f5;
-  display:block;
-  width:100%;
-  padding:10px 15px 10px 15px;
-  font-size:.9em;
-  display:block;
-  position:relative;
-  border-radius:3px;
-  box-shadow:
-    1px 1px 3px rgba(0,0,0,.3);}
-
-.comment-content > span:before{
-  content:'';
-  position:absolute;
-  top:28px;
-  left:-28px;
-  display:block;
-  width:0;
-  height:0;
-  border:1em solid #f5f5f5;
-  border-color:transparent #f5f5f5 transparent transparent;
+.commentField {
+  border-top: 1px dotted black;
+  background: #6b9ebb;
 }
 
-/*.comment p{
-  font-family:'Open Sans';
-  text-shadow:1px 1px 2px #fff;
-}*/
+.textField {
+  background: #6a8394;
+}
 
-.comment strong{font-weight:700;}
-.comment .author{font-weight:300;font-size:.8em}
+.fieldDiv {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: 0;
+}
 
-.comment img{
-  float:left;
-  max-width:9%;
-  border-radius:50%;
-  box-shadow:
-    0 0 0 1px rgba(0,0,0,.2),
-    0 0 0 7px rgba(200,200,200,1),
-    0 0 0 9px rgba(175,175,175,1),
-    0 0 20px rgba(0,0,0,.7);
-  margin:20px 0 0 10px;
+.fieldTextArea {
+  -webkit-appearance: textarea;
+  -webkit-rtl-ordering: logical;
+  background-color: white;
+  flex-direction: column;
+  max-width: 100%;
+  cursor: text;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  margin: 0px;
+  width: 100%;
+  height: 57px;
+}
+
+.submitButton {
+  padding: 5px 20px;
+  background-color: #0e7ec7;
+  color: #fff;
+  float: right;
+}
+
+.commentInstructions{
+  font-size: 10px;
+  font-family: Bitter;
+  float: right;
+}
+
+.author {
+  font-size: 9px;
+  float: right;
+}
+
+.footer {
+    width:100%;
+    bottom: 0;
 }

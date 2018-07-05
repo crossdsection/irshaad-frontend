@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+* {
+  font-family: 'Bitter', serif;
+  /*font-family: 'Bitter', serif;
+  font-family: 'Cinzel', serif;
+  font-family: 'Pacifico';
+  font-family: 'Source Code Pro', monospace;
+  font-family: 'Bree Serif', serif;
+  font-family: 'Chela One', cursive;
+*/
+}
