@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProfileModalComponent } from '../profilemodal/profilemodal.component';
 import { CommentModalComponent } from '../comment-modal/comment-modal.component';
+import { LoginsignupComponent } from '../loginsignup/loginsignup.component';
 
 import { HttpService } from '../../services/http.service';
 import { UserdataService } from '../../services/userdata.service';
@@ -17,9 +18,14 @@ export class FeedsComponent implements OnInit {
   feedCourtData : any;
   feedDiscussionData : any;
   feedNewsData : any;
+  loggedIn: boolean;
 
-  constructor( private modal: NgbModal, private userdata: UserdataService, private httpService: HttpService ) {
-    // this.profilePic = this.userdata.getProfilePic();
+  constructor( private modal: NgbModal, private userService: UserdataService, private httpService: HttpService ) {
+    this.loggedIn = false;
+    let userInfo = this.userService.getUserInfo();
+    if( userInfo ){
+      this.loggedIn = true;
+    }
   }
 
   profileModal() {
@@ -29,23 +35,27 @@ export class FeedsComponent implements OnInit {
   }
 
   commentModal( index, postType ) {
-    var postData = null;
-    switch( postType ){
-      case 'court':{
-        postData = this.feedCourtData[ index ];
-        break;
+    if( this.loggedIn ){
+      var postData = null;
+      switch( postType ){
+        case 'court':{
+          postData = this.feedCourtData[ index ];
+          break;
+        }
+        case 'discussion':{
+          postData = this.feedDiscussionData[ index ];
+          break;
+        }
+        case 'news':{
+          postData = this.feedNewsData[ index ];
+          break;
+        }
       }
-      case 'discussion':{
-        postData = this.feedDiscussionData[ index ];
-        break;
-      }
-      case 'news':{
-        postData = this.feedNewsData[ index ];
-        break;
-      }
+      let commentModalRef = this.modal.open( CommentModalComponent );
+      commentModalRef.componentInstance.setPostId( postData );
+    } else {
+      this.modal.open(LoginsignupComponent);
     }
-    let commentModalRef = this.modal.open( CommentModalComponent );
-    commentModalRef.componentInstance.setPostId( postData );
   }
 
   setupData( feedData ){

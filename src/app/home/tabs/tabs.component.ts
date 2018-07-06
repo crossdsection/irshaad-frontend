@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EnactModalComponent } from '../enact-modal/enact-modal.component';
+import { LoginsignupComponent } from '../loginsignup/loginsignup.component';
+import { UserdataService } from '../../services/userdata.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { trigger, style, group, transition, state, animate, keyframes, query, stagger } from '@angular/animations';
 
@@ -41,11 +43,22 @@ export class TabsComponent implements OnInit {
   public state : String;
   public city : String;
   public locality : String;
+  public loggedIn: boolean;
 
-  constructor(private modal: NgbModal) { }
+  constructor( private modal: NgbModal, private userService: UserdataService ) {
+    this.loggedIn = false;
+    let userInfo = this.userService.getUserInfo();
+    if( userInfo ){
+      this.loggedIn = true;
+    }
+  }
 
   enactModal() {
-    this.modal.open(EnactModalComponent);
+    if( this.loggedIn ){
+      this.modal.open(EnactModalComponent);
+    } else {
+      this.modal.open(LoginsignupComponent);
+    }
   }
 
   changeColor(val) {
