@@ -120,7 +120,7 @@ export class LoginsignupComponent implements OnInit {
           localStorage.setItem( 'userData', JSON.stringify( response['data'] ) );
           this.userService.getUserInfo();
           this.activeModal.close( 'Close Click' );
-          location.reload()
+          location.reload();
         } else {
           this.loginAlert = -1;
         }

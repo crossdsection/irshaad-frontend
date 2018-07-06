@@ -22,6 +22,7 @@ import { EnactModalComponent } from './home/enact-modal/enact-modal.component';
 
 import { UserdataService } from './services/userdata.service';
 import { HttpService } from './services/http.service';
+import { LogoutService } from './services/logout.service';
 import { GeolocationService } from './services/geolocation.service';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { UserProfileComponent } from './home/user-profile/user-profile.component';
@@ -61,6 +62,7 @@ const routes: Routes = [
     HttpService,
     GeolocationService,
     UserdataService,
+    LogoutService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import { map, catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
+import { LogoutService } from './logout.service';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -9,13 +12,28 @@ const httpOptions = {
 @Injectable()
 export class HttpService {
 
-  constructor( private http:HttpClient ) { }
+  constructor( private http: HttpClient, private logoutService: LogoutService ) { }
 
   apiRoot: string = "http://localhost/worlvoting/";
 
   doGET( url ) {
     let getUrl = `${this.apiRoot}${url}`;
-    return this.http.get( getUrl );
+    return this.http.get( getUrl ).pipe(
+      catchError( this.handleError )
+    );
+  }
+
+  handleError( error : any, res : any ) {
+    if (error.status === 500) {
+      console.log( error );
+    } else if ( error.status === 400 || error.status === 401 ) {
+      this.logoutService.logout();
+    } else if (error.status === 409) {
+      console.log( error );
+    } else if (error === 406) {
+      console.log( error );
+    }
+    return throwError(error);
   }
 
   doPOST( url, postData ) {

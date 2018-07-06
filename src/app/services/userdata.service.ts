@@ -22,7 +22,9 @@ export class UserdataService {
             return false;
           }
         },
-        err => console.log(err)
+        err => {
+            console.log( err )
+        }
       );
     }
   }
@@ -34,9 +36,5 @@ export class UserdataService {
       profilepic = this.httpService.doGETFileUrl( JSON.parse(userInfo)['profilepic'] );
     }
     return profilepic;
-  }
-
-  logout(){
-    localStorage.clear();
   }
 }

@@ -5,6 +5,7 @@ import { LoginsignupComponent } from '../loginsignup/loginsignup.component';
 import { HttpService } from '../../services/http.service';
 import { GeolocationService } from '../../services/geolocation.service';
 import { UserdataService } from '../../services/userdata.service';
+import { LogoutService } from '../../services/logout.service';
 
 @Component({
   selector: 'app-header',
@@ -15,7 +16,7 @@ import { UserdataService } from '../../services/userdata.service';
 export class HeaderComponent implements OnInit {
   public loggedIn: boolean;
   public userInfo: object;
-  constructor( private modal: NgbModal, private userService: UserdataService, private httpService: HttpService, private geolocationService: GeolocationService ) {
+  constructor( private modal: NgbModal, private userService: UserdataService, private logoutService: LogoutService, private httpService: HttpService, private geolocationService: GeolocationService ) {
     this.loggedIn = false;
     this.userInfo = this.userService.getUserInfo();
     if( this.userInfo ){
@@ -49,7 +50,6 @@ export class HeaderComponent implements OnInit {
               'state' : response['address'][ 'state' ],
               'country' : response['address'][ 'country' ]
             };
-            console.log( currentCoordinates );
             localStorage.setItem('currentCoordinates', JSON.stringify( currentCoordinates ) );
           },
           err => {
@@ -68,7 +68,6 @@ export class HeaderComponent implements OnInit {
   }
 
   logOut(){
-    this.userService.logout();
-    location.reload();
+    this.logoutService.logout();
   }
 }
