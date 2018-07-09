@@ -8,15 +8,13 @@ export class UserdataService {
 
   getUserInfo() {
     var userInfo = localStorage.getItem('userinfo');
-    console.log( userInfo );
     if (userInfo != null && JSON.parse( userInfo ).length != 0 ) {
       return JSON.parse( userInfo );
     } else {
       this.httpService.doGET( 'user/getinfo' ).subscribe(
         response => {
-          console.log( response );
           if( response["error"] == 0 ){
-            localStorage.setItem('userinfo', JSON.stringify(response['data']) );
+            localStorage.setItem('userinfo', JSON.stringify( response['data'] ) );
             return response['data'];
           } else {
             return false;

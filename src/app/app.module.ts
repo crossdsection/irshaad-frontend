@@ -4,11 +4,11 @@ import { NgbModule, NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AgmCoreModule } from '@agm/core';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
-
 
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './home/header/header.component';
@@ -27,6 +27,7 @@ import { GeolocationService } from './services/geolocation.service';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { UserProfileComponent } from './home/user-profile/user-profile.component';
 import { FavLocationComponent } from './home/fav-location/fav-location.component';
+import { CarouselComponent, CarouselItemElement, CarouselItemDirective } from './carousel/carousel.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -45,7 +46,10 @@ const routes: Routes = [
     CommentModalComponent,
     EnactModalComponent,
     UserProfileComponent,
-    FavLocationComponent
+    FavLocationComponent,
+    CarouselComponent,
+    CarouselItemDirective,
+    CarouselItemElement
   ],
   entryComponents: [LoginsignupComponent, ProfileModalComponent, CommentModalComponent, EnactModalComponent],
   imports: [
@@ -54,7 +58,12 @@ const routes: Routes = [
     NgbModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAGvUJIs_SRj6bKpbQvNOWHxDjwnSqlvdE',
+      language: 'en',
+      libraries: ['geometry', 'places']
+    })
     // RouterModule.forRoot(routes, {onSameUrlNavigation: ‘reload’})
   ],
   providers: [

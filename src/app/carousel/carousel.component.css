@@ -1,0 +1,31 @@
+.carousel-wrapper {
+  overflow: hidden;
+}
+
+.carousel-item {
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  margin: 16px;
+  width: 159px;
+  height: 200px;
+}
+
+.carousel-button {
+  display: flex;
+  margin: 16px;
+  width: 20px;
+  height: 200px;
+  padding-top: 50px;
+}
+
+.carousel {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 6000px;
+}
+
+.carousel-inner {
+  display: flex;
+}

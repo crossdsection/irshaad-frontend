@@ -196,17 +196,6 @@ ul {
     padding-right: 41px !important;
 }
 
-.search_input_category {
-    background: transparent;
-    border: none;
-    border-bottom: 2px solid white;
-    width: 100%;
-    font-size: 25px;
-    color: white;
-    outline: none;
-    padding-right: 41px !important;
-}
-
 .menu_icons {
     color: white;
     font-size: 36px;
@@ -1117,4 +1106,3 @@ ul ul a {
 .pad_top20 {
     padding-top: 20px
 }
- 

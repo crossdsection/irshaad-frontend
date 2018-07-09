@@ -6,4 +6,5 @@ export interface Coordinates {
   city ?: String
   state ?: String
   country ?: String
+  zoom ?: Number
 }

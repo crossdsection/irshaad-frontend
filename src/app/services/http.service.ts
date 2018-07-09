@@ -27,7 +27,7 @@ export class HttpService {
     if (error.status === 500) {
       console.log( error );
     } else if ( error.status === 400 || error.status === 401 ) {
-      this.logoutService.logout();
+      // this.logoutService.logout();
     } else if (error.status === 409) {
       console.log( error );
     } else if (error === 406) {
