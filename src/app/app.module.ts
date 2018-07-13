@@ -29,9 +29,12 @@ import { UserProfileComponent } from './home/user-profile/user-profile.component
 import { FavLocationComponent } from './home/fav-location/fav-location.component';
 import { CarouselComponent, CarouselItemElement, CarouselItemDirective } from './carousel/carousel.component';
 
-const routes: Routes = [
-  { path: 'home', component: HomeComponent },
-  { path: '', redirectTo: '/home', pathMatch: 'full'}
+const appRoutes: Routes = [
+  { path: '', component: FeedsComponent },
+  { path: 'home', component: FeedsComponent },
+  { path: 'feeds', component: FeedsComponent },
+  { path: 'profile', component: ProfileModalComponent },
+  { path: 'favlocation', component: FavLocationComponent }
 ];
 
 @NgModule({
@@ -63,8 +66,8 @@ const routes: Routes = [
       apiKey: 'AIzaSyAGvUJIs_SRj6bKpbQvNOWHxDjwnSqlvdE',
       language: 'en',
       libraries: ['geometry', 'places']
-    })
-    // RouterModule.forRoot(routes, {onSameUrlNavigation: ‘reload’})
+    }),
+    RouterModule.forRoot( appRoutes, {onSameUrlNavigation: 'reload'} )
   ],
   providers: [
     NgbActiveModal,

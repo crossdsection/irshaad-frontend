@@ -45,18 +45,19 @@ export class CarouselComponent implements AfterViewInit {
 
   change( state ) {
     if( this.currentSlide + 1 === this.items.length ) return;
+    let slidingAnime : AnimationFactory;
     if( state == 'next' ){
       this.currentSlide = ( this.currentSlide + 1 ) % this.items.length;
       this.offset = this.currentSlide * this.itemWidth;
       console.log( this.offset );
-      let slidingAnime : AnimationFactory = this._builder.build([
+      slidingAnime = this._builder.build([
          animate( '250ms ease-in', style({ transform: `translateX(-${ this.offset }px)` }))
       ]);
     } else {
       this.currentSlide = ( ( this.currentSlide - 1 ) + this.items.length ) % this.items.length;
       this.offset = this.currentSlide * this.itemWidth;
       console.log( this.offset );
-      let slidingAnime : AnimationFactory = this._builder.build([
+      slidingAnime = this._builder.build([
          animate( '250ms ease-in', style({ transform: `translateX(${ this.offset }px)` }))
       ]);
     }
