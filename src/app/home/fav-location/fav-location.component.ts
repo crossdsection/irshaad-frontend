@@ -3,7 +3,7 @@ import { Coordinates } from '../../interfaces/coordinates';
 import { } from '@types/googlemaps';
 import { MapsAPILoader } from '@agm/core';
 import { FormControl } from '@angular/forms';
-
+import { HttpService } from '../../services/http.service';
 import { CarouselComponent } from '../../carousel/carousel.component';
 
 @Component({
@@ -21,29 +21,24 @@ export class FavLocationComponent implements OnInit {
   public searchElementRef: ElementRef;
   public items : Array<any>;
 
-  constructor( private mapsAPILoader: MapsAPILoader, private ngZone: NgZone ) { }
+  constructor( private mapsAPILoader: MapsAPILoader, private ngZone: NgZone, private httpService: HttpService ) { }
 
   ngOnInit() {
-    this.items = [
-      {
-        favouriteLocation : 'Dehradun, Uttarakhand'
+    this.items = [];
+    this.httpService.doGET('/favlocation/get/').subscribe(
+      response => {
+        if( response['error'] == 0 ){
+          for( var i in response['data'] ){
+            this.items.push({
+              'favouriteLocation' : response['data'][i]
+            });
+          }
+        }
       },
-      {
-        favouriteLocation : 'Jaipur, Rajasthan'
-      },
-      {
-        favouriteLocation : 'Agra, Uttar Pradesh'
-      },
-      {
-        favouriteLocation : 'Dehradun, Uttarakhand'
-      },
-      {
-        favouriteLocation : 'Jaipur, Rajasthan'
-      },
-      {
-        favouriteLocation : 'Agra, Uttar Pradesh'
+      err => {
+        console.log( err );
       }
-    ];
+    );
     var location = localStorage.getItem('currentCoordinates');
     if( location == null ){
       this.currentCoordinates = {
@@ -83,6 +78,10 @@ export class FavLocationComponent implements OnInit {
     });
   }
 
+  private directiveArgument(event) {
+    this.searchElementRef.nativeElement.focus();
+  }
+
   private setCurrentPosition() {
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -93,5 +92,52 @@ export class FavLocationComponent implements OnInit {
         };
       });
     }
+  }
+
+  saveFavouriteLocation(){
+    var openStreetAPIUrl = 'https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=' + this.currentCoordinates.latitude + '&lon=' + this.currentCoordinates.longitude;
+    this.httpService.doGETFullUrl( openStreetAPIUrl ).subscribe(
+      response => {
+        var findFirst = function ( keys, needle ) {
+           for ( var i in keys) {
+        	    for( var j in needle )
+               if ( keys[ i ] == needle[ j ] ) return keys[ i ];
+           }
+           return null;
+        };
+        const keys = Object.keys( response['address'] );
+        var locality = response['address'][ findFirst( keys, ['road', 'suburb'] ) ];
+        var city = response['address'][ findFirst( keys, ['city', 'county'] ) ];
+        var favCoordinates = {
+          'latitude' : this.currentCoordinates.latitude,
+          'longitude' : this.currentCoordinates.longitude,
+          'locality' : locality,
+          'city' : city,
+          'state' : response['address'][ 'state' ],
+          'country' : response['address'][ 'country' ]
+        };
+        this.httpService.doPOST( 'favlocation/submit', favCoordinates ).subscribe(
+          res => {
+            console.log( res );
+            // location.reload();
+          },
+          err => {
+            console.log( err )
+          }
+        );
+      },
+      err => {
+        console.log( err );
+      }
+    );
+  }
+
+  onMouseOver(infoWindow, gm) {
+    console.log( gm );
+    if( gm.lastOpen != null ) {
+        gm.lastOpen.close();
+    }
+    gm.lastOpen = infoWindow;
+    infoWindow.open();
   }
 }

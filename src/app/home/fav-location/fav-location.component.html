@@ -8,12 +8,19 @@
     </span>
   </div>
   <div class="map">
-    <agm-map [latitude]="currentCoordinates.latitude" [longitude]="currentCoordinates.longitude" [zoom]="currentCoordinates.zoom">
-      <agm-marker [latitude]="currentCoordinates.latitude" [longitude]="currentCoordinates.longitude"></agm-marker>
+    <agm-map [latitude]="currentCoordinates.latitude" [longitude]="currentCoordinates.longitude" [zoom]="currentCoordinates.zoom" #gm>
+      <agm-marker [latitude]="currentCoordinates.latitude" [longitude]="currentCoordinates.longitude" (mouseOver)="onMouseOver( infoWindow, gm )">
+        <agm-info-window [disableAutoPan]="false" #infoWindow>
+          <button class="btn" name="button" (click)="saveFavouriteLocation()">
+            Add to Favourites
+            <i class="fa fa-bookmark"></i>
+          </button>
+        </agm-info-window>
+      </agm-marker>
     </agm-map>
   </div>
   <div class="carousel">
-    <app-carousel>
+    <app-carousel (argBehaviour)="directiveArgument($event)">
       <ng-container *ngFor="let item of items;">
         <ng-container *carouselItem>
           <div>{{ item.favouriteLocation }}</div>

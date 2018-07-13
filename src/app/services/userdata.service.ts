@@ -21,7 +21,7 @@ export class UserdataService {
           }
         },
         err => {
-            console.log( err )
+            // console.log( err )
         }
       );
     }
