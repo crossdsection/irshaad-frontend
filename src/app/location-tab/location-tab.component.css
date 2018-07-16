@@ -1,0 +1,35 @@
+div.col-md-2 {
+    padding: 0;
+}
+button.location-tab-button {
+    width: 100%;
+    margin: 0;
+    border: none;
+    padding: 10px 0;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+button.world {
+    background: #71911d;
+}
+
+button.country {
+    background: #dd7518;
+}
+
+button.state {
+    background: #4d99be;
+}
+
+button.city {
+    background: #8e5220;
+}
+
+button.locality {
+    background: #b5375f;
+}
+
+button.rwa {
+    background: #beaa2b;
+}

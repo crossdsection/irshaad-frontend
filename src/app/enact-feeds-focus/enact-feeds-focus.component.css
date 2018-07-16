@@ -1,0 +1,17 @@
+.container {
+    margin-top: 30px;    
+}
+
+.enact-feeds-tabs-sub-menu {
+    /*background: #143233;*/
+    padding-left: 20px;
+}
+
+.list-group-item-action:hover, .list-group-item-action.active {
+    color: #000000;
+    background: #f3f3f3;
+}
+
+.list-group-item-action {
+    color: #000000;
+}

@@ -1,0 +1,31 @@
+.container-fluid {
+    background: #1e4372;
+    padding: 5px 0;
+    color: #ffffff;
+}
+
+.toggle-menu {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.enact-button {
+    background: linear-gradient(#ebf904, #ff9703);
+    border: none;
+    padding: 5px 20px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+button.breadcrumb-bar-icon {
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    padding: 5px 20px;
+    cursor: pointer;
+    font-size: 25px;
+}
