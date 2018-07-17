@@ -16,8 +16,10 @@ import { EnactFeedsFocusComponent } from './enact-feeds-focus/enact-feeds-focus.
 import { PollCardsComponent } from './poll-cards/poll-cards.component';
 import { PollCardComponent } from './poll-card/poll-card.component';
 import { CountryFlagDisplayComponent } from './country-flag-display/country-flag-display.component';
+
 import { HeaderProfileIconComponent } from './header-profile-icon/header-profile-icon.component';
 import { LoginPopupComponent } from './login-popup/login-popup.component';
+
 
 @NgModule({
   declarations: [
