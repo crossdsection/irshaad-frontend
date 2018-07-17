@@ -1,0 +1,46 @@
+div.dark-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #0000008f;
+    z-index: 9;
+}
+
+div.modal {
+    min-width: 250px !important;
+    top: 50%;
+    left: 50%;
+    display: block;
+    background: #153e73;
+    color: #ffffff;
+    font-weight: bold;
+    padding: 20px;
+    border-radius: 10px;
+    transform: translate(-50%, -50%);
+}
+
+img {
+    max-width: 150px;
+}
+
+input {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #fefefe;
+    color: #ffffff;
+}
+
+.form-control:focus {
+    color: #ffffff;
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid #FFEB3B;
+    outline: 0;
+    box-shadow: none;
+}
+
+button {
+
+}

@@ -15,6 +15,9 @@ import { EnactFeedsComponent } from './enact-feeds/enact-feeds.component';
 import { EnactFeedsFocusComponent } from './enact-feeds-focus/enact-feeds-focus.component';
 import { PollCardsComponent } from './poll-cards/poll-cards.component';
 import { PollCardComponent } from './poll-card/poll-card.component';
+import { CountryFlagDisplayComponent } from './country-flag-display/country-flag-display.component';
+import { HeaderProfileIconComponent } from './header-profile-icon/header-profile-icon.component';
+import { LoginPopupComponent } from './login-popup/login-popup.component';
 
 @NgModule({
   declarations: [
@@ -28,8 +31,12 @@ import { PollCardComponent } from './poll-card/poll-card.component';
     EnactFeedsComponent,
     EnactFeedsFocusComponent,
     PollCardsComponent,
-    PollCardComponent
+    PollCardComponent,
+    CountryFlagDisplayComponent,
+    HeaderProfileIconComponent,
+    LoginPopupComponent
   ],
+  entryComponents: [LoginPopupComponent],
   imports: [
     BrowserModule,
     AgmCoreModule.forRoot({
