@@ -1,0 +1,18 @@
+.row {
+    padding: 0 14px;
+}
+
+.col-md-4 {
+    padding: 0;
+}
+
+button.location-menu-button {
+    width: 100%;
+    border: none;
+    padding: 10px 0;
+    color: #ffffff;
+    background: #7a8a21;
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+    cursor: pointer;
+}

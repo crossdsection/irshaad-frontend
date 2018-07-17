@@ -1,0 +1,37 @@
+.container-fluid {
+    background: #7f8325;
+    padding: 15px 0;
+}
+
+input {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #ffffff;
+}
+
+::placeholder {
+    color: #ffffff;
+    opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color: #ffffff;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+   color: #ffffff;
+}
+
+ul.dept-list {
+    list-style-type:none;
+    padding: 0;
+    margin: 0;
+    color: #ffffff;
+    margin-top: 20px;
+}
+
+ul.dept-list li {
+    padding: 5px 0;
+    width: 300px;
+    display: inline-block;
+}
