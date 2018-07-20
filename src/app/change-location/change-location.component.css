@@ -3,11 +3,9 @@ agm-map {
 }
 
 input {
-    box-shadow: black 0px 0px 2px -1px;
     border-radius: 0;
     margin: 0 auto;
-    width: 50%;
-    background: #8080802e;
+    background: #80808087;
     border: none;
 }
 
@@ -15,13 +13,124 @@ div.container-fluid {
     position: relative;
 }
 
-div.container {
+/* div.container-fluid div.container-fluid {
     position: absolute;
     top: 10%;
     left: 50%;
     z-index: 1;
     transform: translateX(-50%);
+} */
+
+
+div.container-fluid div.container-fluid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #80808087;
+    z-index: 1;
+    padding-top: 50px;
 }
 
-agm-info-window {
+
+/* Placeholder */
+::placeholder {
+    color: #000000;
+    /* font-weight: bold; */
+    opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color: #ffffff;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+   color: #ffffff;
+}
+
+
+input {
+    border-radius: 0;
+    margin: 0 auto;
+    background: #ffffff;
+    border: none;
+    /* width: 330px; */
+}
+
+.magnify-icon {
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    top: 10px;
+}
+
+.col-md-1, .col-md-9 {
+    padding: 0;
+}
+
+button {
+    margin: 0;
+    background: #ffffff;
+    border: none;
+    display: block;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #efefef;
+}
+
+.fav-location-row {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+}
+
+.fav-location-row .col-md-12 {
+    /* overflow-x: scroll; */
+}
+
+.fav-location-row-left-arrow {
+    width: 50px;
+    position: absolute;
+    z-index: 1;
+    height: 130px;
+}
+
+.fav-location-row-left-arrow span {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    font-size: 46px;
+    line-height: 2.5;
+}
+
+.fav-location-row-left-arrow span:hover, .fav-location-row-right-arrow span:hover {
+    background: #00000066;
+    color: #ffffff;
+    font-size: 50px;
+    transition: all 0.1s linear;
+    cursor: pointer;
+}
+
+.fav-location-row-right-arrow {
+    width: 50px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1;
+    height: 130px;
+}
+
+.fav-location-row-right-arrow span {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    font-size: 46px;
+    line-height: 2.5;
 }

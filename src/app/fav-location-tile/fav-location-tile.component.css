@@ -1,0 +1,13 @@
+.card {
+    background-color: #ffffff !important;
+    height: 100%;
+    width: 100%;
+}
+
+.card-body {
+    padding: 10px 11px !important;
+}
+
+a {
+    color: #000000;
+}

@@ -24,6 +24,8 @@ import { LoginPopupComponent } from './login-popup/login-popup.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { ChangeLocationComponent } from './change-location/change-location.component';
+import { FavLocationTileComponent } from './fav-location-tile/fav-location-tile.component';
+import { FavLocationListGridComponent } from './fav-location-list-grid/fav-location-list-grid.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { ChangeLocationComponent } from './change-location/change-location.compo
     CountryFlagDisplayComponent,
     HeaderProfileIconComponent,
     LoginPopupComponent,
-    ChangeLocationComponent
+    ChangeLocationComponent,
+    FavLocationTileComponent,
+    FavLocationListGridComponent
   ],
   entryComponents: [
     LoginPopupComponent,

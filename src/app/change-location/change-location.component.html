@@ -1,7 +1,49 @@
 <div class="container-fluid">
-  <div class="container">
-    <input type="text" #searchKeyword placeholder="Search Location" class="form-control"/>
+
+  <div class="container-fluid text-center">
+    <!-- Search Bar -->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4" style="box-shadow: black 0px 0px 2px -1px;">
+          <div class="row">
+            <div class="col-md-9">
+              <input type="text" #searchKeyword placeholder="Search Location" class="form-control"/>
+            </div>
+            <div class="col-md-1">
+              <button><i class="fa fa-search"></i></button>
+            </div>
+            <div class="col-md-1">
+              <button><i class="fa fa-star"></i></button>
+            </div>
+            <div class="col-md-1">
+              <button><i class="fa fa-arrow-down"></i></button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4"></div>
+      </div>
+
+    </div>
+
+    <div class="fav-location-row">
+      <div class="fav-location-row-left-arrow" (click)="moveLeft(toBeMoved)">
+        <span><i class="fa fa-angle-left"></i></span>
+      </div>
+      <div class="row">
+        <div class="col-md-12" #toBeMoved>
+          <!-- Fav location grid -->
+          <app-fav-location-list-grid></app-fav-location-list-grid>
+        </div>
+      </div>
+      <div class="fav-location-row-right-arrow" (click)="moveRight(toBeMoved)">
+        <span><i class="fa fa-angle-right"></i></span>
+      </div>
+    </div>
+
   </div>
+
+  <!-- Map Background -->
   <agm-map [latitude]="lat" [longitude]="lng" [zoom]="12" #gm>
     <agm-marker [latitude]="lat" [longitude]="lng" (mouseOver)="onMouseOver( infoWindow, gm )">
       <agm-info-window [disableAutoPan]="false" #infoWindow>

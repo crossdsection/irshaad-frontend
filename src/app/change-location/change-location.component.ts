@@ -5,6 +5,8 @@ import { GOOGLE_MAPS_API_KEY, REQUEST_BASE_URL } from '../globals';
 
 import { MapsAPILoader } from '@agm/core';
 
+import {  } from 'googlemaps';
+
 import { GeolocationService } from '../services/geolocation.service';
 
 
@@ -24,15 +26,19 @@ export class ChangeLocationComponent implements OnInit {
   @ViewChild("searchKeyword")
   public searchElementRef: ElementRef;
 
+  @ViewChild("toBeMoved")
+  public toBeMovedRef: ElementRef;
+  public currentMargin = 0;
+
   constructor(private http: HttpClient, private mapsAPILoader: MapsAPILoader, private geolocationService: GeolocationService) {
-   /* let currentCoordinates = JSON.parse(localStorage.getItem("currentCoordinates"));
+   let currentCoordinates = JSON.parse(localStorage.getItem("currentCoordinates"));
 
     this.lat = currentCoordinates.latitude;
-    this.lng = currentCoordinates.longitude;*/
+    this.lng = currentCoordinates.longitude;
   }
 
   ngOnInit() {
-    /*let currentCoordinates = JSON.parse(localStorage.getItem("currentCoordinates"));
+    let currentCoordinates = JSON.parse(localStorage.getItem("currentCoordinates"));
 
     this.lat = currentCoordinates.latitude;
     this.lng = currentCoordinates.longitude;
@@ -58,7 +64,6 @@ export class ChangeLocationComponent implements OnInit {
         this.lng = place.geometry.location.lng();
       })
     });
-*/
   }
 
   /*autocompleteLoction() {
@@ -95,8 +100,18 @@ export class ChangeLocationComponent implements OnInit {
         console.log( err )
       }
     );
+  }
 
+  moveLeft(toBeMoved) {
+    let element = document.getElementById("grid-fav");
+    this.currentMargin += 250;
+   element.style.marginLeft = this.currentMargin + "px";
+  }
 
+  moveRight() {
+   let element = document.getElementById("grid-fav");
+    this.currentMargin -= 250;
+   element.style.marginLeft = this.currentMargin + "px";
   }
 
 } // End Class

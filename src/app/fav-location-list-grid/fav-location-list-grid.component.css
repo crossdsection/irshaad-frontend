@@ -1,0 +1,20 @@
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 2000px;
+    white-space: nowrap;
+}
+
+#grid-fav {
+    position: relative;
+    left: 0;
+    transition: margin-left 0.5s linear;
+}
+
+li {
+    display: inline-block;
+    height: 130px;
+    width: 130px;
+    padding: 0 5px;
+}
