@@ -30,7 +30,9 @@ export class AppComponent {
         this.lat = position.coords.latitude;
         this.lng = position.coords.longitude;
 
-        this.http.get('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + position.coords.latitude + ',' + position.coords.longitude + '&key=AIzaSyAGvUJIs_SRj6bKpbQvNOWHxDjwnSqlvdE').subscribe((data) => {
+        console.log('https://maps.googleapis.com/maps/api/geocode/xml?latlng=' + position.coords.latitude + ',' + position.coords.longitude + '&key=AIzaSyAGvUJIs_SRj6bKpbQvNOWHxDjwnSqlvdE');
+
+        this.http.get('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + position.coords.latitude + ',' + position.coords.longitude + '&key=AIzaSyAGvUJIs_SRj6bKpbQvNOWHxDjwnSqlvdE').subscribe((data: any) => {
           console.log(data);
           let country = data.results[6].address_components[0].long_name;
           let countryShortName = data.results[6].address_components[0].short_name;

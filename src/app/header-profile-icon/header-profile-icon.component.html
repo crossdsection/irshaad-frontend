@@ -1,5 +1,16 @@
-<a href="#" (click)="showLoginPopup()">
-  Log in
-</a>
-<div #loginPopupContainer></div>
-<!-- <app-login-popup></app-login-popup> -->
+<span *ngIf="!loggedIn">
+  <a href="#" (click)="showLoginPopup()">
+    Log in
+  </a>
+  <div #loginPopupContainer></div>
+  <!-- <app-login-popup></app-login-popup> -->
+</span>
+<span *ngIf="loggedIn" >
+  <div class="profile-dropdown">
+    <img src="{{ profilePicture }}" (click)="toggleProfileMenu()" class="profile-picture" />
+    <div *ngIf="profileMenuOpen" class="profile-menu list-group">
+      <a href="#" class="list-group-item">View Profile</a>
+      <a href="#" (click)="logoutAction()" class="list-group-item">Logout</a>
+    </div>
+  </div>
+</span>

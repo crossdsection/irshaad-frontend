@@ -22,5 +22,18 @@ export class ComponentCommunicationService {
     this.countryFlagDisplayComponent.next(data);
   }
 
+  // Change Login status in header profile icon tab
+  private headerProfileIconComponent = new BehaviorSubject<string>("");
+  headerProfileIconComponentData = this.headerProfileIconComponent.asObservable();
+
+  editLoggedInStatus(status) {
+    this.headerProfileIconComponent.next(status);
+  }
+
+  // Logout 
+  userLogout() {
+    localStorage.removeItem("auth_data");
+  }
+
   constructor() { }
 }

@@ -19,7 +19,7 @@ export class LocationTabComponent implements OnInit {
   constructor(private componentCommunicationService: ComponentCommunicationService) { }
 
   ngOnInit() {
-    this.componentCommunicationService.locationTabComponentData.subscribe(data => {
+    this.componentCommunicationService.locationTabComponentData.subscribe((data: any) => {
       this.country = data.country;
       this.state = data.state;
       this.city = data.city;

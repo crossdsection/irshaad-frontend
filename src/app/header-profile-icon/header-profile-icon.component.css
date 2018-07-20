@@ -2,3 +2,41 @@ a {
     display: inline-block;
     margin-right: 20px;
 }
+
+.profile-picture {
+    width: 50px;
+    height: auto;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.profile-dropdown {
+    padding: 0 10px;
+    position: relative;
+}
+
+.list-group-item {
+    color: #000000;
+}
+
+.profile-menu {
+    position: absolute;
+    background: #ffffff;
+    right: 0;
+    z-index: 9;
+    text-align: left;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+.profile-menu::before {
+    content: "";
+    display: inline-block;
+    border: 10px solid transparent;
+    border-bottom-color: #ffffff;
+    width: 0;
+    height: 0;
+    position: absolute;
+    top: -15px;
+    right: -0.45px;
+}

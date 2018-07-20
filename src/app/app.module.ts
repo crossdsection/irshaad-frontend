@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AgmCoreModule } from '@agm/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -21,6 +21,10 @@ import { HeaderProfileIconComponent } from './header-profile-icon/header-profile
 import { LoginPopupComponent } from './login-popup/login-popup.component';
 
 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthInterceptor } from './interceptors/auth.interceptor';
+import { ChangeLocationComponent } from './change-location/change-location.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,17 +40,29 @@ import { LoginPopupComponent } from './login-popup/login-popup.component';
     PollCardComponent,
     CountryFlagDisplayComponent,
     HeaderProfileIconComponent,
-    LoginPopupComponent
+    LoginPopupComponent,
+    ChangeLocationComponent
   ],
-  entryComponents: [LoginPopupComponent],
+  entryComponents: [
+    LoginPopupComponent,
+    ChangeLocationComponent
+  ],
   imports: [
     BrowserModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAGvUJIs_SRj6bKpbQvNOWHxDjwnSqlvdE'
+      apiKey: 'AIzaSyAGvUJIs_SRj6bKpbQvNOWHxDjwnSqlvdE',
+      libraries: ['places']
     }),
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent],  
 })
 export class AppModule { }

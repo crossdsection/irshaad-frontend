@@ -1,0 +1,15 @@
+<div class="container-fluid">
+  <div class="container">
+    <input type="text" #searchKeyword placeholder="Search Location" class="form-control"/>
+  </div>
+  <agm-map [latitude]="lat" [longitude]="lng" [zoom]="12" #gm>
+    <agm-marker [latitude]="lat" [longitude]="lng" (mouseOver)="onMouseOver( infoWindow, gm )">
+      <agm-info-window [disableAutoPan]="false" #infoWindow>
+        <button class="btn" name="button" (click)="saveFavouriteLocation()">
+          Add to Favourites
+          <i class="fa fa-bookmark"></i>
+        </button>
+      </agm-info-window>
+    </agm-marker>
+  </agm-map>
+</div>
