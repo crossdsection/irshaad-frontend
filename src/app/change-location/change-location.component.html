@@ -27,7 +27,7 @@
     </div>
 
     <div class="fav-location-row">
-      <div class="fav-location-row-left-arrow" (click)="moveLeft(toBeMoved)">
+      <div class="fav-location-row-left-arrow" *ngIf="currentMargin != 0" (click)="moveLeft(toBeMoved)">
         <span><i class="fa fa-angle-left"></i></span>
       </div>
       <div class="row">

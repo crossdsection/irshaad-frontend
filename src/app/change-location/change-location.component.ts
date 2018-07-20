@@ -105,6 +105,9 @@ export class ChangeLocationComponent implements OnInit {
   moveLeft(toBeMoved) {
     let element = document.getElementById("grid-fav");
     this.currentMargin += 250;
+    if(this.currentMargin >= 250) {
+      this.currentMargin = 0;
+    }
    element.style.marginLeft = this.currentMargin + "px";
   }
 

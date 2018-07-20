@@ -108,6 +108,7 @@ button:hover {
     height: 100%;
     font-size: 46px;
     line-height: 2.5;
+    color: transparent;
 }
 
 .fav-location-row-left-arrow span:hover, .fav-location-row-right-arrow span:hover {
@@ -133,4 +134,5 @@ button:hover {
     height: 100%;
     font-size: 46px;
     line-height: 2.5;
+    color: transparent;
 }
