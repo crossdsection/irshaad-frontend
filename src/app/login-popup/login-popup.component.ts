@@ -15,6 +15,10 @@ export class LoginPopupComponent implements OnInit {
   username: any;
   password: any;
 
+  loginMessage = "";
+
+  currentForm = "join"; // can be 'login', 'join', 'forgotPassword'
+
   constructor(private elementRef: ElementRef, private http: HttpClient, private componentCommunicationService: ComponentCommunicationService) {
     this.element = this.elementRef.nativeElement;
     document.body.appendChild(this.element);
@@ -41,16 +45,22 @@ export class LoginPopupComponent implements OnInit {
     }
 
     this.http.post("https://backend.worldvoting.org/auth/login", dataToSend).subscribe((response: any) => {
-      localStorage.setItem("auth_data", JSON.stringify(response.data));
 
-      this.componentCommunicationService.editLoggedInStatus(true);
+      if(response.error == 0) {
+        localStorage.setItem("auth_data", JSON.stringify(response.data));
+        this.componentCommunicationService.editLoggedInStatus(true);
+        this.loginMessage = "Login Successful";
+        this.closeThisPopup();
+      }
+      else {
+        this.loginMessage = "Invalid Login";
+      }
     });
 
   }
 
   handleFormSubmit() {
     this.submitLoginForm();
-    this.closeThisPopup();
   }
 
 }
