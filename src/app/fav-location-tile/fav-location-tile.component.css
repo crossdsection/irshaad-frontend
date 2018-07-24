@@ -11,3 +11,7 @@
 a {
     color: #000000;
 }
+
+.card-title {
+    white-space: normal !important;
+}

@@ -1,70 +1,121 @@
 <div class="dark-overlay">
-  <div class="modal">
-    <button class="close" (click)="closeThisPopup()"><i class="fa fa-close"></i></button>
+  <div class="modal" id="login-popup-component-modal">
+    <div class="modal-body">
 
-    <!-- Login Form -->
-    <span class="login-area" *ngIf="currentForm == 'login'">
-      <div class="container-fluid text-center">
-        <img src="assets/img/logo.PNG" class="img img-responsive" />
-        <h5>Login to your Account</h5>
-      </div>
-      <form (ngSubmit)="handleFormSubmit()">
-        <div class="form-group">
-          <!-- <label>Username</label> -->
-          <input type="text" [(ngModel)]="username" name="username" class="form-control" placeholder="Username"/>
-        </div>
-        <div class="form-group">
-          <!-- <label>Password</label> -->
-          <input type="password" [(ngModel)]="password" name="password" class="form-control" placeholder="Password"/>
-        </div>
-        <div class="form-group">
-          <label style="color: darkred;">{{ loginMessage }}</label>
-        </div>
-        <div class="form-group">
-          <button type="submit" class="form-control btn btn-secondary">Login</button>
-        </div>
-      </form>
-    </span>
+        <button class="close" (click)="closeThisPopup()"><i class="fa fa-close"></i></button>
 
-    <!-- Join Form -->
-    <span class="join-area" *ngIf="currentForm == 'join'">
-      <div class="container-fluid text-center">
-        <img src="assets/img/logo.PNG" class="img img-responsive" />
-        <h5>Join World Voting</h5>
-      </div>
-      <form (ngSubmit)="handleJoinFormSubmit()">
-        <div class="row">
-          <div class="form-group col-md-6">
-            <!-- <label>Username</label> -->
-            <input type="text" name="first_name" class="form-control" placeholder="First Name"/>
+        <!-- Login Form -->
+        <span class="login-area" *ngIf="currentForm == 'login'">
+          <div class="container-fluid text-center">
+            <img src="assets/img/logo.PNG" class="img img-responsive" />
+            <h5>Login to your Account</h5>
           </div>
-          <div class="form-group col-md-6">
-            <!-- <label>Username</label> -->
-            <input type="text" name="last_name" class="form-control" placeholder="Last Name"/>
-          </div>
-        </div>
-        <div class="row">
-            <div class="form-group col-md-6">
+          <form (ngSubmit)="handleFormSubmit()">
+            <div class="form-group">
               <!-- <label>Username</label> -->
-              <input type="date" name="first_name" class="form-control" placeholder="Birth Date"/>
+              <input type="text" [(ngModel)]="username" name="username" class="form-control" placeholder="Username"/>
             </div>
-            <div class="form-group col-md-6">
-              <!-- <label>Username</label> -->
-              <input type="text" name="last_name" class="form-control" placeholder="Last Name"/>
+            <div class="form-group">
+              <!-- <label>Password</label> -->
+              <input type="password" [(ngModel)]="password" name="password" class="form-control" placeholder="Password"/>
             </div>
+            <div class="form-group">
+              <label>{{ loginMessage }}</label>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="form-control btn">Login</button>
+              <button type="submit" class="form-control btn btn-secondary" (click)="changeForm('forgotPassword')">Forget Password</button>
+              <button type="submit" class="form-control btn btn-secondary" (click)="changeForm('join')">Register</button>
+            </div>
+          </form>
+        </span>
+    
+        <!-- Join Form -->
+        <span class="join-area" *ngIf="currentForm == 'join'">
+          <div class="container-fluid text-center">
+            <img src="assets/img/logo.PNG" class="img img-responsive" />
+            <h5>Register</h5>
           </div>
-        <div class="form-group">
-          <!-- <label>Password</label> -->
-          <input type="password" [(ngModel)]="password" name="password" class="form-control" placeholder="Password"/>
-        </div>
-        <div class="form-group">
-          <label style="color: darkred;">{{ loginMessage }}</label>
-        </div>
-        <div class="form-group">
-          <button type="submit" class="form-control btn btn-secondary">Login</button>
-        </div>
-      </form>
-    </span>
+          <form (ngSubmit)="handleJoinFormSubmit()">
+            <div class="row">
+              <div class="form-group col-sm-6">
+                <!-- <label>Username</label> -->
+                <input type="text" [(ngModel)]="firstName" name="first_name" class="form-control" placeholder="First Name" required/>
+              </div>
+              <div class="form-group col-sm-6">
+                <!-- <label>Username</label> -->
+                <input type="text" [(ngModel)]="lastName" name="last_name" class="form-control" placeholder="Last Name" required/>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-sm-6">
+                <!-- <label>Username</label> -->
+                <input type="text" [(ngModel)]="birthDate" name="birth_date" class="form-control" placeholder="Birth Date" required/>
+              </div>
+              <div class="form-group col-sm-6">
+                <!-- <label>Username</label> -->
+                <select [(ngModel)]="gender" name="gender" class="form-control" required>
+                  <option value="" selected disabled>Gender</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Transgender">Transgender</option>
+                </select>
+              </div>
+            </div>
+    
+            <div class="row">
+              <div class="form-group col-md-12">
+                <!-- <label>Username</label> -->
+                <input type="text" [(ngModel)]="email" name="email" class="form-control" placeholder="Email" required/>
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group col-md-12">
+                <!-- <label>Username</label> -->
+                <input type="{{ passwordSeen }}" [(ngModel)]="password" name="password" class="form-control" placeholder="Password" required/>
+                <i class="fa {{ passwordSeenIcon }}" style="display: inline-block; position: relative; top: -25px; cursor: pointer;" (click)="togglePasswordVisibility()"></i>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>{{ loginMessage }}</label>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="form-control btn">Join Now</button>
+              <button type="submit" class="form-control btn btn-secondary" (click)="changeForm('login')">Login</button>
+            </div>
+          </form>
+        </span>
+
+
+        <!-- Forget Password Form -->
+        <span class="forget-password-area" *ngIf="currentForm == 'forgotPassword'">
+          <div class="container-fluid text-center">
+            <img src="assets/img/logo.PNG" class="img img-responsive" />
+            <h5>Forgot Password?</h5>
+          </div>
+          <form (ngSubmit)="handleForgetPasswordFormSubmit()">
+            
+            
+            <div class="row">
+              <div class="form-group col-md-12">
+                <h6 class="text-center">Enter your registered email to get Password Reset link</h6>
+                <input type="text" [(ngModel)]="email" name="email" class="form-control" placeholder="Email" required/>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>{{ loginMessage }}</label>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="form-control btn">Get Password Link</button>
+              <button type="submit" class="form-control btn btn-secondary" (click)="changeForm('login')">Login</button>
+            </div>
+          </form>
+        </span>
+
+
+
+    </div>
+    
      
   </div>
 </div>

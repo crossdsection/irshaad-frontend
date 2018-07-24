@@ -25,11 +25,15 @@ img {
     max-width: 150px;
 }
 
-input {
+input, select {
     background: transparent;
     border: none;
     border-bottom: 1px solid #fefefe;
     color: #ffffff;
+}
+
+option {
+    color: #000000;
 }
 
 .form-control:focus {
@@ -40,7 +44,14 @@ input {
     outline: 0;
     box-shadow: none;
 }
+.btn {
+    margin-bottom: 5px;
+}
 
-button {
+#login-popup-component-modal {
+    transition: height 0.3s ease-in-out;    
+}
 
+.error-field {
+    border-bottom: 2px solid red !important;
 }

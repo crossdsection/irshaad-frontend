@@ -16,7 +16,6 @@ export class AuthInterceptor implements HttpInterceptor {
     let url_to_intercept = new RegExp("https://backend.worldvoting.org/(.*)");
 
     if(url_to_intercept.test(request.url)) {
-      console.log("in if");
       if( authData ){
           authData = JSON.parse( authData );
         let bearerToken = authData['bearerToken'];
@@ -30,7 +29,6 @@ export class AuthInterceptor implements HttpInterceptor {
       return next.handle( changedReq );
     }
     else {
-      console.log("in else");
       return next.handle( request );
     }
   }

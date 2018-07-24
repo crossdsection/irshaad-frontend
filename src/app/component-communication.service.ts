@@ -30,6 +30,14 @@ export class ComponentCommunicationService {
     this.headerProfileIconComponent.next(status);
   }
 
+  // Toggle Change Location Component
+  private changeLocationComponent = new BehaviorSubject<string>("");
+  changeLocationComponentData = this.changeLocationComponent.asObservable();
+
+  editChangeLocationComponentDisplay() {
+    this.changeLocationComponent.next("");
+  }
+
   // Logout 
   userLogout() {
     localStorage.removeItem("auth_data");

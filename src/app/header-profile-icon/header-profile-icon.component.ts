@@ -29,12 +29,10 @@ export class HeaderProfileIconComponent implements OnInit {
       this.loggedIn = data;
       // Getting User Info
       this.http.get(REQUEST_BASE_URL + "user/getinfo").subscribe((response: any) => {
-        console.log(response);
         this.loggedIn = true;
         this.profilePicture = REQUEST_BASE_URL + response.data[0].profilepic;
         }, 
         error => {
-        console.log(error.status);
         if(error.status) {
           this.loggedIn = false;
         }
@@ -42,11 +40,9 @@ export class HeaderProfileIconComponent implements OnInit {
     });
 
     this.http.get(REQUEST_BASE_URL + "user/getinfo").subscribe((response: any) => {
-      console.log(response);
       this.loggedIn = true;
       }, 
       error => {
-      console.log(error.status);
       if(error.status) {
         this.loggedIn = false;
       }

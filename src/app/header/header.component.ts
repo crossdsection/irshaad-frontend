@@ -1,6 +1,5 @@
 import { Component, OnInit, ComponentFactoryResolver, ContentChild, ViewContainerRef } from '@angular/core';
-
-import { ChangeLocationComponent } from '../change-location/change-location.component';
+import { ComponentCommunicationService } from '../component-communication.service';
 
 @Component({
   selector: 'app-header',
@@ -9,17 +8,14 @@ import { ChangeLocationComponent } from '../change-location/change-location.comp
 })
 export class HeaderComponent implements OnInit {
 
-  @ContentChild('changeLocationContainer', {read: ViewContainerRef}) changeLocationContainer;
-
-  constructor(private componentFactoryResolver: ComponentFactoryResolver) { }
+  constructor(private componentCommunicationService: ComponentCommunicationService) { }
 
   ngOnInit() {
-    console.log(this.changeLocationContainer);
   }
 
   // When user click on change location link
   changeLocation() {
-    this.changeLocationContainer.createComponent(this.componentFactoryResolver.resolveComponentFactory(ChangeLocationComponent));
+    this.componentCommunicationService.editChangeLocationComponentDisplay();
   }
 
 }

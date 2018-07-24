@@ -1,24 +1,8 @@
 <ul id="grid-fav">
-  <li><app-fav-location-tile location="Dehradun"></app-fav-location-tile></li>
-  <li><app-fav-location-tile location="Delhi"></app-fav-location-tile></li>
-  <li><app-fav-location-tile location="Mumbai"></app-fav-location-tile></li>
-  <li><app-fav-location-tile location="America"></app-fav-location-tile></li>
-  <li><app-fav-location-tile location="Pathankot"></app-fav-location-tile></li>
-  <li><app-fav-location-tile location="Thiruvananthapuram"></app-fav-location-tile></li>
 
-  <li><app-fav-location-tile location="Dehradun"></app-fav-location-tile></li>
-  <li><app-fav-location-tile location="Delhi"></app-fav-location-tile></li>
-  <li><app-fav-location-tile location="Mumbai"></app-fav-location-tile></li>
-  <li><app-fav-location-tile location="America"></app-fav-location-tile></li>
-  <li><app-fav-location-tile location="Pathankot"></app-fav-location-tile></li>
-  <li><app-fav-location-tile location="Thiruvananthapuram"></app-fav-location-tile></li>
-
-  <li><app-fav-location-tile location="Dehradun"></app-fav-location-tile></li>
-  <li><app-fav-location-tile location="Delhi"></app-fav-location-tile></li>
-  <li><app-fav-location-tile location="Mumbai"></app-fav-location-tile></li>
-  <li><app-fav-location-tile location="America"></app-fav-location-tile></li>
-  <li><app-fav-location-tile location="Pathankot"></app-fav-location-tile></li>
-  <li><app-fav-location-tile location="Thiruvananthapuram"></app-fav-location-tile></li>
+  <li *ngFor="let item of favLocationData">
+    <app-fav-location-tile location={{item.address_string}} longitude={{item.longitude}} latitude={{item.latitude}} level={{item.level}}></app-fav-location-tile>
+  </li>
 
   <!-- Add More Option -->
   <!-- <li>

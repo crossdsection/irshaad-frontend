@@ -8,18 +8,29 @@ export class GeolocationService {
 	constructor() {}
 
 	resolveLocation(locationComponent: any) {
-		console.log(locationComponent);
 		let locationResolved : any = {
 			latitude   : 0,
 			longitude  : 0,
 			locality   : "",
 			city       : "",
 			state      : "",
-			country    : ""
+			country    : "",
+			countryShortName: "",
+			level: ""
 		};
 
-		locationResolved.latitude = locationComponent.geometry.location.lat();
-		locationResolved.longitude = locationComponent.geometry.location.lng();
+		let levelOrder: any = {
+			locality: 0,
+			city: 1,
+			state: 2,
+			country: 3
+		}
+		let levelOrderName = ["locality", "city", "state", "country"];
+
+		locationResolved.level = levelOrder.country;
+
+		locationResolved.latitude = locationComponent.geometry.location.lat;
+		locationResolved.longitude = locationComponent.geometry.location.lng;
 
 		let addressComponent = locationComponent.address_components;
 
@@ -27,16 +38,21 @@ export class GeolocationService {
 			let component = addressComponent[i];
 			
 			switch(component.types[0]) {
-				case 'country' : locationResolved.country = component.long_name;
+				case 'country' : locationResolved.country = component.long_name; locationResolved.countryShortName = component.short_name;
+				locationResolved.level = (locationResolved.level > levelOrder.country) ? levelOrder.country : locationResolved.level;
 				break;
 				case 'administrative_area_level_1' : locationResolved.state = component.long_name;
+				locationResolved.level = (locationResolved.level > levelOrder.state) ? levelOrder.state : locationResolved.level;
 				break;
 				case 'administrative_area_level_2' : locationResolved.city = component.long_name;
+				locationResolved.level = (locationResolved.level > levelOrder.city) ? levelOrder.city : locationResolved.level;
 				break;
 				case 'locality' : locationResolved.locality = component.long_name;
+				locationResolved.level = (locationResolved.level > levelOrder.locality) ? levelOrder.locality : locationResolved.level;
 				break;
 			}
 		}
+		locationResolved.level = levelOrderName[locationResolved.level];
 		return locationResolved;
 	}
 
