@@ -1,72 +1,5 @@
 agm-map {
-    height: 300px;
-}
-
-input {
-    border-radius: 0;
-    margin: 0 auto;
-    background: #80808087;
-    border: none;
-}
-
-div.container-fluid {
-    position: relative;
-}
-
-/* div.container-fluid div.container-fluid {
-    position: absolute;
-    top: 10%;
-    left: 50%;
-    z-index: 1;
-    transform: translateX(-50%);
-} */
-
-
-div.container-fluid div.container-fluid {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #80808087;
-    z-index: 1;
-    padding-top: 50px;
-}
-
-
-/* Placeholder */
-::placeholder {
-    color: #000000;
-    /* font-weight: bold; */
-    opacity: 1; /* Firefox */
-}
-
-:-ms-input-placeholder { /* Internet Explorer 10-11 */
-   color: #ffffff;
-}
-
-::-ms-input-placeholder { /* Microsoft Edge */
-   color: #ffffff;
-}
-
-
-input {
-    border-radius: 0;
-    margin: 0 auto;
-    background: #ffffff;
-    border: none;
-    /* width: 330px; */
-}
-
-.magnify-icon {
-    display: inline-block;
-    position: absolute;
-    right: 0;
-    top: 10px;
-}
-
-.col-md-1, .col-md-9 {
-    padding: 0;
+    height: 350px;
 }
 
 button {
@@ -79,30 +12,51 @@ button {
     cursor: pointer;
 }
 
-button:hover {
-    background: #efefef;
+.container-fluid {
+    position: relative;
 }
 
-.fav-location-row {
+.row.container {
     position: absolute;
-    bottom: 10px;
+    top: 10px;
     left: 50%;
     transform: translateX(-50%);
-    width: 100%;
+    z-index: 1;
 }
 
-.fav-location-row .col-md-12 {
-    /* overflow-x: scroll; */
+.col-md-9, .col-md-1 {
+    padding: 0;
 }
 
-.fav-location-row-left-arrow {
+.col-md-9 input {
+    border: none;
+    border-radius: 0;
+}
+
+.col-md-9 input:focus {
+    border: none !important;
+    box-shadow: none;
+}
+
+/* Fav location list grid */
+.row.container-fluid {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    margin: 0;
+}
+
+.fav-location-row-right-arrow {
     width: 50px;
     position: absolute;
+    right: 0;
+    bottom: 0;
     z-index: 1;
     height: 130px;
 }
 
-.fav-location-row-left-arrow span {
+.fav-location-row-right-arrow span {
     display: inline-block;
     width: 100%;
     height: 100%;
@@ -117,18 +71,17 @@ button:hover {
     font-size: 50px;
     transition: all 0.1s linear;
     cursor: pointer;
+    text-align: center;
 }
 
-.fav-location-row-right-arrow {
+.fav-location-row-left-arrow {
     width: 50px;
     position: absolute;
-    right: 0;
-    top: 0;
     z-index: 1;
     height: 130px;
 }
 
-.fav-location-row-right-arrow span {
+.fav-location-row-left-arrow span {
     display: inline-block;
     width: 100%;
     height: 100%;

@@ -24,8 +24,8 @@ export class ChangeLocationComponent implements OnInit {
   elementDisplay = "block";
 
   // For AGM Test
-  lat: number = 51.678418;
-  lng: number = 7.809007;
+  lat: number = 0;
+  lng: number = 0;
 
   // Component Variables
   optionSelected: string = ""; // can be 'listFavLocation'
@@ -46,9 +46,11 @@ export class ChangeLocationComponent implements OnInit {
    let currentCoordinates = JSON.parse(localStorage.getItem("currentCoordinates"));
 
    if(currentCoordinates != null) {
-    this.lat = currentCoordinates.latitude;
-    this.lng = currentCoordinates.longitude;
+    this.lat = parseFloat( currentCoordinates.latitude );
+    this.lng = parseFloat( currentCoordinates.longitude );
    }
+   console.log( this.lat );
+   console.log( this.lng );
 
     this.element = this.elementRef.nativeElement;
   }
@@ -68,16 +70,22 @@ export class ChangeLocationComponent implements OnInit {
         // get the place result
         let place: google.maps.places.PlaceResult = autocomplete.getPlace();
         currentCoordinates = this.geolocationService.resolveLocation(place);
+        console.log("current Coordinates");
+        console.log(currentCoordinates);
+        console.log(JSON.stringify(currentCoordinates));
         localStorage.setItem("currentSearchedLocation", JSON.stringify(currentCoordinates));
+        localStorage.setItem("currentCoordinates", JSON.stringify(currentCoordinates));
 
         // verify result
         if(place.geometry === undefined || place.geometry === null) {
           return;
         }
-
         // set latitude, longitude and zoom
         this.lat = place.geometry.location.lat();
         this.lng = place.geometry.location.lng();
+
+        // Changing the attributes of location tab component.
+        this.componentCommunicationService.editLocationTabComponent(currentCoordinates);
       })
     });
 
@@ -90,6 +98,7 @@ export class ChangeLocationComponent implements OnInit {
     // Doing nativeElement Stuff
     // Initial element stuff
     this.element.style.display = this.elementDisplay;
+    
   }
 
   onMouseOver(infoWindow, gm) {
@@ -140,6 +149,10 @@ export class ChangeLocationComponent implements OnInit {
        }
       break;
     }
+  }
+
+  searchLocation() {
+    // Nothing to be done
   }
 
 } // End Class

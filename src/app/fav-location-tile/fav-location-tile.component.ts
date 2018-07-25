@@ -13,8 +13,8 @@ import { ComponentCommunicationService } from '../component-communication.servic
 export class FavLocationTileComponent implements OnInit {
 
   @Input() location: string;
-  @Input() longitude: number;
-  @Input() latitude: number;
+  @Input() longitude: string;
+  @Input() latitude: string;
   @Input() level: string;
 
   constructor(private http: HttpClient, private geolocationService: GeolocationService, private componentCommunicationService: ComponentCommunicationService) {
@@ -24,26 +24,26 @@ export class FavLocationTileComponent implements OnInit {
   }
 
   setFavLocation() {
-    // this.http.get('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + this.latitude + ',' + this.longitude + '&key=AIzaSyAGvUJIs_SRj6bKpbQvNOWHxDjwnSqlvdE').subscribe((data: any) => {
-    //   let resolvedLocation: any = this.geolocationService.resolveLocation(data.results[0]);
+    this.http.get('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + this.latitude + ',' + this.longitude + '&key=AIzaSyAGvUJIs_SRj6bKpbQvNOWHxDjwnSqlvdE').subscribe((data: any) => {
+      let resolvedLocation: any = this.geolocationService.resolveLocation(data.results[0]);
 
-    //   // Storing in localstorage
-    //   var currentCoordinates = {
-    //     'latitude' : this.latitude,
-    //     'longitude' : this.longitude,
-    //     'timestamp' : 0,
-    //     'rwa' : "",
-    //     'locality' : resolvedLocation.locality,
-    //     'city' : resolvedLocation.city,
-    //     'state' : resolvedLocation.state,
-    //     'country' : resolvedLocation.country,
-    //     'countryShortName': resolvedLocation.countryShortName
-    //   };
-    //   localStorage.setItem('currentCoordinates', JSON.stringify( currentCoordinates ) );
+      // Storing in localstorage
+      var currentCoordinates = {
+        'latitude' : parseFloat( this.latitude ),
+        'longitude' : parseFloat( this.longitude ),
+        'timestamp' : 0,
+        'rwa' : "",
+        'locality' : resolvedLocation.locality,
+        'city' : resolvedLocation.city,
+        'state' : resolvedLocation.state,
+        'country' : resolvedLocation.country,
+        'countryShortName': resolvedLocation.countryShortName
+      };
+      localStorage.setItem('currentCoordinates', JSON.stringify( currentCoordinates ) );
 
-    //   // Changing the attributes of location tab component.
-    //   this.componentCommunicationService.editLocationTabComponent(currentCoordinates);
-    // });
+      // Changing the attributes of location tab component.
+      this.componentCommunicationService.editLocationTabComponent(currentCoordinates);
+    });
   }
 
 }

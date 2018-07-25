@@ -17,7 +17,7 @@ export class HeaderProfileIconComponent implements OnInit {
   profileMenuOpen = false;
 
   // User Info
-  profilePicture = 'assets/img/1.jpg';
+  profilePicture = 'assets/img/giphy.webp';
 
   // For loading login popup component
   @ViewChild("loginPopupContainer", {read: ViewContainerRef}) loginPopupContainer;

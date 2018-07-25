@@ -23,10 +23,25 @@ export class AppComponent {
   constructor(private http: HttpClient, private componentCommunicationService: ComponentCommunicationService, private geolocationService: GeolocationService) { }
 
   // For AGM Test
-  lat: number = 51.678418;
-  lng: number = 7.809007;
+  lat: number = 0;
+  lng: number = 0;
 
   ngOnInit() {
+    let currentCoordinates: any = localStorage.getItem("currentCoordinates");
+
+    if(currentCoordinates == null || currentCoordinates == "") {
+      this.getUserCurrentLocation();
+    }
+    else {
+      currentCoordinates = JSON.parse(currentCoordinates);
+      this.lat = parseFloat(currentCoordinates.latitude);
+      this.lng = parseFloat(currentCoordinates.longitude);
+      // Changing the attributes of location tab component.
+      this.componentCommunicationService.editLocationTabComponent(currentCoordinates);
+    }
+  }
+
+  getUserCurrentLocation() {
     // Getting current location of the user
     if(navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {

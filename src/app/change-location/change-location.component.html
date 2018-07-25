@@ -1,31 +1,22 @@
 <div class="container-fluid">
-
-  <div class="container-fluid text-center">
-    <!-- Search Bar -->
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-4" style="box-shadow: black 0px 0px 2px -1px;">
-          <div class="row">
-            <div class="col-md-9">
-              <input type="text" #searchKeyword placeholder="Search Location" class="form-control"/>
-            </div>
-            <div class="col-md-1">
-              <button><i class="fa fa-search"></i></button>
-            </div>
-            <div class="col-md-1">
-              <button (click)="toggleSection('listFavLocation')" class="app-change-location-fav-location-icon"><i class="fa fa-star"></i></button>
-            </div>
-            <div class="col-md-1">
-              <button><i class="fa fa-arrow-down"></i></button>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4"></div>
-      </div>
-
+  <!-- Search bar -->
+  <div class="row container">
+    <div class="col-md-9">
+      <input type="text" #searchKeyword placeholder="Search Location" class="form-control"/>
     </div>
+    <div class="col-md-1">
+      <button (click)="searchLocation()" class="app-change-location-search-icon"><i class="fa fa-search"></i></button>
+    </div>
+    <div class="col-md-1">
+      <button (click)="toggleSection('listFavLocation')" class="app-change-location-fav-location-icon"><i class="fa fa-star"></i></button>
+    </div>
+    <div class="col-md-1">
+      <button><i class="fa fa-arrow-down"></i></button>
+    </div>
+  </div>
 
+  <!-- Fav location list grid -->
+  <div class="row container-fluid" *ngIf="optionSelected == 'listFavLocation'">
     <div class="fav-location-row">
       <div class="fav-location-row-left-arrow" *ngIf="currentMargin != 0" (click)="moveLeft(toBeMoved)">
         <span><i class="fa fa-angle-left"></i></span>
@@ -33,7 +24,7 @@
       <div class="row">
         <div class="col-md-12" #toBeMoved>
           <!-- Fav location grid -->
-          <span *ngIf="optionSelected == 'listFavLocation'">
+          <span>
             <app-fav-location-list-grid></app-fav-location-list-grid>
           </span>
         </div>
@@ -42,7 +33,6 @@
         <span><i class="fa fa-angle-right"></i></span>
       </div>
     </div>
-
   </div>
 
   <!-- Map Background -->

@@ -7,6 +7,10 @@ export class GeolocationService {
 
 	constructor() {}
 
+	private isFunction(functionToCheck) {
+		return functionToCheck && {}.toString.call(functionToCheck) === '[object Function]';
+	}
+
 	resolveLocation(locationComponent: any) {
 		let locationResolved : any = {
 			latitude   : 0,
@@ -29,8 +33,16 @@ export class GeolocationService {
 
 		locationResolved.level = levelOrder.country;
 
-		locationResolved.latitude = locationComponent.geometry.location.lat;
-		locationResolved.longitude = locationComponent.geometry.location.lng;
+		if(!this.isFunction(locationComponent.geometry.location.lat)) {
+			// Not a function
+			locationResolved.latitude = locationComponent.geometry.location.lat;
+			locationResolved.longitude = locationComponent.geometry.location.lng;
+		}
+		else {
+			// Is a function
+			locationResolved.latitude = locationComponent.geometry.location.lat();
+			locationResolved.longitude = locationComponent.geometry.location.lng();
+		}
 
 		let addressComponent = locationComponent.address_components;
 
