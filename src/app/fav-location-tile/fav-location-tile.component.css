@@ -15,3 +15,18 @@ a {
 .card-title {
     white-space: normal !important;
 }
+
+.options {
+    text-align: right;
+    padding-right: 10px;
+}
+
+.options a {
+    display: inline-block;
+    padding: 3px;
+    margin: 0 3px;
+}
+
+.options .fa-close {
+    color: #ff0000;
+}

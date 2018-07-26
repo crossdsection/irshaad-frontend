@@ -1,7 +1,7 @@
 <ul id="grid-fav">
 
   <li *ngFor="let item of favLocationData">
-    <app-fav-location-tile location={{item.address_string}} longitude={{item.longitude}} latitude={{item.latitude}} level={{item.level}}></app-fav-location-tile>
+    <app-fav-location-tile location={{item.address_string}} longitude={{item.longitude}} latitude={{item.latitude}} level={{item.level}} isHome={{item.default}}></app-fav-location-tile>
   </li>
 
   <!-- Add More Option -->

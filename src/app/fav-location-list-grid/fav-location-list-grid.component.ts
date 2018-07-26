@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { REQUEST_BASE_URL } from '../globals';
 
+import { ComponentCommunicationService } from '../component-communication.service';
+
 @Component({
   selector: 'app-fav-location-list-grid',
   templateUrl: './fav-location-list-grid.component.html',
@@ -11,10 +13,18 @@ export class FavLocationListGridComponent implements OnInit {
 
   favLocationData: any[] = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private componentCommunicationService: ComponentCommunicationService) { }
 
   ngOnInit() {
     this.getFavLocations();
+
+    this.componentCommunicationService.favLocationListGridComponentData.subscribe((flag: string = "false") => {
+      console.log("fav location component");
+      console.log(flag);
+      if(flag == "true") {
+        this.getFavLocations();
+      }
+    });
   }
 
   getFavLocations() {

@@ -2,7 +2,7 @@ agm-map {
     height: 350px;
 }
 
-button {
+.row.container button {
     margin: 0;
     background: #ffffff;
     border: none;
@@ -88,4 +88,23 @@ button {
     font-size: 46px;
     line-height: 2.5;
     color: transparent;
+}
+
+.container.text-center {
+    position: absolute;
+    z-index: 2;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+}
+
+.container.text-center .col-md-8 {
+    background: #ffffff;
+    padding: 10px;
+}
+
+.col-md-8 input.form-control {
+    margin: 7px 0;
+    border-radius: 0;
 }

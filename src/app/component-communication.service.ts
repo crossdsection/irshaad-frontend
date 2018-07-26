@@ -38,9 +38,36 @@ export class ComponentCommunicationService {
     this.changeLocationComponent.next("");
   }
 
+  editChangeLocationComponentMapLatLng(latitude: any, longitude: any) {
+    let parameters = {
+      action: "setLatLng",
+      latitude: latitude,
+      longitude: longitude,
+    };
+    this.changeLocationComponent.next(JSON.stringify(parameters));
+  }
+
+  // Toggle Change Location Component
+  private favLocationListGridComponent = new BehaviorSubject<string>("");
+  favLocationListGridComponentData = this.favLocationListGridComponent.asObservable();
+
+  editFavLocationListGridComponentDisplay() {
+    console.log("component communication service");
+    this.favLocationListGridComponent.next("true");
+  }
+
   // Logout 
   userLogout() {
     localStorage.removeItem("auth_data");
+  }
+
+  // Current Location Change Trigger.
+  private currentLocation = new BehaviorSubject<string>("");
+  currentLocationData = this.currentLocation.asObservable();
+
+  setCurrentLocation() {
+    console.log("component communication service");
+    this.currentLocation.next("true");
   }
 
   constructor() { }

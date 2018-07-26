@@ -18,4 +18,9 @@ export class HeaderComponent implements OnInit {
     this.componentCommunicationService.editChangeLocationComponentDisplay();
   }
 
+  setCurrentLocation() {
+    console.log("header component");
+    this.componentCommunicationService.setCurrentLocation();
+  }
+
 }

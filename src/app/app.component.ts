@@ -39,6 +39,14 @@ export class AppComponent {
       // Changing the attributes of location tab component.
       this.componentCommunicationService.editLocationTabComponent(currentCoordinates);
     }
+
+    this.componentCommunicationService.currentLocationData.subscribe((flag: string = "false") => {
+      if(flag == "true") {
+        console.log("Flag");
+        this.getUserCurrentLocation();
+      }
+    });
+
   }
 
   getUserCurrentLocation() {
@@ -68,6 +76,7 @@ export class AppComponent {
 
           // Changing the attributes of location tab component.
           this.componentCommunicationService.editLocationTabComponent(currentCoordinates);
+          this.componentCommunicationService.editChangeLocationComponentMapLatLng(currentCoordinates.latitude, currentCoordinates.longitude);
         });
       });
     }

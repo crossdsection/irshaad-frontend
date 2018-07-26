@@ -5,7 +5,7 @@ a {
 
 .profile-picture {
     width: 50px;
-    height: auto;
+    height: 50px;
     border-radius: 50%;
     cursor: pointer;
 }

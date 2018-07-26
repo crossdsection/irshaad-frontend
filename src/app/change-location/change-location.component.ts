@@ -28,11 +28,77 @@ export class ChangeLocationComponent implements OnInit {
   lng: number = 0;
 
   // Component Variables
-  optionSelected: string = ""; // can be 'listFavLocation'
+  optionSelected: string = "listFavLocation"; // can be 'listFavLocation'
 
   // Search key
   @ViewChild("searchKeyword")
   public searchElementRef: ElementRef;
+
+  // Enter Location References searchStateKeyword
+  restrictedSearchArea: string = "";
+  private searchCountryElementRef: ElementRef;
+  stateAutocomplete: any;
+  cityAutocomplete: any;
+  @ViewChild('searchCountryKeyword') set content(content: ElementRef) {
+      this.searchCountryElementRef = content;
+
+      // Setting up auto complete
+      let autocomplete = new google.maps.places.Autocomplete(this.searchCountryElementRef.nativeElement, {
+        types: ["geocode"]
+      });
+      autocomplete.addListener('place_changed', () => {
+        let place: google.maps.places.PlaceResult = autocomplete.getPlace();
+        let currentCoordinates = this.geolocationService.resolveLocation(place);
+
+        this.restrictedSearchArea = currentCoordinates.countryShortCode;
+
+        console.log(this.restrictedSearchArea);
+
+        this.stateAutocomplete.setComponentRestrictions(
+          {'country': ["IN"]});
+      });
+  }
+
+  private searchStateElementRef: ElementRef;
+  @ViewChild('searchStateKeyword') set stateContent(content: ElementRef) {
+      this.searchStateElementRef = content;
+
+      // Setting up auto complete
+      this.stateAutocomplete = new google.maps.places.Autocomplete(this.searchStateElementRef.nativeElement, {
+        types: ["geocode"],
+        
+      });
+        this.stateAutocomplete.addListener('place_changed', () => {
+          let place: google.maps.places.PlaceResult = this.stateAutocomplete.getPlace();
+          let currentCoordinates = this.geolocationService.resolveLocation(place);
+          this.restrictedSearchArea = currentCoordinates.countryShortCode;
+          this.cityAutocomplete.setComponentRestrictions(
+            {'country': ["IN"]});
+      });
+  }
+
+  private searchCityElementRef: ElementRef;
+  @ViewChild('searchCityKeyword') set cityContent(content: ElementRef) {
+      this.searchCityElementRef = content;
+
+      // Setting up auto complete
+      this.cityAutocomplete = new google.maps.places.Autocomplete(this.searchCityElementRef.nativeElement, {
+        types: ["(cities)"],
+        
+      });
+        this.cityAutocomplete.addListener('place_changed', () => {
+        let place: google.maps.places.PlaceResult = this.cityAutocomplete.getPlace();
+        let currentCoordinates = this.geolocationService.resolveLocation(place);
+
+        this.restrictedSearchArea = currentCoordinates.countryShortCode;
+
+        console.log(this.restrictedSearchArea);
+
+        this.stateAutocomplete.setComponentRestrictions(
+          {'country': ["IN"]});
+      });
+  }
+
 
   @ViewChild("toBeMoved")
   public toBeMovedRef: ElementRef;
@@ -49,8 +115,6 @@ export class ChangeLocationComponent implements OnInit {
     this.lat = parseFloat( currentCoordinates.latitude );
     this.lng = parseFloat( currentCoordinates.longitude );
    }
-   console.log( this.lat );
-   console.log( this.lng );
 
     this.element = this.elementRef.nativeElement;
   }
@@ -63,7 +127,7 @@ export class ChangeLocationComponent implements OnInit {
 
     // Loading Maps
     this.mapsAPILoader.load().then(() => {
-    let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
+      let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
         types: ["address"]
       });
       autocomplete.addListener('place_changed', () => {
@@ -86,18 +150,28 @@ export class ChangeLocationComponent implements OnInit {
 
         // Changing the attributes of location tab component.
         this.componentCommunicationService.editLocationTabComponent(currentCoordinates);
-      })
+      });
     });
 
     // Listen to componentCommunicationService object for toggle location.
-    this.componentCommunicationService.changeLocationComponentData.subscribe((waste) => {
-      this.elementDisplay = (this.elementDisplay == "none") ? "block" : "none";
-      this.element.style.display = this.elementDisplay;
+    this.componentCommunicationService.changeLocationComponentData.subscribe((parameters: any) => {
+      if(parameters == "") {
+        this.elementDisplay = (this.elementDisplay == "none") ? "block" : "none";
+        this.element.style.display = this.elementDisplay;
+      }
+      else {
+        parameters = JSON.parse(parameters);
+        if(parameters.action == "setLatLng") {
+          this.lat = parseFloat(parameters.latitude);
+          this.lng = parseFloat(parameters.longitude);
+        }
+      }
     });
 
     // Doing nativeElement Stuff
     // Initial element stuff
     this.element.style.display = this.elementDisplay;
+    $(".app-change-location-fav-location-icon").css("color", "#ff5722");
     
   }
 
@@ -114,6 +188,7 @@ export class ChangeLocationComponent implements OnInit {
     this.http.post(REQUEST_BASE_URL + 'favlocation/submit', favCoordinates).subscribe(
       res => {
         console.log( res );
+        this.componentCommunicationService.editFavLocationListGridComponentDisplay();
       },
       err => {
         console.log("Error");
@@ -132,9 +207,9 @@ export class ChangeLocationComponent implements OnInit {
   }
 
   moveRight() {
-   let element = document.getElementById("grid-fav");
+    let element = document.getElementById("grid-fav");
     this.currentMargin -= 250;
-   element.style.marginLeft = this.currentMargin + "px";
+    element.style.marginLeft = this.currentMargin + "px";
   }
 
   toggleSection(section: string) {
@@ -145,7 +220,18 @@ export class ChangeLocationComponent implements OnInit {
         $(".app-change-location-fav-location-icon").css("color", "#000000");
        }
        else {
-        $(".app-change-location-fav-location-icon").css("color", "green");
+        $(".app-change-location-fav-location-icon").css("color", "#ff5722");
+       }
+      break;
+
+      case "enterLocation":
+       console.log(this.searchCountryElementRef);
+       this.optionSelected = (this.optionSelected == "") ? section : "";
+       if(this.optionSelected == "") {
+        $(".app-change-location-enter-location-icon").css("color", "#000000");
+       }
+       else {
+        $(".app-change-location-enter-location-icon").css("color", "#ff0000");
        }
       break;
     }
