@@ -38,11 +38,11 @@ export class AppComponent {
       this.lng = parseFloat(currentCoordinates.longitude);
       // Changing the attributes of location tab component.
       this.componentCommunicationService.editLocationTabComponent(currentCoordinates);
+      this.componentCommunicationService.editBreadcrumbBarLocationContext();
     }
 
     this.componentCommunicationService.currentLocationData.subscribe((flag: string = "false") => {
       if(flag == "true") {
-        console.log("Flag");
         this.getUserCurrentLocation();
       }
     });
@@ -73,10 +73,14 @@ export class AppComponent {
             'countryShortName': resolvedLocation.countryShortName
           };
           localStorage.setItem('currentCoordinates', JSON.stringify( currentCoordinates ) );
+          localStorage.setItem('locationContext', JSON.stringify( {type: "locality"} ) );
 
           // Changing the attributes of location tab component.
           this.componentCommunicationService.editLocationTabComponent(currentCoordinates);
           this.componentCommunicationService.editChangeLocationComponentMapLatLng(currentCoordinates.latitude, currentCoordinates.longitude);
+          
+          // Changing Breadcrumb Bar Location Context
+          this.componentCommunicationService.editBreadcrumbBarLocationContext();
         });
       });
     }

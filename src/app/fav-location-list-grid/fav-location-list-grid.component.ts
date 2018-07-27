@@ -19,8 +19,6 @@ export class FavLocationListGridComponent implements OnInit {
     this.getFavLocations();
 
     this.componentCommunicationService.favLocationListGridComponentData.subscribe((flag: string = "false") => {
-      console.log("fav location component");
-      console.log(flag);
       if(flag == "true") {
         this.getFavLocations();
       }
@@ -30,7 +28,6 @@ export class FavLocationListGridComponent implements OnInit {
   getFavLocations() {
     this.http.get(REQUEST_BASE_URL + 'favlocation/get').subscribe((response: any) => {
       this.favLocationData = response.data;
-      console.log(this.favLocationData);
     },
   error => {
     // Do something

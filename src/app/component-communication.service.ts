@@ -22,6 +22,13 @@ export class ComponentCommunicationService {
     this.countryFlagDisplayComponent.next(data);
   }
 
+  // Country Flag Display component
+  private breadcrumbBarComponent = new BehaviorSubject<string>("");
+  breadcrumbBarComponentData = this.breadcrumbBarComponent.asObservable();
+  editBreadcrumbBarLocationContext() {
+    this.breadcrumbBarComponent.next("true");
+  }
+
   // Change Login status in header profile icon tab
   private headerProfileIconComponent = new BehaviorSubject<string>("");
   headerProfileIconComponentData = this.headerProfileIconComponent.asObservable();
@@ -52,7 +59,6 @@ export class ComponentCommunicationService {
   favLocationListGridComponentData = this.favLocationListGridComponent.asObservable();
 
   editFavLocationListGridComponentDisplay() {
-    console.log("component communication service");
     this.favLocationListGridComponent.next("true");
   }
 
@@ -66,7 +72,6 @@ export class ComponentCommunicationService {
   currentLocationData = this.currentLocation.asObservable();
 
   setCurrentLocation() {
-    console.log("component communication service");
     this.currentLocation.next("true");
   }
 

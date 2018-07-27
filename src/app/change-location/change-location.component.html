@@ -37,22 +37,7 @@
       </div>
     </div>
   </div>
-
-  <!-- Manual Location Enter Form -->
-  <div class="container text-center" *ngIf="optionSelected == 'enterLocation'">
-    <div class="row">
-      <div class="col-md-2"></div>
-      <div class="col-md-8">
-          <input type="text" #searchCountryKeyword placeholder="Enter Country" class="form-control" />
-          <input type="text" #searchStateKeyword placeholder="Enter State" class="form-control" />
-          <input type="text" #searchCityKeyword placeholder="Enter City" class="form-control" />
-          <input type="text" placeholder="Enter Locality" class="form-control" />
-          <button class="form-control btn btn-primary">Go To Location</button>
-      </div>
-      <div class="col-md-2"></div>
-    </div>
-  </div>
-
+  
   <!-- Map Background -->
   <agm-map [latitude]="lat" [longitude]="lng" [zoom]="15" #gm>
     <agm-marker [latitude]="lat" [longitude]="lng"> <!-- (mouseOver)="onMouseOver( infoWindow, gm )" -->

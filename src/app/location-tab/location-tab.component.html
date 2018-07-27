@@ -1,22 +1,19 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-2">
-      <button class="location-tab-button world">World</button>
+    <div class="col">
+      <button (click)="changeLocationContextType('world')" class="location-tab-button world">World</button>
     </div>
-    <div class="col-md-2">
-      <button class="location-tab-button country"> {{ country }} </button>
+    <div class="col">
+      <button (click)="changeLocationContextType('country')" class="location-tab-button country"> {{ country }} </button>
     </div>
-    <div class="col-md-2">
-      <button class="location-tab-button state"> {{ state }} </button>
+    <div class="col">
+      <button (click)="changeLocationContextType('state')" class="location-tab-button state"> {{ state }} </button>
     </div>
-    <div class="col-md-2">
-      <button class="location-tab-button city"> {{ city }} </button>
+    <div class="col">
+      <button (click)="changeLocationContextType('city')" class="location-tab-button city"> {{ city }} </button>
     </div>
-    <div class="col-md-2">
-      <button class="location-tab-button locality"> {{ locality }} </button>
-    </div>
-    <div class="col-md-2">
-      <button class="location-tab-button rwa"> {{ rwa }} </button>
+    <div class="col">
+      <button (click)="changeLocationContextType('locality')" class="location-tab-button locality"> {{ locality }} </button>
     </div>
   </div>
 </div>

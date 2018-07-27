@@ -34,72 +34,6 @@ export class ChangeLocationComponent implements OnInit {
   @ViewChild("searchKeyword")
   public searchElementRef: ElementRef;
 
-  // Enter Location References searchStateKeyword
-  restrictedSearchArea: string = "";
-  private searchCountryElementRef: ElementRef;
-  stateAutocomplete: any;
-  cityAutocomplete: any;
-  @ViewChild('searchCountryKeyword') set content(content: ElementRef) {
-      this.searchCountryElementRef = content;
-
-      // Setting up auto complete
-      let autocomplete = new google.maps.places.Autocomplete(this.searchCountryElementRef.nativeElement, {
-        types: ["geocode"]
-      });
-      autocomplete.addListener('place_changed', () => {
-        let place: google.maps.places.PlaceResult = autocomplete.getPlace();
-        let currentCoordinates = this.geolocationService.resolveLocation(place);
-
-        this.restrictedSearchArea = currentCoordinates.countryShortCode;
-
-        console.log(this.restrictedSearchArea);
-
-        this.stateAutocomplete.setComponentRestrictions(
-          {'country': ["IN"]});
-      });
-  }
-
-  private searchStateElementRef: ElementRef;
-  @ViewChild('searchStateKeyword') set stateContent(content: ElementRef) {
-      this.searchStateElementRef = content;
-
-      // Setting up auto complete
-      this.stateAutocomplete = new google.maps.places.Autocomplete(this.searchStateElementRef.nativeElement, {
-        types: ["geocode"],
-        
-      });
-        this.stateAutocomplete.addListener('place_changed', () => {
-          let place: google.maps.places.PlaceResult = this.stateAutocomplete.getPlace();
-          let currentCoordinates = this.geolocationService.resolveLocation(place);
-          this.restrictedSearchArea = currentCoordinates.countryShortCode;
-          this.cityAutocomplete.setComponentRestrictions(
-            {'country': ["IN"]});
-      });
-  }
-
-  private searchCityElementRef: ElementRef;
-  @ViewChild('searchCityKeyword') set cityContent(content: ElementRef) {
-      this.searchCityElementRef = content;
-
-      // Setting up auto complete
-      this.cityAutocomplete = new google.maps.places.Autocomplete(this.searchCityElementRef.nativeElement, {
-        types: ["(cities)"],
-        
-      });
-        this.cityAutocomplete.addListener('place_changed', () => {
-        let place: google.maps.places.PlaceResult = this.cityAutocomplete.getPlace();
-        let currentCoordinates = this.geolocationService.resolveLocation(place);
-
-        this.restrictedSearchArea = currentCoordinates.countryShortCode;
-
-        console.log(this.restrictedSearchArea);
-
-        this.stateAutocomplete.setComponentRestrictions(
-          {'country': ["IN"]});
-      });
-  }
-
-
   @ViewChild("toBeMoved")
   public toBeMovedRef: ElementRef;
   public currentMargin = 0;
@@ -134,9 +68,6 @@ export class ChangeLocationComponent implements OnInit {
         // get the place result
         let place: google.maps.places.PlaceResult = autocomplete.getPlace();
         currentCoordinates = this.geolocationService.resolveLocation(place);
-        console.log("current Coordinates");
-        console.log(currentCoordinates);
-        console.log(JSON.stringify(currentCoordinates));
         localStorage.setItem("currentSearchedLocation", JSON.stringify(currentCoordinates));
         localStorage.setItem("currentCoordinates", JSON.stringify(currentCoordinates));
 
@@ -187,12 +118,10 @@ export class ChangeLocationComponent implements OnInit {
     var favCoordinates = JSON.parse(localStorage.getItem("currentSearchedLocation"));
     this.http.post(REQUEST_BASE_URL + 'favlocation/submit', favCoordinates).subscribe(
       res => {
-        console.log( res );
         this.componentCommunicationService.editFavLocationListGridComponentDisplay();
       },
       err => {
-        console.log("Error");
-        console.log( err )
+        // Handle Error
       }
     );
   }
@@ -225,7 +154,6 @@ export class ChangeLocationComponent implements OnInit {
       break;
 
       case "enterLocation":
-       console.log(this.searchCountryElementRef);
        this.optionSelected = (this.optionSelected == "") ? section : "";
        if(this.optionSelected == "") {
         $(".app-change-location-enter-location-icon").css("color", "#000000");

@@ -13,8 +13,6 @@ export class DynamicComponentService {
   addPopup(popup: any) {
     // add popups to array of active popups
     this.popups.push(popup);
-    console.log("New Popup");
-    console.log(this.popups);
   }
 
   // Open the popup

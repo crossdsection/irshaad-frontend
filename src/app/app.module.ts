@@ -26,6 +26,8 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 import { ChangeLocationComponent } from './change-location/change-location.component';
 import { FavLocationTileComponent } from './fav-location-tile/fav-location-tile.component';
 import { FavLocationListGridComponent } from './fav-location-list-grid/fav-location-list-grid.component';
+import { GovtDeptListGridComponent } from './govt-dept-list-grid/govt-dept-list-grid.component';
+import { EnactPopupComponent } from './enact-popup/enact-popup.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,9 @@ import { FavLocationListGridComponent } from './fav-location-list-grid/fav-locat
     LoginPopupComponent,
     ChangeLocationComponent,
     FavLocationTileComponent,
-    FavLocationListGridComponent
+    FavLocationListGridComponent,
+    GovtDeptListGridComponent,
+    EnactPopupComponent
   ],
   entryComponents: [
     LoginPopupComponent,

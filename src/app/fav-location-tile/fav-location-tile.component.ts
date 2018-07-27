@@ -31,7 +31,6 @@ export class FavLocationTileComponent implements OnInit {
    }
 
   ngOnInit() {
-    console.log(this.isHome);
     if(this.isHome == "true") {
       this.homeIconColor = "blue";
     }
@@ -54,6 +53,7 @@ export class FavLocationTileComponent implements OnInit {
         'countryShortName': resolvedLocation.countryShortName
       };
       localStorage.setItem('currentCoordinates', JSON.stringify( currentCoordinates ) );
+      this.componentCommunicationService.editBreadcrumbBarLocationContext();
 
       // Changing the attributes of location tab component.
       this.componentCommunicationService.editLocationTabComponent(currentCoordinates);
@@ -71,7 +71,6 @@ export class FavLocationTileComponent implements OnInit {
     };
 
     this.http.post(REQUEST_BASE_URL + "favlocation/remove", dataToSend).subscribe((response: any) => {
-      console.log(response);
       if(response.error == 0) {
         $(this.element).remove();
       }
@@ -82,6 +81,19 @@ export class FavLocationTileComponent implements OnInit {
     (error: any) => {
       console.error(error);
       alert("There is some problem in removing this location. Please try again later.");
+    });
+  }
+
+  setFavLocationHome() {
+    let dataToSend: any = {
+      latitude: this.latitude,
+      longitude: this.longitude,
+      level: this.level
+    };
+    this.http.post(REQUEST_BASE_URL + "favlocation/default", dataToSend).subscribe((response: any) => {
+      if(response.error == 0) {
+        this.componentCommunicationService.editFavLocationListGridComponentDisplay();
+      }
     });
   }
 
