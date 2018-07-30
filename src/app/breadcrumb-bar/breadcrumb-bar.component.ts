@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
 
 import { ComponentCommunicationService } from '../component-communication.service';
 import * as $ from 'jquery';
 import { REQUEST_BASE_URL } from '../globals';
 import { HttpClient } from '@angular/common/http';
+
+import { EnactPopupComponent } from '../enact-popup/enact-popup.component';
 
 @Component({
   selector: 'app-breadcrumb-bar',
@@ -19,7 +21,10 @@ export class BreadcrumbBarComponent implements OnInit {
   sideMenuToggled = false;
   favLocationIconColor = "white";
 
-  constructor(private componentCommunicationService: ComponentCommunicationService, private http: HttpClient) { }
+  // For Enact Popup
+  @ViewChild("enactPopupContainer", { read: ViewContainerRef}) enactPopupContainer;
+
+  constructor(private componentCommunicationService: ComponentCommunicationService, private http: HttpClient, private componentFactoryResolver: ComponentFactoryResolver) { }
 
   ngOnInit() {
     this.componentCommunicationService.breadcrumbBarComponentData.subscribe((data: string) => {
@@ -50,7 +55,6 @@ export class BreadcrumbBarComponent implements OnInit {
         }
 
         this.http.get(REQUEST_BASE_URL + "favlocation/exist?latitude=" + currentCoordinates.latitude + "&longitude=" + currentCoordinates.longitude + "&level=" + locationContext.type).subscribe((response: any) => {
-          console.log(response);
           if(response.data.exist == true) {
             this.favLocationIconColor = "yellow";
           }
@@ -97,5 +101,9 @@ export class BreadcrumbBarComponent implements OnInit {
         // Handle Error
       }
     );
+  }
+
+  showEnactPopup() {
+    this.enactPopupContainer.createComponent(this.componentFactoryResolver.resolveComponentFactory(EnactPopupComponent));
   }
 }

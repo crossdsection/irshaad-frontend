@@ -8,10 +8,13 @@
     <div class="col-md-6" style="text-align: right;">
       <button class="breadcrumb-bar-button" (click)="toggleGovtDept()"><small>Govt. Departments</small><br/><i class="fa fa-angle-down"></i></button>
       <button class="breadcrumb-bar-icon" (click)="addContextFavLoction()" [ngStyle]="{'color': favLocationIconColor}"><i class="fa fa-star"></i></button>
-      <button class="enact-button">ENACT</button>
+      <button class="enact-button" (click)="showEnactPopup()">ENACT</button>
       <button class="breadcrumb-bar-icon"><i class="fa fa-commenting-o"></i></button>
     </div>
   </div>
+
+  <!-- Enact Popup -->
+  <div #enactPopupContainer></div>
 
   <!-- Government Departments list -->
   <div class="row" *ngIf="govtDeptToggled">

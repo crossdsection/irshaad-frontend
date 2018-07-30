@@ -53,7 +53,8 @@ import { EnactPopupComponent } from './enact-popup/enact-popup.component';
   ],
   entryComponents: [
     LoginPopupComponent,
-    ChangeLocationComponent
+    ChangeLocationComponent,
+    EnactPopupComponent
   ],
   imports: [
     BrowserModule,

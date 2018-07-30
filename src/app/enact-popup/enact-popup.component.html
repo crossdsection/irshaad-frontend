@@ -1,71 +1,166 @@
 <div class="dark-overlay">
     <div class="modal">
       <div class="modal-body">
-  
           <button class="close" (click)="closeThisPopup()"><i class="fa fa-close"></i></button>
-          <div class="text-center" style="padding:10px 0; color: #ffffff; background: darkmagenta;">
-            <h3>India</h3>
+          <div class="text-center" [ngStyle]="{'height': '100%', 'padding': '10px', 'color': '#ffffff', 'background': locationContextColor}">
+            <h3>{{ getSelectedLocation() }}</h3>
           </div>
-          <!-- columns -->
-          <div class="row">
-            <div class="col-md-8" style="">
-              <div class="row">
-                <div class="col-sm-4">
-                  <button class="tab-button">Court</button>
-                </div>
-                <div class="col-sm-4">
-                  <button class="tab-button">News</button>
-                </div>
-                <div class="col-sm-4">
-                  <button class="tab-button">Discussion</button>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label>Title</label>
-                    <input type="text" placeholder="Title" class="form-control" />
-                    <label>Add Media</label>
-                    <input type="file" class="form-control" multiple />
-                    <label>Description</label>
-                    <textarea placeholder="Description" class="form-control"></textarea>
-                    <a href="#">Add Option</a>
-                    <input type="text" placeholder="Enter Option 1" class="form-control" />
-                    <input type="text" placeholder="Enter Option 1" class="form-control" />
-                    <input type="text" placeholder="Enter Option 1" class="form-control" />
-                    <button class="enact-option" title="Go Anonymous"><i class="fa fa-user-circle-o"></i></button>
-                    <button class="enact-option" title="Save as Draft"><i class="fa fa-file"></i></button>
-                  </div>
-                </div>
-              </div>
+      </div>
 
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label>Title</label>
-                    <input type="text" placeholder="Title" class="form-control" />
-                    <label>Add Media</label>
-                    <input type="file" class="form-control" multiple />
-                    <label>Description</label>
-                    <textarea placeholder="Description" class="form-control"></textarea>
-                    <a href="#">Add Option</a>
-                    <input type="text" placeholder="Enter Option 1" class="form-control" />
-                    <input type="text" placeholder="Enter Option 1" class="form-control" />
-                    <input type="text" placeholder="Enter Option 1" class="form-control" />
-                    <button class="enact-option" title="Go Anonymous"><i class="fa fa-user-circle-o"></i></button>
-                    <button class="enact-option" title="Save as Draft"><i class="fa fa-file"></i></button>
-                  </div>
-                </div>
-              </div>
+      <div class="row edit-area">
+        <div class="col-md-7" style="overflow-y: scroll;">
+          <div class="row post-tab-area">
+            <div class="col-md-4">
+              <button class="tab-button court tab-button-active" (click)="setActiveForm('court')"><i class="fa fa-balance-scale" style="color: #264771;"></i>&nbsp;Courts</button>
             </div>
             <div class="col-md-4">
-
+              <button class="tab-button discussion" (click)="setActiveForm('discussion')"><img src="assets/img/discussion_icon.svg" style="width: 18px; position: relative; top: -2px;" >&nbsp;Discussions</button>
+            </div>
+            <div class="col-md-4">
+              <button class="tab-button news" (click)="setActiveForm('news')"><i class="fa fa-newspaper-o" style="color: #264771;"></i>&nbsp;News</button>
             </div>
           </div>
-  
-  
-      </div>
-      
+
+          <!-- Form -->
+          <form (ngSubmit)="submitPostData()">
+            <div class="form-group">
+              <label>Title</label>
+              <input [(ngModel)]="title" [ngModelOptions]="{standalone: true}" type="text" placeholder="Enter Title" class="form-control" maxlength="100"/>
+              <h6 style="text-align: right; color: grey; font-weight: 400; font-size: 12px; padding: 0 0.1rem;">100</h6>
+            </div>
+            <div class="form-group">
+              <label>Description</label>
+              <textarea [(ngModel)]="details" [ngModelOptions]="{standalone: true}" placeholder="Enter Description" class="form-control" rows="9"></textarea>
+            </div>
+            <div class="form-group">
+              <label style="display: block;">Add Media</label>
+              <span id="preview-upload-area">
+                <!-- <label class="file-upload-label">&nbsp; &nbsp;
+                  <span class="file-upload-label-close-icon"><i class="fa fa-close"></i></span>
+                </label> -->
+              </span>
+              <label for="file-upload" class="file-upload-label" title="Choose file"><i class="fa fa-plus"></i></label>
+              <input type="file" class="form-control" id="file-upload" (change)="onFileChange($event)"/>
+            </div>
+            <div *ngIf="activeForm == 'court'" class="form-group option-area">
+              <div class="row text-center option-area-row">
+                <div class="col-sm-1">
+                  <button style="color: #80bdff;"><i class="fa fa-minus-circle"></i></button>
+                </div>
+                <div class="col-sm-11">
+                  <input type="text" placeholder="Agree" class="form-control" id="file-upload"/>
+                </div>
+              </div> 
+
+              <div class="row text-center option-area-row">
+                <div class="col-sm-1">
+                  <button><i class="fa fa-minus-circle"></i></button>
+                </div>
+                <div class="col-sm-11">
+                  <input type="text" placeholder="Disagree" class="form-control"/>
+                </div>
+              </div> 
+
+              <div class="row option-area-row">
+                <div class="col-sm-1 text-center ">
+                  <button style="color: #80bdff;"><i class="fa fa-plus-circle"></i></button>
+                </div>
+                <div class="col-sm-11" style="padding: 0.375rem 0.75rem;">
+                  <a href="#">Add option</a>
+                </div>
+              </div>
+            </div>
+
+            <div class="row option-area-row post-options">
+              <div class="col-md-9" style="padding: 0;">
+                <span *ngIf="activeForm == 'court'">CC: <input type="text" placeholder="Add change.org Email Option" class="form-control" style="display: inline-block; width: initial;"/></span>
+              </div>
+              <div class="col-md-3" style="text-align: right; padding: 0;">
+                <button title="Go Anonymous"><i class="fa fa-user-secret"></i></button>
+                <button title="Save as Draft"><i class="fa fa-file-o"></i></button>
+              </div>
+            </div>
+
+            <div class="row option-area-row">
+              <div class="col-md-12" style="padding-left: 0;">
+                <button type="submit" class="btn btn-primary form-control">Submit</button>
+              </div>
+            </div>
+          </form>
+
+        </div>
+        <!-- Preview -->
+        <div class="col-md-5">
+          <div class="preview">
+            <div class="card">
+              <div class="row">
+                <div class="col-md-2">
+                  <img src="{{profilePic}}" class="poll-card-profile-pic"/>
+                </div>
+                <div class="col-md-6">
+                  <h5 style="margin-bottom: -7px;">
+                    {{userName}}
+                  </h5>
+                  <small>{{ getSelectedLocation() }}</small>
+                </div>
+                <div class="col-md-4" style="line-height: 1;">
+                  <small>2018-10-20</small> at
+                  <br />
+                  <small>14:20</small>
+                </div>
+              </div>
+              <div class="card-body">
+                <h3 class="card-title">{{ title }}</h3>
+                <img class="card-img-top" src="assets/img/broken_road.jpg" alt="Card image cap">
+                <p class="card-text">
+                {{details}}
+                </p>
+                <div class="row">
+                  <div class="col-md-6">
+                    <button class="option"><i class="fa fa-check"></i></button>
+                  </div>
+                  <div class="col-md-6">
+                      <button class="option"><i class="fa fa-times"></i></button>
+                    </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <button class="analytic-button"><i class="fa fa-question-circle"></i></button>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <button class="analytic-button bottom-button">
+                      <i class="fa fa-share-alt"></i>
+                    </button>
+                  </div>
+                  <div class="col">
+                    <button class="analytic-button bottom-button">
+                      <i class="fa fa-star"></i>
+                    </button>
+                  </div>
+                  <div class="col">
+                    <button class="analytic-button bottom-button">
+                      <i class="fa fa-comment"></i>
+                    </button>
+                  </div>
+                  <div class="col">
+                    <button class="analytic-button bottom-button">
+                      <i class="fa fa-flag"></i>
+                    </button>
+                  </div>
+                  <div class="col">
+                    <button class="analytic-button bottom-button">
+                      <i class="fa fa-signal"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End Preview -->
+      </div>      
        
     </div>
   </div>

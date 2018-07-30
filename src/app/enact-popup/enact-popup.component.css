@@ -18,6 +18,9 @@ div.modal {
     background: #ffffff;
     border-radius: 0px;
     transform: translate(-50%, -50%);
+    color: #000000;
+    display: grid;
+    grid-template-rows: 10% 90%;
 }
 
 .modal-body, .col-sm-4, .col-md-12 {
@@ -31,12 +34,118 @@ div.modal {
 button.tab-button {
     display: inline-block;
     width: 100%;
+    height: 100%;
     border: none;
     padding: 10px;
     cursor: pointer;
 }
 
+button.tab-button:hover {
+    background: #bbb9b9;
+}
+
+.tab-button-active {
+    background: #bbb9b9;
+}
+
+.post-tab-area .col-md-4 {
+    padding: 0;
+}
+
 a {
     color: darkblue;
     text-decoration: underline;
+}
+
+.row.edit-area {
+    margin: 0;
+}
+
+.option-area {
+    background: #f0f0f0;
+    padding: 15px 0;
+}
+
+.option-area-row .col-sm-1 {
+    padding: 0;
+}
+
+.option-area-row {
+    margin: 4px 0;
+}
+
+.option-area-row .col-sm-11 {
+    padding-left: 0;
+}
+
+.option-area-row .col-sm-1 button {
+    border: none;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    cursor: pointer;
+    color: grey;
+}
+
+.option-area a {
+    color: #80bdff;
+    text-decoration: none;
+}
+
+.post-options button {
+    border: none;
+    background: #f0f0f0;
+    cursor: pointer;
+    margin: 0 5px;
+}
+
+.preview {
+    position: relative;
+    top: -40px;
+    transform: scale(0.8);
+    color: #000000;
+}
+
+/* For Preview */
+
+.preview .poll-card-profile-pic {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+}
+
+.preview small {
+    display: inline-block;
+}
+
+.preview button.option {
+    width: 100%;
+    border: none;
+    background: linear-gradient(#ebf904, #ff9703);
+    padding: 5px 10px;
+}
+
+.preview .analytic-button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #8a2be2;
+    float: right;
+}
+
+.preview .bottom-button {
+    color: gray;
+}
+
+/* End For Preview */
+
+.close {
+    margin: 0 5px;
+}
+
+
+#file-upload {
+    width: 0;
+    height: 0;
+    visibility: hidden;
 }
