@@ -10,6 +10,7 @@ import { REQUEST_BASE_URL } from '../globals';
 export class EnactCardsComponent implements OnChanges {
 
   @Input() posttype : String;
+  @Input() filter : String;
 
   public enactions : Array<Object>;
 
@@ -23,6 +24,9 @@ export class EnactCardsComponent implements OnChanges {
     var getUrl = REQUEST_BASE_URL + "post/get?page=1";
     if ( this.posttype != null ){
       getUrl = getUrl + '&posttype=' + this.posttype;
+    }
+    if ( this.filter != null ){
+      getUrl = getUrl + '&' + this.filter + '=1';
     }
     this.http.get( getUrl ).subscribe((response: any) => {
       if( response.error == 0 ) {

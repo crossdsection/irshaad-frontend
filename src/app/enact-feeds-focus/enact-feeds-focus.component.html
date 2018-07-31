@@ -12,9 +12,20 @@
             <i class="fa fa-newspaper-o" style="color: #264771;"></i>&nbsp;News
         </a>
       </div>
+      <div class="list-group">
+        <a class="list-group-item list-group-item-action" style="font-size: .9rem">
+          <strong>Filters</strong>
+        </a>
+        <a class="list-group-item list-group-item-action" (click)="filter('most_upvoted')" style="font-size: .9rem">
+          <i class="fa fa-thumbs-up" style="color: #264771"></i>&nbsp;Most Upvotes
+        </a>
+        <a class="list-group-item list-group-item-action" (click)="filter('sort_datetime')" style="font-size: .9rem">
+          <i class="fa fa-calendar" style="color: #264771" ></i>&nbsp;DateTime
+        </a>
+      </div>
     </div>
     <div class="col-md-9">
-      <app-enact-cards [posttype]="postType"></app-enact-cards>
+      <app-enact-cards [posttype]="postType" [filter]="filterBy"></app-enact-cards>
     </div>
   </div>
 </div>
