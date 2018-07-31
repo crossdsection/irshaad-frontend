@@ -1,33 +1,30 @@
 <div class="card">
   <div class="row">
     <div class="col-md-2">
-      <img src="assets/img/1.jpg" class="poll-card-profile-pic"/>
+      <img [src]="_post.user.profilepic" class="poll-card-profile-pic"/>
     </div>
     <div class="col-md-6">
       <h5 style="margin-bottom: -7px;">
-        John Smith
+        {{ _post.user.name }}
       </h5>
-      <small>Dehradun, India</small>
+      <small> {{ _post.location }}</small>
     </div>
     <div class="col-md-4" style="line-height: 1;">
-      <small>2018-10-20</small> at
+      <small> {{ _post.postDate }} </small> at
       <br />
-      <small>14:20</small>
+      <small> {{ _post.postTime }} </small>
     </div>
   </div>
   <div class="card-body">
-    <h3 class="card-title">Broken Road in Dehradun.</h3>
-    <img class="card-img-top" src="assets/img/broken_road.jpg" alt="Card image cap">
+    <h3 class="card-title"> {{ _post.title }} </h3>
+    <img class="card-img-top" *ngFor="let file of _post.files" [src]="file.filepath" alt="Card image cap">
     <p class="card-text">
-      There is a road broken in Dehradun in Canal Road.
+      {{ _post.details }}
     </p>
-    <div class="row">
-      <div class="col-md-6">
-        <button class="option"><i class="fa fa-check"></i></button>
+    <div class="row" *ngIf="_post.post_type == 'court'">
+      <div *ngFor="let poll of _post.polls" class="col-md-6">
+        <button class="option">{{ poll.title }}</button>
       </div>
-      <div class="col-md-6">
-          <button class="option"><i class="fa fa-times"></i></button>
-        </div>
     </div>
     <div class="row">
       <div class="col-md-12">

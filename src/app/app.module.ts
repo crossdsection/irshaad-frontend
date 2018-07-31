@@ -13,8 +13,6 @@ import { BreadcrumbBarComponent } from './breadcrumb-bar/breadcrumb-bar.componen
 import { AnalyticsBarComponent } from './analytics-bar/analytics-bar.component';
 import { EnactFeedsComponent } from './enact-feeds/enact-feeds.component';
 import { EnactFeedsFocusComponent } from './enact-feeds-focus/enact-feeds-focus.component';
-import { PollCardsComponent } from './poll-cards/poll-cards.component';
-import { PollCardComponent } from './poll-card/poll-card.component';
 import { CountryFlagDisplayComponent } from './country-flag-display/country-flag-display.component';
 
 import { HeaderProfileIconComponent } from './header-profile-icon/header-profile-icon.component';
@@ -28,6 +26,8 @@ import { FavLocationTileComponent } from './fav-location-tile/fav-location-tile.
 import { FavLocationListGridComponent } from './fav-location-list-grid/fav-location-list-grid.component';
 import { GovtDeptListGridComponent } from './govt-dept-list-grid/govt-dept-list-grid.component';
 import { EnactPopupComponent } from './enact-popup/enact-popup.component';
+import { EnactCardComponent } from './enact-card/enact-card.component';
+import { EnactCardsComponent } from './enact-cards/enact-cards.component';
 
 @NgModule({
   declarations: [
@@ -40,8 +40,6 @@ import { EnactPopupComponent } from './enact-popup/enact-popup.component';
     AnalyticsBarComponent,
     EnactFeedsComponent,
     EnactFeedsFocusComponent,
-    PollCardsComponent,
-    PollCardComponent,
     CountryFlagDisplayComponent,
     HeaderProfileIconComponent,
     LoginPopupComponent,
@@ -49,7 +47,9 @@ import { EnactPopupComponent } from './enact-popup/enact-popup.component';
     FavLocationTileComponent,
     FavLocationListGridComponent,
     GovtDeptListGridComponent,
-    EnactPopupComponent
+    EnactPopupComponent,
+    EnactCardComponent,
+    EnactCardsComponent
   ],
   entryComponents: [
     LoginPopupComponent,
@@ -72,6 +72,6 @@ import { EnactPopupComponent } from './enact-popup/enact-popup.component';
       multi: true
     }
   ],
-  bootstrap: [AppComponent],  
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
