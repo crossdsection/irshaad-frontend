@@ -26,12 +26,24 @@ export class EnactPopupComponent implements OnInit {
   currentPreviewElement: any = null;
   instance: any = this;
 
+  pollInputCount: number = 2;
+
+  // Preview Variables
+  previewImageSrc = "";
+
 
   title: string = "";
   details: string = "";
+  polls: string[] = ["", "", "", "", ""];
+  cc: string = "";
+  isAnonymous: boolean = false;
+  anonymousIconColor: string = "black";
+
+  isDraft: boolean = false;
+  draftIconColor: string = "black";
 
   // User Details
-  profilePic: string;
+  profilePic: string = "assets/img/giphy.webp";
   userName: string;
 
   constructor(private elementRef: ElementRef, private http: HttpClient, private httpService: HttpService) {
@@ -110,13 +122,37 @@ export class EnactPopupComponent implements OnInit {
   }
 
   submitPostData() {
-    console.log(this.title);
+    let currentCoordinates = JSON.parse(localStorage.getItem("currentCoordinates"));
+    let locationContext = JSON.parse(localStorage.getItem("locationContext"));
     let dataToSend = {
       title: this.title,
       details: this.details,
       postType: this.activeForm,
-      fileJSON: fileJSON
+      filejson: fileJSON, 
+      polls: this.polls,
+      cc: this.cc,
+      anonymous: this.isAnonymous,
+      draft: this.isDraft,
+      latitude: currentCoordinates.latitude,
+      longitude: currentCoordinates.longitude,
+      locality: currentCoordinates.locality,
+      city: currentCoordinates.city,
+      state: currentCoordinates.state,
+      country: currentCoordinates.country,
+      country_code: currentCoordinates.countryShortName,
+      level: locationContext.type,
+      department_id: ""
     }
+
+    this.http.post(REQUEST_BASE_URL + "post/submit", dataToSend).subscribe(
+      (response: any) => {
+        console.log(response);
+      },
+      (error: any) => {
+        console.log("There is an error");
+        console.error(error);
+      }
+    );
   }
 
   // Check for file upload
@@ -134,10 +170,16 @@ export class EnactPopupComponent implements OnInit {
     closeIcon.title = "Remove Media";
     closeIcon.innerHTML = '<i class="fa fa-close"></i>';
     $(closeIcon).on("click", function() {
-      let index = parseInt($(this).parent().attr("data-index"));
+      let index = ($(this).parent().attr("data-index"));
       console.log(index);
       console.log("Removed");
       fileJSON.splice(fileJSON.indexOf(index), 1);
+      if(fileJSON.length == 0) { 
+        this.previewImageSrc = "";
+      }
+      else {
+        this.previewImageSrc = fileJSON[0];
+      }
       console.log(fileJSON);
       $(this).parent().remove();
     });
@@ -187,11 +229,15 @@ export class EnactPopupComponent implements OnInit {
       if( this.serverResponse["error"] == 0 ){
         // for( var i in this.serverResponse['data'] ){
         fileJSON.push( this.serverResponse['data']["fileId"] );
-        console.log(fileJSON);
         $(this.currentPreviewElement).attr("data-index", this.serverResponse['data']['fileId']);
         this.currentPreviewElement.style.background = "url('" + REQUEST_BASE_URL + this.serverResponse['data']['filepath'] + "')";
         this.currentPreviewElement.style.backgroundSize = "cover";
         this.currentPreviewElement.style.backgroundRepeat = "no-repeat";
+
+        // Setting up preview image source
+        if(fileJSON.length == 1) { 
+          this.previewImageSrc = REQUEST_BASE_URL + this.serverResponse['data']['filepath'];
+        }
         // }
       } else {
         console.log( this.serverResponse );
@@ -199,9 +245,27 @@ export class EnactPopupComponent implements OnInit {
     }
   }
 
-  removeFile() {
-    console.log("Remove File triggered  ");
+  addPollInput() {
+    this.pollInputCount++;
+    if(this.pollInputCount > 5) this.pollInputCount = 5;
   }
 
+  removePollInput(index: number) {
+    this.pollInputCount--;
+    if(this.pollInputCount < 2) this.pollInputCount = 2;
+
+    this.polls[index] = "";
+
+  }
+
+  toggleAnonymity() {
+    this.isAnonymous = !this.isAnonymous;
+    this.anonymousIconColor = (this.isAnonymous) ? "#80bdff" : "#000000";
+  }
+
+  toggleDraftStatus() {
+    this.isDraft = !this.isDraft;
+    this.draftIconColor = (this.isDraft) ? "#80bdff" : "#000000";
+  }
 
 }
