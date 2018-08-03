@@ -1,0 +1,53 @@
+<div class="card">
+    <div class="row">
+      <div class="col-md-6">
+        <h5 style="margin-bottom: -7px; cursor: pointer;">
+          {{user.name}}
+        </h5>
+        
+      </div>
+      <div class="col-md-6">
+        <!-- Later -->
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <small> {{userLocation}}</small>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <small> {{user.profession}}</small>
+      </div>
+    </div>
+    <div class="card-body">
+      <p class="card-title"> {{user.tagline}} </p>
+      <div class="row">
+        <div class="col-md-12">
+          <img class="card-img-top" src="{{ requestBaseUrl + user.profilepic}}" alt="Card image cap" />
+          <button class="follow-button" title="Follow"><i class="fa fa-user-plus"></i></button>
+        </div>
+      </div>
+      <p class="card-text" style="font-weight: bold;">
+          {{user.about}}
+      </p>
+      <div class="row">
+        <div class="col">
+          <button class="analytic-button bottom-button" title="Share">
+            <i class="fa fa-share-alt"></i>
+          </button>
+        </div>
+        <div class="col">
+          <button class="analytic-button bottom-button" title="Block">
+            <i class="fa fa-ban"></i>
+          </button>
+        </div>
+        <div class="col">
+          <button class="analytic-button bottom-button" title="Message">
+            <i class="fa fa-comment"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  

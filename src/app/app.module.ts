@@ -30,6 +30,7 @@ import { EnactCardComponent } from './enact-card/enact-card.component';
 import { EnactCardsComponent } from './enact-cards/enact-cards.component';
 import { RightOverlayComponent } from './right-overlay/right-overlay.component';
 import { ProfileComponent } from './profile/profile.component';
+import { UserSummaryTileComponent } from './user-summary-tile/user-summary-tile.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { ProfileComponent } from './profile/profile.component';
     EnactCardComponent,
     EnactCardsComponent,
     RightOverlayComponent,
-    ProfileComponent
+    ProfileComponent,
+    UserSummaryTileComponent
   ],
   entryComponents: [
     LoginPopupComponent,

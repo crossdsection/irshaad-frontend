@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-enact-feeds-focus',
@@ -9,6 +9,8 @@ export class EnactFeedsFocusComponent implements OnInit {
 
   public postType : String = 'court';
   public filterBy : String;
+
+  @Input() mcph: string = "";
 
   constructor() { }
 

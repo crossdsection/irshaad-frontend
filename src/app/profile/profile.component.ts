@@ -2,6 +2,7 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { RightOverlayCommunicationService } from '../services/right-overlay-communication.service';
 import { HttpClient } from '@angular/common/http';
 import { REQUEST_BASE_URL } from '../globals';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-profile',
@@ -13,6 +14,11 @@ export class ProfileComponent implements OnInit {
   user: User;
 
   mcph: any = "";
+
+  currentlyOpenedTab = "enactions";
+
+  followers: any[] = [];
+  followings: any[] = [];
 
   constructor(private rightOverlayCommunicationService: RightOverlayCommunicationService, private elementRef: ElementRef, private http: HttpClient) {
     this.user = new User();
@@ -54,12 +60,66 @@ export class ProfileComponent implements OnInit {
         this.user.followerCount = response.data[0].followerCount;
         this.user.followingCount = response.data[0].followingCount;
         this.user.postCount = response.data[0].postCount;
+        this.user.draftCount = response.data[0].draftCount;
+        this.user.bookmarkCount = response.data[0].bookmarkCount;
         this.user.profilePicture = REQUEST_BASE_URL + response.data[0].profilepic;
       },
       (error) => {
         console.log(error);
       }
     );
+  }
+
+  // Control Tabs
+  showEnactions(event: any) {
+    $(".detail-tab").removeClass("active");
+    $(".detail-tab.world").addClass("active");
+
+    this.currentlyOpenedTab = "enactions";
+  }
+
+  showFollowers(event: any) {
+    $(".detail-tab").removeClass("active");
+    $(".detail-tab.country").addClass("active");
+
+    // Get user's followers list
+    let dataToSend: any = {
+      searchKey : "",
+      page : 1,
+      offset : 20,
+      mcph : this.mcph
+    }
+    this.http.post(REQUEST_BASE_URL + "user/getfollowers", dataToSend).subscribe((response: any) => {
+      this.followers = response.data;
+      console.log("Followers");
+      console.log(this.followers);
+    }, (error: any) => {
+      console.log(error);
+    });
+
+    this.currentlyOpenedTab = "followers";
+  }
+
+  showFollowing(event: any) {
+    $(".detail-tab").removeClass("active");
+    $(".detail-tab.state").addClass("active");
+
+    // Get user's following list
+    let dataToSend: any = {
+      searchKey : "",
+      page : 1,
+      offset : 20,
+      mcph : this.mcph
+    }
+    this.http.post(REQUEST_BASE_URL + "user/getfollowing", dataToSend).subscribe((response: any) => {
+      this.followings = response.data;
+      console.log("Following");
+      console.log(this.followers);
+    }, (error: any) => {
+      console.log(error);
+    });
+
+    this.currentlyOpenedTab = "following";
   }
 
 }
@@ -76,6 +136,8 @@ class User {
   followerCount: number = 0;
   followingCount: number = 0;
   postCount: number = 0;
+  draftCount: number = 0;
+  bookmarkCount: number = 0;
   profilePicture: string = "assets/img/giphy.webp";
 
 }

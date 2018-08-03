@@ -2,6 +2,7 @@
   <div class="row">
     <div class="col-md-3 text-center">
       <img src="{{ user.profilePicture }}" class="img img-thumbnail" />
+      <button class="change-profile-pic-button"><i class="fa fa-camera"></i></button>
     </div>
     <div class="col-md-4">
       <h3>{{ user.name }}</h3>
@@ -10,10 +11,8 @@
     <div class="col-md-5 profile-action-buttons">
       <div class="upper-row">
         <!-- <button class="profile-action-button world">{{ user.postCount }} <br /> Enactions</button> -->
-        <button class="profile-action-button country">{{ user.followerCount }} <br /> Followers</button>
-        <button class="profile-action-button state">{{ user.followingCount }} <br /> Following</button>  
       </div>
-      <div class="lower-row">
+      <div class="lower-row" *ngIf="!user.editable">
         <button class="profile-action-button city">Follow</button>
         <button class="profile-action-button locality">Message</button>
       </div>
@@ -26,24 +25,78 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <button class="detail-tab world active"><i class="fa fa-newspaper-o"></i>Enactions</button>
+      <button (click)="showEnactions($event)" class="detail-tab world active" title="Enactions"><span class="counter-button">{{user.postCount}}</span><i class="fa fa-newspaper-o"></i> Enactions</button>
     </div>
     <div class="col">
-      <button class="detail-tab country"><i class="fa fa-bookmark"></i> Bookmarked</button>
+      <button (click)="showFollowers($event)" class="detail-tab country" title="Followers"><span class="counter-button">{{user.followerCount}}</span><i class="fa fa-users"></i> Followers</button>      
     </div>
     <div class="col">
-      <button class="detail-tab state"><i class="fa fa-file-o"></i> Drafts</button>
+      <button (click)="showFollowing($event)" class="detail-tab state" title="Following"><span class="counter-button">{{user.followingCount}}</span><i class="fa fa-user"></i> Following</button>
     </div>
     <div class="col">
-      <button class="detail-tab city"><i class="fa fa-bar-chart"></i> Stats</button>
+      <button class="detail-tab city" title="Bookmarks"><span class="counter-button">{{user.bookmarkCount}}</span><i class="fa fa-bookmark"></i> Bookmarks</button>
     </div>
     <div class="col">
-      <button class="detail-tab locality"><i class="fa fa-cog"></i> Settings</button>
+      <button class="detail-tab locality" title="Drafts"><span class="counter-button">{{user.draftCount}}</span><i class="fa fa-file-o"></i> Drafts</button>
+    </div>
+    <div class="col">
+      <button class="detail-tab rwa" title="Stats"><span class="counter-button">&nbsp;</span> <i class="fa fa-bar-chart"></i> Stats</button>
     </div>
   </div>
 </div>
 
 <!-- For Enactions -->
-<div>
-  <app-enact-cards [mcph]="mcph" [posttype]="postType" [filter]="filterBy"></app-enact-cards>
+<div *ngIf="currentlyOpenedTab == 'enactions'">
+  <!-- <app-enact-cards [mcph]="mcph" [posttype]="postType" [filter]="filterBy"></app-enact-cards> -->
+  <app-enact-feeds-focus [mcph]="mcph"></app-enact-feeds-focus>
+</div>
+
+<!-- For Followers list -->
+<div *ngIf="currentlyOpenedTab == 'followers'">
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-md-12">
+        <h3>Followers</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 offset-4">
+        <input type="text" placeholder="Search people" class="form-control" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <ul class="uul">
+          <li *ngFor="let follower of followers">
+            <app-user-summary-tile [user]="follower"></app-user-summary-tile>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- For Following list -->
+<div *ngIf="currentlyOpenedTab == 'following'">
+  <div class="container text-center">
+    <div class="row">
+      <div class="col-md-12">
+        <h3>Following</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 offset-4">
+        <input type="text" placeholder="Search people" class="form-control" />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <ul class="uul">
+          <li *ngFor="let following of followings">
+            <app-user-summary-tile [user]="following"></app-user-summary-tile>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>

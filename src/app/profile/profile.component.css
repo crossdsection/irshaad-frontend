@@ -42,6 +42,10 @@ button.profile-action-button, .detail-tab {
     cursor: pointer;
 }
 
+.detail-tab {
+    font-weight: 300;
+}
+
 .col {
     padding: 0;
 }
@@ -71,7 +75,7 @@ button.rwa {
 }
 
 .active {
-
+    border-bottom: 5px solid #de2727;
 }
 
 .active::after {
@@ -80,9 +84,45 @@ button.rwa {
     width: 0;
     height: 0;
     display: inline-block;
-    border-bottom-color: #ffffff;
+    border-bottom-color: #de2727;
     position: absolute;
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
 }
+
+.change-profile-pic-button {
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 0;
+    left: 60%;
+    cursor: pointer;
+}
+
+span.counter-button {
+    /* display: inline-block; */
+    /* background: #232222; */
+    padding: 2px 5px;
+    border-radius: 50%;
+    /* position: absolute; */
+    margin: 0 10px;
+    font-size: 10px;
+    font-weight: bold;
+    /* left: 45%; */
+    /* top: 10%; */
+}
+
+/* Testing horizontal list group */
+ul.uul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+ul.uul li {
+    margin : 2px 2px;
+    display: inline-block;
+    width  : 30%;
+}
+/* End Testing horizontal list group */
