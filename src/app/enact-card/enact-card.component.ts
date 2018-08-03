@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { REQUEST_BASE_URL } from '../globals';
 
+import { RightOverlayCommunicationService } from '../services/right-overlay-communication.service';
+
 @Component({
   selector: 'app-enact-card',
   templateUrl: './enact-card.component.html',
@@ -21,9 +23,14 @@ export class EnactCardComponent implements OnInit {
     }
   };
 
-  constructor() {
+  constructor(private rightOverlayCommuncationService: RightOverlayCommunicationService) {
   }
   ngOnInit() {
+  }
+
+  // To view User Profile
+  viewUserProfile(mcph: string) {
+    this.rightOverlayCommuncationService.invokeRightOverlayWith("ProfileComponent", mcph);
   }
 
 }

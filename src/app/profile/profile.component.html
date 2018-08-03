@@ -1,0 +1,49 @@
+<div class="container" style="padding: 15px 0;">
+  <div class="row">
+    <div class="col-md-3 text-center">
+      <img src="{{ user.profilePicture }}" class="img img-thumbnail" />
+    </div>
+    <div class="col-md-4">
+      <h3>{{ user.name }}</h3>
+      <p>About Me</p>
+    </div>
+    <div class="col-md-5 profile-action-buttons">
+      <div class="upper-row">
+        <!-- <button class="profile-action-button world">{{ user.postCount }} <br /> Enactions</button> -->
+        <button class="profile-action-button country">{{ user.followerCount }} <br /> Followers</button>
+        <button class="profile-action-button state">{{ user.followingCount }} <br /> Following</button>  
+      </div>
+      <div class="lower-row">
+        <button class="profile-action-button city">Follow</button>
+        <button class="profile-action-button locality">Message</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Details row to be made later on -->
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <button class="detail-tab world active"><i class="fa fa-newspaper-o"></i>Enactions</button>
+    </div>
+    <div class="col">
+      <button class="detail-tab country"><i class="fa fa-bookmark"></i> Bookmarked</button>
+    </div>
+    <div class="col">
+      <button class="detail-tab state"><i class="fa fa-file-o"></i> Drafts</button>
+    </div>
+    <div class="col">
+      <button class="detail-tab city"><i class="fa fa-bar-chart"></i> Stats</button>
+    </div>
+    <div class="col">
+      <button class="detail-tab locality"><i class="fa fa-cog"></i> Settings</button>
+    </div>
+  </div>
+</div>
+
+<!-- For Enactions -->
+<div>
+  <app-enact-cards [mcph]="mcph" [posttype]="postType" [filter]="filterBy"></app-enact-cards>
+</div>

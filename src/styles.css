@@ -4,6 +4,7 @@
 
 body {
     overflow-x: hidden;
+    background: #ffffff;
 }
 
 button:focus {

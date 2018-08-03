@@ -1,0 +1,32 @@
+.right-overlay-shadow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #0000006e;
+}
+
+.right-overlay-shadow .right-overlay {
+    width: 95vw;
+    background: #ffffff;
+    float: right;
+    height: 100vh;
+    padding: 25px;
+}
+
+.right-overlay-shadow .right-overlay .right-overlay-nav {
+    border-bottom: 1px solid #000000;
+}
+
+.right-overlay-shadow .right-overlay .right-overlay-nav a {
+    color: #000000;
+    font-size: 20px;
+}
+
+#rightOverlayContent {
+    height: 85vh;
+    overflow: hidden;
+    overflow-y: scroll;
+    padding-top: 20px;
+}

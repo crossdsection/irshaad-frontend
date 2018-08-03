@@ -28,6 +28,8 @@ import { GovtDeptListGridComponent } from './govt-dept-list-grid/govt-dept-list-
 import { EnactPopupComponent } from './enact-popup/enact-popup.component';
 import { EnactCardComponent } from './enact-card/enact-card.component';
 import { EnactCardsComponent } from './enact-cards/enact-cards.component';
+import { RightOverlayComponent } from './right-overlay/right-overlay.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -49,12 +51,15 @@ import { EnactCardsComponent } from './enact-cards/enact-cards.component';
     GovtDeptListGridComponent,
     EnactPopupComponent,
     EnactCardComponent,
-    EnactCardsComponent
+    EnactCardsComponent,
+    RightOverlayComponent,
+    ProfileComponent
   ],
   entryComponents: [
     LoginPopupComponent,
     ChangeLocationComponent,
-    EnactPopupComponent
+    EnactPopupComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

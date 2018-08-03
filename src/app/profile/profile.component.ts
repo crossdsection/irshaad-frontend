@@ -1,0 +1,81 @@
+import { Component, OnInit, ElementRef } from '@angular/core';
+import { RightOverlayCommunicationService } from '../services/right-overlay-communication.service';
+import { HttpClient } from '@angular/common/http';
+import { REQUEST_BASE_URL } from '../globals';
+
+@Component({
+  selector: 'app-profile',
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.css']
+})
+export class ProfileComponent implements OnInit {
+  private element: any;
+  user: User;
+
+  mcph: any = "";
+
+  constructor(private rightOverlayCommunicationService: RightOverlayCommunicationService, private elementRef: ElementRef, private http: HttpClient) {
+    this.user = new User();
+    this.element = this.elementRef.nativeElement;
+  }
+
+  ngOnInit() {
+    document.getElementById("rightOverlayContent").appendChild(this.element);
+    this.rightOverlayCommunicationService.rightOverlayComponentData.subscribe((data: any) => {
+      if(data !== "") {
+        let param: any = JSON.parse(data);
+        switch(param.action) {
+          case "remove":
+          console.log("Triggered");
+            if(param.className == "ProfileComponent") {
+              this.element.remove();
+            }
+          break;
+        }
+      }      
+    });
+  }
+
+  initUser() {
+    let urlToCall: string = REQUEST_BASE_URL + "user/getinfo";
+    let dataToSend: any = {};
+    if(this.mcph != "") {
+      dataToSend = {
+        mcph: this.mcph
+      };
+    }
+    this.http.post(urlToCall, dataToSend).subscribe(
+      (response: any) => {
+        this.user.name = response.data[0].name;
+        this.user.email = response.data[0].email;
+        this.user.accessRoles = response.data[0].accessRoles;
+        this.user.editable = response.data[0].editable;
+        this.user.email_verified = response.data[0].email_verified;
+        this.user.followerCount = response.data[0].followerCount;
+        this.user.followingCount = response.data[0].followingCount;
+        this.user.postCount = response.data[0].postCount;
+        this.user.profilePicture = REQUEST_BASE_URL + response.data[0].profilepic;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+}
+
+// User Class to handle User data.
+class User {
+
+  editable: boolean = false;
+
+  name: string = "";
+  email: string = "";
+  email_verified: boolean = false;
+  accessRoles: any[] = [];
+  followerCount: number = 0;
+  followingCount: number = 0;
+  postCount: number = 0;
+  profilePicture: string = "assets/img/giphy.webp";
+
+}
