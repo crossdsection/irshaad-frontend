@@ -104,15 +104,27 @@
 <!-- For Bookmarked List -->
 <div *ngIf="currentlyOpenedTab == 'bookmarked'">
   <!-- <app-enact-cards [mcph]="mcph" [posttype]="postType" [filter]="filterBy"></app-enact-cards> -->
-  <p>Bookmarked</p>
-  <app-enact-feeds-focus [mcph]="mcph"></app-enact-feeds-focus>
+  <div class="row" *ngIf="user.bookmarkCount == 0">
+    <div class="col-md-12 text-center">
+      <p>You haven't any bookmarked post yet.</p>
+    </div>
+  </div>
+  <span *ngIf="user.bookmarkCount != 0">
+    <app-enact-feeds-focus [mcph]="mcph" filterBy="bookmark"></app-enact-feeds-focus>
+  </span>
 </div>
 
 <!-- For Drafted List -->
 <div *ngIf="currentlyOpenedTab == 'drafted'">
   <!-- <app-enact-cards [mcph]="mcph" [posttype]="postType" [filter]="filterBy"></app-enact-cards> -->
-  <p>Drafted</p>
-  <app-enact-feeds-focus [mcph]="mcph"></app-enact-feeds-focus>
+  <div class="row" *ngIf="user.draftCount == 0">
+    <div class="col-md-12 text-center">
+      <p>You haven't saved any draft yet.</p>
+    </div>
+  </div>
+  <span *ngIf="user.draftCount != 0">
+    <app-enact-feeds-focus [mcph]="mcph" filterBy="draft"></app-enact-feeds-focus>
+  </span>
 </div>
 
 <!-- Stats -->

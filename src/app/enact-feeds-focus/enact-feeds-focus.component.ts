@@ -8,13 +8,14 @@ import { Component, OnInit, Input } from '@angular/core';
 export class EnactFeedsFocusComponent implements OnInit {
 
   public postType : String = 'court';
-  public filterBy : String;
+  @Input() filterBy : String;
 
   @Input() mcph: string = "";
 
   constructor() { }
 
   ngOnInit() {
+    console.log(this.filterBy);
   }
 
   changePostType( arg ){

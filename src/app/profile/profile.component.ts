@@ -90,6 +90,7 @@ export class ProfileComponent implements OnInit {
     }
     this.http.post(REQUEST_BASE_URL + "user/getfollowers", dataToSend).subscribe((response: any) => {
       this.followers = response.data;
+      console.log(this.followers);
     }, (error: any) => {
       console.log(error);
     });
@@ -110,6 +111,7 @@ export class ProfileComponent implements OnInit {
     }
     this.http.post(REQUEST_BASE_URL + "user/getfollowing", dataToSend).subscribe((response: any) => {
       this.followings = response.data;
+      console.log(this.followings);
     }, (error: any) => {
       console.log(error);
     });
@@ -133,7 +135,7 @@ export class ProfileComponent implements OnInit {
 
   showStats(event: any) {
     $(".detail-tab").removeClass("active");
-    $(".detail-tab.locality").addClass("active");
+    $(".detail-tab.rwa").addClass("active");
 
     this.currentlyOpenedTab = "stats";
   }
