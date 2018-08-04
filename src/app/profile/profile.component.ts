@@ -32,7 +32,6 @@ export class ProfileComponent implements OnInit {
         let param: any = JSON.parse(data);
         switch(param.action) {
           case "remove":
-          console.log("Triggered");
             if(param.className == "ProfileComponent") {
               this.element.remove();
             }
@@ -91,8 +90,6 @@ export class ProfileComponent implements OnInit {
     }
     this.http.post(REQUEST_BASE_URL + "user/getfollowers", dataToSend).subscribe((response: any) => {
       this.followers = response.data;
-      console.log("Followers");
-      console.log(this.followers);
     }, (error: any) => {
       console.log(error);
     });
@@ -113,13 +110,32 @@ export class ProfileComponent implements OnInit {
     }
     this.http.post(REQUEST_BASE_URL + "user/getfollowing", dataToSend).subscribe((response: any) => {
       this.followings = response.data;
-      console.log("Following");
-      console.log(this.followers);
     }, (error: any) => {
       console.log(error);
     });
 
     this.currentlyOpenedTab = "following";
+  }
+
+  showBookmarked(event: any) {
+    $(".detail-tab").removeClass("active");
+    $(".detail-tab.city").addClass("active");
+
+    this.currentlyOpenedTab = "bookmarked";
+  }
+
+  showDrafted(event: any) {
+    $(".detail-tab").removeClass("active");
+    $(".detail-tab.locality").addClass("active");
+
+    this.currentlyOpenedTab = "drafted";
+  }
+
+  showStats(event: any) {
+    $(".detail-tab").removeClass("active");
+    $(".detail-tab.locality").addClass("active");
+
+    this.currentlyOpenedTab = "stats";
   }
 
 }

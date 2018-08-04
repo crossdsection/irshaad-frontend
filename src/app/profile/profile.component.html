@@ -34,15 +34,15 @@
       <button (click)="showFollowing($event)" class="detail-tab state" title="Following"><span class="counter-button">{{user.followingCount}}</span><i class="fa fa-user"></i> Following</button>
     </div>
     <div class="col">
-      <button class="detail-tab city" title="Bookmarks"><span class="counter-button">{{user.bookmarkCount}}</span><i class="fa fa-bookmark"></i> Bookmarks</button>
+      <button (click)="showBookmarked($event)" class="detail-tab city" title="Bookmarks"><span class="counter-button">{{user.bookmarkCount}}</span><i class="fa fa-bookmark"></i> Bookmarks</button>
     </div>
     <div class="col">
-      <button class="detail-tab locality" title="Drafts"><span class="counter-button">{{user.draftCount}}</span><i class="fa fa-file-o"></i> Drafts</button>
+      <button (click)="showDrafted($event)" class="detail-tab locality" title="Drafts"><span class="counter-button">{{user.draftCount}}</span><i class="fa fa-file-o"></i> Drafts</button>
     </div>
     <div class="col">
-      <button class="detail-tab rwa" title="Stats"><span class="counter-button">&nbsp;</span> <i class="fa fa-bar-chart"></i> Stats</button>
+      <button (click)="showStats($event)" class="detail-tab rwa" title="Stats"><span class="counter-button">&nbsp;</span> <i class="fa fa-bar-chart"></i> Stats</button>
     </div>
-  </div>
+  </div> 
 </div>
 
 <!-- For Enactions -->
@@ -60,7 +60,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-4 offset-4">
+      <div class="col-md-6 offset-3"  style="margin-bottom: 25px;">
         <input type="text" placeholder="Search people" class="form-control" />
       </div>
     </div>
@@ -84,8 +84,8 @@
         <h3>Following</h3>
       </div>
     </div>
-    <div class="row">
-      <div class="col-md-4 offset-4">
+    <div class="row" style="margin-bottom: 25px;">
+      <div class="col-md-6 offset-3">
         <input type="text" placeholder="Search people" class="form-control" />
       </div>
     </div>
@@ -99,4 +99,23 @@
       </div>
     </div>
   </div>
+</div>
+
+<!-- For Bookmarked List -->
+<div *ngIf="currentlyOpenedTab == 'bookmarked'">
+  <!-- <app-enact-cards [mcph]="mcph" [posttype]="postType" [filter]="filterBy"></app-enact-cards> -->
+  <p>Bookmarked</p>
+  <app-enact-feeds-focus [mcph]="mcph"></app-enact-feeds-focus>
+</div>
+
+<!-- For Drafted List -->
+<div *ngIf="currentlyOpenedTab == 'drafted'">
+  <!-- <app-enact-cards [mcph]="mcph" [posttype]="postType" [filter]="filterBy"></app-enact-cards> -->
+  <p>Drafted</p>
+  <app-enact-feeds-focus [mcph]="mcph"></app-enact-feeds-focus>
+</div>
+
+<!-- Stats -->
+<div *ngIf="currentlyOpenedTab == 'stats'">
+  <p>Stats Section</p>
 </div>

@@ -22,7 +22,7 @@
       {{ _post.details }}
     </p>
     <div class="row" *ngIf="_post.post_type == 'court'">
-      <div *ngFor="let poll of _post.polls" class="col-md-6">
+      <div *ngFor="let poll of _post.polls" class="col-md-12">
         <button class="option">{{ poll.title }}</button>
       </div>
     </div>

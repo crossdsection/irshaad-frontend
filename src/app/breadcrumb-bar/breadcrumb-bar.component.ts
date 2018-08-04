@@ -90,10 +90,8 @@ export class BreadcrumbBarComponent implements OnInit {
 
     this.http.post(REQUEST_BASE_URL + 'favlocation/submit', currentCoordinates).subscribe(
       (res: any) => {
-        console.log(res);
         if(res.error == 0) {
           this.favLocationIconColor = "yellow";
-          console.log(this.favLocationIconColor);
           this.componentCommunicationService.editFavLocationListGridComponentDisplay();
         }
       },

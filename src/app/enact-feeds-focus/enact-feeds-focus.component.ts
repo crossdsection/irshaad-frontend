@@ -23,7 +23,6 @@ export class EnactFeedsFocusComponent implements OnInit {
 
   filter( attribute ){
     this.filterBy = attribute;
-    console.log( this.filterBy);
   }
 
 }

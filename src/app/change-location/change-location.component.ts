@@ -89,6 +89,7 @@ export class ChangeLocationComponent implements OnInit {
       if(parameters == "") {
         this.elementDisplay = (this.elementDisplay == "none") ? "block" : "none";
         this.element.style.display = this.elementDisplay;
+        console.log("Chala Ye");
       }
       else {
         parameters = JSON.parse(parameters);
