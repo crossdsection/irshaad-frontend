@@ -65,16 +65,20 @@ export class EnactCardComponent implements OnInit {
     }
   }
 
-  addBookmark( postId, bookmarkStatus ){
+  changeActivityStatus( postId, postJSON ){
     if( this.loggedIn ){
       let dataToSend: any = {
-        "post_id": postId,
-        "bookmark": bookmarkStatus,
+        "post_id": postId
       };
+      if( postJSON['bookmark'] ){
+        dataToSend['bookmark'] = postJSON['bookmark'];
+      }
+      if( postJSON['flag'] ){
+        dataToSend['flag'] = postJSON['flag'];
+      }
       this.http.post( REQUEST_BASE_URL + '/activity/submit', dataToSend ).subscribe((response: any) => {
-        console.log( response );
         if( response.error == 0 ){
-          this._post['props'].userBookmarkStatus = ( bookmarkStatus == 1 ) ? bookmarkStatus : 0;
+          this._post['props'] = response.data;
         }
       });
     } else {

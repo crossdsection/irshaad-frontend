@@ -44,13 +44,11 @@
           <i class="fa fa-share-alt"></i>
         </button>
       </div>
-      <div class="col" *ngIf="_post.props.userBookmarkStatus == 0">
-        <button (click)="addBookmark( _post.id, 1 )" class="analytic-button bottom-button">
+      <div class="col">
+        <button (click)="changeActivityStatus( _post.id, { 'bookmark' : 1 } )" class="analytic-button bottom-button" *ngIf="_post.props.userBookmarkStatus == 0">
           <i class="fa fa-bookmark"></i>
         </button>
-      </div>
-      <div class="col" *ngIf="_post.props.userBookmarkStatus == 1">
-        <button (click)="addBookmark( _post.id, -1 )" class="analytic-button bottom-button bookmarkEnableClass">
+        <button (click)="changeActivityStatus( _post.id, { 'bookmark' : -1 } )" class="analytic-button bottom-button bookmarkEnableClass" *ngIf="_post.props.userBookmarkStatus == 1">
           <i class="fa fa-bookmark"></i>
         </button>
       </div>
@@ -60,7 +58,10 @@
         </button>
       </div>
       <div class="col">
-        <button class="analytic-button bottom-button">
+        <button (click)="changeActivityStatus( _post.id, { 'flag' : 1 } )" class="analytic-button bottom-button" *ngIf="_post.props.userFlagStatus == 0">
+          <i class="fa fa-flag"></i>
+        </button>
+        <button (click)="changeActivityStatus( _post.id,{ 'flag' : -1 } )" class="analytic-button bottom-button flagEnableClass" *ngIf="_post.props.userFlagStatus == 1">
           <i class="fa fa-flag"></i>
         </button>
       </div>

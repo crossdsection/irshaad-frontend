@@ -34,5 +34,9 @@ button.option {
 }
 
 .bookmarkEnableClass {
-  color: black
+  color: black;
+}
+
+.flagEnableClass {
+  color: red;
 }
