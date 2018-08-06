@@ -1,7 +1,8 @@
 <div class="container">
   <ul>
     <li *ngFor="let post of enactions">
-      <app-enact-card [post]="post"></app-enact-card>
+      <app-enact-card [post]="post" [loggedIn]="_loggedIn" (showPopUp)="showLoginPopUp($event)"></app-enact-card>
     </li>
   </ul>
 </div>
+<div #loginPopupContainer></div>

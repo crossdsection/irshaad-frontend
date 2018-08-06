@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { REQUEST_BASE_URL } from '../globals';
-
+import { HttpClient } from '@angular/common/http';
 import { RightOverlayCommunicationService } from '../services/right-overlay-communication.service';
 
 @Component({
@@ -9,9 +9,13 @@ import { RightOverlayCommunicationService } from '../services/right-overlay-comm
   styleUrls: ['./enact-card.component.css']
 })
 export class EnactCardComponent implements OnInit {
-  
-  public _post : Object;
 
+  public _post : Object;
+  public _polls : Array<Object>;
+  public _userPollStatus : Boolean = false;
+  @Output() showPopUp = new EventEmitter<string>();
+
+  @Input() loggedIn : Boolean;
   @Input() set post( post: object ) {
     this._post = post;
     let date = new Date( this._post['created'] );
@@ -21,16 +25,44 @@ export class EnactCardComponent implements OnInit {
     for( var i in this._post['files'] ){
       this._post['files'][i]['filepath'] = REQUEST_BASE_URL + this._post['files'][i]['filepath'];
     }
+    this._userPollStatus = this._post['polls']['userPollStatus'];
+    if( this._post['polls']['polls'] ){
+      this._polls = this._post['polls']['polls'];
+    } else {
+      this._polls = [];
+    }
   };
 
-  constructor(private rightOverlayCommuncationService: RightOverlayCommunicationService) {
+  constructor(private rightOverlayCommuncationService: RightOverlayCommunicationService, private http: HttpClient ) {
   }
+
   ngOnInit() {
   }
 
   // To view User Profile
   viewUserProfile(mcph: string) {
     this.rightOverlayCommuncationService.invokeRightOverlayWith("ProfileComponent", mcph);
+  }
+
+  //
+  addPoll( pollId, postId ){
+    if( this.loggedIn ){
+      let dataToSend: any = {
+        'poll_id' : pollId,
+        'post_id' : postId
+      };
+      this.http.post( REQUEST_BASE_URL + '/polls/submit', dataToSend ).subscribe((response: any) => {
+        if( response.error == 0 ) {
+          let polls = response.data[0];
+          this._userPollStatus = polls['userPollStatus'];
+          if( polls['polls'] ){
+            this._polls = polls['polls'];
+          }
+        }
+      });
+    } else {
+      this.showPopUp.emit('show');
+    }
   }
 
 }

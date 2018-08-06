@@ -21,9 +21,16 @@
     <p class="card-text">
       {{ _post.details }}
     </p>
-    <div class="row" *ngIf="_post.post_type == 'court'">
-      <div *ngFor="let poll of _post.polls" class="col-md-12">
-        <button class="option">{{ poll.title }}</button>
+    <div class="row" *ngIf="_post.post_type == 'court' ">
+      <div *ngFor="let poll of _polls" class="col-md-12">
+        <button class="option" (click)="addPoll( poll.id, poll.post_id )" *ngIf="!_userPollStatus">{{ poll.title }}</button>
+        <div class="container" *ngIf="_userPollStatus">
+          <span style="color:black"><strong>{{ poll.title }}</strong>{{ '(' + poll.percent + ')' }}</span>
+          <div class="progress">
+            <div class="progress-bar bg-warning" role="progressbar" [ngStyle]="{ 'width': poll.percent }" aria-valuenow="poll.percent" aria-valuemin="0" aria-valuemax="100"></div>
+          </div>
+        </div>
+        <br>
       </div>
     </div>
     <div class="row">
