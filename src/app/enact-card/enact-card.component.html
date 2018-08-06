@@ -44,9 +44,14 @@
           <i class="fa fa-share-alt"></i>
         </button>
       </div>
-      <div class="col">
-        <button class="analytic-button bottom-button">
-          <i class="fa fa-star"></i>
+      <div class="col" *ngIf="_post.props.userBookmarkStatus == 0">
+        <button (click)="addBookmark( _post.id, 1 )" class="analytic-button bottom-button">
+          <i class="fa fa-bookmark"></i>
+        </button>
+      </div>
+      <div class="col" *ngIf="_post.props.userBookmarkStatus == 1">
+        <button (click)="addBookmark( _post.id, -1 )" class="analytic-button bottom-button bookmarkEnableClass">
+          <i class="fa fa-bookmark"></i>
         </button>
       </div>
       <div class="col">
