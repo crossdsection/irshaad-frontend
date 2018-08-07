@@ -19,10 +19,19 @@ export class RightOverlayCommunicationService {
     this.rightOverlayComponent.next(JSON.stringify(param));
   }
 
-  removeFromRightOverlay(className: string) {
+  removeFromRightOverlay(className: string, index: number = -1) {
     let param: any = {
       action: "remove",
-      className: className
+      className: className,
+      index: index
+    };
+    this.rightOverlayComponent.next(JSON.stringify(param));
+  }
+
+  doAction(action: string, value: string = "") {
+    let param: any = {
+      action: action,
+      value: value
     };
     this.rightOverlayComponent.next(JSON.stringify(param));
   }

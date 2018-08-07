@@ -24,4 +24,20 @@ export class HttpService {
     });
     return this.http.request(req);
   }
+
+  doProfilePictureUpload( fileItem:File, extraData?:object ):any{
+    let apiCreateEndpoint = `${REQUEST_BASE_URL}user/changepicture`;
+    const formData: FormData = new FormData();
+
+    formData.append('profile', fileItem, fileItem.name);
+    if ( extraData ) {
+      for( let key in extraData ){
+        formData.append( key, extraData[ key ] )
+      }
+    }
+    const req = new HttpRequest('POST', apiCreateEndpoint, formData, {
+      reportProgress: true // for progress data
+    });
+    return this.http.request(req);
+  }
 }

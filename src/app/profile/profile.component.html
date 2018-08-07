@@ -2,132 +2,240 @@
   <div class="row">
     <div class="col-md-3 text-center">
       <img src="{{ user.profilePicture }}" class="img img-thumbnail" />
-      <button class="change-profile-pic-button"><i class="fa fa-camera"></i></button>
+      <input *ngIf="user.editable && isEditing" (change)="editProfilePicture($event)" type="file" id="change-profile-picture-input" />
+      <label *ngIf="user.editable && isEditing" title="Change Profile Picture" for="change-profile-picture-input" class="change-profile-pic-button"><i class="fa fa-camera"></i></label>
     </div>
     <div class="col-md-4">
-      <h3>{{ user.name }}</h3>
-      <p>About Me</p>
+      <h3 *ngIf="!isEditing">{{ user.name }}</h3>
+      <input type="text" placeholder="First Name" class="form-control" value="{{ user.firstName }}" [(ngModel)]="user.firstName" *ngIf="isEditing" style="font-size: 1.75rem;"/>
+      <input type="text" placeholder="Last Name" class="form-control" value="{{ user.lastName }}" [(ngModel)]="user.lastName" *ngIf="isEditing" style="font-size: 1.75rem;"/>
+
+      <div *ngIf="!isEditing" class="tagline-div">
+        <span>{{ user.tagline }}</span>
+      </div>
+      <input type="text" placeholder="Tagline" class="form-control" value="{{ user.tagline }}" [(ngModel)]="user.tagline" *ngIf="isEditing"/>
+
+      <!-- Tagline -->
+      <blockquote class="blockquote">
+        <p *ngIf="!isEditing" class="mb-0">{{user.aboutMe}}</p>
+        <textarea *ngIf="isEditing" [(ngModel)]="user.aboutMe" placeholder="Write something about yourself..." class="form-control">{{user.aboutMe}}</textarea>
+      </blockquote>
+
     </div>
     <div class="col-md-5 profile-action-buttons">
       <div class="upper-row">
         <!-- <button class="profile-action-button world">{{ user.postCount }} <br /> Enactions</button> -->
       </div>
+      <div class="lower-row" style="text-align: right;" *ngIf="user.editable">
+        <button class="btn btn-default" *ngIf="!isEditing" (click)="toggleEditMode()">Edit Profile</button>
+        <button class="btn btn-success" *ngIf="isEditing" (click)="updateProfile()">Done Editing</button>
+      </div>
       <div class="lower-row" *ngIf="!user.editable">
-        <button class="profile-action-button city">Follow</button>
         <button class="profile-action-button locality">Message</button>
       </div>
     </div>
   </div>
 
+  <!-- More Details -->
+  <div class="row" *ngIf="isEditing"> <!-- Row 1 -->
+    <div class="col-md-6">
+      <table class="table table-striped">
+        <tr>
+          <th>Gender</th>
+          <td>
+            <select [(ngModel)]="user.gender" class="form-control">
+              <option selected disabled>{{user.gender}}</option>
+              <option disabled>-- SELECT OPTION --</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <th>Date of Birth</th>
+          <td><input type="date" class="form-control" placeholder="Date of Birth" [(ngModel)]="user.dateOfBirth" /></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="col-md-6">
+      <table class="table table-striped">
+        <tr>
+          <th>Profession</th>
+          <td>Backend Developer, World Voting Organization</td>
+        </tr>
+        <tr>
+          <th>Education</th>
+          <td>Bachelor of Technology in Computer Science and Engineering from ICFAI, Dehradun</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="isEditing"> <!-- Row 2 -->
+    <div class="col-md-6">
+      <table class="table table-striped">
+        <tr>
+          <th>Phone</th>
+          <td><input type="text" class="form-control" placeholder="Phone" [(ngModel)]="user.phone" /></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="col-md-6">
+      <!-- For later -->
+    </div>
+  </div>
+  <!-- End More Details -->
+
   <!-- Details row to be made later on -->
 </div>
 
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <button (click)="showEnactions($event)" class="detail-tab world active" title="Enactions"><span class="counter-button">{{user.postCount}}</span><i class="fa fa-newspaper-o"></i> Enactions</button>
-    </div>
-    <div class="col">
-      <button (click)="showFollowers($event)" class="detail-tab country" title="Followers"><span class="counter-button">{{user.followerCount}}</span><i class="fa fa-users"></i> Followers</button>      
-    </div>
-    <div class="col">
-      <button (click)="showFollowing($event)" class="detail-tab state" title="Following"><span class="counter-button">{{user.followingCount}}</span><i class="fa fa-user"></i> Following</button>
-    </div>
-    <div class="col">
-      <button (click)="showBookmarked($event)" class="detail-tab city" title="Bookmarks"><span class="counter-button">{{user.bookmarkCount}}</span><i class="fa fa-bookmark"></i> Bookmarks</button>
-    </div>
-    <div class="col">
-      <button (click)="showDrafted($event)" class="detail-tab locality" title="Drafts"><span class="counter-button">{{user.draftCount}}</span><i class="fa fa-file-o"></i> Drafts</button>
-    </div>
-    <div class="col">
-      <button (click)="showStats($event)" class="detail-tab rwa" title="Stats"><span class="counter-button">&nbsp;</span> <i class="fa fa-bar-chart"></i> Stats</button>
-    </div>
-  </div> 
-</div>
-
-<!-- For Enactions -->
-<div *ngIf="currentlyOpenedTab == 'enactions'">
-  <!-- <app-enact-cards [mcph]="mcph" [posttype]="postType" [filter]="filterBy"></app-enact-cards> -->
-  <app-enact-feeds-focus [mcph]="mcph"></app-enact-feeds-focus>
-</div>
-
-<!-- For Followers list -->
-<div *ngIf="currentlyOpenedTab == 'followers'">
-  <div class="container text-center">
+<div *ngIf="!isEditing"> <!-- when not editing -->
+  <div class="container">
     <div class="row">
-      <div class="col-md-12">
-        <h3>Followers</h3>
+      <div class="col">
+        <button (click)="showEnactions($event)" class="detail-tab world active" title="Enactions"><span class="counter-button">{{user.postCount}}</span><i class="fa fa-newspaper-o"></i> Enactions</button>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6 offset-3"  style="margin-bottom: 25px;">
-        <input type="text" placeholder="Search people" class="form-control" />
+      <div class="col">
+        <button (click)="showFollowers($event)" class="detail-tab country" title="Followers"><span class="counter-button">{{user.followerCount}}</span><i class="fa fa-users"></i> Followers</button>      
       </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <ul class="uul">
-          <li *ngFor="let follower of followers">
-            <app-user-summary-tile [user]="follower"></app-user-summary-tile>
-          </li>
-        </ul>
+      <div class="col">
+        <button (click)="showFollowing($event)" class="detail-tab state" title="Following"><span class="counter-button">{{user.followingCount}}</span><i class="fa fa-user"></i> Following</button>
+      </div>
+      <div class="col" *ngIf="user.editable">
+        <button (click)="showBookmarked($event)" class="detail-tab city" title="Bookmarks"><span class="counter-button">{{user.bookmarkCount}}</span><i class="fa fa-bookmark"></i> Bookmarks</button>
+      </div>
+      <div class="col" *ngIf="user.editable">
+        <button (click)="showDrafted($event)" class="detail-tab locality" title="Drafts"><span class="counter-button">{{user.draftCount}}</span><i class="fa fa-file-o"></i> Drafts</button>
+      </div>
+      <div class="col" *ngIf="user.editable">
+        <button (click)="showStats($event)" class="detail-tab rwa" title="Stats"><span class="counter-button">&nbsp;</span> <i class="fa fa-bar-chart"></i> Stats</button>
+      </div>
+      <div class="col" *ngIf="!user.editable">
+        <button (click)="showMoreInfo($event)" class="detail-tab rwamore-info" title="More Info"><span class="counter-button">&nbsp;</span> <i class="fa fa-info-circle"></i> More Info</button>
+      </div>
+    </div> 
+  </div>
+
+  <!-- For Enactions -->
+  <div *ngIf="currentlyOpenedTab == 'enactions'">
+    <!-- <app-enact-cards [mcph]="mcph" [posttype]="postType" [filter]="filterBy"></app-enact-cards> -->
+    <app-enact-feeds-focus [mcph]="mcph"></app-enact-feeds-focus>
+  </div>
+
+  <!-- For Followers list -->
+  <div *ngIf="currentlyOpenedTab == 'followers'">
+    <div class="container text-center">
+      <div class="row">
+        <div class="col-md-12">
+          <h3>Followers</h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 offset-3"  style="margin-bottom: 25px;">
+          <input type="text" placeholder="Search people" class="form-control" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <ul class="uul">
+            <li *ngFor="let follower of followers">
+              <app-user-summary-tile [user]="follower"></app-user-summary-tile>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- For Following list -->
-<div *ngIf="currentlyOpenedTab == 'following'">
-  <div class="container text-center">
-    <div class="row">
-      <div class="col-md-12">
-        <h3>Following</h3>
+  <!-- For Following list -->
+  <div *ngIf="currentlyOpenedTab == 'following'">
+    <div class="container text-center">
+      <div class="row">
+        <div class="col-md-12">
+          <h3>Following</h3>
+        </div>
       </div>
-    </div>
-    <div class="row" style="margin-bottom: 25px;">
-      <div class="col-md-6 offset-3">
-        <input type="text" placeholder="Search people" class="form-control" />
+      <div class="row" style="margin-bottom: 25px;">
+        <div class="col-md-6 offset-3">
+          <input type="text" placeholder="Search people" class="form-control" />
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <ul class="uul">
-          <li *ngFor="let following of followings">
-            <app-user-summary-tile [user]="following"></app-user-summary-tile>
-          </li>
-        </ul>
+      <div class="row">
+        <div class="col-md-12">
+          <ul class="uul">
+            <li *ngFor="let following of followings">
+              <app-user-summary-tile [user]="following"></app-user-summary-tile>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
-<!-- For Bookmarked List -->
-<div *ngIf="currentlyOpenedTab == 'bookmarked'">
-  <!-- <app-enact-cards [mcph]="mcph" [posttype]="postType" [filter]="filterBy"></app-enact-cards> -->
-  <div class="row" *ngIf="user.bookmarkCount == 0">
-    <div class="col-md-12 text-center">
-      <p>You haven't any bookmarked post yet.</p>
+  <!-- For Bookmarked List -->
+  <div *ngIf="currentlyOpenedTab == 'bookmarked'">
+    <!-- <app-enact-cards [mcph]="mcph" [posttype]="postType" [filter]="filterBy"></app-enact-cards> -->
+    <div class="row" *ngIf="user.bookmarkCount == 0">
+      <div class="col-md-12 text-center">
+        <p>You haven't any bookmarked post yet.</p>
+      </div>
+    </div>
+    <span *ngIf="user.bookmarkCount != 0">
+      <app-enact-feeds-focus [mcph]="mcph" filterBy="bookmark"></app-enact-feeds-focus>
+    </span>
+  </div>
+
+  <!-- For Drafted List -->
+  <div *ngIf="currentlyOpenedTab == 'drafted'">
+    <!-- <app-enact-cards [mcph]="mcph" [posttype]="postType" [filter]="filterBy"></app-enact-cards> -->
+    <div class="row" *ngIf="user.draftCount == 0">
+      <div class="col-md-12 text-center">
+        <p>You haven't saved any draft yet.</p>
+      </div>
+    </div>
+    <span *ngIf="user.draftCount != 0">
+      <app-enact-feeds-focus [mcph]="mcph" filterBy="draft"></app-enact-feeds-focus>
+    </span>
+  </div>
+
+  <!-- Stats -->
+  <div *ngIf="currentlyOpenedTab == 'stats'">
+    <p>Stats Section</p>
+  </div>
+
+  <!-- More Details -->
+  <div *ngIf="currentlyOpenedTab == 'moreInfo'"> <!-- Row 1 -->
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <table class="table table-striped">
+            <tr>
+              <th>Gender</th>
+              <td>Male</td>
+            </tr>
+            <tr>
+              <th>Date of Birth</th>
+              <td>23 July, 1994</td>
+            </tr>
+          </table>
+        </div>
+    
+        <div class="col-md-6">
+          <table class="table table-striped">
+            <tr>
+              <th>Profession</th>
+              <td>Backend Developer, World Voting Organization</td>
+            </tr>
+            <tr>
+              <th>Education</th>
+              <td>Bachelor of Technology in Computer Science and Engineering from ICFAI, Dehradun</td>
+            </tr>
+          </table>
+        </div>
+      </div>
     </div>
   </div>
-  <span *ngIf="user.bookmarkCount != 0">
-    <app-enact-feeds-focus [mcph]="mcph" filterBy="bookmark"></app-enact-feeds-focus>
-  </span>
-</div>
-
-<!-- For Drafted List -->
-<div *ngIf="currentlyOpenedTab == 'drafted'">
-  <!-- <app-enact-cards [mcph]="mcph" [posttype]="postType" [filter]="filterBy"></app-enact-cards> -->
-  <div class="row" *ngIf="user.draftCount == 0">
-    <div class="col-md-12 text-center">
-      <p>You haven't saved any draft yet.</p>
-    </div>
-  </div>
-  <span *ngIf="user.draftCount != 0">
-    <app-enact-feeds-focus [mcph]="mcph" filterBy="draft"></app-enact-feeds-focus>
-  </span>
-</div>
-
-<!-- Stats -->
-<div *ngIf="currentlyOpenedTab == 'stats'">
-  <p>Stats Section</p>
-</div>
+  <!-- End More Details -->
+</div> <!-- when not editing -->

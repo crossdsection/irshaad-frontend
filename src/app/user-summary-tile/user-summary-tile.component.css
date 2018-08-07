@@ -18,6 +18,20 @@
     cursor: pointer;
 }
 
+.unfollow-button {
+    position: absolute;
+    top: 0;
+    left: 60%;
+    border-radius: 50%;
+    background: red;
+    color: #ffffff;
+    border: none;
+    padding: 5px 8px;
+    font-size: 12px;
+    font-weight: 200;
+    cursor: pointer;
+}
+
 button.analytic-button.bottom-button {
     background: transparent;
     border: none;

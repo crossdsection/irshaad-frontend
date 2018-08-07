@@ -61,6 +61,7 @@ export class EnactCardsComponent implements OnChanges {
         searchKey : "",
         page : page,
         offset : 20
+
       };
       this.http.post( urlToCall, dataToSend ).subscribe((response: any) => {
         if( response.error == 0 ) {

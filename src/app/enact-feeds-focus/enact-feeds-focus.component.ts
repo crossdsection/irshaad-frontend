@@ -15,7 +15,6 @@ export class EnactFeedsFocusComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    console.log(this.filterBy);
   }
 
   changePostType( arg ){
