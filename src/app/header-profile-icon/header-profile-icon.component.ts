@@ -5,6 +5,7 @@ import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/htt
 import { ComponentCommunicationService } from '../component-communication.service';
 
 import { REQUEST_BASE_URL } from '../globals';
+import { RightOverlayCommunicationService } from '../services/right-overlay-communication.service';
 
 @Component({
   selector: 'app-header-profile-icon',
@@ -17,12 +18,13 @@ export class HeaderProfileIconComponent implements OnInit {
   profileMenuOpen = false;
 
   // User Info
+  userId: string = "";
   profilePicture = 'assets/img/giphy.webp';
 
   // For loading login popup component
   @ViewChild("loginPopupContainer", {read: ViewContainerRef}) loginPopupContainer;
 
-  constructor(private componentFactoryResolver: ComponentFactoryResolver, private http: HttpClient, private componentCommunicationService: ComponentCommunicationService) { }
+  constructor(private componentFactoryResolver: ComponentFactoryResolver, private http: HttpClient, private componentCommunicationService: ComponentCommunicationService, private rightOverlayCommunicationService: RightOverlayCommunicationService) { }
 
   ngOnInit() {
     this.componentCommunicationService.headerProfileIconComponentData.subscribe((data: any) => {
@@ -40,6 +42,7 @@ export class HeaderProfileIconComponent implements OnInit {
     });
 
     this.http.get(REQUEST_BASE_URL + "user/getinfo").subscribe((response: any) => {
+      this.userId = response.data[0].id;
       this.loggedIn = true;
       }, 
       error => {
@@ -63,6 +66,11 @@ export class HeaderProfileIconComponent implements OnInit {
     this.loggedIn = !this.loggedIn;
     this.componentCommunicationService.userLogout();
     this.toggleProfileMenu();
+  }
+
+  viewUserProfile(mcph: string) {
+    this.profileMenuOpen = !this.profileMenuOpen;
+    this.rightOverlayCommunicationService.invokeRightOverlayWith("ProfileComponent", mcph);
   }
 
 }

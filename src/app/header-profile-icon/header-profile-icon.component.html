@@ -9,7 +9,7 @@
   <div class="profile-dropdown">
     <img src="{{ profilePicture }}" (click)="toggleProfileMenu()" class="profile-picture" />
     <div *ngIf="profileMenuOpen" class="profile-menu list-group">
-      <a href="#" class="list-group-item">View Profile</a>
+      <a href="#" class="list-group-item" (click)="viewUserProfile(userId)">View Profile</a>
       <a href="#" (click)="logoutAction()" class="list-group-item">Logout</a>
     </div>
   </div>
