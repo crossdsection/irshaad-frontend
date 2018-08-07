@@ -28,3 +28,15 @@ button.option {
 .bottom-button {
     color: gray;
 }
+
+.progress {
+  height: 20px;
+}
+
+.bookmarkEnableClass {
+  color: black;
+}
+
+.flagEnableClass {
+  color: red;
+}

@@ -13,7 +13,7 @@ import { REQUEST_BASE_URL } from '../globals';
 export class LoginPopupComponent implements OnInit {
 
   private element: any;
-  
+
   // Login Variables
   username: any = "";
   password: any = ""; // will be used with join area as well
@@ -43,7 +43,7 @@ export class LoginPopupComponent implements OnInit {
   }
 
   closeThisPopup() {
-    this.element.remove(); 
+    this.element.remove();
   }
 
   //  Handle Login form submit
@@ -64,18 +64,17 @@ export class LoginPopupComponent implements OnInit {
         "state":currentCoordinates.state,
         "country":currentCoordinates.country
       }
-  
-      this.http.post("https://backend.worldvoting.org/auth/login", dataToSend).subscribe((response: any) => {
-  
+
+      this.http.post( REQUEST_BASE_URL + "auth/login", dataToSend).subscribe((response: any) => {
         if(response.error == 0) {
           localStorage.setItem("auth_data", JSON.stringify(response.data));
           this.componentCommunicationService.editLoggedInStatus(true);
           this.loginMessage = "Login Successful";
-          this.closeThisPopup();
         }
         else {
           this.loginMessage = "Invalid Login";
         }
+        location.reload();
       });
     }
   }
@@ -121,7 +120,7 @@ export class LoginPopupComponent implements OnInit {
       "email":this.email
     }
 
-    this.http.post(REQUEST_BASE_URL + "auth/recover", dataToSend).subscribe((response: any) => {      
+    this.http.post(REQUEST_BASE_URL + "auth/recover", dataToSend).subscribe((response: any) => {
       if(response.error == 0) {
         this.loginMessage = "We've sent a password reset link to your entered email.";
       }
@@ -144,7 +143,7 @@ export class LoginPopupComponent implements OnInit {
 
     this.loginMessage = "";
     this.username = "";
-    this.password = ""; 
+    this.password = "";
     this.firstName = "";
     this.lastName = "";
     this.birthDate = "";

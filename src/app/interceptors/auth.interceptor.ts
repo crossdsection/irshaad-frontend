@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { REQUEST_BASE_URL } from '../globals';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -13,7 +14,8 @@ export class AuthInterceptor implements HttpInterceptor {
     let authData = localStorage.getItem('auth_data');
     var newHeader = {};
 
-    let url_to_intercept = new RegExp("https://backend.worldvoting.org/(.*)");
+    // let url_to_intercept = new RegExp("https://backend.worldvoting.org/(.*)");
+    let url_to_intercept = new RegExp("" + REQUEST_BASE_URL + "(.*)");
 
     if(url_to_intercept.test(request.url)) {
       if( authData ){
