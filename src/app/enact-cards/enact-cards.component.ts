@@ -45,12 +45,10 @@ export class EnactCardsComponent implements OnChanges {
         page : 1,
         offset : 20
       }
-
       this.http.post( urlToCall, dataToSend ).subscribe((response: any) => {
         if( response.error == 0 ) {
           this.enactions = response.data;
-          console.log("Bookmarks");
-          console.log(this.enactions);
+          // console.log(response.data);
         }
       });
 

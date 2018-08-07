@@ -10,9 +10,17 @@ import * as $ from 'jquery';
   styleUrls: ['./right-overlay.component.css']
 })
 export class RightOverlayComponent implements OnInit {
+
+  // Display Stack to maintain display order.
+  displayStack: DisplayStackNode[] = [];
+  dispayStackNodeCount: number = 0;
+  isDisplayed: boolean = false;
+
   depth: number = -10;
   background: string = "transparent";
   currentComponentInvoked: any = "";
+  invoked: any = null;
+  invokedIndex: number = 0;
 
   @ViewChild("rightOverlayContents", {read: ViewContainerRef}) rightOverlayContent;
 
@@ -28,9 +36,14 @@ export class RightOverlayComponent implements OnInit {
             switch(this.currentComponentInvoked) {
               case "ProfileComponent": 
                 this.showRightOverlay();
-                let invoked: any = this.rightOverlayContent.createComponent(this.componentFactoryResolver.resolveComponentFactory(ProfileComponent));
-                invoked.instance.mcph = param.mcph;
-                invoked.instance.initUser();
+                if(this.displayStack.length == 0) {
+                  this.isDisplayed = true;
+                }
+                console.log(this.displayStack);
+                this.invoked = this.rightOverlayContent.createComponent(this.componentFactoryResolver.resolveComponentFactory(ProfileComponent));
+                this.invoked.instance.mcph = param.mcph;
+                this.invoked.instance.displayStackIndex = this.invokedIndex;
+                this.invoked.instance.initUser();
               break;
             }
           break;
@@ -40,15 +53,47 @@ export class RightOverlayComponent implements OnInit {
   }
 
   showRightOverlay() {
+    if(this.isDisplayed) {
+      let displayStackNode: DisplayStackNode = new DisplayStackNode();
+      displayStackNode.componentName = this.currentComponentInvoked;
+      displayStackNode.component = this.invoked;
+      displayStackNode.nodeIndex = this.invokedIndex++;
+
+      this.displayStack.push(displayStackNode);
+      $(this.invoked.instance.element).hide();
+    }
+
     this.depth = 10;
     this.background = "#0000006e";
   }
 
   hideRightOverlay() {
-    this.rightOverlayCommunicationService.removeFromRightOverlay(this.currentComponentInvoked);
+    this.rightOverlayCommunicationService.removeFromRightOverlay(this.currentComponentInvoked, this.invokedIndex);
+    // this.invoked.instance.destroy();
 
-    this.depth = -10;
-    this.background = "transparent";
+    if(this.displayStack.length != 0){
+      let displayStackNode: DisplayStackNode = this.displayStack.pop();
+      this.invoked = displayStackNode.component;
+      this.currentComponentInvoked = displayStackNode.componentName;
+      this.invokedIndex = displayStackNode.nodeIndex;
+
+      console.log(this.displayStack);
+      console.log(displayStackNode);
+
+      $(this.invoked.instance.element).show();
+    }
+    else {
+      this.isDisplayed = false;
+      this.depth = -10;
+      this.background = "transparent";
+    }
   }
 
+}
+
+// Creating a Node for displayStack
+class DisplayStackNode {
+  public componentName: string;
+  public component: string;
+  public nodeIndex: number;
 }
