@@ -1,3 +1,98 @@
-<p>
-  enact-detail works!
-</p>
+<div class="row" style="margin-top: -20px; height: 100%;">
+  <div class="col-md-8 enact-detail-row">
+    <div class="upper-div">
+      <div class="row">
+        <div class="col">
+          <button class="vote-button" (click)="toggleVoteStatus()">Vote</button>
+        </div>
+        <div class="col">
+          <button class="enact-detail-option active"><i class="fa fa-share-alt"></i></button>
+        </div>
+        <div class="col">
+          <button class="enact-detail-option"><i class="fa fa-flag"></i></button>
+        </div>
+        <div class="col">
+          <button class="enact-detail-option"><i class="fa fa-bookmark"></i></button>
+        </div>
+        <div class="col">
+          <button class="enact-detail-option" title="Print" (click)="printThis()"><i class="fa fa-print"></i></button>
+        </div>
+        <div class="col">
+          <button class="enact-detail-option" title="Print" (click)="openFullscreen()"><i class="fa fa-square-o"></i></button>
+        </div>
+      </div>
+    </div>
+    <div class="lower-div">
+      <!-- 5 Votes -->
+      <div class="row" style="border: 1px solid #dedede;" *ngIf="isVoting">
+        <div class="col-md-12">
+          <button class="vote-button-option">Option 1</button>
+          <button class="vote-button-option">Option 1</button>
+          <button class="vote-button-option">Option 1</button>
+          <button class="vote-button-option">Option 1</button>
+        </div>
+      </div>
+
+      <!-- 1 Title -->
+      <div class="row">
+        <div class="col-md-12">
+          <h3>This is a title</h3>
+        </div>
+      </div>
+
+      <!-- 2 Image -->
+      <div class="row">
+        <div class="col-md-12">
+          <img src="assets/img/broken_road.jpg" style="width: 100%;"/>
+        </div>
+      </div>
+
+      <!-- 3 Documents -->
+      <div class="row" style="padding: 20px 0;">
+       <div class="col-md-12">
+         <h6>Attachments: </h6>
+        <div class="row">
+          <div class="col">
+            <button class="enact-detail-option"><i class="fa fa-paperclip"></i></button>
+          </div>
+          <div class="col">
+            <button class="enact-detail-option"><i class="fa fa-file-text"></i></button>
+          </div>
+          <div class="col">
+            <button class="enact-detail-option"><i class="fa fa-file-excel-o"></i></button>
+          </div>
+          <div class="col">
+            <button class="enact-detail-option"><i class="fa fa-file-video-o"></i></button>
+          </div>
+        </div>
+       </div>
+      </div>
+
+      <!-- 4 Descriptions -->
+      <div class="row">
+        <div class="col-md-12">
+          <p>This is a description of the poll. It can be very long. So, to make it long. I will put same line now. This is a repeated line.
+            This is a repeated line. This is a repeated line. This is a repeated line. This is a repeated line. This is a repeated line.
+            This is a repeated line. This is a repeated line. This is a repeated line. This is a repeated line. This is a repeated line.
+            This is a repeated line. This is a repeated line. This is a repeated line. This is a repeated line. This is a repeated line.
+            This is a repeated line. This is a repeated line. This is a repeated line. This is a repeated line. This is a repeated line.
+            This is a repeated line. This is a repeated line. This is a repeated line. This is a repeated line. This is a repeated line.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="upper-div">
+      <div class="row">
+        <div class="col">
+          <button class="enact-detail-option" style="border-left: 1px solid black;"><i class="fa fa-comment"></i></button>
+        </div>
+        <div class="col">
+          <button class="enact-detail-option" style="border-left: 1px solid black;"><i class="fa fa-signal"></i></button>
+        </div>
+      </div>
+    </div>
+    <div class="lower-div"></div>
+  </div>
+</div>

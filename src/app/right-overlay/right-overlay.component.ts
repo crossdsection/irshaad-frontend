@@ -3,6 +3,7 @@ import { RightOverlayCommunicationService } from '../services/right-overlay-comm
 import { ProfileComponent } from '../profile/profile.component';
 
 import * as $ from 'jquery';
+import { EnactDetailComponent } from '../enact-detail/enact-detail.component';
 
 @Component({
   selector: 'app-right-overlay',
@@ -32,18 +33,56 @@ export class RightOverlayComponent implements OnInit {
         let param: any = JSON.parse(data);
         switch(param.action) {
           case "invoke":
-            this.currentComponentInvoked = param.className;
-            switch(this.currentComponentInvoked) {
+            switch(param.className) {
               case "ProfileComponent": 
                 this.showRightOverlay();
+                if(this.isDisplayed) {
+                  let displayStackNode: DisplayStackNode = new DisplayStackNode();
+                  displayStackNode.componentName = this.currentComponentInvoked;
+                  displayStackNode.component = this.invoked;
+                  displayStackNode.nodeIndex = this.invokedIndex++;
+            
+                  console.log(this.displayStack);
+                  console.log(displayStackNode);
+            
+                  this.displayStack.push(displayStackNode);
+                  $(this.invoked.instance.element).hide();
+                }
                 if(this.displayStack.length == 0) {
                   this.isDisplayed = true;
                 }
-                console.log(this.displayStack);
+                this.currentComponentInvoked = param.className;
                 this.invoked = this.rightOverlayContent.createComponent(this.componentFactoryResolver.resolveComponentFactory(ProfileComponent));
                 this.invoked.instance.mcph = param.mcph;
                 this.invoked.instance.displayStackIndex = this.invokedIndex;
                 this.invoked.instance.initUser();
+              break;
+              case "EnactDetailComponent": 
+                this.showRightOverlay();
+
+                if(this.isDisplayed) {
+                  let displayStackNode: DisplayStackNode = new DisplayStackNode();
+                  displayStackNode.componentName = this.currentComponentInvoked;
+                  displayStackNode.component = this.invoked;
+                  displayStackNode.nodeIndex = this.invokedIndex++;
+            
+                  console.log(this.displayStack);
+                  console.log(displayStackNode);
+            
+                  this.displayStack.push(displayStackNode);
+                  $(this.invoked.instance.element).hide();
+                }
+
+                if(this.displayStack.length == 0) {
+                  this.isDisplayed = true;
+                }
+                this.currentComponentInvoked = param.className;
+                this.invoked = this.rightOverlayContent.createComponent(this.componentFactoryResolver.resolveComponentFactory(EnactDetailComponent));
+                this.invoked.instance.mcph = param.mcph;
+                this.invoked.instance.initPost();
+                console.log("Right Overlay");
+                console.log(this.invoked.instance.mcph);
+                this.invoked.instance.displayStackIndex = this.invokedIndex;
               break;
             }
           break;
@@ -53,16 +92,6 @@ export class RightOverlayComponent implements OnInit {
   }
 
   showRightOverlay() {
-    if(this.isDisplayed) {
-      let displayStackNode: DisplayStackNode = new DisplayStackNode();
-      displayStackNode.componentName = this.currentComponentInvoked;
-      displayStackNode.component = this.invoked;
-      displayStackNode.nodeIndex = this.invokedIndex++;
-
-      this.displayStack.push(displayStackNode);
-      $(this.invoked.instance.element).hide();
-    }
-
     this.depth = 10;
     this.background = "#0000006e";
   }

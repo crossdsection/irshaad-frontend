@@ -17,19 +17,22 @@ export class EnactCardComponent implements OnInit {
 
   @Input() loggedIn : Boolean;
   @Input() set post( post: object ) {
-    this._post = post;
-    let date = new Date( this._post['created'] );
-    this._post['user']['profilepic'] = REQUEST_BASE_URL + this._post['user']['profilepic'];
-    this._post['postDate'] = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate();
-    this._post['postTime'] = ( ( date.getHours() < 12) ? date.getHours() : date.getHours() - 12 ) + ':' + date.getMinutes() + ' ' + ( ( date.getHours() < 12 ) ? "AM" : "PM" );
-    for( var i in this._post['files'] ){
-      this._post['files'][i]['filepath'] = REQUEST_BASE_URL + this._post['files'][i]['filepath'];
-    }
-    this._userPollStatus = this._post['polls']['userPollStatus'];
-    if( this._post['polls']['polls'] ){
-      this._polls = this._post['polls']['polls'];
-    } else {
-      this._polls = [];
+    if(post != null) {
+      this._post = post;
+      console.log(post);
+      let date = new Date( this._post['created'] );
+      this._post['user']['profilepic'] = REQUEST_BASE_URL + this._post['user']['profilepic'];
+      this._post['postDate'] = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate();
+      this._post['postTime'] = ( ( date.getHours() < 12) ? date.getHours() : date.getHours() - 12 ) + ':' + date.getMinutes() + ' ' + ( ( date.getHours() < 12 ) ? "AM" : "PM" );
+      for( var i in this._post['files'] ){
+        this._post['files'][i]['filepath'] = REQUEST_BASE_URL + this._post['files'][i]['filepath'];
+      }
+      this._userPollStatus = this._post['polls']['userPollStatus'];
+      if( this._post['polls']['polls'] ){
+        this._polls = this._post['polls']['polls'];
+      } else {
+        this._polls = [];
+      }
     }
   };
 
@@ -84,6 +87,12 @@ export class EnactCardComponent implements OnInit {
     } else {
       this.showPopUp.emit('show');
     }
+  }
+
+  openEnactDetails(event: any) {
+    console.log("Enact Card");
+    console.log(this._post["id"]);
+    this.rightOverlayCommuncationService.invokeRightOverlayWith("EnactDetailComponent", this._post["id"]);
   }
 
 }

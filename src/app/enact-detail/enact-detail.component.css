@@ -1,0 +1,52 @@
+.vote-button {
+    background: linear-gradient(#ebf904, #ff9703);
+    border: none;
+    /* padding: 5px 20px; */
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 20px;
+    width: 100%;
+    height: 100%;
+}
+
+.col {
+    padding: 0;
+}
+
+.enact-detail-option {
+    padding: 10px 20px;
+    border: none;
+    width: 100%;
+    height: 100%;
+    color: gray;
+}
+
+.enact-detail-option:hover, .active {
+    cursor: pointer;
+    background: #bbb9b9;
+    color: green;
+}
+
+.enact-detail-row {
+    display: grid;
+    grid-template-rows: 8% 92%;
+    height: 100%;
+}
+
+.enact-detail-row .lower-div {
+    overflow:hidden;
+    overflow-y: scroll;
+}
+
+.vote-button-option {
+    display: block;
+    margin: 10px 0;
+    width: 100%;
+    background: linear-gradient(#ebf904, #ff9703);
+    border: none;
+    padding: 7px;
+}
+
+.row {
+    margin:0;
+}

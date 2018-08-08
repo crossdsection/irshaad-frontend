@@ -16,6 +16,8 @@ export class RightOverlayCommunicationService {
       className: className,
       mcph: parameter
     };
+    console.log("Right overlay service");
+    console.log(param);
     this.rightOverlayComponent.next(JSON.stringify(param));
   }
 

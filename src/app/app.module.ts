@@ -63,7 +63,8 @@ import { EnactDetailComponent } from './enact-detail/enact-detail.component';
     LoginPopupComponent,
     ChangeLocationComponent,
     EnactPopupComponent,
-    ProfileComponent
+    ProfileComponent,
+    EnactDetailComponent
   ],
   imports: [
     BrowserModule,

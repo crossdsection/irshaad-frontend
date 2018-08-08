@@ -147,6 +147,7 @@ export class EnactPopupComponent implements OnInit {
     this.http.post(REQUEST_BASE_URL + "post/submit", dataToSend).subscribe(
       (response: any) => {
         console.log(response);
+        this.closeThisPopup();  
       },
       (error: any) => {
         console.log("There is an error");

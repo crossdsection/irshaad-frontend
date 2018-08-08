@@ -40,3 +40,8 @@ button.option {
 .flagEnableClass {
   color: red;
 }
+
+.card-title:hover, .card-img-top:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
