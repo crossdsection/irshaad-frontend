@@ -24,8 +24,8 @@ export class EnactCardComponent implements OnInit {
       this._post['user']['profilepic'] = REQUEST_BASE_URL + this._post['user']['profilepic'];
       this._post['postDate'] = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate();
       this._post['postTime'] = ( ( date.getHours() < 12) ? date.getHours() : date.getHours() - 12 ) + ':' + date.getMinutes() + ' ' + ( ( date.getHours() < 12 ) ? "AM" : "PM" );
-      for( var i in this._post['files'] ){
-        this._post['files'][i]['filepath'] = REQUEST_BASE_URL + this._post['files'][i]['filepath'];
+      for( var i in this._post['files']['images'] ) {
+        this._post['files']['images'][i]['filepath'] = REQUEST_BASE_URL + this._post['files']['images'][i]['filepath'];
       }
       this._userPollStatus = this._post['polls']['userPollStatus'];
       if( this._post['polls']['polls'] ){

@@ -17,33 +17,37 @@
         <div class="col">
           <button class="enact-detail-option" title="Print" (click)="printThis()"><i class="fa fa-print"></i></button>
         </div>
-        <div class="col">
-          <button class="enact-detail-option" title="Print" (click)="openFullscreen()"><i class="fa fa-square-o"></i></button>
-        </div>
       </div>
     </div>
     <div class="lower-div">
       <!-- 5 Votes -->
       <div class="row" style="border: 1px solid #dedede;" *ngIf="isVoting">
         <div class="col-md-12">
-          <button class="vote-button-option">Option 1</button>
-          <button class="vote-button-option">Option 1</button>
-          <button class="vote-button-option">Option 1</button>
-          <button class="vote-button-option">Option 1</button>
+          <div *ngFor="let poll of _polls" class="col-md-12">
+            <button class="vote-button-option" (click)="addPoll( poll.id, poll.post_id )" *ngIf="!_userPollStatus">{{ poll.title }}</button>
+            <div class="container" *ngIf="_userPollStatus">
+              <span style="color:black"><strong>{{ poll.title }}</strong>{{ '(' + poll.percent + ')' }}</span>
+              <div class="progress">
+                <div class="progress-bar bg-warning" role="progressbar" [ngStyle]="{ 'width': poll.percent }" aria-valuenow="poll.percent" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+            <br>
+          </div>
+
         </div>
       </div>
 
       <!-- 1 Title -->
       <div class="row">
         <div class="col-md-12">
-          <h3>This is a title</h3>
+          <h3>{{ post.title }}</h3>
         </div>
       </div>
 
       <!-- 2 Image -->
       <div class="row">
         <div class="col-md-12">
-          <img src="assets/img/broken_road.jpg" style="width: 100%;"/>
+          <img src="{{ post.files.images[0].filepath }}" style="width: 100%;"/>
         </div>
       </div>
 
@@ -71,12 +75,8 @@
       <!-- 4 Descriptions -->
       <div class="row">
         <div class="col-md-12">
-          <p>This is a description of the poll. It can be very long. So, to make it long. I will put same line now. This is a repeated line.
-            This is a repeated line. This is a repeated line. This is a repeated line. This is a repeated line. This is a repeated line.
-            This is a repeated line. This is a repeated line. This is a repeated line. This is a repeated line. This is a repeated line.
-            This is a repeated line. This is a repeated line. This is a repeated line. This is a repeated line. This is a repeated line.
-            This is a repeated line. This is a repeated line. This is a repeated line. This is a repeated line. This is a repeated line.
-            This is a repeated line. This is a repeated line. This is a repeated line. This is a repeated line. This is a repeated line.
+          <p>
+              {{ post.details }}
           </p>
         </div>
       </div>
