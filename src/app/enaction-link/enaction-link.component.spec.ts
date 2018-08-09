@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LocationMegaMenuComponent } from './location-mega-menu.component';
+import { EnactionLinkComponent } from './enaction-link.component';
 
-describe('LocationMegaMenuComponent', () => {
-  let component: LocationMegaMenuComponent;
-  let fixture: ComponentFixture<LocationMegaMenuComponent>;
+describe('EnactionLinkComponent', () => {
+  let component: EnactionLinkComponent;
+  let fixture: ComponentFixture<EnactionLinkComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LocationMegaMenuComponent ]
+      declarations: [ EnactionLinkComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LocationMegaMenuComponent);
+    fixture = TestBed.createComponent(EnactionLinkComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

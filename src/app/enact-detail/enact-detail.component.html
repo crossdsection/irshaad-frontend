@@ -1,4 +1,4 @@
-<div class="row" style="margin-top: -20px; height: 100%;">
+<div class="row" style="margin-top: -20px; height: 100%;" *ngIf="post != null">
   <div class="col-md-8 enact-detail-row">
     <div class="upper-div">
       <div class="row">
@@ -8,20 +8,19 @@
         <div class="col">
           <button class="enact-detail-option active"><i class="fa fa-share-alt"></i></button>
         </div>
-        <div class="col">
-          <button (click)="changeActivityStatus( _post.id, { 'flag' : 1 } )" class="enact-detail-option" *ngIf="_post.props.userFlagStatus == 0">
+        <div class="col" *ngIf="post != null">
+          <button (click)="changeActivityStatus( post.id, { 'flag' : 1 } )" class="enact-detail-option" *ngIf="post.props.userFlagStatus == 0">
             <i class="fa fa-flag"></i>
           </button>
-          <button (click)="changeActivityStatus( _post.id,{ 'flag' : -1 } )" class="enact-detail-option" *ngIf="_post.props.userFlagStatus == 1">
+          <button (click)="changeActivityStatus( post.id,{ 'flag' : -1 } )" class="enact-detail-option flagEnableClass" *ngIf="post.props.userFlagStatus == 1">
             <i class="fa fa-flag"></i>
           </button>
         </div>
-        <div class="col">
-          <button class="enact-detail-option"><i class="fa fa-bookmark"></i></button>
-          <button (click)="changeActivityStatus( _post.id, { 'bookmark' : 1 } )" class="enact-detail-option" *ngIf="_post.props.userBookmarkStatus == 0">
+        <div class="col" *ngIf="post != null">
+          <button (click)="changeActivityStatus( post.id, { 'bookmark' : 1 } )" class="enact-detail-option" *ngIf="post.props.userBookmarkStatus == 0">
             <i class="fa fa-bookmark"></i>
           </button>
-          <button (click)="changeActivityStatus( _post.id, { 'bookmark' : -1 } )" class="enact-detail-option bookmarkEnableClass" *ngIf="_post.props.userBookmarkStatus == 1">
+          <button (click)="changeActivityStatus( post.id, { 'bookmark' : -1 } )" class="enact-detail-option bookmarkEnableClass" *ngIf="post.props.userBookmarkStatus == 1">
             <i class="fa fa-bookmark"></i>
           </button>
         </div>
@@ -57,7 +56,7 @@
 
       <!-- 2 Image -->
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12" *ngIf="post != null && post.files != null">
           <img src="{{ post.files.images[0].filepath }}" style="width: 100%;"/>
         </div>
       </div>

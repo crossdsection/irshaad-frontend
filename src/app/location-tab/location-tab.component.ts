@@ -13,10 +13,10 @@ export class LocationTabComponent implements OnInit {
 
   private element: any;
 
-  country = "";
-  state = "";
-  city = "";
-  locality = "";
+  country = "Country";
+  state = "State";
+  city = "City";
+  locality = "Locality";
   rwa = "RWA";
 
   constructor(private componentCommunicationService: ComponentCommunicationService, private elementRef: ElementRef) {
