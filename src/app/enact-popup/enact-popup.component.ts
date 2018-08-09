@@ -82,13 +82,6 @@ export class EnactPopupComponent implements OnInit {
       case 'locality': this.locationContextColor = '#b5375f';
       break;
     }
-
-
-    // Immediately save files on server.
-    /*$(document).on("change", "#file-upload", function(event) {
-      event.preventDefault();
-      console.log(event.target);
-    });*/
   }
 
   getSelectedLocation() {
@@ -146,11 +139,9 @@ export class EnactPopupComponent implements OnInit {
 
     this.http.post(REQUEST_BASE_URL + "post/submit", dataToSend).subscribe(
       (response: any) => {
-        console.log(response);
         this.closeThisPopup();  
       },
       (error: any) => {
-        console.log("There is an error");
         console.error(error);
       }
     );
@@ -158,7 +149,6 @@ export class EnactPopupComponent implements OnInit {
 
   // Check for file upload
   onFileChange( event, fileType ) {
-    console.log("onFileChange triggered.");
     let reader = new FileReader();
 
     // Create element for preview
@@ -172,8 +162,6 @@ export class EnactPopupComponent implements OnInit {
     closeIcon.innerHTML = '<i class="fa fa-close"></i>';
     $(closeIcon).on("click", function() {
       let index = ($(this).parent().attr("data-index"));
-      console.log(index);
-      console.log("Removed");
       fileJSON.splice(fileJSON.indexOf(index), 1);
       if(fileJSON.length == 0) { 
         this.previewImageSrc = "";
@@ -181,7 +169,6 @@ export class EnactPopupComponent implements OnInit {
       else {
         this.previewImageSrc = fileJSON[0];
       }
-      console.log(fileJSON);
       $(this).parent().remove();
     });
 
@@ -197,7 +184,6 @@ export class EnactPopupComponent implements OnInit {
         this.httpService.doFileUpload( file ).subscribe(
           (event : any)=>{this.handleProgress(event)},
           error=>{
-              console.log("Server error")
           }
         );
         // need to run CD since file load runs outside of zone
@@ -207,7 +193,6 @@ export class EnactPopupComponent implements OnInit {
   }
 
   handleProgress(event){
-    console.log("HandleProgress Triggered.");
     if (event.type === HttpEventType.DownloadProgress) {
       this.uploadingProgressing = true;
       this.uploadProgress = Math.round(100 * event.loaded / event.total);
@@ -219,13 +204,9 @@ export class EnactPopupComponent implements OnInit {
     }
 
     if (event.type === HttpEventType.Response) {
-      console.log("Done");
       this.uploadingProgressing = false;
       this.uploadComplete = true;
       this.serverResponse = event.body;
-      console.log(this.serverResponse);
-
-
 
       if( this.serverResponse["error"] == 0 ){
         // for( var i in this.serverResponse['data'] ){
@@ -241,7 +222,6 @@ export class EnactPopupComponent implements OnInit {
         }
         // }
       } else {
-        console.log( this.serverResponse );
       }
     }
   }

@@ -19,7 +19,6 @@ export class EnactCardComponent implements OnInit {
   @Input() set post( post: object ) {
     if(post != null) {
       this._post = post;
-      console.log(post);
       let date = new Date( this._post['created'] );
       this._post['user']['profilepic'] = REQUEST_BASE_URL + this._post['user']['profilepic'];
       this._post['postDate'] = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate();
@@ -90,8 +89,6 @@ export class EnactCardComponent implements OnInit {
   }
 
   openEnactDetails(event: any) {
-    console.log("Enact Card");
-    console.log(this._post["id"]);
     this.rightOverlayCommuncationService.invokeRightOverlayWith("EnactDetailComponent", this._post["id"]);
   }
 

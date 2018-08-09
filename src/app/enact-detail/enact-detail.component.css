@@ -50,3 +50,11 @@
 .row {
     margin:0;
 }
+
+.bookmarkEnableClass {
+    color: black;
+}
+
+.flagEnableClass {
+    color: red;
+}

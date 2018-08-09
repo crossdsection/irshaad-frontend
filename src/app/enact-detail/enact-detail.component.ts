@@ -58,8 +58,6 @@ export class EnactDetailComponent implements OnInit {
       }      
     });
     document.getElementById("rightOverlayContent").style.overflow = "hidden";
-    console.log("Post");
-    console.log(this.post);
   }
 
   initPost() {
@@ -132,6 +130,23 @@ export class EnactDetailComponent implements OnInit {
         if( polls['polls'] ){
           this._polls = polls['polls'];
         }
+      }
+    });
+  }
+
+  changeActivityStatus( postId, postJSON ){
+    let dataToSend: any = {
+      "post_id": postId
+    };
+    if( postJSON['bookmark'] ){
+      dataToSend['bookmark'] = postJSON['bookmark'];
+    }
+    if( postJSON['flag'] ){
+      dataToSend['flag'] = postJSON['flag'];
+    }
+    this.http.post( REQUEST_BASE_URL + '/activity/submit', dataToSend ).subscribe((response: any) => {
+      if( response.error == 0 ){
+        this._post['props'] = response.data;
       }
     });
   }

@@ -42,9 +42,6 @@ export class RightOverlayComponent implements OnInit {
                   displayStackNode.component = this.invoked;
                   displayStackNode.nodeIndex = this.invokedIndex++;
             
-                  console.log(this.displayStack);
-                  console.log(displayStackNode);
-            
                   this.displayStack.push(displayStackNode);
                   $(this.invoked.instance.element).hide();
                 }
@@ -66,9 +63,6 @@ export class RightOverlayComponent implements OnInit {
                   displayStackNode.component = this.invoked;
                   displayStackNode.nodeIndex = this.invokedIndex++;
             
-                  console.log(this.displayStack);
-                  console.log(displayStackNode);
-            
                   this.displayStack.push(displayStackNode);
                   $(this.invoked.instance.element).hide();
                 }
@@ -80,8 +74,6 @@ export class RightOverlayComponent implements OnInit {
                 this.invoked = this.rightOverlayContent.createComponent(this.componentFactoryResolver.resolveComponentFactory(EnactDetailComponent));
                 this.invoked.instance.mcph = param.mcph;
                 this.invoked.instance.initPost();
-                console.log("Right Overlay");
-                console.log(this.invoked.instance.mcph);
                 this.invoked.instance.displayStackIndex = this.invokedIndex;
               break;
             }
@@ -105,9 +97,6 @@ export class RightOverlayComponent implements OnInit {
       this.invoked = displayStackNode.component;
       this.currentComponentInvoked = displayStackNode.componentName;
       this.invokedIndex = displayStackNode.nodeIndex;
-
-      console.log(this.displayStack);
-      console.log(displayStackNode);
 
       $(this.invoked.instance.element).show();
     }

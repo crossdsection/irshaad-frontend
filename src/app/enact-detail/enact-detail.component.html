@@ -9,10 +9,21 @@
           <button class="enact-detail-option active"><i class="fa fa-share-alt"></i></button>
         </div>
         <div class="col">
-          <button class="enact-detail-option"><i class="fa fa-flag"></i></button>
+          <button (click)="changeActivityStatus( _post.id, { 'flag' : 1 } )" class="enact-detail-option" *ngIf="_post.props.userFlagStatus == 0">
+            <i class="fa fa-flag"></i>
+          </button>
+          <button (click)="changeActivityStatus( _post.id,{ 'flag' : -1 } )" class="enact-detail-option" *ngIf="_post.props.userFlagStatus == 1">
+            <i class="fa fa-flag"></i>
+          </button>
         </div>
         <div class="col">
           <button class="enact-detail-option"><i class="fa fa-bookmark"></i></button>
+          <button (click)="changeActivityStatus( _post.id, { 'bookmark' : 1 } )" class="enact-detail-option" *ngIf="_post.props.userBookmarkStatus == 0">
+            <i class="fa fa-bookmark"></i>
+          </button>
+          <button (click)="changeActivityStatus( _post.id, { 'bookmark' : -1 } )" class="enact-detail-option bookmarkEnableClass" *ngIf="_post.props.userBookmarkStatus == 1">
+            <i class="fa fa-bookmark"></i>
+          </button>
         </div>
         <div class="col">
           <button class="enact-detail-option" title="Print" (click)="printThis()"><i class="fa fa-print"></i></button>

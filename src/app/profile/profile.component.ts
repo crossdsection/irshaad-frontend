@@ -90,7 +90,6 @@ export class ProfileComponent implements OnInit {
         this.user.phone = response.data[0].phone;
       },
       (error) => {
-        console.log(error);
       }
     );
   }
@@ -117,7 +116,6 @@ export class ProfileComponent implements OnInit {
     this.http.post(REQUEST_BASE_URL + "user/getfollowers", dataToSend).subscribe((response: any) => {
       this.followers = response.data;
     }, (error: any) => {
-      console.log(error);
     });
 
     this.currentlyOpenedTab = "followers";
@@ -137,7 +135,6 @@ export class ProfileComponent implements OnInit {
     this.http.post(REQUEST_BASE_URL + "user/getfollowing", dataToSend).subscribe((response: any) => {
       this.followings = response.data;
     }, (error: any) => {
-      console.log(error);
     });
 
     this.currentlyOpenedTab = "following";
@@ -174,7 +171,6 @@ export class ProfileComponent implements OnInit {
 
   // Check for file upload
   editProfilePicture( event, fileType ) {
-    console.log("editProfilePicture triggered.");
     let reader = new FileReader();
 
     if(event.target.files && event.target.files.length) {
@@ -184,7 +180,6 @@ export class ProfileComponent implements OnInit {
         this.httpService.doProfilePictureUpload( file ).subscribe(
           (event : any)=>{this.handleProgress(event)},
           error=>{
-              console.log("Server error")
           }
         );
         // need to run CD since file load runs outside of zone
@@ -194,7 +189,6 @@ export class ProfileComponent implements OnInit {
   }
 
   handleProgress(event){
-    console.log("HandleProgress Triggered.");
     if (event.type === HttpEventType.DownloadProgress) {
       this.uploadingProgressing = true;
       this.uploadProgress = Math.round(100 * event.loaded / event.total);
@@ -206,19 +200,15 @@ export class ProfileComponent implements OnInit {
     }
 
     if (event.type === HttpEventType.Response) {
-      console.log("Done");
       this.uploadingProgressing = false;
       this.uploadComplete = true;
       this.serverResponse = event.body;
-      console.log(this.serverResponse);
       if( this.serverResponse["error"] == 0 ){
         /*if(fileJSON.length == 1) { 
           this.previewImageSrc = REQUEST_BASE_URL + this.serverResponse['data']['filepath'];
         }*/
         this.user.profilePicture = REQUEST_BASE_URL + this.serverResponse["data"]["profilepic"]["profilepic"];
       } else {
-        console.log( this.serverResponse );
-
       }
     }
   }
@@ -241,7 +231,6 @@ export class ProfileComponent implements OnInit {
     let urlToCall = REQUEST_BASE_URL + "user/update";
 
     this.http.post(urlToCall, dataToSend).subscribe((response: any) => {
-      console.log(response);
     });
 
     this.toggleEditMode();
