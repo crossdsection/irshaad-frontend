@@ -1,0 +1,19 @@
+.container {
+    padding: 10px;
+    margin: 10px;
+    background: lightgray
+}
+
+.comment-block {
+    display: grid;
+    grid-template-columns: 20% 80%;
+}
+
+.profile-picture img {
+    width: 100%;
+    border-radius: 50%;
+}
+
+.name {
+    font-weight: bold;
+}

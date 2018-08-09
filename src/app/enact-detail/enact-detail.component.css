@@ -58,3 +58,7 @@
 .flagEnableClass {
     color: red;
 }
+
+.col-md-4, .col-md-8 {
+    padding: 0;
+}

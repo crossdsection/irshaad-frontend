@@ -33,6 +33,7 @@ import { AuthInterceptor } from './interceptors/auth.interceptor';
 
 import { RouterModule, Routes } from '@angular/router';
 import { APP_BASE_HREF } from '@angular/common';
+import { CommentComponent } from './comment/comment.component';
 
 const routes: Routes = [
   { path: '', component: EnactFeedsFocusComponent },
@@ -64,7 +65,8 @@ const routes: Routes = [
     ProfileComponent,
     UserSummaryTileComponent,
     EnactDetailComponent,
-    EnactionLinkComponent
+    EnactionLinkComponent,
+    CommentComponent
   ],
   entryComponents: [
     LoginPopupComponent,

@@ -15,6 +15,7 @@ export class EnactDetailComponent implements OnInit {
   public element: any = null;
 
   isVoting: boolean = false;
+  isSharing: boolean = false;
 
   public post: any = null;
 
@@ -76,19 +77,19 @@ export class EnactDetailComponent implements OnInit {
         this.hasImages = true;
         this.post.files.images[0].filepath = REQUEST_BASE_URL + this.post.files.images[0].filepath;
       }*/
-      this._post = this.post;
-      let date = new Date( this._post['created'] );
-      this._post['user']['profilepic'] = REQUEST_BASE_URL + this._post['user']['profilepic'];
-      this._post['postDate'] = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate();
-      this._post['postTime'] = ( ( date.getHours() < 12) ? date.getHours() : date.getHours() - 12 ) + ':' + date.getMinutes() + ' ' + ( ( date.getHours() < 12 ) ? "AM" : "PM" );
-      if( this._post['files'] != null ){
-        for( var i in this._post['files']['images'] ) {
-          this._post['files']['images'][i]['filepath'] = REQUEST_BASE_URL + this._post['files']['images'][i]['filepath'];
+      // this.post = this.post;
+      let date = new Date( this.post['created'] );
+      this.post['user']['profilepic'] = REQUEST_BASE_URL + this.post['user']['profilepic'];
+      this.post['postDate'] = date.getFullYear() + '-' + date.getMonth() + '-' + date.getDate();
+      this.post['postTime'] = ( ( date.getHours() < 12) ? date.getHours() : date.getHours() - 12 ) + ':' + date.getMinutes() + ' ' + ( ( date.getHours() < 12 ) ? "AM" : "PM" );
+      if( this.post['files'] != null ){
+        for( var i in this.post['files']['images'] ) {
+          this.post['files']['images'][i]['filepath'] = REQUEST_BASE_URL + this.post['files']['images'][i]['filepath'];
         }
       }
-      this._userPollStatus = this._post['polls']['userPollStatus'];
-      if( this._post['polls']['polls'] ){
-        this._polls = this._post['polls']['polls'];
+      this._userPollStatus = this.post['polls']['userPollStatus'];
+      if( this.post['polls']['polls'] ){
+        this._polls = this.post['polls']['polls'];
       } else {
         this._polls = [];
       }
@@ -101,6 +102,10 @@ export class EnactDetailComponent implements OnInit {
 
   toggleVoteStatus() {
     this.isVoting = !this.isVoting;
+  }
+
+  toggleShareStatus() {
+    this.isSharing = !this.isSharing;
   }
 
   printThis() {
@@ -148,7 +153,7 @@ export class EnactDetailComponent implements OnInit {
     }
     this.http.post( REQUEST_BASE_URL + '/activity/submit', dataToSend ).subscribe((response: any) => {
       if( response.error == 0 ){
-        this._post['props'] = response.data;
+        this.post['props'] = response.data;
       }
     });
   }

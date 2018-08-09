@@ -6,18 +6,18 @@
           <button class="vote-button" (click)="toggleVoteStatus()">Vote</button>
         </div>
         <div class="col">
-          <button class="enact-detail-option active"><i class="fa fa-share-alt"></i></button>
+          <button class="enact-detail-option" (click)="toggleShareStatus()"><i class="fa fa-share-alt"></i></button>
         </div>
-        <div class="col" *ngIf="post != null">
-          <button (click)="changeActivityStatus( post.id, { 'flag' : 1 } )" class="enact-detail-option" *ngIf="post.props.userFlagStatus == 0">
+        <div class="col">
+          <button (click)="changeActivityStatus( post.id, { 'flag' : 1 } )" class="enact-detail-option" *ngIf="post.props.userFlagStatus != 1">
             <i class="fa fa-flag"></i>
           </button>
           <button (click)="changeActivityStatus( post.id,{ 'flag' : -1 } )" class="enact-detail-option flagEnableClass" *ngIf="post.props.userFlagStatus == 1">
             <i class="fa fa-flag"></i>
           </button>
         </div>
-        <div class="col" *ngIf="post != null">
-          <button (click)="changeActivityStatus( post.id, { 'bookmark' : 1 } )" class="enact-detail-option" *ngIf="post.props.userBookmarkStatus == 0">
+        <div class="col">
+          <button (click)="changeActivityStatus( post.id, { 'bookmark' : 1 } )" class="enact-detail-option" *ngIf="post.props.userBookmarkStatus != 1">
             <i class="fa fa-bookmark"></i>
           </button>
           <button (click)="changeActivityStatus( post.id, { 'bookmark' : -1 } )" class="enact-detail-option bookmarkEnableClass" *ngIf="post.props.userBookmarkStatus == 1">
@@ -32,8 +32,8 @@
     <div class="lower-div">
       <!-- 5 Votes -->
       <div class="row" style="border: 1px solid #dedede;" *ngIf="isVoting">
-        <div class="col-md-12">
-          <div *ngFor="let poll of _polls" class="col-md-12">
+        <div class="col-md-12" style="padding: 20px 0px;">
+          <span *ngFor="let poll of _polls" class="">
             <button class="vote-button-option" (click)="addPoll( poll.id, poll.post_id )" *ngIf="!_userPollStatus">{{ poll.title }}</button>
             <div class="container" *ngIf="_userPollStatus">
               <span style="color:black"><strong>{{ poll.title }}</strong>{{ '(' + poll.percent + ')' }}</span>
@@ -41,9 +41,20 @@
                 <div class="progress-bar bg-warning" role="progressbar" [ngStyle]="{ 'width': poll.percent }" aria-valuenow="poll.percent" aria-valuemin="0" aria-valuemax="100"></div>
               </div>
             </div>
-            <br>
-          </div>
+          </span>
 
+        </div>
+      </div>
+
+      <div class="row" style="border: 1px solid #dedede;" *ngIf="isSharing">
+        <div class="col">
+          <button class="enact-detail-option" title="Share via Facebook"><i class="fa fa-facebook-official"></i></button>
+        </div>
+        <div class="col">
+          <button class="enact-detail-option" title="Share via Twitter"><i class="fa fa-twitter-square"></i></button>
+        </div>
+        <div class="col">
+          <button class="enact-detail-option" title="Share via Link"><i class="fa fa-link"></i></button>
         </div>
       </div>
 
@@ -103,6 +114,8 @@
         </div>
       </div>
     </div>
-    <div class="lower-div"></div>
+    <div class="lower-div">
+      <app-comment></app-comment>
+    </div>
   </div>
 </div>
