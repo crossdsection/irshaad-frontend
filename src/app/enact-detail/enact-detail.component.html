@@ -48,7 +48,9 @@
 
       <div class="row" style="border: 1px solid #dedede;" *ngIf="isSharing">
         <div class="col">
-          <button class="enact-detail-option" title="Share via Facebook"><i class="fa fa-facebook-official"></i></button>
+          <div class="fb-share-button" data-href="{{shareLink}}" data-layout="button_count">
+          </div>
+          <!-- <a href="https://facebook.com/sharer/sharer.php?u={{shareLink}}" target="_blank"><button class="enact-detail-option" title="Share via Facebook"><i class="fa fa-facebook-official"></i></button></a> -->
         </div>
         <div class="col">
           <button class="enact-detail-option" title="Share via Twitter"><i class="fa fa-twitter-square"></i></button>

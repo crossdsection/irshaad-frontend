@@ -13,6 +13,7 @@ export class EnactDetailComponent implements OnInit {
 
   public mcph: string;
   public element: any = null;
+  public shareLink: string = "";
 
   isVoting: boolean = false;
   isSharing: boolean = false;
@@ -93,6 +94,7 @@ export class EnactDetailComponent implements OnInit {
       } else {
         this._polls = [];
       }
+      this.shareLink = "http://localhost:4200/" + "enactions/" + this.post['id'];
     });
   }
 
