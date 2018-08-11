@@ -17,3 +17,45 @@
 .name {
     font-weight: bold;
 }
+
+
+.fieldClass {
+  padding: 6px;
+  display: block;
+  min-width: -webkit-min-content;
+}
+
+.commentField {
+  border-top: 1px dotted black;
+  background: #d4d4d4;
+}
+
+.textField {
+  background: #d4d4d4;
+}
+
+.fieldDiv {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: 0;
+}
+
+.fieldTextArea {
+  -webkit-appearance: textarea;
+  -webkit-rtl-ordering: logical;
+  background-color: white;
+  flex-direction: column;
+  max-width: 100%;
+  cursor: text;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  margin: 0px;
+  width: 100%;
+  height: 57px;
+}
+
+.commentInstructions{
+  font-size: 10px;
+  float: right;
+}

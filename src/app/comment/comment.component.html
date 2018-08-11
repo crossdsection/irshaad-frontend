@@ -1,15 +1,25 @@
 <div class="container">
+  <div>
+    <fieldset class="fieldClass textField">
+      <div class="fieldDiv">
+        <textarea placeholder="Write your comment here." [(ngModel)]="commentText" name="commentText" (keydown)="checkSubmit($event)" class="fieldTextArea"></textarea>
+      </div>
+      <div>
+        <span class="commentInstructions">Press Enter to post.</span>
+      </div>
+    </fieldset>
+  </div>
   <div class="row">
-    <div class="col-md-12">
-      <div class="comment-block">
+    <div class="col-md-12" *ngFor="let comment of commentData; let k = index">
+      <div class="comment-block" >
         <!-- Profile Pic area -->
         <div class="profile-picture">
-          <img src="assets/img/1.jpg" />
+          <img [src]="comment.user.profilepic" />
         </div>
 
         <div class="detail">
-          <div class="name">John Smith</div>
-          <div class="comment-string">This is a comment. This is a precious comment. Mind if spelling is wrong.</div>
+          <div class="name">{{ comment.user.name }}</div> - {{ comment.dashTimeAgo }}
+          <div class="comment-string">{{ comment.text }}</div>
         </div>
       </div>
     </div>
