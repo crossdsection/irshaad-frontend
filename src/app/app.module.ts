@@ -35,6 +35,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { APP_BASE_HREF } from '@angular/common';
 import { CommentComponent } from './comment/comment.component';
 
+import { JwSocialButtonsModule } from 'jw-angular-social-buttons';
+
 const routes: Routes = [
   { path: '', component: EnactFeedsFocusComponent },
   { path: 'home', component: EnactFeedsFocusComponent },
@@ -83,7 +85,8 @@ const routes: Routes = [
     }),
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot( routes )
+    RouterModule.forRoot( routes ),
+    JwSocialButtonsModule
   ],
   providers: [
     {

@@ -59,7 +59,7 @@ export class EnactDetailComponent implements OnInit {
         }
       }
     });
-    document.getElementById("rightOverlayContent").style.overflow = "hidden";
+    // document.getElementById("rightOverlayContent").style.overflow = "hidden";
   }
 
   initPost() {
