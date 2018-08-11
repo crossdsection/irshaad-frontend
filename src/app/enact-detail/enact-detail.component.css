@@ -34,17 +34,23 @@
 }
 
 .enact-detail-row .lower-div {
+    padding-top: 20px;
     overflow:hidden;
     overflow-y: scroll;
 }
 
 .vote-button-option {
     display: block;
-    margin: 10px 0;
-    width: 100%;
+    margin: 10px auto;
+    width: 90%;
     background: linear-gradient(#ebf904, #ff9703);
     border: none;
     padding: 7px;
+}
+
+.vote-button-option:hover {
+    cursor: pointer;
+    background: linear-gradient(#ff9703, #ebf904);
 }
 
 .row {
@@ -59,6 +65,6 @@
     color: red;
 }
 
-.col-md-4, .col-md-8 {
+.col-md-4, .col-md-8, .col-md-1 {
     padding: 0;
 }
