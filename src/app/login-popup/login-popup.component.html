@@ -29,7 +29,7 @@
             </div>
           </form>
         </span>
-    
+
         <!-- Join Form -->
         <span class="join-area" *ngIf="currentForm == 'join'">
           <div class="container-fluid text-center">
@@ -62,7 +62,7 @@
                 </select>
               </div>
             </div>
-    
+
             <div class="row">
               <div class="form-group col-md-12">
                 <!-- <label>Username</label> -->
@@ -94,11 +94,11 @@
             <h5>Forgot Password?</h5>
           </div>
           <form (ngSubmit)="handleForgetPasswordFormSubmit()">
-            
-            
+
+
             <div class="row">
               <div class="form-group col-md-12">
-                <h6 class="text-center">Enter your registered email to get Password Reset link</h6>
+                <h6 class="text-center">Enter Email</h6>
                 <input type="text" [(ngModel)]="email" name="email" class="form-control" placeholder="Email" required/>
               </div>
             </div>
@@ -106,16 +106,59 @@
               <label>{{ loginMessage }}</label>
             </div>
             <div class="form-group">
-              <button type="submit" class="form-control btn">Get Password Link</button>
+              <button type="submit" class="form-control btn">Reset Password</button>
               <button type="submit" class="form-control btn btn-secondary" (click)="changeForm('login')">Login</button>
             </div>
           </form>
         </span>
 
+        <span class="reset-code-area" *ngIf="currentForm == 'resetCode'">
+          <div class="container-fluid text-center">
+            <img src="assets/img/logo.PNG" class="img img-responsive" />
+            <h5>Reset Code</h5>
+          </div>
+          <form (ngSubmit)="handleVerify()">
+            <div class="row">
+              <div class="form-group col-md-12">
+                <h6 class="text-center">Enter Your Reset Code</h6>
+                <input type="text" [(ngModel)]="reset" name="reset" class="form-control" placeholder="Reset Code" required/>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>{{ loginMessage }}</label>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="form-control btn">Submit</button>
+            </div>
+          </form>
+        </span>
 
-
+        <span class="reset-code-area" *ngIf="currentForm == 'newPassword'">
+          <div class="container-fluid text-center">
+            <img src="assets/img/logo.PNG" class="img img-responsive" />
+            <h5>Reset Code</h5>
+          </div>
+          <form (ngSubmit)="handleChangePassword()">
+            <div class="row">
+              <div class="form-group col-md-12">
+                <h6 class="text-center">New Password</h6>
+                <input type="password" [(ngModel)]="newPassword" name="newPassword" class="form-control" placeholder="New Password" required/>
+              </div>
+              <!-- <div class="form-group col-md-12">
+                <h6 class="text-center">Confirm Password</h6>
+                <input type="password" [(ngModel)]="confirmPassword" name="newPassword" class="form-control" placeholder="Confirm Password" required/>
+              </div> -->
+            </div>
+            <div class="form-group">
+              <label>{{ loginMessage }}</label>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="form-control btn">Submit</button>
+            </div>
+          </form>
+        </span>
     </div>
-    
-     
+
+
   </div>
 </div>

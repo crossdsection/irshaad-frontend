@@ -30,6 +30,10 @@ export class LoginPopupComponent implements OnInit {
     gender: string = "Gender"; // Male, Female, Transgender
     email: string = ""; // will be used in forget password and join form
 
+    // Form Variables Verification
+    reset: string = "";
+    newPassword: string = "";
+
   // Component Variable
   currentForm = "login"; // can be 'login', 'join', 'forgotPassword'
 
@@ -70,8 +74,7 @@ export class LoginPopupComponent implements OnInit {
           localStorage.setItem("auth_data", JSON.stringify(response.data));
           this.componentCommunicationService.editLoggedInStatus(true);
           this.loginMessage = "Login Successful";
-        }
-        else {
+        } else {
           this.loginMessage = "Invalid Login";
         }
         location.reload();
@@ -106,8 +109,7 @@ export class LoginPopupComponent implements OnInit {
       this.http.post(REQUEST_BASE_URL + "auth/signup", dataToSend).subscribe((response: any) => {
         if(response.error == 0) {
           this.loginMessage = "Registration Succesful. Please check your email for verification. Thank you.";
-        }
-        if(response.error == 1) {
+        } else {
           this.loginMessage = "There is some problem. Please try again later.";
         }
       });
@@ -122,23 +124,66 @@ export class LoginPopupComponent implements OnInit {
 
     this.http.post(REQUEST_BASE_URL + "auth/recover", dataToSend).subscribe((response: any) => {
       if(response.error == 0) {
-        this.loginMessage = "We've sent a password reset link to your entered email.";
-      }
-      if(response.error == 1) {
-        this.loginMessage = "There is some problem. Please try again later.";
+        this.loginMessage = response.message;
+        this.changeForm('resetCode');
+      } else {
+        this.loginMessage = response.message;
       }
     });
 
   }
 
+  // Handle Email Verification submit
+  handleVerify() {
+    let dataToSend = {
+      "email": this.email,
+      "code" : this.reset
+    }
+    this.http.post( REQUEST_BASE_URL + "user/verify", dataToSend ).subscribe((response: any) => {
+      if( response.error == 0 ) {
+        localStorage.setItem( "auth_data", JSON.stringify( response.data ) );
+        this.loginMessage = response.message;
+        this.changeForm('newPassword');
+      }
+      if( response.error == 1 ) {
+        this.loginMessage = "Please try again later.";
+      }
+    });
+  }
+
+  handleChangePassword() {
+    let dataToSend = {
+      "password" : this.newPassword
+    }
+    this.http.post( REQUEST_BASE_URL + "user/update", dataToSend ).subscribe((response: any) => {
+      if( response.error == 0 ) {
+        this.loginMessage = response.message;
+        location.reload();
+      }
+      if( response.error == 1 ) {
+        this.loginMessage = "Please try again later.";
+      }
+    });
+  }
+
   changeForm(form: string) {
     let height: number = 0;
-    switch(form) {
-      case "login": height = 440;
-      break;
-      case "join": height = 510;
-      break;
-      case "forgotPassword" : height = 410;
+    switch( form ) {
+      case "login":
+        height = 440;
+        break;
+      case "join":
+        height = 510;
+        break;
+      case "forgotPassword" :
+        height = 410;
+        break;
+      case "resetCode" :
+        height = 410;
+        break;
+      case "newPassword" :
+        height = 410;
+        break;
     }
 
     this.loginMessage = "";
@@ -148,7 +193,7 @@ export class LoginPopupComponent implements OnInit {
     this.lastName = "";
     this.birthDate = "";
     this.gender = "Gender";
-    this.email = "";
+    // this.email = "";
 
     document.getElementById("login-popup-component-modal").style.height = height + "px"
     this.currentForm = form;
@@ -257,5 +302,4 @@ export class LoginPopupComponent implements OnInit {
 
     return validationResult;
   }
-
 }
