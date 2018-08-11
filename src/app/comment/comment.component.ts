@@ -11,7 +11,8 @@ export class CommentComponent implements OnInit {
 
   @Input()
   public mcph : String;
-  public commentData : Array<Any>;
+  public commentData : Array<any>;
+  public commentText : String;
 
   constructor( private http: HttpClient ) {
   }
@@ -104,11 +105,8 @@ export class CommentComponent implements OnInit {
         console.log( response );
         if( response["error"] == 0 ){
           this.commentText = "";
-          this.commentAlert = 1;
           this.getComments( this.mcph );
-        } else {
-          this.commentAlert = -1;
-        }
+        } 
       },
       err => console.log(err)
     );
