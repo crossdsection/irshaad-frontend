@@ -38,9 +38,9 @@ export class ChangeLocationComponent implements OnInit {
   public toBeMovedRef: ElementRef;
   public currentMargin = 0;
 
-  constructor(private elementRef: ElementRef, 
-              private http: HttpClient, 
-              private mapsAPILoader: MapsAPILoader, 
+  constructor(private elementRef: ElementRef,
+              private http: HttpClient,
+              private mapsAPILoader: MapsAPILoader,
               private geolocationService: GeolocationService,
               private componentCommunicationService: ComponentCommunicationService) {
    let currentCoordinates = JSON.parse(localStorage.getItem("currentCoordinates"));
@@ -103,7 +103,7 @@ export class ChangeLocationComponent implements OnInit {
     // Initial element stuff
     this.element.style.display = this.elementDisplay;
     $(".app-change-location-fav-location-icon").css("color", "#ff5722");
-    
+
   }
 
   onMouseOver(infoWindow, gm) {

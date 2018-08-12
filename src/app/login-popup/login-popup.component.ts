@@ -35,7 +35,7 @@ export class LoginPopupComponent implements OnInit {
     newPassword: string = "";
 
   // Component Variable
-  currentForm = "login"; // can be 'login', 'join', 'forgotPassword'
+  currentForm = "login"; // can be 'login', 'join', 'forgotPassword', 'resetCode', 'newPassword'
 
   constructor(private elementRef: ElementRef, private http: HttpClient, private componentCommunicationService: ComponentCommunicationService) {
     this.element = this.elementRef.nativeElement;

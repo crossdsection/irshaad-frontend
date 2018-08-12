@@ -36,11 +36,13 @@ import { APP_BASE_HREF } from '@angular/common';
 import { CommentComponent } from './comment/comment.component';
 
 import { JwSocialButtonsModule } from 'jw-angular-social-buttons';
+import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 
 const routes: Routes = [
   { path: '', component: EnactFeedsFocusComponent },
   { path: 'home', component: EnactFeedsFocusComponent },
-  { path: 'enaction', component: EnactionLinkComponent }
+  { path: 'enaction', component: EnactionLinkComponent },
+  { path: 'resetpassword', component: ResetpasswordComponent }
 ];
 
 @NgModule({
@@ -68,7 +70,8 @@ const routes: Routes = [
     UserSummaryTileComponent,
     EnactDetailComponent,
     EnactionLinkComponent,
-    CommentComponent
+    CommentComponent,
+    ResetpasswordComponent
   ],
   entryComponents: [
     LoginPopupComponent,
