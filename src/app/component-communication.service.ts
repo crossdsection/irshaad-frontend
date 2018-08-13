@@ -1,10 +1,14 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { REQUEST_BASE_URL } from './globals';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ComponentCommunicationService {
+
+  constructor( private http: HttpClient ) { }
 
   // Location tab component
   private locationTabComponent = new BehaviorSubject<string>("[]");
@@ -62,9 +66,10 @@ export class ComponentCommunicationService {
     this.favLocationListGridComponent.next("true");
   }
 
-  // Logout 
+  // Logout
   userLogout() {
-    localStorage.removeItem("auth_data");
+    localStorage.clear();
+    // this.http.get( REQUEST_BASE_URL + 'user/logout')
   }
 
   // Current Location Change Trigger.
@@ -75,5 +80,4 @@ export class ComponentCommunicationService {
     this.currentLocation.next("true");
   }
 
-  constructor() { }
 }

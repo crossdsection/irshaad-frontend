@@ -78,7 +78,7 @@ export class AppComponent {
           // Changing the attributes of location tab component.
           this.componentCommunicationService.editLocationTabComponent(currentCoordinates);
           this.componentCommunicationService.editChangeLocationComponentMapLatLng(currentCoordinates.latitude, currentCoordinates.longitude);
-          
+
           // Changing Breadcrumb Bar Location Context
           this.componentCommunicationService.editBreadcrumbBarLocationContext();
 
