@@ -1,4 +1,4 @@
-<div class="container-fluid" style="text-align:center" *ngIf="showRatingDiv">
+<div class="container-fluid" style="text-align:center" *ngIf="showRatingDiv" [@slideInOut]>
   <div class="row">
     <div class="col-md-12">
       <h2> {{ location }} </h2>
@@ -35,6 +35,6 @@
 
 <div class="row downArrow" [ngStyle]="{'background': barBackgroundColor}">
   <div class="col-md-12" style="text-align:center">
-    <a class="breadcrumb-bar-button" (click)="toggleAreaRatings()"><i class="fa fa-angle-down"></i></a>
+    <a class="breadcrumb-bar-button" (click)="toggleAreaRatings()"><i [class]="iconForAction"></i></a>
   </div>
 </div>

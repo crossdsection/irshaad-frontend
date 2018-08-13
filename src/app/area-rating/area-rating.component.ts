@@ -1,12 +1,25 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { trigger, transition, animate, style } from '@angular/animations'
+
 import { ComponentCommunicationService } from '../component-communication.service';
 import { REQUEST_BASE_URL } from '../globals';
 
 @Component({
   selector: 'app-area-rating',
   templateUrl: './area-rating.component.html',
-  styleUrls: ['./area-rating.component.css']
+  styleUrls: ['./area-rating.component.css'],
+  animations: [
+    trigger('slideInOut', [
+      transition(':enter', [
+        style({transform: 'translateY(-100%)'}),
+        animate('1000ms ease-in', style({transform: 'translateY(0%)'}))
+      ]),
+      transition(':leave', [
+        animate('1000ms ease-in', style({transform: 'translateY(-100%)'}))
+      ])
+    ])
+  ]
 })
 export class AreaRatingComponent implements OnInit {
 
@@ -23,6 +36,7 @@ export class AreaRatingComponent implements OnInit {
   locationContext : Object;
   location : String;
   locationId : String;
+  iconForAction : String = "fa fa-angle-down";
 
   constructor( private componentCommunicationService: ComponentCommunicationService, private http: HttpClient ) { }
 
@@ -141,5 +155,10 @@ export class AreaRatingComponent implements OnInit {
 
   toggleAreaRatings(){
     this.showRatingDiv = !this.showRatingDiv;
+    if( this.showRatingDiv ){
+      this.iconForAction = "fa fa-angle-up";
+    } else {
+      this.iconForAction = "fa fa-angle-down";
+    }
   }
 }
