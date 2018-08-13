@@ -17,10 +17,10 @@ export class AreaRatingComponent implements OnInit {
   public pieChartOptions:any;
 
   barBackgroundColor: string = "#1e4372";
-  areaRatingVariables: Object<any>;
+  areaRatingVariables: Object;
   showRatingDiv: Boolean = false;
-  currentCoordinates : Object<any>;
-  locationContext : Object<any>;
+  currentCoordinates : Object;
+  locationContext : Object;
   location : String;
   locationId : String;
 
@@ -59,12 +59,16 @@ export class AreaRatingComponent implements OnInit {
 
     this.locationContext = JSON.parse(localStorage.getItem("locationContext"));
     this.currentCoordinates = JSON.parse(localStorage.getItem("currentCoordinates"));
-    this.barBackgroundColor = indexOfBackgroundColor[ this.locationContext.type ];
-    this.getAreaRatings( this.currentCoordinates, this.locationContext.type );
-    this.location = this.currentCoordinates[ this.locationContext.type ].toUpperCase();
+    this.barBackgroundColor = indexOfBackgroundColor[ this.locationContext['type'] ];
+    this.getAreaRatings( this.currentCoordinates, this.locationContext['type'] );
+    if( this.locationContext['type'] != 'world' ){
+      this.location = this.currentCoordinates[ this.locationContext['type'] ].toUpperCase();
+    } else {
+      this.location = this.locationContext['type'].toUpperCase();
+    }
   }
 
-  getAreaRatings( coordinates : JSON<any>, level : String ){
+  getAreaRatings( coordinates, level ){
     let indexOfLevelWiseResponseKeys = {
       'locality' : {
         "returnKey" : "localities",
@@ -97,18 +101,20 @@ export class AreaRatingComponent implements OnInit {
     baseAPI = baseAPI + getURI;
     this.http.get( baseAPI ).subscribe(
       response => {
-        if( response['data'] ){
-          let returnKey = indexOfLevelWiseResponseKeys[ level ]['returnKey'];
-          let returnId = indexOfLevelWiseResponseKeys[ level ]['returnId'];
-          let location: Object<any> = response['data']['location'];
-          console.log( location );
-          console.log( returnKey );
-          this.locationId = location[ returnKey ][ 0 ][ returnId ];
+        if( Object.keys( response['data'] ).length > 0 ){
+          if( level != 'world' ){
+            let returnKey = indexOfLevelWiseResponseKeys[ level ]['returnKey'];
+            let returnId = indexOfLevelWiseResponseKeys[ level ]['returnId'];
+            let location: any = response['data']['location'];
+            this.locationId = location[ returnKey ][ 0 ][ returnId ];
+          } else if( level == 'world' ) {
+            this.locationId = "0";
+          }
           this.areaRatingVariables = response['data']['areaRating'];
           this.pieChartData = [];
-          this.pieChartData.push( this.areaRatingVariables.goodPercent );
-          this.pieChartData.push( this.areaRatingVariables.badPercent );
-          if( !this.areaRatingVariables.userStatus ){
+          this.pieChartData.push( this.areaRatingVariables['goodPercent'] );
+          this.pieChartData.push( this.areaRatingVariables['badPercent'] );
+          if( !this.areaRatingVariables['userStatus'] ){
             this.showRatingDiv = true;
           }
         }
@@ -117,16 +123,16 @@ export class AreaRatingComponent implements OnInit {
   }
 
   areaRate( rating : String ){
-    if( this.locationContext.type && this.locationId && ( rating == 'good' || rating == 'bad' ) ){
+    if( this.locationContext['type'] && this.locationId && ( rating == 'good' || rating == 'bad' ) ){
       let dataToSend = {
-      	"areaLevel": this.locationContext.type,
+      	"areaLevel": this.locationContext['type'],
       	"areaLevelId": this.locationId,
       	"rating" : rating
-      }
+      };
       this.http.post( REQUEST_BASE_URL + 'area/rate', dataToSend ).subscribe(
         response => {
           if( response['error'] == 0 ){
-            this.getAreaRatings( this.currentCoordinates, this.locationContext.type );
+            this.getAreaRatings( this.currentCoordinates, this.locationContext['type'] );
           }
         }
       );
