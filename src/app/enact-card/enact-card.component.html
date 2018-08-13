@@ -18,7 +18,8 @@
   <div class="card-body">
     <h3 class="card-title" (click)="openEnactDetails($event)"> {{ _post.title }} </h3>
     <div *ngIf="_post.files != null">
-      <img class="card-img-top" (click)="openEnactDetails($event)" *ngFor="let file of _post.files.images" [src]="file.filepath" alt="No Image">
+      <!-- <carousel [sources]="imagesList" [config]="config"></carousel> -->
+      <!-- <img class="card-img-top" (click)="openEnactDetails($event)" *ngFor="let file of _post.files.images" [src]="file.filepath" alt="No Image"> -->
     </div>
     <p class="card-text">
       {{ _post.details }}

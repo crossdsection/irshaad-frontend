@@ -16,6 +16,7 @@ export class EnactCardComponent implements OnInit {
   @Output() showPopUp = new EventEmitter<string>();
 
   @Input() loggedIn : Boolean;
+  imageList: string[] = [];
   @Input() set post( post: object ) {
     if(post != null) {
       this._post = post;
@@ -33,6 +34,11 @@ export class EnactCardComponent implements OnInit {
         this._polls = this._post['polls']['polls'];
       } else {
         this._polls = [];
+      }
+      
+      // Setting up image array for carousel
+      for(let file in this._post['files']['images']) {
+        this.imageList.push(file['filepath']);
       }
     }
   };
