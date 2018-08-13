@@ -69,7 +69,7 @@ export class LocationTabComponent implements OnInit {
     localStorage.setItem("locationContext", JSON.stringify(locationContext));
 
     this.componentCommunicationService.editBreadcrumbBarLocationContext();
-
+    this.componentCommunicationService.editAreaRatingLocationContext();
   }
 
 }

@@ -1,0 +1,15 @@
+.downArrow {
+  height: 20px;
+}
+
+.goodButton {
+  background-color: rgb(76, 175, 80);
+  border-color: rgb(71,214,76);
+  color: white;
+}
+
+.badButton {
+  background-color: rgb(214,71,71);
+  border-color: rgb(152,13,13);
+  color: white;
+}

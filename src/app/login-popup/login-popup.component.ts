@@ -74,10 +74,10 @@ export class LoginPopupComponent implements OnInit {
           localStorage.setItem("auth_data", JSON.stringify(response.data));
           this.componentCommunicationService.editLoggedInStatus(true);
           this.loginMessage = "Login Successful";
+          location.reload();
         } else {
           this.loginMessage = "Invalid Login";
         }
-        location.reload();
       });
     }
   }

@@ -40,9 +40,8 @@ export class ResetpasswordComponent implements OnInit {
       if( response.error == 0 ) {
         localStorage.setItem( "auth_data", JSON.stringify( response.data ) );
         this.showLoginPopup();
-      }
-      if( response.error == 1 ) {
-        this.loginMessage = "Please try again later.";
+      } else {
+        alert( "Verification Failed." );
       }
     });
   }
