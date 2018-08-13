@@ -4,6 +4,9 @@ import { NgModule } from '@angular/core';
 import { AgmCoreModule } from '@agm/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { ChartsModule } from 'ng2-charts';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -38,6 +41,7 @@ import { CommentComponent } from './comment/comment.component';
 import { JwSocialButtonsModule } from 'jw-angular-social-buttons';
 import { CarouselModule } from 'angular4-carousel';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
+import { AreaRatingComponent } from './area-rating/area-rating.component';
 
 const routes: Routes = [
   { path: '', component: EnactFeedsFocusComponent },
@@ -72,7 +76,8 @@ const routes: Routes = [
     EnactDetailComponent,
     EnactionLinkComponent,
     CommentComponent,
-    ResetpasswordComponent
+    ResetpasswordComponent,
+    AreaRatingComponent
   ],
   entryComponents: [
     LoginPopupComponent,
@@ -83,6 +88,7 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAGvUJIs_SRj6bKpbQvNOWHxDjwnSqlvdE',
       libraries: ['places']
@@ -90,7 +96,8 @@ const routes: Routes = [
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot( routes ),
-    JwSocialButtonsModule
+    JwSocialButtonsModule,
+    ChartsModule
   ],
   providers: [
     {

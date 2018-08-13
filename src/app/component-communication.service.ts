@@ -33,6 +33,12 @@ export class ComponentCommunicationService {
     this.breadcrumbBarComponent.next("true");
   }
 
+  private areaRatingComponent = new BehaviorSubject<string>("");
+  areaRatingComponentData = this.areaRatingComponent.asObservable();
+  editAreaRatingLocationContext() {
+    this.areaRatingComponent.next("true");
+  }
+
   // Change Login status in header profile icon tab
   private headerProfileIconComponent = new BehaviorSubject<string>("");
   headerProfileIconComponentData = this.headerProfileIconComponent.asObservable();
@@ -68,7 +74,7 @@ export class ComponentCommunicationService {
 
   // Logout
   userLogout() {
-    localStorage.clear();
+    localStorage.removeItem("auth_data");
     // this.http.get( REQUEST_BASE_URL + 'user/logout')
   }
 
