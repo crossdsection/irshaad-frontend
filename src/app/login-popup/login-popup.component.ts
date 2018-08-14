@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { ComponentCommunicationService } from '../component-communication.service';
 
 import { REQUEST_BASE_URL } from '../globals';
+import { GeolocationService } from '../services/geolocation.service';
 
 @Component({
   selector: 'app-login-popup',
@@ -37,7 +38,7 @@ export class LoginPopupComponent implements OnInit {
   // Component Variable
   currentForm = "login"; // can be 'login', 'join', 'forgotPassword', 'resetCode', 'newPassword'
 
-  constructor(private elementRef: ElementRef, private http: HttpClient, private componentCommunicationService: ComponentCommunicationService) {
+  constructor(private elementRef: ElementRef, private http: HttpClient, private componentCommunicationService: ComponentCommunicationService, private geolocationService: GeolocationService) {
     this.element = this.elementRef.nativeElement;
     document.body.appendChild(this.element);
   }
@@ -76,8 +77,45 @@ export class LoginPopupComponent implements OnInit {
           this.loginMessage = "Login Successful";
 
           // Changing Current location to favorite home location.
+          // Set User's home location if user is logged in.
+          this.http.get(REQUEST_BASE_URL + 'favlocation/get?isHome=1').subscribe((response: any) => {
+            let lat: number = parseFloat(response.data[0].longitude);
+            let lng: number = parseFloat(response.data[0].latitude);
 
-          location.reload();
+            console.log("home lat lng");
+            console.log(lat);
+            console.log(lng);
+            this.http.get('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + lng + ',' + lat + '&key=AIzaSyAGvUJIs_SRj6bKpbQvNOWHxDjwnSqlvdE').subscribe((data: any) => {
+              console.log(data.results[0]);
+              let resolvedLocation: any = this.geolocationService.resolveLocation(data.results[0]);
+              console.log(resolvedLocation);
+
+              // Storing in localstorage
+              var currentCoordinates = {
+                'latitude' : lat,
+                'longitude' : lng,
+                'timestamp' : "",
+                'rwa' : "",
+                'locality' : resolvedLocation.locality,
+                'city' : resolvedLocation.city,
+                'state' : resolvedLocation.state,
+                'country' : resolvedLocation.country,
+                'countryShortName': resolvedLocation.countryShortName
+              };
+              localStorage.setItem('currentCoordinates', JSON.stringify( currentCoordinates ) );
+              localStorage.setItem('locationContext', JSON.stringify( {type: "locality"} ) );
+
+              // Changing the attributes of location tab component.
+              this.componentCommunicationService.editLocationTabComponent(currentCoordinates);
+              this.componentCommunicationService.editChangeLocationComponentMapLatLng(currentCoordinates.latitude, currentCoordinates.longitude);
+
+              // Changing Breadcrumb Bar Location Context
+              this.componentCommunicationService.editBreadcrumbBarLocationContext();
+
+              location.reload();
+            });
+
+          });
         } else {
           this.loginMessage = "Invalid Login";
         }

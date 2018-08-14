@@ -28,7 +28,7 @@ export class GeolocationService {
 			city: 1,
 			state: 2,
 			country: 3
-		}
+		};
 		let levelOrderName = ["locality", "city", "state", "country"];
 
 		locationResolved.level = levelOrder.country;

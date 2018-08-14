@@ -1,8 +1,11 @@
 import { Component, OnInit, Input, ElementRef } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 // Importing Services
 import { ComponentCommunicationService } from '../component-communication.service';
 import * as $ from 'jquery';
+import { GeolocationService } from '../services/geolocation.service';
+import { REQUEST_BASE_URL } from '../globals';
 
 @Component({
   selector: 'app-location-tab',
@@ -19,10 +22,10 @@ export class LocationTabComponent implements OnInit {
   locality = "Locality";
   rwa = "RWA";
 
-  constructor(private componentCommunicationService: ComponentCommunicationService, private elementRef: ElementRef) {
+  constructor(private componentCommunicationService: ComponentCommunicationService, private elementRef: ElementRef, private geolocationService: GeolocationService, private http: HttpClient) {
     this.element = this.elementRef.nativeElement;
-   }
-
+  }
+  
   ngOnInit() {
     this.componentCommunicationService.locationTabComponentData.subscribe((data: any) => {
       this.country = data.country;
