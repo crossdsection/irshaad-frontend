@@ -139,7 +139,7 @@ export class AreaRatingComponent implements OnInit {
           this.pieChartData.push( this.areaRatingVariables['goodPercent'] );
           this.pieChartData.push( this.areaRatingVariables['badPercent'] );
           if( !this.areaRatingVariables['userStatus'] ){
-            this.showRatingDiv = true;
+            this.toggleAreaRatings();
           }
         }
       }

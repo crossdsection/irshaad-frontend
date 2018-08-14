@@ -74,8 +74,6 @@ export class EnactDetailComponent implements OnInit {
 
     this.http.post(urlToCall, dataToSend).subscribe((response: any) => {
       this.post = response.data[0];
-      console.log("Updated Post");
-      console.log(this.post);
       /*if(this.post.files.images.length != 0) {
         this.hasImages = true;
         this.post.files.images[0].filepath = REQUEST_BASE_URL + this.post.files.images[0].filepath;
@@ -87,7 +85,12 @@ export class EnactDetailComponent implements OnInit {
       this.post['postTime'] = ( ( date.getHours() < 12) ? date.getHours() : date.getHours() - 12 ) + ':' + date.getMinutes() + ' ' + ( ( date.getHours() < 12 ) ? "AM" : "PM" );
       if( this.post['files'] != null ){
         for( var i in this.post['files']['images'] ) {
-          this.post['files']['images'][i]['filepath'] = REQUEST_BASE_URL + this.post['files']['images'][i]['filepath'];
+          var newJSON = {
+            "id" : this.post['id'] + 'image' + i,
+            "filepath" : REQUEST_BASE_URL + this.post['files']['images'][i]['filepath'],
+            "filetype" : this.post['files']['images'][i]['filetype']
+          };
+          this.post['files']['images'][i] = new Object( newJSON );
         }
       }
       this._userPollStatus = this.post['polls']['userPollStatus'];

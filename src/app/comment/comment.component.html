@@ -2,13 +2,14 @@
   <div>
     <fieldset class="fieldClass textField">
       <div class="fieldDiv">
-        <textarea placeholder="Write your comment here." [(ngModel)]="commentText" name="commentText" (keydown)="checkSubmit($event)" class="fieldTextArea"></textarea>
+        <textarea placeholder="Write your Answer here." [(ngModel)]="commentText" name="commentText" (keydown)="checkSubmit($event)" class="fieldTextArea"></textarea>
       </div>
       <div>
         <span class="commentInstructions">Press Enter to post.</span>
       </div>
     </fieldset>
   </div>
+
   <div class="row">
     <div class="col-md-12" *ngFor="let comment of commentData; let k = index">
       <div class="comment-block" >

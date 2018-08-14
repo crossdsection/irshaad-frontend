@@ -39,7 +39,6 @@ import { APP_BASE_HREF } from '@angular/common';
 import { CommentComponent } from './comment/comment.component';
 
 import { JwSocialButtonsModule } from 'jw-angular-social-buttons';
-import { CarouselModule } from 'angular4-carousel';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
 import { AreaRatingComponent } from './area-rating/area-rating.component';
 
@@ -89,7 +88,7 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    NgbModule,
+    NgbModule.forRoot(),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyAGvUJIs_SRj6bKpbQvNOWHxDjwnSqlvdE',
       libraries: ['places']
