@@ -58,6 +58,9 @@ export class AppComponent {
 
         this.http.get('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + position.coords.latitude + ',' + position.coords.longitude + '&key=AIzaSyAGvUJIs_SRj6bKpbQvNOWHxDjwnSqlvdE').subscribe((data: any) => {
 
+          // Check
+          console.log(data.results[0]);
+
           let resolvedLocation: any = this.geolocationService.resolveLocation(data.results[0]);
 
           // Storing in localstorage
@@ -82,7 +85,7 @@ export class AppComponent {
           // Changing Breadcrumb Bar Location Context
           this.componentCommunicationService.editBreadcrumbBarLocationContext();
 
-          location.reload();
+          // location.reload();
         });
       });
     }

@@ -15,12 +15,12 @@ export class GeolocationService {
 		let locationResolved : any = {
 			latitude   : 0,
 			longitude  : 0,
-			locality   : "",
-			city       : "",
-			state      : "",
-			country    : "",
-			countryShortName: "",
-			level: ""
+			locality   : "-",
+			city       : "-",
+			state      : "-",
+			country    : "-",
+			countryShortName: "-",
+			level: "-"
 		};
 
 		let levelOrder: any = {
@@ -45,11 +45,17 @@ export class GeolocationService {
 		}
 
 		let addressComponent = locationComponent.address_components;
-		let levelTypeKeys = {
-			'locality' : [ 'route', 'sublocality', 'neighborhood' ],
+		/*let levelTypeKeys = {
+			'locality' : [ 'route', 'sublocality', 'neighborhood', 'sublocality_level_1', 'locality' ],
 			'city' : [ 'locality', 'administrative_area_level_2' ],
 			'state' : [ 'administrative_area_level_1' ],
 			'country' : [ 'country' ]
+		};*/
+		let levelTypeKeys = {
+			'country' : [ 'country' ],
+			'state' : [ 'administrative_area_level_1' ],
+			'city' : [ 'locality', 'administrative_area_level_2' ],
+			'locality' : [ 'route', 'sublocality', 'neighborhood', 'sublocality_level_1', 'locality' ]
 		};
 
 		for( var i in addressComponent ){
@@ -57,6 +63,8 @@ export class GeolocationService {
 			for( var level in  levelTypeKeys ){
 				let intersectArray = levelTypeKeys[ level ].filter( value => -1 !== component['types'].indexOf(value) );
 				if( intersectArray.length > 0 ){
+					// locationResolved[ level ] = level;
+					locationResolved.level = (locationResolved.level > levelOrder[level]) ? levelOrder[level] : locationResolved.level;
 					locationResolved[ level ] = component.long_name;
 					if( level == 'country' ){
 						locationResolved[ 'countryShortName' ] = component.short_name;
