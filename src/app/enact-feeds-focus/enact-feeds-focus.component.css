@@ -1,5 +1,7 @@
 .container {
-    margin-top: 30px;    
+    margin-top: 30px;
+    margin-left: 15px;
+    margin-right: 15px;
 }
 
 .enact-feeds-tabs-sub-menu {
