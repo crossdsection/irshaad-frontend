@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-3 enact-feeds-tabs-sub-menu">
+    <div class="col-md-2 enact-feeds-tabs-sub-menu">
       <div class="list-group">
         <a class="list-group-item list-group-item-action active" (click)="changePostType('court')">
           <i class="fa fa-balance-scale" style="color: #264771;"></i>&nbsp;Courts
@@ -24,7 +24,7 @@
         </a>
       </div>
     </div>
-    <div class="col-md-9">
+    <div class="col-md-10">
       <app-enact-cards [mcph]="mcph" [posttype]="postType" [filter]="filterBy"></app-enact-cards>
     </div>
   </div>
