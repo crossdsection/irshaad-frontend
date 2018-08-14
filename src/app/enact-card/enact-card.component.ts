@@ -26,7 +26,12 @@ export class EnactCardComponent implements OnInit {
       this._post['postTime'] = ( ( date.getHours() < 12) ? date.getHours() : date.getHours() - 12 ) + ':' + date.getMinutes() + ' ' + ( ( date.getHours() < 12 ) ? "AM" : "PM" );
       if( this._post['files'] != null ){
         for( var i in this._post['files']['images'] ) {
-          this._post['files']['images'][i]['filepath'] = REQUEST_BASE_URL + this._post['files']['images'][i]['filepath'];
+          var newJSON = {
+            "id" : this._post['id'] + 'image' + i,
+            "filepath" : REQUEST_BASE_URL + this._post['files']['images'][i]['filepath'],
+            "filetype" : this._post['files']['images'][i]['filetype']
+          };
+          this._post['files']['images'][i] = new Object( newJSON );
         }
       }
       this._userPollStatus = this._post['polls']['userPollStatus'];
@@ -35,7 +40,7 @@ export class EnactCardComponent implements OnInit {
       } else {
         this._polls = [];
       }
-      
+
       // Setting up image array for carousel
       for(let file in this._post['files']['images']) {
         this.imageList.push(file['filepath']);

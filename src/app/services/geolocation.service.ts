@@ -45,12 +45,6 @@ export class GeolocationService {
 		}
 
 		let addressComponent = locationComponent.address_components;
-		/*let levelTypeKeys = {
-			'locality' : [ 'route', 'sublocality', 'neighborhood', 'sublocality_level_1', 'locality' ],
-			'city' : [ 'locality', 'administrative_area_level_2' ],
-			'state' : [ 'administrative_area_level_1' ],
-			'country' : [ 'country' ]
-		};*/
 		let levelTypeKeys = {
 			'country' : [ 'country' ],
 			'state' : [ 'administrative_area_level_1' ],
@@ -62,8 +56,7 @@ export class GeolocationService {
 			let component = addressComponent[ i ];
 			for( var level in  levelTypeKeys ){
 				let intersectArray = levelTypeKeys[ level ].filter( value => -1 !== component['types'].indexOf(value) );
-				if( intersectArray.length > 0 ){
-					// locationResolved[ level ] = level;
+				if( intersectArray.length > 0 && locationResolved[ level ] == '-' ){
 					locationResolved.level = (locationResolved.level > levelOrder[level]) ? levelOrder[level] : locationResolved.level;
 					locationResolved[ level ] = component.long_name;
 					if( level == 'country' ){
@@ -73,24 +66,6 @@ export class GeolocationService {
 			}
 		}
 		locationResolved.level = levelOrderName[ locationResolved.level ];
-		// for(let i: number = 0; i < addressComponent.length; i++) {
-		// 	let component = addressComponent[ i ];
-		// 	switch(component.types[0]) {
-		// 		case 'country' : locationResolved.country = component.long_name; locationResolved.countryShortName = component.short_name;
-		// 		locationResolved.level = (locationResolved.level > levelOrder.country) ? levelOrder.country : locationResolved.level;
-		// 		break;
-		// 		case 'administrative_area_level_1' : locationResolved.state = component.long_name;
-		// 		locationResolved.level = (locationResolved.level > levelOrder.state) ? levelOrder.state : locationResolved.level;
-		// 		break;
-		// 		case 'administrative_area_level_2' : locationResolved.city = component.long_name;
-		// 		locationResolved.level = (locationResolved.level > levelOrder.city) ? levelOrder.city : locationResolved.level;
-		// 		break;
-		// 		case 'locality' : locationResolved.locality = component.long_name;
-		// 		locationResolved.level = (locationResolved.level > levelOrder.locality) ? levelOrder.locality : locationResolved.level;
-		// 		break;
-		// 	}
-		// }
-		// locationResolved.level = levelOrderName[locationResolved.level];
 		return locationResolved;
 	}
 

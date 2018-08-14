@@ -1,5 +1,5 @@
 <div class="container" style="margin-top: -20px;">
-  <div class="container">
+  <div class="container" *ngIf="post != null">
     <div class="enact-detail-row">
       <div class="upper-div">
         <div class="row">
@@ -9,7 +9,7 @@
           <div class="col">
             <button class="enact-detail-option" (click)="toggleShareStatus()"><i class="fa fa-share-alt"></i></button>
           </div>
-          <div class="col">
+          <div class="col" *ngIf="post.props">
             <button (click)="changeActivityStatus( post.id, { 'flag' : 1 } )" class="enact-detail-option" *ngIf="post.props.userFlagStatus != 1">
               <i class="fa fa-flag"></i>
             </button>
@@ -53,6 +53,14 @@
           </div>
         </div>
 
+        <div class="row" *ngIf="post.files != null">
+          <ngb-carousel (click)="openEnactDetails($event)">
+            <ng-template ngbSlide *ngFor="let image of post.files.images" [id]="image.id">
+              <img class="card-img-top" [src]="image.filepath"  alt="No Image">
+            </ng-template>
+          </ngb-carousel>
+        </div>
+
         <!-- Atachments -->
         <div class="row">
           <div class="col-md-12">
@@ -73,6 +81,22 @@
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="col-md-12">
+              <p class="card-text">
+                {{ post.details }}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <app-comment [mcph]="post.id"></app-comment>
           </div>
         </div>
       </div>

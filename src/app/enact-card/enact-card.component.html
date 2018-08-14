@@ -18,12 +18,16 @@
   <div class="card-body">
     <h3 class="card-title" (click)="openEnactDetails($event)"> {{ _post.title }} </h3>
     <div *ngIf="_post.files != null">
-      <ngb-carousel>
-        <ng-template ngbSlide *ngFor="let image of _post.files.images">
-          <img class="card-img-top" [src]="image.filepath" (click)="openEnactDetails($event)"  alt="No Image">
+      <ngb-carousel (click)="openEnactDetails($event)" *ngIf="_post.files.images.length > 1">
+        <ng-template ngbSlide *ngFor="let image of _post.files.images" [id]="image.id">
+          <img class="card-img-top" [src]="image.filepath"  alt="No Image">
         </ng-template>
       </ngb-carousel>
-      <!-- <img   [src]="file.filepath" alt="No Image"> -->
+      <div *ngIf="_post.files.images.length == 1">
+        <div *ngFor="let image of _post.files.images">
+          <img class="card-img-top" [src]="image.filepath"  alt="No Image">
+        </div>
+      </div>
     </div>
     <p class="card-text">
       {{ _post.details }}
