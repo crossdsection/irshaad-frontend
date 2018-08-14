@@ -28,9 +28,9 @@ ul.navbar-nav.ml-auto {
 
 #header-right-links {
     list-style-type: none;
-    position: absolute;
+    /*position: absolute;
     bottom: 0;
-    right: 30px;
+    right: 30px;*/
 }
 
 #header-right-links li {
