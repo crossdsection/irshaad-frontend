@@ -11,11 +11,13 @@ export class CommentComponent implements OnInit {
 
   @Input()
   public mcph : String;
-  public commentData : Array<any>;
+  public answerData : Array<any>;
+  public commentData : Object;
   public commentText : String;
+  public answerText : String;
+  public replyBox : Object<any>;
 
-  constructor( private http: HttpClient ) {
-  }
+  constructor( private http: HttpClient ) { }
 
   ngOnInit() {
     this.getComments( this.mcph );
@@ -68,19 +70,36 @@ export class CommentComponent implements OnInit {
       return;
     }
     if( parentId != null ){
-      requestURL = requestURL + '?parentId=' + parentId;
+      requestURL = requestURL + '&parentId=' + parentId;
     }
     this.http.get( requestURL ).subscribe(
       response => {
         if( response['error'] == 0 ){
+          this.toggleReplyBox();
+          this.answerData = ( this.answerData == null ) ? [] : this.answerData;
+          this.commentData = ( this.commentData == null ) ? {} : this.commentData;
+          this.replyBox = ( this.replyBox == null ) ? {} : this.replyBox;
           for( var i in response['data'] ){
             response['data'][i].user.profilepic = REQUEST_BASE_URL + response['data'][i].user.profilepic;
             response['data'][i]['dashTimeAgo'] = this.getTimeDiff( response['data'][i].created );
+            if( parentId == null ){
+              this.answerData.push( response['data'][i] );
+              this.replyBox[ response['data'][i]['id'] ] = false;
+              this.getComments( postId, response['data'][i]['id'] );
+            } else {
+              if( !this.commentData[ response['data'][i]['parent_id'] ] ){
+                this.commentData[ response['data'][i]['parent_id'] ] = [];
+              }
+              this.commentData[ response['data'][i]['parent_id'] ].push( response['data'][i] );
+              this.commentData[ response['data'][i]['parent_id'] ].sort(function(a,b){
+                return b['id'] - a['id'];
+              });
+            }
           }
-          this.commentData = response['data'];
-          this.commentData.sort(function(a,b){
+          this.answerData.sort(function(a,b){
             return b['id'] - a['id'];
           });
+          this.toggleReplyBox();
         }
       },
       error => {
@@ -89,27 +108,51 @@ export class CommentComponent implements OnInit {
     )
   }
 
-  checkSubmit( event ){
+  checkSubmit( event, parentId = null ){
     if( event.keyCode == 13 ) {
-      this.submitComment();
+      console.log( parentId );
+      this.submitComment( parentId );
     }
   }
 
-  submitComment(){
-    console.log( this.commentText );
+  submitComment( parentId = null ){
     var postData = {};
     postData['post_id'] = this.mcph;
     postData['text'] = this.commentText;
+    if( parentId != null ){
+      postData['parent_id'] = parentId;
+    }
     this.http.post( REQUEST_BASE_URL + '/comments/submit', postData ).subscribe(
       response => {
         console.log( response );
         if( response["error"] == 0 ){
           this.commentText = "";
           this.getComments( this.mcph );
-        } 
+        }
       },
       err => console.log(err)
     );
   }
 
+  getCommentData( parentId ){
+    // console.log( this.commentData );
+    if( this.commentData[ parentId ] )
+      return this.commentData[ parentId ];
+    else
+      return null;
+  }
+
+  showReplyBox( parentId ){
+    if( this.replyBox && this.replyBox[ parentId ] ){
+      return this.replyBox[ parentId ];
+    } else {
+      return null;
+    }
+  }
+
+  toggleReplyBox( parentId = null ){
+    if( !parentId && this.replyBox && this.replyBox[ parentId ] ){
+      this.replyBox[ parentId ] = !this.replyBox[ parentId ];
+    }
+  }
 }

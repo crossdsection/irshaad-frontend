@@ -42,9 +42,9 @@ export class EnactCardComponent implements OnInit {
       }
 
       // Setting up image array for carousel
-      for(let file in this._post['files']['images']) {
-        this.imageList.push(file['filepath']);
-      }
+      // for(let file in this._post['files']['images']) {
+      //   this.imageList.push(file['filepath']);
+      // }
     }
   };
 

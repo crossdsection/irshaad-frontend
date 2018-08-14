@@ -29,31 +29,28 @@ export class HeaderProfileIconComponent implements OnInit {
   ngOnInit() {
     this.componentCommunicationService.headerProfileIconComponentData.subscribe((data: any) => {
       this.loggedIn = data;
-      // Getting User Info
+      this.checkLoggedIn();
+    }, (error: any) => {
+      this.componentCommunicationService.userLogout();
+    });
+    this.checkLoggedIn();
+  }
+
+  checkLoggedIn(){
+    var authData = localStorage.getItem('auth_data');
+    if( authData ){
       this.http.get(REQUEST_BASE_URL + "user/getinfo").subscribe((response: any) => {
+        this.userId = response.data[0].id;
         this.loggedIn = true;
         this.profilePicture = REQUEST_BASE_URL + response.data[0].profilepic;
-        }, 
+        },
         error => {
         if(error.status) {
           this.loggedIn = false;
           this.componentCommunicationService.userLogout();
         }
       });
-    }, (error: any) => {
-      this.componentCommunicationService.userLogout();
-    });
-
-    this.http.get(REQUEST_BASE_URL + "user/getinfo").subscribe((response: any) => {
-      this.userId = response.data[0].id;
-      this.loggedIn = true;
-      }, 
-      error => {
-      if(error.status) {
-        this.loggedIn = false;
-        this.componentCommunicationService.userLogout();
-      }
-    });
+    }
   }
 
   // Click Event Handler

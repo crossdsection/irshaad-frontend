@@ -5,6 +5,7 @@ import { ComponentCommunicationService } from '../component-communication.servic
 
 import { REQUEST_BASE_URL } from '../globals';
 import { GeolocationService } from '../services/geolocation.service';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-login-popup',
@@ -38,7 +39,7 @@ export class LoginPopupComponent implements OnInit {
   // Component Variable
   currentForm = "login"; // can be 'login', 'join', 'forgotPassword', 'resetCode', 'newPassword'
 
-  constructor(private elementRef: ElementRef, private http: HttpClient, private componentCommunicationService: ComponentCommunicationService, private geolocationService: GeolocationService) {
+  constructor(private elementRef: ElementRef, private http: HttpClient, private componentCommunicationService: ComponentCommunicationService, private geolocationService: GeolocationService, private router: Router) {
     this.element = this.elementRef.nativeElement;
     document.body.appendChild(this.element);
   }
@@ -75,7 +76,6 @@ export class LoginPopupComponent implements OnInit {
           localStorage.setItem("auth_data", JSON.stringify(response.data));
           this.componentCommunicationService.editLoggedInStatus(true);
           this.loginMessage = "Login Successful";
-
           // Changing Current location to favorite home location.
           // Set User's home location if user is logged in.
           this.http.get(REQUEST_BASE_URL + 'favlocation/get?isHome=1').subscribe((response: any) => {
@@ -199,7 +199,7 @@ export class LoginPopupComponent implements OnInit {
     this.http.post( REQUEST_BASE_URL + "user/update", dataToSend ).subscribe((response: any) => {
       if( response.error == 0 ) {
         this.loginMessage = response.message;
-        location.reload();
+        this.router.navigate(['']);
       }
       if( response.error == 1 ) {
         this.loginMessage = "Please try again later.";

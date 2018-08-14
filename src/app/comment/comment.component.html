@@ -1,28 +1,68 @@
-<div class="container">
-  <div>
-    <fieldset class="fieldClass textField">
-      <div class="fieldDiv">
-        <textarea placeholder="Write your Answer here." [(ngModel)]="commentText" name="commentText" (keydown)="checkSubmit($event)" class="fieldTextArea"></textarea>
-      </div>
-      <div>
-        <span class="commentInstructions">Press Enter to post.</span>
-      </div>
-    </fieldset>
-  </div>
-
+<div class="comments-container">
   <div class="row">
-    <div class="col-md-12" *ngFor="let comment of commentData; let k = index">
-      <div class="comment-block" >
-        <!-- Profile Pic area -->
-        <div class="profile-picture">
-          <img [src]="comment.user.profilepic" />
+    <div class="col-md-12">
+      <fieldset class="fieldClass textField">
+        <div class="fieldDiv">
+          <textarea placeholder="Write your Answer here." [(ngModel)]="answerText" name="commentText" (keydown)="checkSubmit($event)" class="fieldTextArea"></textarea>
         </div>
-
-        <div class="detail">
-          <div class="name">{{ comment.user.name }}</div> - {{ comment.dashTimeAgo }}
-          <div class="comment-string">{{ comment.text }}</div>
+        <div>
+          <span class="commentInstructions">Press Enter to post.</span>
         </div>
-      </div>
+      </fieldset>
     </div>
   </div>
+
+	<ul id="comments-list" class="comments-list">
+		<li *ngFor="let answer of answerData; let k = index">
+			<div class="comment-main-level">
+				<!-- Avatar -->
+				<div class="comment-avatar"><img [src]="answer.user.profilepic" alt=""></div>
+				<!-- Contenedor del Comentario -->
+				<div class="comment-box">
+					<div class="comment-head">
+						<h6 class="comment-name by-author"><a href="#">{{ answer.user.name }}</a></h6>
+						<span>{{ answer.dashTimeAgo }}</span>
+						<i (click)="toggleReplyBox( answer.id )" class="fa fa-reply"></i>
+						<i class="fa fa-heart"></i>
+					</div>
+					<div class="comment-content">
+						{{ answer.text }}
+					</div>
+				</div>
+			</div>
+      <ul class="comments-list reply-list" *ngIf="showReplyBox( answer.id )">
+        <div class="row">
+          <div class="col-md-12">
+            <fieldset class="fieldClass textField">
+              <div class="fieldDiv">
+                <textarea placeholder="Write your Answer here." [(ngModel)]="commentText" name="commentText" (keydown)="checkSubmit( $event, answer.id )" class="fieldTextArea"></textarea>
+              </div>
+              <div>
+                <span class="commentInstructions">Press Enter to post.</span>
+              </div>
+            </fieldset>
+          </div>
+        </div>
+      </ul>
+			<!-- Respuestas de los comentarios -->
+			<ul class="comments-list reply-list" *ngIf="getCommentData( answer.id ) && showReplyBox( answer.id )">
+				<li *ngFor="let comment of getCommentData( answer.id )">
+					<!-- Avatar -->
+					<div class="comment-avatar"><img [src]="comment.user.profilepic" alt=""></div>
+					<!-- Contenedor del Comentario -->
+					<div class="comment-box">
+						<div class="comment-head">
+							<h6 class="comment-name"><a href="#">{{ comment.user.name }}</a></h6>
+							<span>{{ comment.dashTimeAgo }}</span>
+							<i class="fa fa-reply"></i>
+							<i class="fa fa-heart"></i>
+						</div>
+						<div class="comment-content">
+							{{ comment.text }}
+						</div>
+					</div>
+				</li>
+			</ul>
+		</li>
+	</ul>
 </div>

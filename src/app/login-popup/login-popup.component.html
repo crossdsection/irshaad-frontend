@@ -120,8 +120,7 @@
           <form (ngSubmit)="handleVerify()">
             <div class="row">
               <div class="form-group col-md-12">
-                <h6 class="text-center">Enter Your Reset Code</h6>
-                <input type="text" [(ngModel)]="reset" name="reset" class="form-control" placeholder="Reset Code" required/>
+                <input type="text" [(ngModel)]="reset" name="reset" class="form-control" placeholder="Enter Code" required/>
               </div>
             </div>
             <div class="form-group">
@@ -136,12 +135,11 @@
         <span class="reset-code-area" *ngIf="currentForm == 'newPassword'">
           <div class="container-fluid text-center">
             <img src="assets/img/logo.PNG" class="img img-responsive" />
-            <h5>Reset Code</h5>
+            <h5>RESET PASSWORD</h5>
           </div>
           <form (ngSubmit)="handleChangePassword()">
             <div class="row">
               <div class="form-group col-md-12">
-                <h6 class="text-center">New Password</h6>
                 <input type="password" [(ngModel)]="newPassword" name="newPassword" class="form-control" placeholder="New Password" required/>
               </div>
               <!-- <div class="form-group col-md-12">

@@ -33,10 +33,8 @@ export class ResetpasswordComponent implements OnInit {
     let dataToSend = {
       "email": this.email,
       "token" : this.token
-    }
-    console.log( dataToSend);
+    };
     this.http.post( REQUEST_BASE_URL + "user/verify", dataToSend ).subscribe((response: any) => {
-      console.log( response );
       if( response.error == 0 ) {
         localStorage.setItem( "auth_data", JSON.stringify( response.data ) );
         this.showLoginPopup();
