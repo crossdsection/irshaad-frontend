@@ -21,11 +21,8 @@
     "@angular/platform-browser": "^6.0.3",
     "@angular/platform-browser-dynamic": "^6.0.3",
     "@angular/router": "^6.0.3",
-<<<<<<< HEAD
     "angular4-carousel": "^3.1.8",
-=======
     "@ng-bootstrap/ng-bootstrap": "^3.0.0",
->>>>>>> 41e667aede9abe299b55a766a2e6d4f1879dc008
     "bootstrap": "^4.1.1",
     "chart.js": "^2.7.2",
     "core-js": "^2.5.4",
