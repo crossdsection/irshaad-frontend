@@ -4,6 +4,7 @@ import { HttpClient, HttpEventType } from '@angular/common/http';
 import { REQUEST_BASE_URL } from '../globals';
 import { HttpService } from '../services/http.service';
 import * as $ from 'jquery';
+import { ComponentCommunicationService } from '../component-communication.service';
 
 @Component({
   selector: 'app-profile',
@@ -32,7 +33,7 @@ export class ProfileComponent implements OnInit {
   // To edit profile
   isEditing: boolean = false;
 
-  constructor(private rightOverlayCommunicationService: RightOverlayCommunicationService, private elementRef: ElementRef, private http: HttpClient, private httpService: HttpService) {
+  constructor(private rightOverlayCommunicationService: RightOverlayCommunicationService, private elementRef: ElementRef, private http: HttpClient, private httpService: HttpService, private componentCommunicationService: ComponentCommunicationService) {
     this.user = new User();
     this.element = this.elementRef.nativeElement;
   }
@@ -90,6 +91,7 @@ export class ProfileComponent implements OnInit {
         this.user.phone = response.data[0].phone;
       },
       (error) => {
+        this.componentCommunicationService.userLogout();
       }
     );
   }

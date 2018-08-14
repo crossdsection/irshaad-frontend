@@ -2,6 +2,7 @@ import { Component, OnChanges, Input, ComponentFactoryResolver, ViewChild, ViewC
 import { HttpClient } from '@angular/common/http';
 import { REQUEST_BASE_URL } from '../globals';
 import { LoginPopupComponent } from '../login-popup/login-popup.component';
+import { ComponentCommunicationService } from '../component-communication.service';
 
 @Component({
   selector: 'app-enact-cards',
@@ -22,13 +23,14 @@ export class EnactCardsComponent implements OnChanges {
   @ViewChild("loginPopupContainer", {read: ViewContainerRef}) loginPopupContainer;
   @ViewChild("feedContainer", {read: ViewContainerRef}) feedContainer;
 
-  constructor( private http: HttpClient, private componentFactoryResolver: ComponentFactoryResolver, private el : ElementRef ) {
+  constructor( private http: HttpClient, private componentFactoryResolver: ComponentFactoryResolver, private el : ElementRef, private componentCommunicationService: ComponentCommunicationService ) {
     this.http.get(REQUEST_BASE_URL + "user/getinfo").subscribe((response: any) => {
       this._loggedIn = true;
       },
       error => {
       if(error.status) {
         this._loggedIn = false;
+        this.componentCommunicationService.userLogout();
       }
     });
   }

@@ -22,6 +22,7 @@ export class ChangeLocationComponent implements OnInit {
 
   private element: any;
   elementDisplay = "block";
+  userLoggedIn = false;
 
   // For AGM Test
   lat: number = 0;
@@ -103,6 +104,9 @@ export class ChangeLocationComponent implements OnInit {
     // Initial element stuff
     this.element.style.display = this.elementDisplay;
     $(".app-change-location-fav-location-icon").css("color", "#ff5722");
+
+    this.userLoggedIn = this.geolocationService.isUserLoggedIn();
+    this.toggleSection('listFavLocation');
 
   }
 

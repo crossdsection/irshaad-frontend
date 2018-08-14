@@ -3,6 +3,7 @@ import { HttpClient, HttpEventType } from '@angular/common/http';
 import * as $ from 'jquery';
 import { REQUEST_BASE_URL, fileJSON } from '../globals';
 import { HttpService } from '../services/http.service';
+import { ComponentCommunicationService } from '../component-communication.service';
 
 @Component({
   selector: 'app-enact-popup',
@@ -46,7 +47,7 @@ export class EnactPopupComponent implements OnInit {
   profilePic: string = "assets/img/giphy.webp";
   userName: string;
 
-  constructor(private elementRef: ElementRef, private http: HttpClient, private httpService: HttpService) {
+  constructor(private elementRef: ElementRef, private http: HttpClient, private httpService: HttpService, private componentCommunicationService: ComponentCommunicationService) {
     this.element = this.elementRef.nativeElement;
     document.body.appendChild(this.element);
   }
@@ -64,6 +65,7 @@ export class EnactPopupComponent implements OnInit {
       }, 
       error => {
       if(error.status) {
+        this.componentCommunicationService.userLogout();
         // Do Something
       }
     });

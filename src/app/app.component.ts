@@ -85,7 +85,7 @@ export class AppComponent {
           // Changing Breadcrumb Bar Location Context
           this.componentCommunicationService.editBreadcrumbBarLocationContext();
 
-          // location.reload();
+          location.reload();
         });
       });
     }

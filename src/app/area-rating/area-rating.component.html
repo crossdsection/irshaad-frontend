@@ -1,11 +1,14 @@
-<div class="container-fluid" style="text-align:center" *ngIf="showRatingDiv" [@slideInOut]>
+<div class="container-fluid" style="text-align:center" *ngIf="showRatingDiv" [@simpleFadeAnimation]>
   <div class="row">
     <div class="col-md-12">
       <h2> {{ location }} </h2>
     </div>
   </div>
-  <div class="row">
-    <div class="col-md-12" *ngIf="areaRatingVariables.goodPercent != 0 || areaRatingVariables.badPercent != 0">
+  <div class="row" style="margin-bottom: 20px;">
+    <div class="col-md-3" *ngIf="areaRatingVariables.goodPercent != 0 || areaRatingVariables.badPercent != 0">
+        <!-- NO data -->
+      </div>
+    <div class="col-md-6" *ngIf="areaRatingVariables.goodPercent != 0 || areaRatingVariables.badPercent != 0">
       <div>
         <canvas baseChart
             [data]="pieChartData"
@@ -16,6 +19,9 @@
             (chartHover)="chartHovered($event)"
             (chartClick)="chartClicked($event)"></canvas>
       </div>
+    </div>
+    <div class="col-md-3" *ngIf="areaRatingVariables.goodPercent != 0 || areaRatingVariables.badPercent != 0">
+      <!-- NO data -->
     </div>
     <div class="col-md-12" *ngIf="areaRatingVariables.goodPercent == 0 && areaRatingVariables.badPercent == 0">
       <h4>No Data Available</h4>

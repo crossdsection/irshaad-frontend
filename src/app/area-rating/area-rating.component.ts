@@ -10,14 +10,21 @@ import { REQUEST_BASE_URL } from '../globals';
   templateUrl: './area-rating.component.html',
   styleUrls: ['./area-rating.component.css'],
   animations: [
-    trigger('slideInOut', [
+    // the fade-in/fade-out animation.
+    trigger('simpleFadeAnimation', [
+
+      // the "in" style determines the "resting" state of the element when it is visible.
+      // state('in', style({opacity: 1})),
+
+      // fade in when created. this could also be written as transition('void => *')
       transition(':enter', [
-        style({transform: 'translateY(-100%)'}),
-        animate('1000ms ease-in', style({transform: 'translateY(0%)'}))
+        style({opacity: 0}),
+        animate(600 )
       ]),
-      transition(':leave', [
-        animate('1000ms ease-in', style({transform: 'translateY(-100%)'}))
-      ])
+
+      // fade out when destroyed. this could also be written as transition('void => *')
+      transition(':leave',
+        animate(600, style({opacity: 0})))
     ])
   ]
 })
@@ -106,6 +113,9 @@ export class AreaRatingComponent implements OnInit {
     let baseAPI = REQUEST_BASE_URL + 'location/get';
     let getURI = '?level=' + level;
     for( var key in coordinates ){
+      if( key == 'level' ){
+        continue;
+      }
       if( key != 'countryShortName' ){
         getURI = getURI + '&' + key + '=' + encodeURIComponent( coordinates[ key ] );
       } else {

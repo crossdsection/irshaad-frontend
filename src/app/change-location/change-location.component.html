@@ -11,7 +11,7 @@
       <button (click)="searchLocation()" class="app-change-location-search-icon"><i class="fa fa-search"></i></button>
     </div>
     <div class="col-md-1">
-      <button (click)="toggleSection('listFavLocation')" class="app-change-location-fav-location-icon"><i class="fa fa-star"></i></button>
+      <button *ngIf="userLoggedIn" (click)="toggleSection('listFavLocation')" class="app-change-location-fav-location-icon"><i class="fa fa-star"></i></button>
     </div>
     <!-- <div class="col-md-1">
       <button (click)="toggleSection('enterLocation')" class="app-change-location-enter-location-icon"><i class="fa fa-arrow-down"></i></button>

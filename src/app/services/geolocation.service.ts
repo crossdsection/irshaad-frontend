@@ -94,4 +94,9 @@ export class GeolocationService {
 		return locationResolved;
 	}
 
+	isUserLoggedIn() {
+		let auth_data = JSON.parse(localStorage.getItem('auth_data'));
+		return !(auth_data == null);
+	}
+
 }

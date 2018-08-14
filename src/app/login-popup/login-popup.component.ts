@@ -43,7 +43,7 @@ export class LoginPopupComponent implements OnInit {
   }
 
   ngOnInit() {
-    document.getElementById("login-popup-component-modal").style.height = 440 + "px"
+    document.getElementById("login-popup-component-modal").style.height = 440 + "px";
   }
 
   closeThisPopup() {
@@ -74,6 +74,9 @@ export class LoginPopupComponent implements OnInit {
           localStorage.setItem("auth_data", JSON.stringify(response.data));
           this.componentCommunicationService.editLoggedInStatus(true);
           this.loginMessage = "Login Successful";
+
+          // Changing Current location to favorite home location.
+
           location.reload();
         } else {
           this.loginMessage = "Invalid Login";

@@ -3,6 +3,7 @@ import { RightOverlayCommunicationService } from '../services/right-overlay-comm
 import { REQUEST_BASE_URL } from '../globals';
 import { HttpClient } from '@angular/common/http';
 import { LoginPopupComponent } from '../login-popup/login-popup.component';
+import { ComponentCommunicationService } from '../component-communication.service';
 
 @Component({
   selector: 'app-enact-detail',
@@ -32,7 +33,7 @@ export class EnactDetailComponent implements OnInit {
 
   @ViewChild("loginPopupContainer", {read: ViewContainerRef}) loginPopupContainer;
 
-  constructor(private http: HttpClient, private rightOverlayCommunicationService: RightOverlayCommunicationService,  private elementRef: ElementRef, private componentFactoryResolver: ComponentFactoryResolver ) {
+  constructor(private http: HttpClient, private rightOverlayCommunicationService: RightOverlayCommunicationService,  private elementRef: ElementRef, private componentFactoryResolver: ComponentFactoryResolver, private componentCommunicationService: ComponentCommunicationService ) {
     this.element = this.elementRef.nativeElement;
 
     this.http.get(REQUEST_BASE_URL + "user/getinfo").subscribe((response: any) => {
@@ -41,6 +42,7 @@ export class EnactDetailComponent implements OnInit {
       error => {
       if(error.status) {
         this._loggedIn = false;
+        this.componentCommunicationService.userLogout();
       }
     });
    }

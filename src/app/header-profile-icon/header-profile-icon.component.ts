@@ -37,8 +37,11 @@ export class HeaderProfileIconComponent implements OnInit {
         error => {
         if(error.status) {
           this.loggedIn = false;
+          this.componentCommunicationService.userLogout();
         }
       });
+    }, (error: any) => {
+      this.componentCommunicationService.userLogout();
     });
 
     this.http.get(REQUEST_BASE_URL + "user/getinfo").subscribe((response: any) => {
@@ -48,6 +51,7 @@ export class HeaderProfileIconComponent implements OnInit {
       error => {
       if(error.status) {
         this.loggedIn = false;
+        this.componentCommunicationService.userLogout();
       }
     });
   }
