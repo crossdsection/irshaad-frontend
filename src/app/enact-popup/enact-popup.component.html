@@ -1,194 +1,194 @@
 <div class="dark-overlay">
-    <div class="modal">
-      <div class="modal-body">
-          <button class="close" (click)="closeThisPopup()"><i class="fa fa-close"></i></button>
-          <div class="text-center" [ngStyle]="{'height': '100%', 'padding': '10px', 'color': '#ffffff', 'background': locationContextColor}">
-            <h3>{{ getSelectedLocation() }}</h3>
+  <div class="modal" style="overflow-y: scroll;">
+    <button class="close" (click)="closeThisPopup()"><i class="fa fa-close"></i></button>
+
+    <div class="text-center" [ngStyle]="{'padding': '10px', 'color': '#ffffff', 'background': locationContextColor}">
+      <h3>{{ getSelectedLocation() }}</h3>
+    </div>
+
+    <div class="row">
+      <div class="col-md-7">
+        <div class="row post-tab-area">
+          <div class="col-md-4">
+            <button class="tab-button court tab-button-active" (click)="setActiveForm('court')"><i class="fa fa-balance-scale" style="color: #264771;"></i>&nbsp;Courts</button>
           </div>
+          <div class="col-md-4">
+            <button class="tab-button discussion" (click)="setActiveForm('discussion')"><img src="assets/img/discussion_icon.svg" style="width: 18px; position: relative; top: -2px;" >&nbsp;Discussions</button>
+          </div>
+          <div class="col-md-4">
+            <button class="tab-button news" (click)="setActiveForm('news')"><i class="fa fa-newspaper-o" style="color: #264771;"></i>&nbsp;News</button>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <!-- Form -->
+            <form (ngSubmit)="submitPostData()">
+              <div class="form-group">
+                <label>Title</label>
+                <input [(ngModel)]="title" [ngModelOptions]="{standalone: true}" type="text" placeholder="Enter Title" class="form-control" maxlength="90"/>
+                <h6 style="text-align: right; color: grey; font-weight: 400; font-size: 12px; padding: 0 0.1rem;">100</h6>
+              </div>
+              <div class="form-group">
+                <label>Description</label>
+                <textarea [(ngModel)]="details" [ngModelOptions]="{standalone: true}" placeholder="Enter Description" class="form-control" rows="9"></textarea>
+              </div>
+              <div class="form-group">
+                <label style="display: block;">Add Media</label>
+                <span id="preview-upload-area">
+                  <!-- <label class="file-upload-label">&nbsp; &nbsp;
+                    <span class="file-upload-label-close-icon"><i class="fa fa-close"></i></span>
+                  </label> -->
+                </span>
+                <label for="file-upload" class="file-upload-label" title="Choose file"><i class="fa fa-plus"></i></label>
+                <input type="file" class="form-control" id="file-upload" (change)="onFileChange($event)"/>
+              </div>
+              <div *ngIf="activeForm == 'court'" class="form-group option-area">
+                <div class="row text-center option-area-row" *ngIf="pollInputCount >= 2">
+                  <div class="col-sm-1">
+                    <button><i class="fa fa-minus-circle"></i></button>
+                  </div>
+                  <div class="col-sm-11">
+                    <input type="text" [(ngModel)]="polls[0]" [ngModelOptions]="{standalone: true}" placeholder="Agree" class="form-control" maxlength="30"/>
+                  </div>
+                </div> 
+
+                <div class="row text-center option-area-row" *ngIf="pollInputCount >= 2">
+                  <div class="col-sm-1">
+                    <button><i class="fa fa-minus-circle"></i></button>
+                  </div>
+                  <div class="col-sm-11">
+                    <input type="text" [(ngModel)]="polls[1]" [ngModelOptions]="{standalone: true}" placeholder="Disagree" class="form-control" maxlength="30"/>
+                  </div>
+                </div>
+                
+                <div class="row text-center option-area-row" *ngIf="pollInputCount >= 3">
+                  <div class="col-sm-1">
+                    <button (click)="removePollInput(2)" style="color: #80bdff;"><i class="fa fa-minus-circle"></i></button>
+                  </div>
+                  <div class="col-sm-11">
+                    <input type="text" [(ngModel)]="polls[2]" [ngModelOptions]="{standalone: true}" placeholder="Enter Option" class="form-control" maxlength="30"/>
+                  </div>
+                </div>
+
+                <div class="row text-center option-area-row" *ngIf="pollInputCount >= 4">
+                  <div class="col-sm-1">
+                    <button (click)="removePollInput(3)" style="color: #80bdff;"><i class="fa fa-minus-circle"></i></button>
+                  </div>
+                  <div class="col-sm-11">
+                    <input type="text" [(ngModel)]="polls[3]" [ngModelOptions]="{standalone: true}" placeholder="Enter Option" class="form-control" maxlength="30"/>
+                  </div>
+                </div>
+
+                <div class="row text-center option-area-row" *ngIf="pollInputCount >= 5">
+                  <div class="col-sm-1">
+                    <button (click)="removePollInput(4)" style="color: #80bdff;"><i class="fa fa-minus-circle"></i></button>
+                  </div>
+                  <div class="col-sm-11">
+                    <input type="text" [(ngModel)]="polls[4]" [ngModelOptions]="{standalone: true}" placeholder="Enter Option" class="form-control" maxlength="30"/>
+                  </div>
+                </div>
+
+                <div class="row option-area-row" *ngIf="pollInputCount < 5">
+                  <div class="col-sm-1 text-center ">
+                    <button (click)="addPollInput()" style="color: #80bdff;"><i class="fa fa-plus-circle"></i></button>
+                  </div>
+                  <div class="col-sm-11" style="padding: 0.375rem 0.75rem;">
+                    <a (click)="addPollInput()" href="#">Add option</a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row option-area-row post-options">
+                <div class="col-md-9" style="padding: 0;">
+                  <!-- <span *ngIf="activeForm == 'court'">CC: <input type="text" [(ngModel)]="cc" [ngModelOptions]="{standalone: true}" placeholder="Add change.org Email Option" class="form-control" style="display: inline-block; width: initial;"/></span> -->
+                </div>
+                <div class="col-md-3" style="text-align: right; padding: 0;">
+                  <button type="button" title="Go Anonymous" (click)="toggleAnonymity()" [ngStyle]="{'color': anonymousIconColor}" ><i class="fa fa-user-secret"></i></button>
+                  <button type="button" title="Save as Draft" (click)="toggleDraftStatus()" [ngStyle]="{'color': draftIconColor}"><i class="fa fa-file-o"></i></button>
+                </div>
+              </div>
+
+              <div class="row option-area-row">
+                <div class="col-md-12" style="padding-left: 0;">
+                  <button type="submit" class="btn btn-primary form-control">Submit</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
-
-      <div class="row edit-area">
-        <div class="col-md-7" style="overflow-y: scroll;">
-          <div class="row post-tab-area">
-            <div class="col-md-4">
-              <button class="tab-button court tab-button-active" (click)="setActiveForm('court')"><i class="fa fa-balance-scale" style="color: #264771;"></i>&nbsp;Courts</button>
-            </div>
-            <div class="col-md-4">
-              <button class="tab-button discussion" (click)="setActiveForm('discussion')"><img src="assets/img/discussion_icon.svg" style="width: 18px; position: relative; top: -2px;" >&nbsp;Discussions</button>
-            </div>
-            <div class="col-md-4">
-              <button class="tab-button news" (click)="setActiveForm('news')"><i class="fa fa-newspaper-o" style="color: #264771;"></i>&nbsp;News</button>
+      <!-- Preview -->
+      <div class="col-md-5">
+        <div class="preview">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="row">
+                <div class="col-md-2">
+                  <img src="{{profilePic}}" class="poll-card-profile-pic"/>
+                </div>
+                <div class="col-md-6">
+                  <h5 style="margin-bottom: -7px;">
+                    {{userName}}
+                  </h5>
+                  <small>{{ getSelectedLocation() }}</small>
+                </div>
+                <div class="col-md-4" style="line-height: 1;">
+                  <!-- <small>2018-10-20</small> at
+                  <br />
+                  <small>14:20</small> -->
+                </div>
+              </div>
             </div>
           </div>
-
-          <!-- Form -->
-          <form (ngSubmit)="submitPostData()">
-            <div class="form-group">
-              <label>Title</label>
-              <input [(ngModel)]="title" [ngModelOptions]="{standalone: true}" type="text" placeholder="Enter Title" class="form-control" maxlength="90"/>
-              <h6 style="text-align: right; color: grey; font-weight: 400; font-size: 12px; padding: 0 0.1rem;">100</h6>
+          <div class="row">
+            <div class="col-md-12">
+              <h3 class="card-title">{{ title }}</h3>
             </div>
-            <div class="form-group">
-              <label>Description</label>
-              <textarea [(ngModel)]="details" [ngModelOptions]="{standalone: true}" placeholder="Enter Description" class="form-control" rows="9"></textarea>
+          </div>
+          <div class="row">
+            <div class="col-md-12 text-center" style="overflow: hidden;">
+              <img class="card-img-top" *ngIf="previewImageSrc != ''" src="{{ previewImageSrc }}" alt="Card image cap">
             </div>
-            <div class="form-group">
-              <label style="display: block;">Add Media</label>
-              <span id="preview-upload-area">
-                <!-- <label class="file-upload-label">&nbsp; &nbsp;
-                  <span class="file-upload-label-close-icon"><i class="fa fa-close"></i></span>
-                </label> -->
-              </span>
-              <label for="file-upload" class="file-upload-label" title="Choose file"><i class="fa fa-plus"></i></label>
-              <input type="file" class="form-control" id="file-upload" (change)="onFileChange($event)"/>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <p class="card-text" style="padding: 5px 0;">
+                {{(details.length > 200)? (details | slice:0:200)+'..':(details)}}
+              </p>
             </div>
-            <div *ngIf="activeForm == 'court'" class="form-group option-area">
-              <div class="row text-center option-area-row" *ngIf="pollInputCount >= 2">
-                <div class="col-sm-1">
-                  <button><i class="fa fa-minus-circle"></i></button>
-                </div>
-                <div class="col-sm-11">
-                  <input type="text" [(ngModel)]="polls[0]" [ngModelOptions]="{standalone: true}" placeholder="Agree" class="form-control" maxlength="30"/>
-                </div>
-              </div> 
-
-              <div class="row text-center option-area-row" *ngIf="pollInputCount >= 2">
-                <div class="col-sm-1">
-                  <button><i class="fa fa-minus-circle"></i></button>
-                </div>
-                <div class="col-sm-11">
-                  <input type="text" [(ngModel)]="polls[1]" [ngModelOptions]="{standalone: true}" placeholder="Disagree" class="form-control" maxlength="30"/>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="row" *ngIf="pollInputCount >= 2 && polls[0] != ''">
+                <div class="col-md-12">
+                  <button class="option" title="{{ polls[0] }}">{{(polls[0].length > 30)? (polls[0] | slice:0:30)+'..':(polls[0])}}</button>
                 </div>
               </div>
-              
-              <div class="row text-center option-area-row" *ngIf="pollInputCount >= 3">
-                <div class="col-sm-1">
-                  <button (click)="removePollInput(2)" style="color: #80bdff;"><i class="fa fa-minus-circle"></i></button>
-                </div>
-                <div class="col-sm-11">
-                  <input type="text" [(ngModel)]="polls[2]" [ngModelOptions]="{standalone: true}" placeholder="Enter Option" class="form-control" maxlength="30"/>
+              <div class="row" *ngIf="pollInputCount >= 2 && polls[1] != ''">
+                <div class="col-md-12">
+                  <button class="option" title="{{ polls[1] }}">{{(polls[1].length > 30)? (polls[1] | slice:0:30)+'..':(polls[1])}}</button>
                 </div>
               </div>
-
-              <div class="row text-center option-area-row" *ngIf="pollInputCount >= 4">
-                <div class="col-sm-1">
-                  <button (click)="removePollInput(3)" style="color: #80bdff;"><i class="fa fa-minus-circle"></i></button>
-                </div>
-                <div class="col-sm-11">
-                  <input type="text" [(ngModel)]="polls[3]" [ngModelOptions]="{standalone: true}" placeholder="Enter Option" class="form-control" maxlength="30"/>
+              <div class="row" *ngIf="pollInputCount >= 3">
+                <div class="col-md-12">
+                  <button class="option" title="{{ polls[2] }}">{{(polls[2].length > 30)? (polls[2] | slice:0:30)+'..':(polls[2])}}</button>
                 </div>
               </div>
-
-              <div class="row text-center option-area-row" *ngIf="pollInputCount >= 5">
-                <div class="col-sm-1">
-                  <button (click)="removePollInput(4)" style="color: #80bdff;"><i class="fa fa-minus-circle"></i></button>
-                </div>
-                <div class="col-sm-11">
-                  <input type="text" [(ngModel)]="polls[4]" [ngModelOptions]="{standalone: true}" placeholder="Enter Option" class="form-control" maxlength="30"/>
+              <div class="row" *ngIf="pollInputCount >= 4">
+                <div class="col-md-12">
+                  <button class="option" title="{{ polls[3] }}">{{(polls[3].length > 30)? (polls[3] | slice:0:30)+'..':(polls[3])}}</button>
                 </div>
               </div>
-
-              <div class="row option-area-row" *ngIf="pollInputCount < 5">
-                <div class="col-sm-1 text-center ">
-                  <button (click)="addPollInput()" style="color: #80bdff;"><i class="fa fa-plus-circle"></i></button>
-                </div>
-                <div class="col-sm-11" style="padding: 0.375rem 0.75rem;">
-                  <a (click)="addPollInput()" href="#">Add option</a>
-                </div>
-              </div>
-            </div>
-
-            <div class="row option-area-row post-options">
-              <div class="col-md-9" style="padding: 0;">
-                <!-- <span *ngIf="activeForm == 'court'">CC: <input type="text" [(ngModel)]="cc" [ngModelOptions]="{standalone: true}" placeholder="Add change.org Email Option" class="form-control" style="display: inline-block; width: initial;"/></span> -->
-              </div>
-              <div class="col-md-3" style="text-align: right; padding: 0;">
-                <button type="button" title="Go Anonymous" (click)="toggleAnonymity()" [ngStyle]="{'color': anonymousIconColor}" ><i class="fa fa-user-secret"></i></button>
-                <button type="button" title="Save as Draft" (click)="toggleDraftStatus()" [ngStyle]="{'color': draftIconColor}"><i class="fa fa-file-o"></i></button>
-              </div>
-            </div>
-
-            <div class="row option-area-row">
-              <div class="col-md-12" style="padding-left: 0;">
-                <button type="submit" class="btn btn-primary form-control">Submit</button>
-              </div>
-            </div>
-          </form>
-
-        </div>
-        <!-- Preview -->
-        <div class="col-md-5" style="overflow-y: scroll;">
-          <div class="preview">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="row">
-                  <div class="col-md-2">
-                    <img src="{{profilePic}}" class="poll-card-profile-pic"/>
-                  </div>
-                  <div class="col-md-6">
-                    <h5 style="margin-bottom: -7px;">
-                      {{userName}}
-                    </h5>
-                    <small>{{ getSelectedLocation() }}</small>
-                  </div>
-                  <div class="col-md-4" style="line-height: 1;">
-                    <!-- <small>2018-10-20</small> at
-                    <br />
-                    <small>14:20</small> -->
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12">
-                <h3 class="card-title">{{ title }}</h3>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12 text-center" style="overflow: hidden;">
-                <img class="card-img-top" *ngIf="previewImageSrc != ''" src="{{ previewImageSrc }}" alt="Card image cap">
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12">
-                <p class="card-text" style="padding: 5px 0;">
-                  {{(details.length > 200)? (details | slice:0:200)+'..':(details)}}
-                </p>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12">
-                <div class="row" *ngIf="pollInputCount >= 2 && polls[0] != ''">
-                  <div class="col-md-12">
-                    <button class="option" title="{{ polls[0] }}">{{(polls[0].length > 30)? (polls[0] | slice:0:30)+'..':(polls[0])}}</button>
-                  </div>
-                </div>
-                <div class="row" *ngIf="pollInputCount >= 2 && polls[1] != ''">
-                  <div class="col-md-12">
-                    <button class="option" title="{{ polls[1] }}">{{(polls[1].length > 30)? (polls[1] | slice:0:30)+'..':(polls[1])}}</button>
-                  </div>
-                </div>
-                <div class="row" *ngIf="pollInputCount >= 3">
-                  <div class="col-md-12">
-                    <button class="option" title="{{ polls[2] }}">{{(polls[2].length > 30)? (polls[2] | slice:0:30)+'..':(polls[2])}}</button>
-                  </div>
-                </div>
-                <div class="row" *ngIf="pollInputCount >= 4">
-                  <div class="col-md-12">
-                    <button class="option" title="{{ polls[3] }}">{{(polls[3].length > 30)? (polls[3] | slice:0:30)+'..':(polls[3])}}</button>
-                  </div>
-                </div>
-                <div class="row" *ngIf="pollInputCount >= 5">
-                  <div class="col-md-12">
-                    <button class="option" title="{{ polls[4] }}">{{(polls[4].length > 30)? (polls[4] | slice:0:30)+'..':(polls[4])}}</button>
-                  </div>
+              <div class="row" *ngIf="pollInputCount >= 5">
+                <div class="col-md-12">
+                  <button class="option" title="{{ polls[4] }}">{{(polls[4].length > 30)? (polls[4] | slice:0:30)+'..':(polls[4])}}</button>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <!-- End Preview -->
-      </div>      
-       
+      </div>
     </div>
   </div>
+</div>
