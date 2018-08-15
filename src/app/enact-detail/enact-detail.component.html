@@ -54,7 +54,7 @@
         </div>
 
         <div class="row" *ngIf="post.files != null">
-          <ngb-carousel (click)="openEnactDetails($event)">
+          <ngb-carousel>
             <ng-template ngbSlide *ngFor="let image of post.files.images" [id]="image.id">
               <img class="card-img-top" [src]="image.filepath"  alt="No Image">
             </ng-template>

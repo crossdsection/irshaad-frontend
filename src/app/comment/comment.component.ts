@@ -82,12 +82,12 @@ export class CommentComponent implements OnInit {
           for( var i in response['data'] ){
             response['data'][i].user.profilepic = REQUEST_BASE_URL + response['data'][i].user.profilepic;
             response['data'][i]['dashTimeAgo'] = this.getTimeDiff( response['data'][i].created );
-            if( parentId == null ){
+            if( response['data'][i]['parent_id'] == 0 ){
               this.answerData.push( response['data'][i] );
               this.replyBox[ response['data'][i]['id'] ] = false;
               this.getComments( postId, response['data'][i]['id'] );
             } else {
-              if( !this.commentData[ response['data'][i]['parent_id'] ] ){
+              if( this.commentData[ response['data'][i]['parent_id'] ] == null ){
                 this.commentData[ response['data'][i]['parent_id'] ] = [];
               }
               this.commentData[ response['data'][i]['parent_id'] ].push( response['data'][i] );
@@ -141,7 +141,7 @@ export class CommentComponent implements OnInit {
   }
 
   getCommentData( parentId ){
-    // console.log( this.commentData );
+    console.log( this.commentData );
     if( this.commentData[ parentId ] )
       return this.commentData[ parentId ];
     else
