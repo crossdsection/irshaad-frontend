@@ -6,7 +6,10 @@
           <textarea placeholder="Write your Answer here." [(ngModel)]="answerText" name="commentText" (keydown)="checkSubmit($event)" class="fieldTextArea"></textarea>
         </div>
         <div>
-          <span class="commentInstructions">Press Enter to post.</span>
+          <span class="commentInstructions">
+            Press Enter to post. <br>
+            <a class="comment-button btnBlueGreen btnBorder" (click)="submitComment()">Submit</a>
+          </span>
         </div>
       </fieldset>
     </div>
@@ -23,7 +26,7 @@
 						<h6 class="comment-name by-author"><a href="#">{{ answer.user.name }}</a></h6>
 						<span>{{ answer.dashTimeAgo }}</span>
 						<i (click)="toggleReplyBox( answer.id )" class="fa fa-reply"></i>
-						<i class="fa fa-heart"></i>
+						<!-- <i class="fa fa-heart"></i> -->
 					</div>
 					<div class="comment-content">
 						{{ answer.text }}
@@ -38,7 +41,10 @@
                 <textarea placeholder="Write your Answer here." [(ngModel)]="commentText" name="commentText" (keydown)="checkSubmit( $event, answer.id )" class="fieldTextArea"></textarea>
               </div>
               <div>
-                <span class="commentInstructions">Press Enter to post.</span>
+                <span class="commentInstructions">
+                  Press Enter to post. <br>
+                  <a class="comment-button btnBlueGreen btnBorder" (click)="submitComment( answer.id )">Submit</a>
+                </span>
               </div>
             </fieldset>
           </div>
@@ -54,8 +60,8 @@
 						<div class="comment-head">
 							<h6 class="comment-name"><a href="#">{{ comment.user.name }}</a></h6>
 							<span>{{ comment.dashTimeAgo }}</span>
-							<i class="fa fa-reply"></i>
-							<i class="fa fa-heart"></i>
+							<!-- <i class="fa fa-reply"></i> -->
+							<!-- <i class="fa fa-heart"></i> -->
 						</div>
 						<div class="comment-content">
 							{{ comment.text }}
