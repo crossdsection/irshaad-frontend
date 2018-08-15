@@ -41,3 +41,7 @@ button:focus {
 .file-upload-label:hover .file-upload-label-close-icon {
     display: inline-block;
 }
+
+.row {
+    margin: 0;
+}

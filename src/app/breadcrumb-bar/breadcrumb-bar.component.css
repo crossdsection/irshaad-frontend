@@ -63,3 +63,7 @@ button.breadcrumb-bar-icon, .breadcrumb-bar-button {
 .list-group-item-action {
     padding: 5px 0;
 }
+
+.row {
+    margin: 0;
+}
