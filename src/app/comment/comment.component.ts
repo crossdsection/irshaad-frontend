@@ -15,7 +15,7 @@ export class CommentComponent implements OnInit {
   public commentData : Object;
   public commentText : String;
   public answerText : String;
-  public replyBox : Object<any>;
+  public replyBox : Object;
 
   constructor( private http: HttpClient ) { }
 
@@ -118,15 +118,21 @@ export class CommentComponent implements OnInit {
   submitComment( parentId = null ){
     var postData = {};
     postData['post_id'] = this.mcph;
-    postData['text'] = this.commentText;
     if( parentId != null ){
       postData['parent_id'] = parentId;
+      postData['text'] = this.commentText;
+    } else {
+      postData['text'] = this.answerText;
     }
     this.http.post( REQUEST_BASE_URL + '/comments/submit', postData ).subscribe(
       response => {
         console.log( response );
         if( response["error"] == 0 ){
           this.commentText = "";
+          this.answerText = "";
+          this.answerData = [];
+          this.commentData = {};
+          this.replyBox = {};
           this.getComments( this.mcph );
         }
       },
@@ -151,7 +157,7 @@ export class CommentComponent implements OnInit {
   }
 
   toggleReplyBox( parentId = null ){
-    if( !parentId && this.replyBox && this.replyBox[ parentId ] ){
+    if( parentId != null && this.replyBox != null && this.replyBox[ parentId ] != null ){
       this.replyBox[ parentId ] = !this.replyBox[ parentId ];
     }
   }
