@@ -53,12 +53,16 @@
           </div>
         </div>
 
-        <div class="row" *ngIf="post.files != null">
-          <ngb-carousel>
-            <ng-template ngbSlide *ngFor="let image of post.files.images" [id]="image.id">
-              <img class="card-img-top" [src]="image.filepath"  alt="No Image">
-            </ng-template>
-          </ngb-carousel>
+        <div class="row" *ngIf="post.files != null" style="height: 300px; overflow: hidden;">
+          <div class="col-md-4"></div>
+          <div class="col-md-4">
+            <ngb-carousel style="height: 100%;">
+              <ng-template ngbSlide *ngFor="let image of post.files.images" [id]="image.id">
+                <img class="card-img-top" [src]="image.filepath"  alt="No Image">
+              </ng-template>
+            </ngb-carousel>
+          </div>
+          <div class="col-md-4"></div>
         </div>
 
         <!-- Atachments -->
