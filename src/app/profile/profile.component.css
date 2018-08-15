@@ -131,7 +131,8 @@ ul.uul {
 ul.uul li {
     margin : 2px 2px;
     display: inline-block;
-    width  : 30%;
+    /* width  : 30%; */
+    width: 200px;
 }
 /* End Testing horizontal list group */
 

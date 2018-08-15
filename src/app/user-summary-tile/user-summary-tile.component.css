@@ -1,5 +1,6 @@
 .card-img-top {
-    width: 50%;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     box-shadow: grey 0px 0px 11px -1px;
 }
