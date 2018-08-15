@@ -74,7 +74,11 @@ export class ComponentCommunicationService {
 
   // Logout
   userLogout() {
-    localStorage.removeItem("auth_data");
+    let authData = localStorage.getItem("auth_data");
+    if( authData != null ){
+      localStorage.removeItem("auth_data");
+      location.reload();
+    }
     // this.http.get( REQUEST_BASE_URL + 'user/logout')
   }
 

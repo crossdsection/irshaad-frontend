@@ -79,16 +79,11 @@ export class LoginPopupComponent implements OnInit {
           // Changing Current location to favorite home location.
           // Set User's home location if user is logged in.
           this.http.get(REQUEST_BASE_URL + 'favlocation/get?isHome=1').subscribe((response: any) => {
-            let lat: number = parseFloat(response.data[0].longitude);
-            let lng: number = parseFloat(response.data[0].latitude);
+            let lat: number = parseFloat( response.data[0].longitude );
+            let lng: number = parseFloat( response.data[0].latitude );
 
-            console.log("home lat lng");
-            console.log(lat);
-            console.log(lng);
             this.http.get('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + lng + ',' + lat + '&key=AIzaSyAGvUJIs_SRj6bKpbQvNOWHxDjwnSqlvdE').subscribe((data: any) => {
-              console.log(data.results[0]);
               let resolvedLocation: any = this.geolocationService.resolveLocation(data.results[0]);
-              console.log(resolvedLocation);
 
               // Storing in localstorage
               var currentCoordinates = {
@@ -193,6 +188,9 @@ export class LoginPopupComponent implements OnInit {
   }
 
   handleChangePassword() {
+    if(!this.validated('newPassword')) {
+      return;
+    }
     let dataToSend = {
       "password" : this.newPassword
     }
@@ -281,7 +279,7 @@ export class LoginPopupComponent implements OnInit {
         let firstnameElement = <HTMLElement>document.querySelector('input[name="first_name"]');
         let lastnameElement = <HTMLElement>document.querySelector('input[name="last_name"]');
         let birthDateElement = <HTMLElement>document.querySelector('input[name="birth_date"]');
-        let genderElement = <HTMLElement>document.querySelector('input[name="gender"]');
+        let genderElement = <HTMLElement>document.querySelector("select");;
         let emailElement = <HTMLElement>document.querySelector('input[name="email"]');
         passwordElement = <HTMLElement>document.querySelector('input[name="password"]');
 
@@ -331,6 +329,16 @@ export class LoginPopupComponent implements OnInit {
         }
 
         // Password
+        if(this.password == "" || this.password.length < 6) {
+          passwordElement.style.borderBottom = "2px solid red";
+          validationResult = false;
+        }
+        else {
+          passwordElement.style.borderBottom = "1px solid #ffffff";
+        }
+      break;
+      case 'newPassword' :
+        passwordElement = <HTMLElement>document.querySelector('input[name="newPassword"]');
         if(this.password == "" || this.password.length < 6) {
           passwordElement.style.borderBottom = "2px solid red";
           validationResult = false;
