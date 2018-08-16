@@ -62,9 +62,7 @@ export class ChangeLocationComponent implements OnInit {
 
     // Loading Maps
     this.mapsAPILoader.load().then(() => {
-      let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
-        types: ["address"]
-      });
+      let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement);
       autocomplete.addListener('place_changed', () => {
         // get the place result
         let place: google.maps.places.PlaceResult = autocomplete.getPlace();

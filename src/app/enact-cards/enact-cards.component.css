@@ -60,9 +60,9 @@ div#columns small a {
   transition: .4s color;
 }
 
-div#columns:hover figure:not(:hover) {
-	opacity: 0.4;
-}
+/*div#columns:hover figure:not(:hover) {
+	opacity: 0.2;
+}*/
 
 @media screen and (max-width: 750px) {
   #columns { column-gap: 0px; }

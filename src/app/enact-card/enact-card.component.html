@@ -16,7 +16,7 @@
     </div>
   </div>
   <div class="card-body">
-    <h3 class="card-title" (click)="openEnactDetails($event)"> {{ _post.title }} </h3>
+    <h3 class="card-title wrap" (click)="openEnactDetails($event)"> {{ _post.title }} </h3>
     <div *ngIf="_post.files != null">
       <ngb-carousel (click)="openEnactDetails($event)" *ngIf="_post.files.images.length > 1">
         <ng-template ngbSlide *ngFor="let image of _post.files.images" [id]="image.id">
@@ -29,7 +29,7 @@
         </div>
       </div>
     </div>
-    <p class="card-text">
+    <p class="card-text wrap">
       {{ _post.details }}
     </p>
     <div class="row" *ngIf="_post.post_type == 'court' ">
@@ -65,7 +65,7 @@
         </button>
       </div>
       <div class="col">
-        <button class="analytic-button bottom-button">
+        <button class="analytic-button bottom-button" (click)="openEnactDetails($event)">
           <i class="fa fa-comment"></i>
         </button>
       </div>
