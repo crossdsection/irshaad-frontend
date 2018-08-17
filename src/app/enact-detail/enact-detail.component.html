@@ -100,10 +100,11 @@
 
         <div class="row">
           <div class="col-md-12">
-            <app-comment [mcph]="post.id"></app-comment>
+            <app-comment [mcph]="post.id" (showPopUp)="showLoginPopUp($event)" [_loggedIn]="_loggedIn"></app-comment>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+<div #loginPopupContainer></div>
