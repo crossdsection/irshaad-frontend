@@ -25,7 +25,7 @@ export class LocationTabComponent implements OnInit {
   constructor(private componentCommunicationService: ComponentCommunicationService, private elementRef: ElementRef, private geolocationService: GeolocationService, private http: HttpClient) {
     this.element = this.elementRef.nativeElement;
   }
-  
+
   ngOnInit() {
     this.componentCommunicationService.locationTabComponentData.subscribe((data: any) => {
       this.country = data.country;
@@ -36,6 +36,7 @@ export class LocationTabComponent implements OnInit {
 
       // Change Flag in country flag display component
       this.componentCommunicationService.editCountryFlagDisplayComponent(data.countryShortName);
+      this.changeLocationContextType();
     });
 
     // Setting scroll fixed.
@@ -66,10 +67,12 @@ export class LocationTabComponent implements OnInit {
     // End Setting scroll fixed.
   }
 
-  changeLocationContextType(value: string) {
+  changeLocationContextType(value: string = null) {
     let locationContext: any = JSON.parse(localStorage.getItem("locationContext"));
-    locationContext.type = value;
-    localStorage.setItem("locationContext", JSON.stringify(locationContext));
+    if( value != null ){
+      locationContext.type = value;
+      localStorage.setItem("locationContext", JSON.stringify(locationContext));
+    }
 
     this.componentCommunicationService.editBreadcrumbBarLocationContext();
     this.componentCommunicationService.editAreaRatingLocationContext();

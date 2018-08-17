@@ -20,11 +20,11 @@
             (chartClick)="chartClicked($event)"></canvas>
       </div>
     </div>
-    <div class="col-md-3" *ngIf="areaRatingVariables.goodPercent != 0 || areaRatingVariables.badPercent != 0">
+    <div class="col-md-3">
       <!-- NO data -->
     </div>
     <div class="col-md-12" *ngIf="areaRatingVariables.goodPercent == 0 && areaRatingVariables.badPercent == 0">
-      <h4>No Data Available</h4>
+      <h4>No data for last 24 hours Available</h4>
     </div>
   </div>
   <div class="row" *ngIf="!areaRatingVariables.userStatus">
@@ -36,6 +36,11 @@
       <button class="btn badButton" (click)="areaRate('bad')">BAD</button>
     </div>
     <div class="col-md-3"> </div>
+  </div>
+  <div class="row" *ngIf="areaRatingVariables.userStatus">
+    <div class="col-md-12">
+      <h4>You can change your vote after 24 Hours.</h4>
+    </div>
   </div>
 </div>
 
