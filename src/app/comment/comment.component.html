@@ -3,7 +3,7 @@
     <div class="col-md-12">
       <fieldset class="fieldClass textField">
         <div class="fieldDiv">
-          <textarea placeholder="Write your Answer here." [(ngModel)]="answerText" name="commentText" (keydown)="checkSubmit($event)" class="fieldTextArea"></textarea>
+          <textarea placeholder="Write your Answer here." [(ngModel)]="answerText" name="commentText" (click)="checkSubmit($event)" (keydown)="checkSubmit($event)" class="fieldTextArea"></textarea>
         </div>
         <div>
           <span class="commentInstructions">
@@ -38,7 +38,7 @@
           <div class="col-md-12">
             <fieldset class="fieldClass textField">
               <div class="fieldDiv">
-                <textarea placeholder="Write your Answer here." [(ngModel)]="commentText" name="commentText" (keydown)="checkSubmit( $event, answer.id )" class="fieldTextArea"></textarea>
+                <textarea placeholder="Write your Answer here." [(ngModel)]="commentText" name="commentText" (click)="checkSubmit($event)" (keydown)="checkSubmit( $event, answer.id )" class="fieldTextArea"></textarea>
               </div>
               <div>
                 <span class="commentInstructions">

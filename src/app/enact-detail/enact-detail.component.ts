@@ -133,36 +133,43 @@ export class EnactDetailComponent implements OnInit {
   }
 
   addPoll( pollId, postId ){
-    let dataToSend: any = {
-      'poll_id' : pollId,
-      'post_id' : postId
-    };
-    this.http.post( REQUEST_BASE_URL + '/polls/submit', dataToSend ).subscribe((response: any) => {
-      if( response.error == 0 ) {
-        let polls = response.data[0];
-        this._userPollStatus = polls['userPollStatus'];
-        if( polls['polls'] ){
-          this._polls = polls['polls'];
+    if( this._loggedIn ){
+      let dataToSend: any = {
+        'poll_id' : pollId,
+        'post_id' : postId
+      };
+      this.http.post( REQUEST_BASE_URL + '/polls/submit', dataToSend ).subscribe((response: any) => {
+        if( response.error == 0 ) {
+          let polls = response.data[0];
+          this._userPollStatus = polls['userPollStatus'];
+          if( polls['polls'] ){
+            this._polls = polls['polls'];
+          }
         }
-      }
-    });
+      });
+    } else {
+      this.showLoginPopUp();
+    }
   }
 
   changeActivityStatus( postId, postJSON ){
-    let dataToSend: any = {
-      "post_id": postId
-    };
-    if( postJSON['bookmark'] ){
-      dataToSend['bookmark'] = postJSON['bookmark'];
-    }
-    if( postJSON['flag'] ){
-      dataToSend['flag'] = postJSON['flag'];
-    }
-    this.http.post( REQUEST_BASE_URL + '/activity/submit', dataToSend ).subscribe((response: any) => {
-      if( response.error == 0 ){
-        this.post['props'] = response.data;
+    if( this._loggedIn ){
+      let dataToSend: any = {
+        "post_id": postId
+      };
+      if( postJSON['bookmark'] ){
+        dataToSend['bookmark'] = postJSON['bookmark'];
       }
-    });
+      if( postJSON['flag'] ){
+        dataToSend['flag'] = postJSON['flag'];
+      }
+      this.http.post( REQUEST_BASE_URL + '/activity/submit', dataToSend ).subscribe((response: any) => {
+        if( response.error == 0 ){
+          this.post['props'] = response.data;
+        }
+      });
+    } else {
+      this.showLoginPopUp();
+    }
   }
-
 }

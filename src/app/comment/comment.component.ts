@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { REQUEST_BASE_URL } from '../globals';
 import { HttpClient } from '@angular/common/http';
 
@@ -8,6 +8,11 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./comment.component.css']
 })
 export class CommentComponent implements OnInit {
+
+  @Output() showPopUp = new EventEmitter<string>();
+
+  @Input()
+  public _loggedIn : Boolean = false;
 
   @Input()
   public mcph : String;
@@ -110,8 +115,10 @@ export class CommentComponent implements OnInit {
 
   checkSubmit( event, parentId = null ){
     if( event.keyCode == 13 ) {
-      console.log( parentId );
       this.submitComment( parentId );
+    } else if ( !this._loggedIn ){
+      event.target.blur();
+      this.showPopUp.emit('show');
     }
   }
 
