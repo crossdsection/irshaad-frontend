@@ -54,3 +54,7 @@ button.option {
    word-wrap: break-word;      /* IE */
    max-width: 400px;
 }
+
+.wrap[_ngcontent-c15] {
+    max-width: 240px;
+}
