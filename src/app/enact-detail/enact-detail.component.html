@@ -4,7 +4,16 @@
       <div class="upper-div">
         <div class="row">
           <div class="col">
-            <button class="vote-button" (click)="toggleVoteStatus()">Vote</button>
+            <button *ngIf="post.post_type == 'court'" class="vote-button" (click)="toggleVoteStatus()">Vote</button>
+            <span *ngIf="post.post_type == 'news'">
+              <button (click)="changeActivityStatus( post.id, { 'eyewitness' : 1 } )" class="vote-button" *ngIf="post.props.userEyeWitnessStatus != 1">
+                Eye Witness
+              </button>
+              <button (click)="changeActivityStatus( post.id, { 'eyewitness' : -1 } )" class="vote-button flagEnableClass" *ngIf="post.props.userEyeWitnessStatus == 1">
+                Seen
+              </button>
+            </span>
+            <button *ngIf="post.post_type == 'discussion'" class="vote-button">Discuss</button>
           </div>
           <div class="col">
             <button class="enact-detail-option" (click)="toggleShareStatus()"><i class="fa fa-share-alt"></i></button>

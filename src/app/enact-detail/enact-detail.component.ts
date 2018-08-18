@@ -18,6 +18,7 @@ export class EnactDetailComponent implements OnInit {
 
   isVoting: boolean = false;
   isSharing: boolean = false;
+  hasWitnessed: number = -1;
 
   public post: any = null;
 
@@ -162,6 +163,9 @@ export class EnactDetailComponent implements OnInit {
       }
       if( postJSON['flag'] ){
         dataToSend['flag'] = postJSON['flag'];
+      }
+      if( postJSON['eyewitness'] ){
+        dataToSend['eyewitness'] = postJSON['eyewitness'];
       }
       this.http.post( REQUEST_BASE_URL + '/activity/submit', dataToSend ).subscribe((response: any) => {
         if( response.error == 0 ){

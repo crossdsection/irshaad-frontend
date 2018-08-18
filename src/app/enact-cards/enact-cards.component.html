@@ -1,4 +1,4 @@
-<div #feedContainer class="container">
+<div #feedContainer class="container-fluid">
   <div id="columns">
     <figure *ngFor="let post of enactions">
       <app-enact-card [post]="post" [loggedIn]="_loggedIn" (showPopUp)="showLoginPopUp($event)"></app-enact-card>

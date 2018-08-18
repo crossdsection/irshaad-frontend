@@ -30,7 +30,8 @@
       </div>
     </div>
     <p class="card-text wrap">
-      {{ _post.details }}
+      <!-- {{ _post.details }} -->
+      {{(_post.details.length > 200)? (_post.details | slice:0:200)+'..':(_post.details)}}
     </p>
     <div class="row" *ngIf="_post.post_type == 'court' ">
       <div *ngFor="let poll of _polls" class="col-md-12">

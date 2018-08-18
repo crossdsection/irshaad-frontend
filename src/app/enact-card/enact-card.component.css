@@ -58,3 +58,7 @@ button.option {
 .wrap[_ngcontent-c15] {
     max-width: 240px;
 }
+
+.card-body {
+    padding: 0px;
+}
