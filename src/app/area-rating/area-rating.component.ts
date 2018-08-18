@@ -33,8 +33,19 @@ export class AreaRatingComponent implements OnInit {
   public pieChartLabels:string[] = ['GOOD', 'BAD'];
   public pieChartData:number[] = [];
   public pieChartType:string = 'pie';
-  public pieChartColors:Array<any>;
   public pieChartOptions:any;
+
+  public barChartOptions:any = {
+    scaleShowVerticalLines: false,
+    responsive: true
+  };
+  public barChartLabels:string[] = [];
+  public barChartType:string = 'bar';
+  public barChartLegend:boolean = false;
+  public barChartData:any[];
+
+  public piechartColors:Array<any>;
+  public barchartColors:Array<any>;
 
   barBackgroundColor: string = "#1e4372";
   areaRatingVariables: Object;
@@ -54,7 +65,24 @@ export class AreaRatingComponent implements OnInit {
         this.init();
       }
     });
-    this.pieChartColors = [
+    this.barchartColors = [{
+      // green
+      backgroundColor: 'rgb(76, 175, 80)',
+      borderColor: 'rgb(6,125,11)',
+      pointBackgroundColor: 'rgb(61,119,63)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgb(71,214,76)'
+    },
+    { // red
+      backgroundColor: 'rgb(214,71,71)',
+      borderColor: 'rgb(152,13,13)',
+      pointBackgroundColor: 'rgb(138,7,7)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgb(181,59,8)'
+    }];
+    this.piechartColors = [
       { // green, red
         backgroundColor: [ 'rgb(76, 175, 80)', 'rgb(214,71,71)' ],
         borderColor: [ 'rgb(6,125,11)', 'rgb(152,13,13)' ],
@@ -140,6 +168,26 @@ export class AreaRatingComponent implements OnInit {
           this.pieChartData.push( this.areaRatingVariables['badPercent'] );
           if( !this.areaRatingVariables['userStatus'] ){
             this.toggleAreaRatings();
+          }
+          this.getDateWiseRatings( this.locationId, level );
+        }
+      }
+    );
+  }
+
+  getDateWiseRatings( locationId, locationType ){
+    this.barChartData = [
+      {data: [], label: 'Good'},
+      {data: [], label: 'Bad'}
+    ];
+    let baseAPI = REQUEST_BASE_URL + 'area/getratings?areaLevel=' + locationType + '&areaLevelId=' + locationId;
+    this.http.get( baseAPI ).subscribe(
+      response => {
+        if( Object.keys( response['data'] ).length > 0 ){
+          for( var label in response['data'] ){
+            this.barChartLabels.push( label );
+            this.barChartData[0].data.push( response['data'][label]['goodPercent'] );
+            this.barChartData[1].data.push( response['data'][label]['badPercent'] );
           }
         }
       }

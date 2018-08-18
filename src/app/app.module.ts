@@ -95,7 +95,7 @@ const routes: Routes = [
     }),
     HttpClientModule,
     FormsModule,
-    RouterModule.forRoot( routes ),
+    RouterModule.forRoot( routes, {useHash:true} ),
     JwSocialButtonsModule,
     ChartsModule
   ],
