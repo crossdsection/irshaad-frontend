@@ -19,3 +19,13 @@
     padding: 0 10px;
     cursor: pointer;
 }
+
+.close-panel {
+  padding-top: 0px;
+  margin-top: 0px;
+  margin-right: 26px;
+  float: right;
+  cursor: pointer;
+  font-size: 34px;
+  color: #0c0a0a;
+}

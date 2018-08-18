@@ -50,6 +50,7 @@ export class AreaRatingComponent implements OnInit {
   barBackgroundColor: string = "#1e4372";
   areaRatingVariables: Object;
   showRatingDiv: Boolean = false;
+  showNextDiv: Boolean = false;
   currentCoordinates : Object;
   locationContext : Object;
   location : String;
@@ -166,9 +167,9 @@ export class AreaRatingComponent implements OnInit {
           this.pieChartData = [];
           this.pieChartData.push( this.areaRatingVariables['goodPercent'] );
           this.pieChartData.push( this.areaRatingVariables['badPercent'] );
-          if( !this.areaRatingVariables['userStatus'] ){
-            this.toggleAreaRatings();
-          }
+          // if( !this.areaRatingVariables['userStatus'] ){
+          //   this.toggleAreaRatings();
+          // }
           this.getDateWiseRatings( this.locationId, level );
         }
       }
@@ -212,11 +213,23 @@ export class AreaRatingComponent implements OnInit {
   }
 
   toggleAreaRatings(){
-    this.showRatingDiv = !this.showRatingDiv;
-    if( this.showRatingDiv ){
+    console.log( this.showRatingDiv );
+    console.log( this.showNextDiv );
+    if( this.showRatingDiv && !this.showNextDiv ){
+      this.showNextDiv = true;
       this.iconForAction = "fa fa-angle-up";
-    } else {
+    } else if ( this.showRatingDiv && this.showNextDiv ) {
+      this.showNextDiv = false;
+      this.iconForAction = "fa fa-angle-down";
+    } else if ( !this.showRatingDiv ){
+      this.showRatingDiv = true;
       this.iconForAction = "fa fa-angle-down";
     }
+  }
+
+  hideAll(){
+    this.showNextDiv = false;
+    this.showRatingDiv = false;
+    this.iconForAction = "fa fa-angle-down";
   }
 }
