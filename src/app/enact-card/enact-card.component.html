@@ -1,22 +1,23 @@
 <!-- <div class="card"> -->
   <div class="row">
     <div class="col-md-2">
-      <img [src]="_post.user.profilepic" class="poll-card-profile-pic" (click)="viewUserProfile(_post.user.id)"/>
+      <img src="/assets/img/1.jpg" class="poll-card-profile-pic" (click)="viewUserProfile(_post.user.id)"/>
+
     </div>
     <div class="col-md-6">
       <h5 style="margin-bottom: -7px; cursor: pointer;" (click)="viewUserProfile(_post.user.id)">
-        {{ _post.user.name }}
+        Bhetan Chagat
       </h5>
-      <small> {{ _post.location }}</small>
+      <small> Chandigarh</small>
     </div>
     <div class="col-md-4" style="line-height: 1;">
-      <small> {{ _post.postDate }} </small> at
+      <small> 24 September, 1903 </small> at
       <br />
-      <small> {{ _post.postTime }} </small>
+      <small> 8.24 pm </small>
     </div>
   </div>
   <div class="card-body">
-    <h3 class="card-title wrap" (click)="openEnactDetails($event)"> {{ _post.title }} </h3>
+    <h3 class="card-title wrap" (click)="openEnactDetails($event)"> A sweet story </h3>
     <div *ngIf="_post.files != null">
       <ngb-carousel (click)="openEnactDetails($event)" *ngIf="_post.files.images.length > 1">
         <ng-template ngbSlide *ngFor="let image of _post.files.images" [id]="image.id">
@@ -31,7 +32,11 @@
     </div>
     <p class="card-text wrap">
       <!-- {{ _post.details }} -->
-      {{(_post.details.length > 200)? (_post.details | slice:0:200)+'..':(_post.details)}}
+      <!-- {{(_post.details.length > 200)? (_post.details | slice:0:200)+'..':(_post.details)}} -->
+      This is a story about a boy. There was a boy who live in a house. He eats food and sleeps at night.
+      He used to drink water when he was thirsty. One day he found that people also drink milk. So, he 
+      went to shop and bought milk, came home, heated milk and drink it. And now he drink water and milk both.
+      And he lived happily ever after.
     </p>
     <div class="row" *ngIf="_post.post_type == 'court' ">
       <div *ngFor="let poll of _polls" class="col-md-12">
