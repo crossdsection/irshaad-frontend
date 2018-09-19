@@ -27,8 +27,8 @@ img {
 
 input, select {
     background: transparent;
-    border: none;
-    border-bottom: 1px solid #fefefe;
+    /*border: none;
+    border-bottom: 1px solid #fefefe;*/
     color: #ffffff;
 }
 
@@ -39,8 +39,8 @@ option {
 .form-control:focus {
     color: #000000;
     background-color: #a3c1dc;
-    border: none;
-    border-bottom: 2px solid #FFEB3B;
+    /*border: none;
+    border-bottom: 2px solid #FFEB3B;*/
     outline: 0;
     box-shadow: none;
 }
