@@ -8,7 +8,7 @@
         <span class="login-area" *ngIf="currentForm == 'login'">
           <div class="container-fluid text-center">
             <img src="assets/img/logo.PNG" class="img img-responsive" />
-            <h5>Login to your Account</h5>
+            <!-- <h5>Login to your Account</h5> -->
           </div>
           <form (ngSubmit)="handleFormSubmit()">
             <div class="form-group">
@@ -23,7 +23,7 @@
               <label>{{ loginMessage }}</label>
             </div>
             <div class="form-group">
-              <button type="submit" class="form-control btn">Login</button>
+              <button type="submit" class="form-control btn btn-primary">Login</button>
               <button type="submit" class="form-control btn btn-secondary" (click)="changeForm('forgotPassword')">Forget Password</button>
               <button type="submit" class="form-control btn btn-secondary" (click)="changeForm('join')">Register</button>
             </div>
@@ -34,7 +34,7 @@
         <span class="join-area" *ngIf="currentForm == 'join'">
           <div class="container-fluid text-center">
             <img src="assets/img/logo.PNG" class="img img-responsive" />
-            <h5>Register</h5>
+            <!-- <h5>Register</h5> -->
           </div>
           <form (ngSubmit)="handleJoinFormSubmit()">
             <div class="row">
@@ -80,7 +80,7 @@
               <label>{{ loginMessage }}</label>
             </div>
             <div class="form-group">
-              <button type="submit" class="form-control btn">Join Now</button>
+              <button type="submit" class="form-control btn btn-primary">Join Now</button>
               <button type="submit" class="form-control btn btn-secondary" (click)="changeForm('login')">Login</button>
             </div>
           </form>
@@ -91,7 +91,7 @@
         <span class="forget-password-area" *ngIf="currentForm == 'forgotPassword'">
           <div class="container-fluid text-center">
             <img src="assets/img/logo.PNG" class="img img-responsive" />
-            <h5>Forgot Password?</h5>
+            <!-- <h5>Forgot Password?</h5> -->
           </div>
           <form (ngSubmit)="handleForgetPasswordFormSubmit()">
 
@@ -106,7 +106,7 @@
               <label>{{ loginMessage }}</label>
             </div>
             <div class="form-group">
-              <button type="submit" class="form-control btn">Reset Password</button>
+              <button type="submit" class="form-control btn btn-primary">Reset Password</button>
               <button type="submit" class="form-control btn btn-secondary" (click)="changeForm('login')">Login</button>
             </div>
           </form>
@@ -115,7 +115,7 @@
         <span class="reset-code-area" *ngIf="currentForm == 'resetCode'">
           <div class="container-fluid text-center">
             <img src="assets/img/logo.PNG" class="img img-responsive" />
-            <h5>Reset Code</h5>
+            <!-- <h5>Reset Code</h5> -->
           </div>
           <form (ngSubmit)="handleVerify()">
             <div class="row">
@@ -127,7 +127,7 @@
               <label>{{ loginMessage }}</label>
             </div>
             <div class="form-group">
-              <button type="submit" class="form-control btn">Submit</button>
+              <button type="submit" class="form-control btn btn-primary">Submit</button>
             </div>
           </form>
         </span>
@@ -151,7 +151,7 @@
               <label>{{ loginMessage }}</label>
             </div>
             <div class="form-group">
-              <button type="submit" class="form-control btn">Submit</button>
+              <button type="submit" class="form-control btn btn-primary">Submit</button>
             </div>
           </form>
         </span>

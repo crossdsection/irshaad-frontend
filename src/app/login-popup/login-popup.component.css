@@ -13,8 +13,8 @@ div.modal {
     top: 50%;
     left: 50%;
     display: block;
-    background: #153e73;
-    color: #ffffff;
+    background: #ffffff;
+    color: #000000;
     font-weight: bold;
     padding: 20px;
     border-radius: 10px;
@@ -37,8 +37,8 @@ option {
 }
 
 .form-control:focus {
-    color: #ffffff;
-    background-color: transparent;
+    color: #000000;
+    background-color: #a3c1dc;
     border: none;
     border-bottom: 2px solid #FFEB3B;
     outline: 0;
@@ -49,7 +49,7 @@ option {
 }
 
 #login-popup-component-modal {
-    transition: height 0.3s ease-in-out;    
+    transition: height 0.3s ease-in-out;
 }
 
 .error-field {

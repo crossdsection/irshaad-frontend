@@ -12,7 +12,7 @@ button:focus {
 }
 
 #preview-upload-area .file-upload-label {
-    background: url('assets/img/giphy.webp');
+    /*background: url('assets/img/giphy.webp');*/
     background-repeat: no-repeat;
     background-size: cover;
 }

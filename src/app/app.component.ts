@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { LocationTabComponent } from './location-tab/location-tab.component';
-
 // Importing Services
 import { ComponentCommunicationService } from './component-communication.service';
 import { GeolocationService } from './services/geolocation.service';
@@ -17,8 +15,6 @@ import { GeolocationService } from './services/geolocation.service';
 })
 export class AppComponent {
   title = 'app';
-
-  locationTabComponent = LocationTabComponent;
 
   constructor(private http: HttpClient, private componentCommunicationService: ComponentCommunicationService, private geolocationService: GeolocationService) { }
 
@@ -37,7 +33,7 @@ export class AppComponent {
       this.lat = parseFloat(currentCoordinates.latitude);
       this.lng = parseFloat(currentCoordinates.longitude);
       // Changing the attributes of location tab component.
-      this.componentCommunicationService.editLocationTabComponent(currentCoordinates);
+      // this.componentCommunicationService.editLocationTabComponent(currentCoordinates);
       this.componentCommunicationService.editBreadcrumbBarLocationContext();
     }
 
@@ -79,7 +75,7 @@ export class AppComponent {
           localStorage.setItem('locationContext', JSON.stringify( {type: "locality"} ) );
 
           // Changing the attributes of location tab component.
-          this.componentCommunicationService.editLocationTabComponent(currentCoordinates);
+          // this.componentCommunicationService.editLocationTabComponent(currentCoordinates);
           this.componentCommunicationService.editChangeLocationComponentMapLatLng(currentCoordinates.latitude, currentCoordinates.longitude);
 
           // Changing Breadcrumb Bar Location Context
