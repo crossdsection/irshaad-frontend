@@ -4,10 +4,13 @@
       <h2> {{ location }} </h2>
     </div>
   </div>
+  <div class="close-panel">
+    <a (click)="hideAll()"><i class="fa fa-close"></i></a>
+  </div>
   <div class="row" style="margin-bottom: 20px;">
     <div class="col-md-3" *ngIf="areaRatingVariables.goodPercent != 0 || areaRatingVariables.badPercent != 0">
         <!-- NO data -->
-      </div>
+    </div>
     <div class="col-md-6" *ngIf="areaRatingVariables.goodPercent != 0 || areaRatingVariables.badPercent != 0">
       <div>
         <canvas baseChart
@@ -19,9 +22,6 @@
             (chartHover)="chartHovered($event)"
             (chartClick)="chartClicked($event)"></canvas>
       </div>
-    </div>
-    <div class="col-md-3">
-      <!-- NO data -->
     </div>
     <div class="col-md-12" *ngIf="areaRatingVariables.goodPercent == 0 && areaRatingVariables.badPercent == 0">
       <h4>No data for last 24 hours Available</h4>
@@ -42,7 +42,7 @@
       <h4>You can change your vote after 24 Hours.</h4>
     </div>
   </div>
-  <div class="row" style="margin-top: 50px;">
+  <div class="row" *ngIf="showNextDiv" [@simpleFadeAnimation] style="margin-top: 50px;">
     <div class="col-md-4"></div>
     <div class="col-md-4">
       <canvas baseChart width="200" height="200"
