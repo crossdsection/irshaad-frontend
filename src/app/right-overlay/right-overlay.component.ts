@@ -16,7 +16,7 @@ export class RightOverlayComponent implements OnInit {
   displayStack: DisplayStackNode[] = [];
   dispayStackNodeCount: number = 0;
   isDisplayed: boolean = false;
-
+  visibility: string = "hidden";
   depth: number = -10;
   background: string = "transparent";
   currentComponentInvoked: any = "";
@@ -34,14 +34,14 @@ export class RightOverlayComponent implements OnInit {
         switch(param.action) {
           case "invoke":
             switch(param.className) {
-              case "ProfileComponent": 
+              case "ProfileComponent":
                 this.showRightOverlay();
                 if(this.isDisplayed) {
                   let displayStackNode: DisplayStackNode = new DisplayStackNode();
                   displayStackNode.componentName = this.currentComponentInvoked;
                   displayStackNode.component = this.invoked;
                   displayStackNode.nodeIndex = this.invokedIndex++;
-            
+
                   this.displayStack.push(displayStackNode);
                   $(this.invoked.instance.element).hide();
                 }
@@ -54,7 +54,7 @@ export class RightOverlayComponent implements OnInit {
                 this.invoked.instance.displayStackIndex = this.invokedIndex;
                 this.invoked.instance.initUser();
               break;
-              case "EnactDetailComponent": 
+              case "EnactDetailComponent":
                 this.showRightOverlay();
 
                 if(this.isDisplayed) {
@@ -62,7 +62,7 @@ export class RightOverlayComponent implements OnInit {
                   displayStackNode.componentName = this.currentComponentInvoked;
                   displayStackNode.component = this.invoked;
                   displayStackNode.nodeIndex = this.invokedIndex++;
-            
+
                   this.displayStack.push(displayStackNode);
                   $(this.invoked.instance.element).hide();
                 }
@@ -86,9 +86,11 @@ export class RightOverlayComponent implements OnInit {
   showRightOverlay() {
     this.depth = 10;
     this.background = "#0000006e";
+    this.visibility = 'visible';
   }
 
   hideRightOverlay() {
+    this.visibility = 'hidden';
     this.rightOverlayCommunicationService.removeFromRightOverlay(this.currentComponentInvoked, this.invokedIndex);
     // this.invoked.instance.destroy();
 
