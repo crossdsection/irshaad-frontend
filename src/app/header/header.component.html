@@ -1,42 +1,35 @@
-<div class="container-fluid" style="background: #0c5460; padding: 10px 0;">
-  <div class="row">
-    <div class="col-sm-6">
-      <div class="row">
-        <div class="col-sm-6 text-center">
-          <h2 style="color: #ffffff; line-height: 3;">Writer's Hub</h2>
-          <!-- <app-country-flag-display></app-country-flag-display> -->
-        </div>
-        <div class="col-sm-6 text-center">
-          <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/PM_Modi_2015.jpg/220px-PM_Modi_2015.jpg" class="img img-thumbnail" style="width: 80px;"/> -->
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-6">
-      <div class="row">
-        <div class="col-sm-6" style="padding-top: 50px;">
-          <div style="position: relative; height: 100%;">
-              <form class="header-search-form">
-                <input class="form-control" type="text" placeholder="Search on Writer's Hub"/>
-                <button type="submit"><i class="fa fa-search"></i></button>
-              </form>
+<div class="header">
+  <div class="innerHeader hFlex hRow">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-2 text-center">
+            <a href="/" title="My Dashboard"><img src="assets/img/logo.PNG" class="img img-responsive" style="height: 50px;"/></a>
+            <!-- <app-country-flag-display></app-country-flag-display>-->
           </div>
-        </div>
-        <div class="col-md-6 text-center" style="display: inline-grid; grid-template-columns: 70% 30%; padding-top: 50px;">
-          <div>
-            <ul id="header-right-links">
+          <div class="col-sm-4">
+            <form class="header-search-form">
+              <input class="form-control" type="text" placeholder="Search on Writer's Hub"/>
+              <button type="submit"><i class="fa fa-search"></i></button>
+            </form>
+          </div>
+          <div class="col-sm-6">
+            <ul class="header-navigations">
+              <li class="nav-item">
+                <a href="#" title="Add Post"><i class="fa fa-plus"></i></a>
+              </li>
               <li class="nav-item">
                 <a href="#" title="Notifications"><i class="fa fa-bell"></i></a>
               </li>
               <li class="nav-item">
-                <a href="#" title="My Dashboard"><i class="fa fa-user"></i></a>
+                <a href="#" title="Home"><i class="fa fa-home"></i></a>
+              </li>
+              <li>
+                <app-header-profile-icon></app-header-profile-icon>
               </li>
             </ul>
           </div>
-          <div>
-            <app-header-profile-icon></app-header-profile-icon>
-          </div>          
         </div>
       </div>
-    </div>
   </div>
+  <!-- -->
 </div>

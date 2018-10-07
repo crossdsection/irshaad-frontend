@@ -12,7 +12,7 @@ import { RightOverlayCommunicationService } from '../services/right-overlay-comm
 export class UserSummaryTileComponent implements OnInit {
 
   @Input() user: any = [];
-  requestBaseUrl :string = "http://backend.worldvoting.org/";
+  requestBaseUrl :string = REQUEST_BASE_URL;
   userLocation: string = "";
 
   constructor(private http: HttpClient, private rightOverlayCommunicationService: RightOverlayCommunicationService) { }
@@ -35,7 +35,7 @@ export class UserSummaryTileComponent implements OnInit {
         this.user.follows = true;
         this.rightOverlayCommunicationService.doAction("increaseFollowing");
       }
-    });   
+    });
   }
 
   unfollowUser(mcph) {
@@ -48,7 +48,7 @@ export class UserSummaryTileComponent implements OnInit {
         this.user.follows = false;
         this.rightOverlayCommunicationService.doAction("decreaseFollowing");
       }
-    });   
+    });
   }
 
   // To view User Profile

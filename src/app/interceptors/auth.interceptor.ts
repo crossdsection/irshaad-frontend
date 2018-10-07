@@ -14,7 +14,6 @@ export class AuthInterceptor implements HttpInterceptor {
     let authData = localStorage.getItem('auth_data');
     var newHeader = {};
 
-    // let url_to_intercept = new RegExp("https://backend.worldvoting.org/(.*)");
     let url_to_intercept = new RegExp("" + REQUEST_BASE_URL + "(.*)");
 
     if(url_to_intercept.test(request.url)) {
@@ -28,6 +27,7 @@ export class AuthInterceptor implements HttpInterceptor {
       let changedReq = request.clone({
         setHeaders : newHeader
       });
+      console.log( changedReq );
       return next.handle( changedReq );
     }
     else {

@@ -45,3 +45,7 @@ button:focus {
 .row {
     margin: 0;
 }
+
+.fa {
+  color: black;
+}
