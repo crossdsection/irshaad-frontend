@@ -1,6 +1,7 @@
 .container {
-    margin-top: 67px; // To Be Fixed 
+    margin-top: 80px; // To Be Fixed
     width: 100%;
+    max-width: 100%;
 }
 
 .enact-feeds-tabs-sub-menu {

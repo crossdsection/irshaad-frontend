@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, AfterViewInit, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 // Importing Services
@@ -15,6 +15,8 @@ import { GeolocationService } from './services/geolocation.service';
 })
 export class AppComponent {
   title = 'app';
+
+  @ViewChild('headerDiv' , { read: ElementRef }) headerDiv: ElementRef;
 
   constructor(private http: HttpClient, private componentCommunicationService: ComponentCommunicationService, private geolocationService: GeolocationService) { }
 
@@ -54,9 +56,6 @@ export class AppComponent {
 
         this.http.get('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + position.coords.latitude + ',' + position.coords.longitude + '&key=AIzaSyAGvUJIs_SRj6bKpbQvNOWHxDjwnSqlvdE').subscribe((data: any) => {
 
-          // Check
-          console.log(data.results[0]);
-
           let resolvedLocation: any = this.geolocationService.resolveLocation(data.results[0]);
 
           // Storing in localstorage
@@ -86,4 +85,9 @@ export class AppComponent {
       });
     }
   }
+
+  ngAfterViewInit() {
+    console.log(this.headerDiv.nativeElement.offsetHeight);
+  }
+
 }
